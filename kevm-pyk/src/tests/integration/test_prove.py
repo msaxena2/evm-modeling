@@ -9,7 +9,7 @@ from pyk.cterm import CTerm
 from pyk.proof.reachability import APRProof
 
 from kevm_pyk import config
-from kevm_pyk.__main__ import exec_prove
+from kevm_pyk.__main__ import ProveCommand
 from kevm_pyk.kevm import KEVM
 from kevm_pyk.kompile import KompileTarget, kevm_kompile
 
@@ -222,18 +222,21 @@ def test_pyk_prove(
         definition_dir = kompiled_target_for(spec_file)
         name = str(spec_file.relative_to(SPEC_DIR))
         break_on_calls = name in TEST_PARAMS and TEST_PARAMS[name].break_on_calls
-        exec_prove(
-            spec_file=spec_file,
-            definition_dir=definition_dir,
-            includes=[str(include_dir) for include_dir in config.INCLUDE_DIRS],
-            save_directory=use_directory,
-            smt_timeout=300,
-            smt_retry_limit=10,
-            md_selector='foo',  # TODO Ignored flag, this is to avoid KeyError
-            use_booster=use_booster,
-            bug_report=bug_report,
-            break_on_calls=break_on_calls,
+
+        options = ProveCommand(
+            {
+                'spec_file': spec_file,
+                'definition_dir': definition_dir,
+                'includes': [str(include_dir) for include_dir in config.INCLUDE_DIRS],
+                'save_directory': use_directory,
+                'md_selector': 'foo',
+                'use_booster': use_booster,
+                'bug_report': bug_report,
+                'break_on_calls': break_on_calls,
+            }
         )
+
+        options.exec()
         if name in TEST_PARAMS:
             params = TEST_PARAMS[name]
             if params.leaf_number is not None and params.main_claim_id is not None:

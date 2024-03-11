@@ -10,7 +10,7 @@ from pyk.cli.utils import file_path
 from pyk.kore.prelude import BOOL, INT, SORT_JSON, SORT_K_ITEM, bool_dv, inj, int_dv, json_to_kore, top_cell_initializer
 from pyk.kore.syntax import App, SortApp
 
-from .cli import KEVMCLIArgs
+from .cli import EVMChainOptions
 
 if TYPE_CHECKING:
     from argparse import Namespace
@@ -67,10 +67,10 @@ def _exec_gst_to_kore(input_file: Path, schedule: str, mode: str, chainid: int, 
 
 
 def _parse_args() -> Namespace:
-    kevm_cli_args = KEVMCLIArgs()
+    EVMChainOptions.all_args()
     parser = ArgumentParser(
         description='Convert a GeneralStateTest to Kore for compsumption by KEVM',
-        parents=[kevm_cli_args.evm_chain_args],
+        parents=[EVMChainOptions.all_args()],
     )
     parser.add_argument('input_file', type=file_path, help='path to GST')
     return parser.parse_args()
