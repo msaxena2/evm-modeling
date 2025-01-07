@@ -1,67 +1,79 @@
-from curses.ascii import DEL
-from pathlib import Path
+from __future__ import annotations
+
 import sys
 import time
-from kevm_pyk.__main__ import wrap_process_pool
-from kevm_pyk.kevm import KEVM, KEVMSemantics
-from kevm_pyk.utils import legacy_explore, initialize_apr_proof, run_prover, print_failure_info
-from pyk.cterm import CTerm, CTermSymbolic, cterm_build_claim
-from pyk.proof import APRProof
-from pyk.kast.outer import KSort
-from pyk.kdist import kdist
-from pyk.kast.inner import KInner, bottom_up, KVariable, KSequence, KApply
-from pyk.kcfg import KCFGExplore
-from pyk.kore.rpc import KoreClient
+from pathlib import Path
+from typing import TYPE_CHECKING
 
-DEFINITION_DIR = Path('/home/zhaoji/.cache/kdist-4056746/evm-semantics/haskell')
-# kdist.get('evm-semantics.haskell')
+from pyk.cterm import CTerm, CTermSymbolic, cterm_build_claim
+from pyk.kast.inner import KApply, KSequence, KVariable, bottom_up
+from pyk.kast.outer import KSort
+from pyk.kcfg import KCFGExplore
+from pyk.kdist import kdist
+from pyk.kore.rpc import KoreClient
+from pyk.proof import APRProof
+
+from kevm_pyk.kevm import KEVM, KEVMSemantics
+from kevm_pyk.utils import initialize_apr_proof, legacy_explore, print_failure_info, run_prover
+
+if TYPE_CHECKING:
+    from pyk.kast.inner import KInner
+
 
 class KEVMSummarizer:
     """
     A class for summarizing the instructions of the KEVM.
-    
+
     TODO:
     1. Build the proof to symbolically execute one abitrary instruction.
     2. Run the proof to get the KCFG.
     3. Summarize the KCFG to get the summarized rules for the instructions.
     rdots(pyk.KRewrite(pyk.KApply('#next[_]_EVM_InternalOp_MaybeOpCode', [opcode]), pyk.KConstant('#EmptyK')))
     """
+
     _cterm_symbolic: CTermSymbolic
     kevm: KEVM
     proof_dir: Path
     save_directory: Path
-    
+
     def __init__(self, proof_dir: Path, save_directory: Path) -> None:
-        self.kevm = KEVM(DEFINITION_DIR)
+        self.kevm = KEVM(kdist.get('evm-semantics.haskell'))
         self.proof_dir = proof_dir
         self.save_directory = save_directory
-    
-    def build_spec(self, ) -> APRProof:
+
+    def build_spec(
+        self,
+    ) -> APRProof:
         """
         Build the specification to symbolically execute one abitrary instruction.
         """
         cterm = CTerm(self.kevm.definition.empty_config(KSort('GeneratedTopCell')))
-        
+
         def _to_init(kast: KInner) -> KInner:
             if type(kast) is KVariable and kast.name == 'K_CELL':
-                return KSequence([KApply('#next[_]_EVM_InternalOp_MaybeOpCode', KVariable('OP_CODE', KSort('OpCode'))), KVariable('K_CELL')])
+                return KSequence(
+                    [
+                        KApply('#next[_]_EVM_InternalOp_MaybeOpCode', KVariable('OP_CODE', KSort('OpCode'))),
+                        KVariable('K_CELL'),
+                    ]
+                )
             return kast
-        
+
         def _to_final(kast: KInner) -> KInner:
             if type(kast) is KVariable and kast.name != 'K_CELL':
                 return KVariable('FINAL_' + kast.name)
             return kast
-        
+
         init_cterm = CTerm(bottom_up(_to_init, cterm.config), cterm.constraints)
         final_cterm = CTerm(bottom_up(_to_final, cterm.config), cterm.constraints)
-        kclaim, _  = cterm_build_claim('individual_instruction', init_cterm, final_cterm)
+        kclaim, _ = cterm_build_claim('individual_instruction', init_cterm, final_cterm)
         return APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
-    
+
     def explore(self, proof: APRProof) -> None:
         """
         Execute the specification to explore the KCFG for all possible instructions.
         """
-        
+
         # Construct the KCFGExplore
         # Copy from kevm-pyk/src/kevm_pyk/__main__.py/exec_prove
         # TODO: Make this process as an independent function to reuse； best to be in pyk.
@@ -71,7 +83,7 @@ class KEVMSummarizer:
                 self.kevm,
                 kcfg_semantics=KEVMSemantics(),
                 id=proof.id,
-                llvm_definition_dir=DEFINITION_DIR / 'llvm-library',
+                llvm_definition_dir=self.kevm.definition_dir / 'llvm-library',
                 bug_report=None,
                 kore_rpc_command=('kore-rpc-booster',),
                 smt_timeout=None,
@@ -104,10 +116,10 @@ class KEVMSummarizer:
                         kcfg_semantics=KEVMSemantics(),
                         id=proof.id,
                     )
-                    
+
                 initialize_apr_proof(kcfg_explore.cterm_symbolic, proof)
                 proof.write_proof_data()
-                
+
                 if proof.admitted:
                     print(f'Skipping execution of proof because it is marked as admitted: {proof.id}')
                     return True, None
@@ -159,12 +171,12 @@ class KEVMSummarizer:
 
         if failed:
             sys.exit(failed)
-    
-    def summarize(self, ):
+
+    def summarize(self) -> None:
         pass
 
 
-if __name__ == '__main__':
+def main() -> None:
     proof_dir = Path(__file__).parent / 'proofs'
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)

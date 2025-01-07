@@ -39,6 +39,7 @@ pyupgrade = "*"
 kevm = "kevm_pyk.__main__:main"
 kevm-pyk = "kevm_pyk.__main__:main"
 gst-to-kore = "kevm_pyk.gst_to_kore:main"
+summarize = "kevm_pyk.summarizer:main"
 
 [tool.poetry.plugins.kdist]
 evm-semantics = "kevm_pyk.kdist.plugin"
