@@ -24,7 +24,7 @@ class KEVMSummarizer:
     1. Build the proof to symbolically execute one abitrary instruction.
     2. Run the proof to get the KCFG.
     3. Summarize the KCFG to get the summarized rules for the instructions.
-    rdots(pyk.KRewrite(pyk.KApply('#next[_]_EVM_InternalOp_OpCode', [opcode]), pyk.KConstant('#EmptyK')))
+    rdots(pyk.KRewrite(pyk.KApply('#next[_]_EVM_InternalOp_MaybeOpCode', [opcode]), pyk.KConstant('#EmptyK')))
     """
     _cterm_symbolic: CTermSymbolic
     kevm: KEVM
@@ -44,7 +44,7 @@ class KEVMSummarizer:
         
         def _to_init(kast: KInner) -> KInner:
             if type(kast) is KVariable and kast.name == 'K_CELL':
-                return KSequence([KApply('#next[_]_EVM_InternalOp_OpCode', KVariable('OP_CODE', KSort('OpCode'))), KVariable('K_CELL')])
+                return KSequence([KApply('#next[_]_EVM_InternalOp_MaybeOpCode', KVariable('OP_CODE', KSort('OpCode'))), KVariable('K_CELL')])
             return kast
         
         def _to_final(kast: KInner) -> KInner:
@@ -79,7 +79,7 @@ class KEVMSummarizer:
                 log_succ_rewrites=True,
                 log_fail_rewrites=True,
                 fallback_on=None,
-                interim_simplification=True,
+                interim_simplification=25,
                 no_post_exec_simplify=False,
                 port=None,
                 haskell_threads=8,
