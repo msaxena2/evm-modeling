@@ -62,7 +62,6 @@ class KEVMSummarizer:
         # Runtime error | code: -32002 | data: {'context': 'CallStack (from HasCallStack):\n  error, called at src/Kore/Rewrite/Function/Evaluator.hs:377:6 in kore-0.1.104-CWw3vBaRpxI3Spyxy9LUQ8:Kore.Rewrite.Function.Evaluator', 'error': 'Error: missing hook\nSymbol\n    LblisValidPoint\'LParUndsRParUnds\'KRYPTO\'Unds\'Bool\'Unds\'G1Point{}\ndeclared with attribute\n    hook{}("KRYPTO.bn128valid")\nWe don\'t recognize that hook and it was not given any rules.\nPlease open a feature request at\n    https://github.com/runtimeverification/haskell-backend/issues\nand include the text of this message.\nWorkaround: Give rules for LblisValidPoint\'LParUndsRParUnds\'KRYPTO\'Unds\'Bool\'Unds\'G1Point{}'}
         # Analysis: need hook in Haskell backend for KRYPTO.bn128valid
         # Temp Solution: skip the PrecompiledOp for now
-        
 
         # construct the final substitution
         _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
@@ -156,7 +155,7 @@ class KEVMSummarizer:
 
             res_lines = proof_show.show(
                 proof,
-                nodes= [node.id for node in proof.kcfg.nodes],
+                nodes=[node.id for node in proof.kcfg.nodes],
             )
 
             return passed, res_lines
@@ -171,5 +170,3 @@ class KEVMSummarizer:
         proof_show = APRProofShow(self.kevm, node_printer=node_printer)
         for res_line in proof_show.show(proof, to_module=True):
             print(res_line)
-
-
