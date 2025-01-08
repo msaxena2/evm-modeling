@@ -1,23 +1,22 @@
 from __future__ import annotations
 
-import sys
+import logging
 import time
 from pathlib import Path
-from typing import TYPE_CHECKING
 
-from pyk.cterm import CTerm, CTermSymbolic, cterm_build_claim
-from pyk.kast.inner import KApply, KSequence, KVariable, bottom_up
+from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
+from pyk.kast.inner import KApply, KSequence, KVariable, Subst
 from pyk.kast.outer import KSort
 from pyk.kcfg import KCFGExplore
 from pyk.kdist import kdist
 from pyk.kore.rpc import KoreClient
 from pyk.proof import APRProof
+from pyk.proof.show import APRProofShow
 
-from kevm_pyk.kevm import KEVM, KEVMSemantics
-from kevm_pyk.utils import initialize_apr_proof, legacy_explore, print_failure_info, run_prover
+from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
+from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
 
-if TYPE_CHECKING:
-    from pyk.kast.inner import KInner
+_LOGGER = logging.getLogger(__name__)
 
 
 class KEVMSummarizer:
@@ -28,7 +27,6 @@ class KEVMSummarizer:
     1. Build the proof to symbolically execute one abitrary instruction.
     2. Run the proof to get the KCFG.
     3. Summarize the KCFG to get the summarized rules for the instructions.
-    rdots(pyk.KRewrite(pyk.KApply('#next[_]_EVM_InternalOp_MaybeOpCode', [opcode]), pyk.KConstant('#EmptyK')))
     """
 
     _cterm_symbolic: CTermSymbolic
@@ -49,24 +47,20 @@ class KEVMSummarizer:
         """
         cterm = CTerm(self.kevm.definition.empty_config(KSort('GeneratedTopCell')))
 
-        def _to_init(kast: KInner) -> KInner:
-            if type(kast) is KVariable and kast.name == 'K_CELL':
-                return KSequence(
-                    [
-                        KApply('#next[_]_EVM_InternalOp_MaybeOpCode', KVariable('OP_CODE', KSort('OpCode'))),
-                        KVariable('K_CELL'),
-                    ]
-                )
-            return kast
+        # construct the initial substitution
+        opcode = KVariable('OP_CODE', KSort('OpCode'))
+        next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
+        _init_subst = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
+        _init_subst['PROGRAM_CELL'] = self.kevm.bytes_empty()
+        init_subst = CSubst(Subst(_init_subst), ())
+        
+        # construct the final substitution
+        _final_subst = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
+        _final_subst['K_CELL'] = KVariable('K_CELL')
+        _final_subst['PROGRAM_CELL'] = self.kevm.bytes_empty()
+        final_subst = CSubst(Subst(_final_subst), ())
 
-        def _to_final(kast: KInner) -> KInner:
-            if type(kast) is KVariable and kast.name != 'K_CELL':
-                return KVariable('FINAL_' + kast.name)
-            return kast
-
-        init_cterm = CTerm(bottom_up(_to_init, cterm.config), cterm.constraints)
-        final_cterm = CTerm(bottom_up(_to_final, cterm.config), cterm.constraints)
-        kclaim, _ = cterm_build_claim('individual_instruction', init_cterm, final_cterm)
+        kclaim, _ = cterm_build_claim('instruction_spec', init_subst(cterm), final_subst(cterm))
         return APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
 
     def explore(self, proof: APRProof) -> None:
@@ -78,7 +72,7 @@ class KEVMSummarizer:
         # Copy from kevm-pyk/src/kevm_pyk/__main__.py/exec_prove
         # TODO: Make this process as an independent function to reuse； best to be in pyk.
 
-        def _init_and_run_proof(proof: APRProof) -> tuple[bool, list[str] | None]:
+        def _init_and_run_proof(proof: APRProof) -> tuple[bool, list[str]]:
             with legacy_explore(
                 self.kevm,
                 kcfg_semantics=KEVMSemantics(),
@@ -120,16 +114,12 @@ class KEVMSummarizer:
                 initialize_apr_proof(kcfg_explore.cterm_symbolic, proof)
                 proof.write_proof_data()
 
-                if proof.admitted:
-                    print(f'Skipping execution of proof because it is marked as admitted: {proof.id}')
-                    return True, None
-
                 start_time = time.time()
                 passed = run_prover(
                     proof,
                     create_kcfg_explore=create_kcfg_explore,
                     max_depth=1000,
-                    max_iterations=None,  # Small number to avoid infinite loop and cut rules more often.
+                    max_iterations=None,
                     cut_point_rules=KEVMSemantics.cut_point_rules(
                         break_on_jumpi=False,
                         break_on_jump=False,
@@ -149,36 +139,20 @@ class KEVMSummarizer:
                 )
             end_time = time.time()
             print(f'Proof timing {proof.id}: {end_time - start_time}s')
-            failure_log = None
-            if not passed:
-                failure_log = print_failure_info(proof, kcfg_explore)
+            # failure_log = None
 
-            return passed, failure_log
+            node_printer = kevm_node_printer(self.kevm, proof)
+            proof_show = APRProofShow(self.kevm, node_printer=node_printer)
 
-        result: list[tuple[bool, list[str] | None]] = [_init_and_run_proof(proof)]
+            res_lines = proof_show.show(
+                proof,
+            )
 
-        failed = 0
-        for job, r in zip([proof], result, strict=True):
-            passed, failure_log = r
-            if passed:
-                print(f'PROOF PASSED: {job.id}')
-            else:
-                failed += 1
-                print(f'PROOF FAILED: {job.id}')
-                if failure_log is not None:
-                    for line in failure_log:
-                        print(line)
+            return passed, res_lines
 
-        if failed:
-            sys.exit(failed)
+        _, res_lines = _init_and_run_proof(proof)
+        for line in res_lines:
+            print(line)
 
     def summarize(self) -> None:
         pass
-
-
-def main() -> None:
-    proof_dir = Path(__file__).parent / 'proofs'
-    save_directory = Path(__file__).parent / 'summaries'
-    summarizer = KEVMSummarizer(proof_dir, save_directory)
-    proof = summarizer.build_spec()
-    summarizer.explore(proof)
