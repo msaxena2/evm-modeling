@@ -55,7 +55,6 @@ class KEVMSummarizer:
         opcode = KVariable('OP_CODE', KSort('BinStackOp'))
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
-        _init_subst['PROGRAM_CELL'] = self.kevm.bytes_empty()
         init_subst = CSubst(Subst(_init_subst), ())
         # TODO: following provides some special cases that cannot be handled automatically
         # Error Message:
@@ -66,7 +65,6 @@ class KEVMSummarizer:
         # construct the final substitution
         _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
         _final_subst['K_CELL'] = KVariable('K_CELL')
-        _final_subst['PROGRAM_CELL'] = self.kevm.bytes_empty()
         final_subst = CSubst(Subst(_final_subst), ())
 
         kclaim, _ = cterm_build_claim('instruction_spec', init_subst(cterm), final_subst(cterm))
@@ -84,7 +82,7 @@ class KEVMSummarizer:
         def _init_and_run_proof(proof: APRProof) -> tuple[bool, list[str]]:
             with legacy_explore(
                 self.kevm,
-                kcfg_semantics=KEVMSemantics(),
+                kcfg_semantics=KEVMSemantics(allow_symbolic_program=True),
                 id=proof.id,
                 llvm_definition_dir=self.kevm.definition_dir / 'llvm-library',
                 bug_report=None,
@@ -116,7 +114,7 @@ class KEVMSummarizer:
                     )
                     return KCFGExplore(
                         cterm_symbolic,
-                        kcfg_semantics=KEVMSemantics(),
+                        kcfg_semantics=KEVMSemantics(allow_symbolic_program=True),
                         id=proof.id,
                     )
 
@@ -165,7 +163,7 @@ class KEVMSummarizer:
             print(line)
 
     def summarize(self, proof: APRProof) -> None:
-        proof.minimize_kcfg(KEVMSemantics(), False)
+        proof.minimize_kcfg(KEVMSemantics(allow_symbolic_program=True), False)
         node_printer = kevm_node_printer(self.kevm, proof)
         proof_show = APRProofShow(self.kevm, node_printer=node_printer)
         for res_line in proof_show.show(proof, to_module=True):
