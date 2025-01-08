@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import logging
 import time
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
-from pyk.kast.inner import KApply, KSequence, KVariable, Subst
+from pyk.kast.inner import KApply, KInner, KSequence, KVariable, Subst
 from pyk.kast.outer import KSort
 from pyk.kcfg import KCFGExplore
 from pyk.kdist import kdist
@@ -15,6 +15,9 @@ from pyk.proof.show import APRProofShow
 
 from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
 from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -50,12 +53,12 @@ class KEVMSummarizer:
         # construct the initial substitution
         opcode = KVariable('OP_CODE', KSort('OpCode'))
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
-        _init_subst = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
+        _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
         _init_subst['PROGRAM_CELL'] = self.kevm.bytes_empty()
         init_subst = CSubst(Subst(_init_subst), ())
-        
+
         # construct the final substitution
-        _final_subst = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
+        _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
         _final_subst['K_CELL'] = KVariable('K_CELL')
         _final_subst['PROGRAM_CELL'] = self.kevm.bytes_empty()
         final_subst = CSubst(Subst(_final_subst), ())
@@ -135,7 +138,7 @@ class KEVMSummarizer:
                     max_frontier_parallel=8,
                     force_sequential=False,
                     assume_defined=False,
-                    optimize_kcfg=True,
+                    optimize_kcfg=False,
                 )
             end_time = time.time()
             print(f'Proof timing {proof.id}: {end_time - start_time}s')
