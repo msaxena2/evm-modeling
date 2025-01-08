@@ -32,6 +32,8 @@ from pyk.proof.show import APRProofShow
 from pyk.proof.tui import APRProofViewer
 from pyk.utils import FrozenDict, hash_str, single
 
+from kevm_pyk.summarizer import KEVMSummarizer
+
 from . import VERSION, config
 from .cli import _create_argument_parser, generate_options, get_argument_type_setter, get_option_string_destination
 from .gst_to_kore import SORT_ETHEREUM_SIMULATION, filter_gst_keys, gst_to_kore, kore_pgm_to_kore
@@ -632,6 +634,14 @@ def exec_kast(options: KastOptions) -> None:
 
     output_text = kore_print(kore_pattern, definition_dir=kevm.definition_dir, output=options.output)
     print(output_text)
+
+
+def exec_summarize(options: ProveOptions) -> None:
+    proof_dir = Path(__file__).parent / 'proofs'
+    save_directory = Path(__file__).parent / 'summaries'
+    summarizer = KEVMSummarizer(proof_dir, save_directory)
+    proof = summarizer.build_spec()
+    summarizer.explore(proof)
 
 
 # Helpers
