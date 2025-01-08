@@ -642,6 +642,7 @@ def exec_summarize(options: ProveOptions) -> None:
     summarizer = KEVMSummarizer(proof_dir, save_directory)
     proof = summarizer.build_spec()
     summarizer.explore(proof)
+    # summarizer.summarize(proof)
 
 
 # Helpers
