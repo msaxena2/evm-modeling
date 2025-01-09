@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+
+import json
 import logging
 import time
 from typing import TYPE_CHECKING
@@ -7,11 +9,12 @@ from typing import TYPE_CHECKING
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
 from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
 from pyk.kast.outer import KSort
-from pyk.kcfg import KCFGExplore
+from pyk.kcfg import KCFGExplore, KCFG
 from pyk.kdist import kdist
 from pyk.kore.rpc import KoreClient
 from pyk.proof import APRProof
 from pyk.proof.show import APRProofShow
+from pyk.utils import ensure_dir_path
 
 from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
 from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
@@ -21,6 +24,99 @@ if TYPE_CHECKING:
 
 _LOGGER = logging.getLogger(__name__)
 
+OPCODES = {
+    'STOP': KApply('STOP_EVM_NullStackOp'),
+    'ADD': KApply('ADD_EVM_BinStackOp'),
+    'MUL': KApply('MUL_EVM_BinStackOp'),
+    'SUB': KApply('SUB_EVM_BinStackOp'),
+    'DIV': KApply('DIV_EVM_BinStackOp'),
+    'SDIV': KApply('SDIV_EVM_BinStackOp'),
+    'MOD': KApply('MOD_EVM_BinStackOp'),
+    'SMOD': KApply('SMOD_EVM_BinStackOp'),
+    'ADDMOD': KApply('ADDMOD_EVM_BinStackOp'),
+    'MULMOD': KApply('MULMOD_EVM_BinStackOp'),
+    'EXP': KApply('EXP_EVM_BinStackOp'),
+    'SIGNEXTEND': KApply('SIGNEXTEND_EVM_BinStackOp'),
+    'LT': KApply('LT_EVM_BinStackOp'),
+    'GT': KApply('GT_EVM_BinStackOp'),
+    'SLT': KApply('SLT_EVM_BinStackOp'),
+    'SGT': KApply('SGT_EVM_BinStackOp'),
+    'EQ': KApply('EQ_EVM_BinStackOp'),
+    'ISZERO': KApply('ISZERO_EVM_BinStackOp'),
+    'AND': KApply('AND_EVM_BinStackOp'),
+    'EVMOR': KApply('EVMOR_EVM_BinStackOp'),
+    'XOR': KApply('XOR_EVM_BinStackOp'),
+    'NOT': KApply('NOT_EVM_BinStackOp'),
+    'BYTE': KApply('BYTE_EVM_BinStackOp'),
+    'SHL': KApply('SHL_EVM_BinStackOp'),
+    'SHR': KApply('SHR_EVM_BinStackOp'),
+    'SAR': KApply('SAR_EVM_BinStackOp'),
+    'SHA3': KApply('SHA3_EVM_BinStackOp'),
+    'ADDRESS': KApply('ADDRESS_EVM_BinStackOp'),
+    'BALANCE': KApply('BALANCE_EVM_BinStackOp'),
+    'ORIGIN': KApply('ORIGIN_EVM_BinStackOp'),
+    'CALLER': KApply('CALLER_EVM_BinStackOp'),
+    'CALLVALUE': KApply('CALLVALUE_EVM_BinStackOp'),
+    'CALLDATALOAD': KApply('CALLDATALOAD_EVM_BinStackOp'),
+    'CALLDATASIZE': KApply('CALLDATASIZE_EVM_BinStackOp'),
+    'CALLDATACOPY': KApply('CALLDATACOPY_EVM_BinStackOp'),
+    'CODESIZE': KApply('CODESIZE_EVM_BinStackOp'),
+    'CODECOPY': KApply('CODECOPY_EVM_BinStackOp'),
+    'GASPRICE': KApply('GASPRICE_EVM_BinStackOp'),
+    'EXTCODESIZE': KApply('EXTCODESIZE_EVM_BinStackOp'),
+    'EXTCODECOPY': KApply('EXTCODECOPY_EVM_BinStackOp'),
+    'RETURNDATASIZE': KApply('RETURNDATASIZE_EVM_BinStackOp'),
+    'RETURNDATACOPY': KApply('RETURNDATACOPY_EVM_BinStackOp'),
+    'EXTCODEHASH': KApply('EXTCODEHASH_EVM_BinStackOp'),
+    'BLOCKHASH': KApply('BLOCKHASH_EVM_BinStackOp'),
+    'COINBASE': KApply('COINBASE_EVM_BinStackOp'),
+    'TIMESTAMP': KApply('TIMESTAMP_EVM_BinStackOp'),
+    'NUMBER': KApply('NUMBER_EVM_BinStackOp'),
+    'PREVRANDAO': KApply('PREVRANDAO_EVM_BinStackOp'),
+    'DIFFICULTY': KApply('DIFFICULTY_EVM_BinStackOp'),
+    'GASLIMIT': KApply('GASLIMIT_EVM_BinStackOp'),
+    'CHAINID': KApply('CHAINID_EVM_BinStackOp'),
+    'SELFBALANCE': KApply('SELFBALANCE_EVM_BinStackOp'),
+    'BASEFEE': KApply('BASEFEE_EVM_BinStackOp'),
+    'POP': KApply('POP_EVM_BinStackOp'),
+    'MLOAD': KApply('MLOAD_EVM_BinStackOp'),
+    'MSTORE': KApply('MSTORE_EVM_BinStackOp'),
+    'MSTORE8': KApply('MSTORE8_EVM_BinStackOp'),
+    'SLOAD': KApply('SLOAD_EVM_BinStackOp'),
+    'SSTORE': KApply('SSTORE_EVM_BinStackOp'),
+    'JUMP': KApply('JUMP_EVM_BinStackOp'),
+    'JUMPI': KApply('JUMPI_EVM_BinStackOp'),
+    'PC': KApply('PC_EVM_BinStackOp'),
+    'MSIZE': KApply('MSIZE_EVM_BinStackOp'),
+    'GAS': KApply('GAS_EVM_BinStackOp'),
+    'JUMPDEST': KApply('JUMPDEST_EVM_BinStackOp'),
+    'TLOAD': KApply('TLOAD_EVM_BinStackOp'),
+    'TSTORE': KApply('TSTORE_EVM_BinStackOp'),
+    'MCOPY': KApply('MCOPY_EVM_BinStackOp'),
+    'PUSHZERO': KApply('PUSHZERO_EVM_BinStackOp'),
+    'PUSH': KApply('PUSH_EVM_BinStackOp'),
+    'DUP': KApply('DUP_EVM_BinStackOp'),
+    'SWAP': KApply('SWAP_EVM_BinStackOp'),
+    'LOG': KApply('LOG_EVM_BinStackOp'),
+    'CREATE': KApply('CREATE_EVM_BinStackOp'),
+    'CALL': KApply('CALL_EVM_BinStackOp'),
+    'CALLCODE': KApply('CALLCODE_EVM_BinStackOp'),
+    'RETURN': KApply('RETURN_EVM_BinStackOp'),
+    'DELEGATECALL': KApply('DELEGATECALL_EVM_BinStackOp'),
+    'CREATE2': KApply('CREATE2_EVM_BinStackOp'),
+    'STATICCALL': KApply('STATICCALL_EVM_BinStackOp'),
+    'REVERT': KApply('REVERT_EVM_BinStackOp'),
+    'INVALID': KApply('INVALID_EVM_BinStackOp'),
+    'SELFDESTRUCT': KApply('SELFDESTRUCT_EVM_BinStackOp'),
+    'UNDEFINED': KApply('UNDEFINED_EVM_BinStackOp'),
+}
+
+OPCODES_SUMMARY_STATUS = {
+    'STOP': 'TODICUSS, all the leaves are terminal or stuck, find NDBranch',
+}
+
+def get_summary_status(opcode: str) -> str:
+    return OPCODES_SUMMARY_STATUS[opcode].split(',')[0]
 
 class KEVMSummarizer:
     """
@@ -44,6 +140,7 @@ class KEVMSummarizer:
 
     def build_spec(
         self,
+        opcode_symbol: str,
     ) -> APRProof:
         """
         Build the specification to symbolically execute one abitrary instruction.
@@ -53,22 +150,17 @@ class KEVMSummarizer:
         # construct the initial substitution
         # opcode = KVariable('OP_CODE', KSort('OpCode'))
         # opcode = KVariable('OP_CODE', KSort('BinStackOp'))
-        opcode = KApply('STOP_EVM_NullStackOp')
+        opcode = OPCODES[opcode_symbol]
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
         init_subst = CSubst(Subst(_init_subst), ())
-        # TODO: following provides some special cases that cannot be handled automatically
-        # Error Message:
-        # Runtime error | code: -32002 | data: {'context': 'CallStack (from HasCallStack):\n  error, called at src/Kore/Rewrite/Function/Evaluator.hs:377:6 in kore-0.1.104-CWw3vBaRpxI3Spyxy9LUQ8:Kore.Rewrite.Function.Evaluator', 'error': 'Error: missing hook\nSymbol\n    LblisValidPoint\'LParUndsRParUnds\'KRYPTO\'Unds\'Bool\'Unds\'G1Point{}\ndeclared with attribute\n    hook{}("KRYPTO.bn128valid")\nWe don\'t recognize that hook and it was not given any rules.\nPlease open a feature request at\n    https://github.com/runtimeverification/haskell-backend/issues\nand include the text of this message.\nWorkaround: Give rules for LblisValidPoint\'LParUndsRParUnds\'KRYPTO\'Unds\'Bool\'Unds\'G1Point{}'}
-        # Analysis: need hook in Haskell backend for KRYPTO.bn128valid
-        # Temp Solution: skip the PrecompiledOp for now
 
         # construct the final substitution
         _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
         _final_subst['K_CELL'] = KVariable('K_CELL')
         final_subst = CSubst(Subst(_final_subst), ())
 
-        kclaim, _ = cterm_build_claim('instruction_spec', init_subst(cterm), final_subst(cterm))
+        kclaim, _ = cterm_build_claim(f'{opcode_symbol}_SPEC', init_subst(cterm), final_subst(cterm))
         return APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
 
     def explore(self, proof: APRProof) -> None:
@@ -160,16 +252,29 @@ class KEVMSummarizer:
             return passed, res_lines
 
         passed, res_lines = _init_and_run_proof(proof)
-        if passed:
-            print(f'Proof {proof.id} Passed')
-        else:
-            print(f'Proof {proof.id} Failed')
-        for line in res_lines:
-            print(line)
+        
+        ensure_dir_path(self.save_directory / proof.id)
+        with open(self.save_directory / proof.id / 'proof-result.txt', 'w') as f:
+            f.write(f'Proof {proof.id} Passed' if passed else f'Proof {proof.id} Failed')
+            f.write('\n')
+            for line in res_lines:
+                f.write(line)
+                f.write('\n')
 
-    def summarize(self, proof: APRProof) -> None:
-        proof.minimize_kcfg(KEVMSemantics(allow_symbolic_program=True), False)
+    def summarize(self, proof: APRProof, merge: bool = False) -> None:
+        # TODO: need customized minimization rules, maybe
+        proof.minimize_kcfg(KEVMSemantics(allow_symbolic_program=True), merge)
         node_printer = kevm_node_printer(self.kevm, proof)
         proof_show = APRProofShow(self.kevm, node_printer=node_printer)
-        for res_line in proof_show.show(proof, to_module=True):
-            print(res_line)
+        ensure_dir_path(self.save_directory / proof.id)
+        with open(self.save_directory / proof.id / 'summary.md', 'w') as f:
+            for res_line in proof_show.show(proof, to_module=True):
+                f.write(res_line)
+                f.write('\n')
+    
+    def analyze_proof(self, proof_id: str) -> None:
+        proof = APRProof.read_proof_data(self.proof_dir, proof_id)
+        for successor in proof.kcfg.successors(11):
+            print('Type: ', type(successor))
+            print('Source: ', successor.source.id)
+            print('Target: ', [target.id for target in successor.targets])
