@@ -5,7 +5,7 @@ import time
 from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
-from pyk.kast.inner import KApply, KInner, KSequence, KVariable, Subst
+from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
 from pyk.kast.outer import KSort
 from pyk.kcfg import KCFGExplore
 from pyk.kdist import kdist
@@ -52,7 +52,8 @@ class KEVMSummarizer:
 
         # construct the initial substitution
         # opcode = KVariable('OP_CODE', KSort('OpCode'))
-        opcode = KVariable('OP_CODE', KSort('BinStackOp'))
+        # opcode = KVariable('OP_CODE', KSort('BinStackOp'))
+        opcode = KApply('STOP_EVM_NullStackOp')
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
         init_subst = CSubst(Subst(_init_subst), ())
@@ -158,7 +159,11 @@ class KEVMSummarizer:
 
             return passed, res_lines
 
-        _, res_lines = _init_and_run_proof(proof)
+        passed, res_lines = _init_and_run_proof(proof)
+        if passed:
+            print(f'Proof {proof.id} Passed')
+        else:
+            print(f'Proof {proof.id} Failed')
         for line in res_lines:
             print(line)
 
