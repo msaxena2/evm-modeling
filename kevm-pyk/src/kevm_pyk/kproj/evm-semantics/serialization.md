@@ -18,6 +18,16 @@ module SERIALIZATION
 Address/Hash Helpers
 --------------------
 
+- `isValidPointWrapper` serves as a wrapper around the `isValidPoint` in `KRYPTO`.
+
+```k
+    syntax Bool ::= isValidPointWrapper ( G1Point ) [symbol(isValidPointWrapper), function, total, smtlib(smt_krypto_bn128valid)]
+                  | isValidPointWrapper ( G2Point ) [symbol(isValidG2PointWrapper), function, total, smtlib(smt_krypto_bn128g2valid)]
+ // -----------------------------------------------------------------------------------------------------------------------------
+    rule [isValidPointWrapper]: isValidPointWrapper(P:G1Point) => isValidPoint(P) [concrete]
+    rule [isValidG2PointWrapper]: isValidPointWrapper(P:G2Point) => isValidPoint(P) [concrete]
+```
+
 -   `keccak` serves as a wrapper around the `Keccak256` in `KRYPTO`.
 
 ```k

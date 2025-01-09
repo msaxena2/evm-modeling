@@ -640,7 +640,7 @@ def exec_summarize(options: ProveOptions) -> None:
     proof_dir = Path(__file__).parent / 'proofs'
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)
-    proof = summarizer.build_spec('STOP')
+    proof = summarizer.build_spec('ADD')
     summarizer.explore(proof)
     summarizer.summarize(proof)
     # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')

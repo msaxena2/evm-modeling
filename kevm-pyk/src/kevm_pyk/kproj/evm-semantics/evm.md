@@ -2010,9 +2010,9 @@ Precompiled Contracts
     syntax InternalOp ::= #ecadd(G1Point, G1Point) [symbol(#ecadd)]
  // ---------------------------------------------------------------
     rule <k> #ecadd(P1, P2) => #end EVMC_PRECOMPILE_FAILURE ... </k>
-      requires notBool isValidPoint(P1) orBool notBool isValidPoint(P2)
+      requires notBool isValidPointWrapper(P1) orBool notBool isValidPointWrapper(P2)
     rule <k> #ecadd(P1, P2) => #end EVMC_SUCCESS ... </k> <output> _ => #point(BN128Add(P1, P2)) </output>
-      requires isValidPoint(P1) andBool isValidPoint(P2)
+      requires isValidPointWrapper(P1) andBool isValidPointWrapper(P2)
 
     syntax PrecompiledOp ::= "ECMUL"
  // --------------------------------
@@ -2022,9 +2022,9 @@ Precompiled Contracts
     syntax InternalOp ::= #ecmul(G1Point, Int) [symbol(#ecmul)]
  // -----------------------------------------------------------
     rule <k> #ecmul(P, _S) => #end EVMC_PRECOMPILE_FAILURE ... </k>
-      requires notBool isValidPoint(P)
+      requires notBool isValidPointWrapper(P)
     rule <k> #ecmul(P,  S) => #end EVMC_SUCCESS ... </k> <output> _ => #point(BN128Mul(P, S)) </output>
-      requires isValidPoint(P)
+      requires isValidPointWrapper(P)
 
     syntax Bytes ::= #point ( G1Point ) [symbol(#point), function]
  // --------------------------------------------------------------
@@ -2049,9 +2049,9 @@ Precompiled Contracts
     syntax InternalOp ::= "#checkPoint"
  // -----------------------------------
     rule <k> (#checkPoint => .K) ~> #ecpairing(ListItem(AK::G1Point) _, ListItem(BK::G2Point) _, _, _, _) ... </k>
-      requires isValidPoint(AK) andBool isValidPoint(BK)
+      requires isValidPointWrapper(AK) andBool isValidPointWrapper(BK)
     rule <k> #checkPoint ~> #ecpairing(ListItem(AK::G1Point) _, ListItem(BK::G2Point) _, _, _, _) => #end EVMC_PRECOMPILE_FAILURE ... </k>
-      requires notBool isValidPoint(AK) orBool notBool isValidPoint(BK)
+      requires notBool isValidPointWrapper(AK) orBool notBool isValidPointWrapper(BK)
 
     syntax PrecompiledOp ::= "BLAKE2F"
  // ----------------------------------
