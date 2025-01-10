@@ -1,0 +1,611 @@
+Proof CALLVALUE_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ CALLVALUE ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ CALLVALUE ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 8 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_UNDERFLOW
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024
+┃  │
+┃  ├─ 4
+┃  │   k: #next [ CALLVALUE ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 7 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_OVERFLOW
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 )
+   ┃     ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 )
+   │
+   ├─ 5
+   │   k: #next [ CALLVALUE ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (3 steps)
+   ├─ 6 (split)
+   │   k: #gas [ CALLVALUE , CALLVALUE ] ~> CALLVALUE ~> #pc [ CALLVALUE ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┃ (branch)
+   ┣━━┓ subst: .Subst
+   ┃  ┃ constraint:
+   ┃  ┃     _USEGAS_CELL:Bool
+   ┃  │
+   ┃  ├─ 9
+   ┃  │   k: #gas [ CALLVALUE , CALLVALUE ] ~> CALLVALUE ~> #pc [ CALLVALUE ] ~> _K_CELL:K
+   ┃  │   pc: _PC_CELL:Int
+   ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  │
+   ┃  │  (4 steps)
+   ┃  ├─ 11
+   ┃  │   k: Gbase < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ CALLVALUE , CALLVAL ...
+   ┃  │   pc: _PC_CELL:Int
+   ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃
+   ┃  ┃ (1 step)
+   ┃  ┣━━┓
+   ┃  ┃  │
+   ┃  ┃  └─ 12 (leaf, pending)
+   ┃  ┃      k: #access [ CALLVALUE , CALLVALUE ] ~> CALLVALUE ~> #pc [ CALLVALUE ] ~> _K_CELL:K
+   ┃  ┃      pc: _PC_CELL:Int
+   ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃
+   ┃  ┣━━┓
+   ┃  ┃  │
+   ┃  ┃  ├─ 13
+   ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ CALLVALUE , CALLVALUE ] ~> CALLVALUE ~> #pc [  ...
+   ┃  ┃  │   pc: _PC_CELL:Int
+   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  │
+   ┃  ┃  │  (4 steps)
+   ┃  ┃  └─ 15 (leaf, terminal)
+   ┃  ┃      k: #halt ~> _K_CELL:K
+   ┃  ┃      pc: _PC_CELL:Int
+   ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃      statusCode: EVMC_OUT_OF_GAS
+   ┃  ┃
+   ┃  ┗━━┓
+   ┃     │
+   ┃     └─ 14 (stuck, leaf)
+   ┃         k: Gbase < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ CALLVALUE , CALLVAL ...
+   ┃         pc: _PC_CELL:Int
+   ┃         callDepth: _CALLDEPTH_CELL:Int
+   ┃         statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┗━━┓ subst: .Subst
+      ┃ constraint:
+      ┃     ( notBool _USEGAS_CELL:Bool )
+      │
+      └─ 10 (leaf, pending)
+          k: #gas [ CALLVALUE , CALLVALUE ] ~> CALLVALUE ~> #pc [ CALLVALUE ] ~> _K_CELL:K
+          pc: _PC_CELL:Int
+          callDepth: _CALLDEPTH_CELL:Int
+          statusCode: _STATUSCODE_CELL:StatusCode
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { false #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 }
+#And { false #Equals ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 } ) )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_OVERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 } )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_UNDERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 } )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gbase < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gbase < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And ( { true #Equals Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #access [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And ( { true #Equals _GAS_CELL:Gas <Gas Gbase < _SCHEDULE_CELL:Schedule > }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gbase < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ CALLVALUE , CALLVALUE ]
+      ~> CALLVALUE
+      ~> #pc [ CALLVALUE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And ( { true #Equals ( notBool _GAS_CELL:Gas <Gas Gbase < _SCHEDULE_CELL:Schedule > ) }
+#And ( { true #Equals ( notBool Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And ( { true #Equals _GAS_CELL:Gas <Gas Gbase < _SCHEDULE_CELL:Schedule > }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int 1 ) >Int 1024 ) } ) ) ) )
+
+
+

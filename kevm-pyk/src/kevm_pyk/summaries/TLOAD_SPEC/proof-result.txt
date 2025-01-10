@@ -1,0 +1,4836 @@
+Proof TLOAD_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ TLOAD ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ TLOAD ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 8 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_UNDERFLOW
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024
+┃  │
+┃  ├─ 4
+┃  │   k: #next [ TLOAD ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 7 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_OVERFLOW
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 )
+   ┃     ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 )
+   │
+   ├─ 5
+   │   k: #next [ TLOAD ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (2 steps)
+   ├─ 6
+   │   k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┃ (1 step)
+   ┣━━┓
+   ┃  │
+   ┃  ├─ 9 (split)
+   ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  │   pc: _PC_CELL:Int
+   ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃
+   ┃  ┃ (branch)
+   ┃  ┣━━┓ subst: .Subst
+   ┃  ┃  ┃ constraint:
+   ┃  ┃  ┃     _USEGAS_CELL:Bool
+   ┃  ┃  │
+   ┃  ┃  ├─ 11
+   ┃  ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  │   pc: _PC_CELL:Int
+   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  │
+   ┃  ┃  │  (4 steps)
+   ┃  ┃  ├─ 22
+   ┃  ┃  │   k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+   ┃  ┃  │   pc: _PC_CELL:Int
+   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃
+   ┃  ┃  ┃ (1 step)
+   ┃  ┃  ┣━━┓
+   ┃  ┃  ┃  │
+   ┃  ┃  ┃  ├─ 23
+   ┃  ┃  ┃  │   k: #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  ┃  │   pc: _PC_CELL:Int
+   ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃  │
+   ┃  ┃  ┃  │  (1 step)
+   ┃  ┃  ┃  ├─ 34
+   ┃  ┃  ┃  │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  ┃  │   pc: _PC_CELL:Int
+   ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃  ┃
+   ┃  ┃  ┃  ┃ (1 step)
+   ┃  ┃  ┃  ┣━━┓
+   ┃  ┃  ┃  ┃  │
+   ┃  ┃  ┃  ┃  └─ 46 (leaf, pending)
+   ┃  ┃  ┃  ┃      k: #lookup ( TSTORAGE:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
+   ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃  ┃
+   ┃  ┃  ┃  ┗━━┓
+   ┃  ┃  ┃     │
+   ┃  ┃  ┃     ├─ 47
+   ┃  ┃  ┃     │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  ┃     │   pc: _PC_CELL:Int
+   ┃  ┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃     ┃
+   ┃  ┃  ┃     ┃ (1 step)
+   ┃  ┃  ┃     ┣━━┓
+   ┃  ┃  ┃     ┃  │
+   ┃  ┃  ┃     ┃  └─ 64 (leaf, pending)
+   ┃  ┃  ┃     ┃      k: #lookup ( TSTORAGE0:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  ┃     ┃      pc: _PC_CELL:Int
+   ┃  ┃  ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃     ┃
+   ┃  ┃  ┃     ┗━━┓
+   ┃  ┃  ┃        │
+   ┃  ┃  ┃        └─ 65 (leaf, pending)
+   ┃  ┃  ┃            k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃  ┃  ┃            pc: _PC_CELL:Int
+   ┃  ┃  ┃            callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃            statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃
+   ┃  ┃  ┣━━┓
+   ┃  ┃  ┃  │
+   ┃  ┃  ┃  ├─ 24
+   ┃  ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc  ...
+   ┃  ┃  ┃  │   pc: _PC_CELL:Int
+   ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ┃  │
+   ┃  ┃  ┃  │  (4 steps)
+   ┃  ┃  ┃  └─ 48 (leaf, terminal)
+   ┃  ┃  ┃      k: #halt ~> _K_CELL:K
+   ┃  ┃  ┃      pc: _PC_CELL:Int
+   ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃  ┃      statusCode: EVMC_OUT_OF_GAS
+   ┃  ┃  ┃
+   ┃  ┃  ┗━━┓
+   ┃  ┃     │
+   ┃  ┃     └─ 25 (stuck, leaf)
+   ┃  ┃         k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+   ┃  ┃         pc: _PC_CELL:Int
+   ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+   ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃
+   ┃  ┗━━┓ subst: .Subst
+   ┃     ┃ constraint:
+   ┃     ┃     ( notBool _USEGAS_CELL:Bool )
+   ┃     │
+   ┃     ├─ 12
+   ┃     │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃     │   pc: _PC_CELL:Int
+   ┃     │   callDepth: _CALLDEPTH_CELL:Int
+   ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃     │
+   ┃     │  (1 step)
+   ┃     ├─ 19
+   ┃     │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃     │   pc: _PC_CELL:Int
+   ┃     │   callDepth: _CALLDEPTH_CELL:Int
+   ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃     ┃
+   ┃     ┃ (1 step)
+   ┃     ┣━━┓
+   ┃     ┃  │
+   ┃     ┃  └─ 20 (leaf, pending)
+   ┃     ┃      k: #lookup ( TSTORAGE:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃     ┃      pc: _PC_CELL:Int
+   ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃     ┃
+   ┃     ┗━━┓
+   ┃        │
+   ┃        ├─ 21
+   ┃        │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃        │   pc: _PC_CELL:Int
+   ┃        │   callDepth: _CALLDEPTH_CELL:Int
+   ┃        │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃        ┃
+   ┃        ┃ (1 step)
+   ┃        ┣━━┓
+   ┃        ┃  │
+   ┃        ┃  └─ 31 (leaf, pending)
+   ┃        ┃      k: #lookup ( TSTORAGE0:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃        ┃      pc: _PC_CELL:Int
+   ┃        ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃        ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃        ┃
+   ┃        ┗━━┓
+   ┃           │
+   ┃           ├─ 32
+   ┃           │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃           │   pc: _PC_CELL:Int
+   ┃           │   callDepth: _CALLDEPTH_CELL:Int
+   ┃           │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃           ┃
+   ┃           ┃ (1 step)
+   ┃           ┣━━┓
+   ┃           ┃  │
+   ┃           ┃  └─ 49 (leaf, pending)
+   ┃           ┃      k: #lookup ( TSTORAGE1:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃           ┃      pc: _PC_CELL:Int
+   ┃           ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃           ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃           ┃
+   ┃           ┗━━┓
+   ┃              │
+   ┃              ├─ 50
+   ┃              │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃              │   pc: _PC_CELL:Int
+   ┃              │   callDepth: _CALLDEPTH_CELL:Int
+   ┃              │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃              ┃
+   ┃              ┃ (1 step)
+   ┃              ┣━━┓
+   ┃              ┃  │
+   ┃              ┃  └─ 68 (leaf, pending)
+   ┃              ┃      k: #lookup ( TSTORAGE2:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃              ┃      pc: _PC_CELL:Int
+   ┃              ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃              ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃              ┃
+   ┃              ┗━━┓
+   ┃                 │
+   ┃                 └─ 69 (leaf, pending)
+   ┃                     k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+   ┃                     pc: _PC_CELL:Int
+   ┃                     callDepth: _CALLDEPTH_CELL:Int
+   ┃                     statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┗━━┓
+      │
+      ├─ 10
+      │   k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+      │   pc: _PC_CELL:Int
+      │   callDepth: _CALLDEPTH_CELL:Int
+      │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃
+      ┃ (1 step)
+      ┣━━┓
+      ┃  │
+      ┃  ├─ 13 (split)
+      ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃  │   pc: _PC_CELL:Int
+      ┃  │   callDepth: _CALLDEPTH_CELL:Int
+      ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃
+      ┃  ┃ (branch)
+      ┃  ┣━━┓ subst: .Subst
+      ┃  ┃  ┃ constraint:
+      ┃  ┃  ┃     _USEGAS_CELL:Bool
+      ┃  ┃  │
+      ┃  ┃  ├─ 15
+      ┃  ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃  ┃  │   pc: _PC_CELL:Int
+      ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  │
+      ┃  ┃  │  (4 steps)
+      ┃  ┃  ├─ 33
+      ┃  ┃  │   k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+      ┃  ┃  │   pc: _PC_CELL:Int
+      ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  ┃
+      ┃  ┃  ┃ (1 step)
+      ┃  ┃  ┣━━┓
+      ┃  ┃  ┃  │
+      ┃  ┃  ┃  ├─ 39
+      ┃  ┃  ┃  │   k: #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃  ┃  ┃  │   pc: _PC_CELL:Int
+      ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  ┃  │
+      ┃  ┃  ┃  │  (1 step)
+      ┃  ┃  ┃  ├─ 53
+      ┃  ┃  ┃  │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃  ┃  ┃  │   pc: _PC_CELL:Int
+      ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  ┃  ┃
+      ┃  ┃  ┃  ┃ (1 step)
+      ┃  ┃  ┃  ┣━━┓
+      ┃  ┃  ┃  ┃  │
+      ┃  ┃  ┃  ┃  └─ 70 (leaf, pending)
+      ┃  ┃  ┃  ┃      k: #lookup ( TSTORAGE:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
+      ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  ┃  ┃
+      ┃  ┃  ┃  ┗━━┓
+      ┃  ┃  ┃     │
+      ┃  ┃  ┃     └─ 71 (leaf, pending)
+      ┃  ┃  ┃         k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃  ┃  ┃         pc: _PC_CELL:Int
+      ┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  ┃
+      ┃  ┃  ┣━━┓
+      ┃  ┃  ┃  │
+      ┃  ┃  ┃  ├─ 40
+      ┃  ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc  ...
+      ┃  ┃  ┃  │   pc: _PC_CELL:Int
+      ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃  ┃  │
+      ┃  ┃  ┃  │  (4 steps)
+      ┃  ┃  ┃  └─ 63 (leaf, pending)
+      ┃  ┃  ┃      k: #halt ~> _K_CELL:K
+      ┃  ┃  ┃      pc: _PC_CELL:Int
+      ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃  ┃      statusCode: EVMC_OUT_OF_GAS
+      ┃  ┃  ┃
+      ┃  ┃  ┗━━┓
+      ┃  ┃     │
+      ┃  ┃     └─ 41 (stuck, leaf)
+      ┃  ┃         k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+      ┃  ┃         pc: _PC_CELL:Int
+      ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+      ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+      ┃  ┃
+      ┃  ┗━━┓ subst: .Subst
+      ┃     ┃ constraint:
+      ┃     ┃     ( notBool _USEGAS_CELL:Bool )
+      ┃     │
+      ┃     ├─ 16
+      ┃     │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃     │   pc: _PC_CELL:Int
+      ┃     │   callDepth: _CALLDEPTH_CELL:Int
+      ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃     │
+      ┃     │  (1 step)
+      ┃     ├─ 30
+      ┃     │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃     │   pc: _PC_CELL:Int
+      ┃     │   callDepth: _CALLDEPTH_CELL:Int
+      ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃     ┃
+      ┃     ┃ (1 step)
+      ┃     ┣━━┓
+      ┃     ┃  │
+      ┃     ┃  └─ 35 (leaf, pending)
+      ┃     ┃      k: #lookup ( TSTORAGE:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃     ┃      pc: _PC_CELL:Int
+      ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+      ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+      ┃     ┃
+      ┃     ┗━━┓
+      ┃        │
+      ┃        ├─ 36
+      ┃        │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃        │   pc: _PC_CELL:Int
+      ┃        │   callDepth: _CALLDEPTH_CELL:Int
+      ┃        │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃        ┃
+      ┃        ┃ (1 step)
+      ┃        ┣━━┓
+      ┃        ┃  │
+      ┃        ┃  └─ 51 (leaf, pending)
+      ┃        ┃      k: #lookup ( TSTORAGE0:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃        ┃      pc: _PC_CELL:Int
+      ┃        ┃      callDepth: _CALLDEPTH_CELL:Int
+      ┃        ┃      statusCode: _STATUSCODE_CELL:StatusCode
+      ┃        ┃
+      ┃        ┗━━┓
+      ┃           │
+      ┃           ├─ 52
+      ┃           │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃           │   pc: _PC_CELL:Int
+      ┃           │   callDepth: _CALLDEPTH_CELL:Int
+      ┃           │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃           ┃
+      ┃           ┃ (1 step)
+      ┃           ┣━━┓
+      ┃           ┃  │
+      ┃           ┃  └─ 77 (leaf, pending)
+      ┃           ┃      k: #lookup ( TSTORAGE1:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃           ┃      pc: _PC_CELL:Int
+      ┃           ┃      callDepth: _CALLDEPTH_CELL:Int
+      ┃           ┃      statusCode: _STATUSCODE_CELL:StatusCode
+      ┃           ┃
+      ┃           ┗━━┓
+      ┃              │
+      ┃              └─ 78 (leaf, pending)
+      ┃                  k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+      ┃                  pc: _PC_CELL:Int
+      ┃                  callDepth: _CALLDEPTH_CELL:Int
+      ┃                  statusCode: _STATUSCODE_CELL:StatusCode
+      ┃
+      ┗━━┓
+         │
+         ├─ 14
+         │   k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+         │   pc: _PC_CELL:Int
+         │   callDepth: _CALLDEPTH_CELL:Int
+         │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃
+         ┃ (1 step)
+         ┣━━┓
+         ┃  │
+         ┃  ├─ 17 (split)
+         ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃  │   pc: _PC_CELL:Int
+         ┃  │   callDepth: _CALLDEPTH_CELL:Int
+         ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃
+         ┃  ┃ (branch)
+         ┃  ┣━━┓ subst: .Subst
+         ┃  ┃  ┃ constraint:
+         ┃  ┃  ┃     _USEGAS_CELL:Bool
+         ┃  ┃  │
+         ┃  ┃  ├─ 26
+         ┃  ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃  ┃  │   pc: _PC_CELL:Int
+         ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃  │
+         ┃  ┃  │  (4 steps)
+         ┃  ┃  ├─ 44
+         ┃  ┃  │   k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+         ┃  ┃  │   pc: _PC_CELL:Int
+         ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃  ┃
+         ┃  ┃  ┃ (1 step)
+         ┃  ┃  ┣━━┓
+         ┃  ┃  ┃  │
+         ┃  ┃  ┃  ├─ 56
+         ┃  ┃  ┃  │   k: #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃  ┃  ┃  │   pc: _PC_CELL:Int
+         ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃  ┃  │
+         ┃  ┃  ┃  │  (1 step)
+         ┃  ┃  ┃  └─ 79 (leaf, pending)
+         ┃  ┃  ┃      k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃  ┃  ┃      pc: _PC_CELL:Int
+         ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃  ┃
+         ┃  ┃  ┣━━┓
+         ┃  ┃  ┃  │
+         ┃  ┃  ┃  ├─ 57
+         ┃  ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc  ...
+         ┃  ┃  ┃  │   pc: _PC_CELL:Int
+         ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃  ┃  │
+         ┃  ┃  ┃  │  (4 steps)
+         ┃  ┃  ┃  └─ 80 (leaf, pending)
+         ┃  ┃  ┃      k: #halt ~> _K_CELL:K
+         ┃  ┃  ┃      pc: _PC_CELL:Int
+         ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃  ┃      statusCode: EVMC_OUT_OF_GAS
+         ┃  ┃  ┃
+         ┃  ┃  ┗━━┓
+         ┃  ┃     │
+         ┃  ┃     └─ 58 (stuck, leaf)
+         ┃  ┃         k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+         ┃  ┃         pc: _PC_CELL:Int
+         ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+         ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+         ┃  ┃
+         ┃  ┗━━┓ subst: .Subst
+         ┃     ┃ constraint:
+         ┃     ┃     ( notBool _USEGAS_CELL:Bool )
+         ┃     │
+         ┃     ├─ 27
+         ┃     │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃     │   pc: _PC_CELL:Int
+         ┃     │   callDepth: _CALLDEPTH_CELL:Int
+         ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃     │
+         ┃     │  (1 step)
+         ┃     ├─ 45
+         ┃     │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃     │   pc: _PC_CELL:Int
+         ┃     │   callDepth: _CALLDEPTH_CELL:Int
+         ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+         ┃     ┃
+         ┃     ┃ (1 step)
+         ┃     ┣━━┓
+         ┃     ┃  │
+         ┃     ┃  └─ 59 (leaf, pending)
+         ┃     ┃      k: #lookup ( TSTORAGE:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃     ┃      pc: _PC_CELL:Int
+         ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+         ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+         ┃     ┃
+         ┃     ┗━━┓
+         ┃        │
+         ┃        └─ 60 (leaf, pending)
+         ┃            k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+         ┃            pc: _PC_CELL:Int
+         ┃            callDepth: _CALLDEPTH_CELL:Int
+         ┃            statusCode: _STATUSCODE_CELL:StatusCode
+         ┃
+         ┗━━┓
+            │
+            ├─ 18
+            │   k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+            │   pc: _PC_CELL:Int
+            │   callDepth: _CALLDEPTH_CELL:Int
+            │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃
+            ┃ (1 step)
+            ┣━━┓
+            ┃  │
+            ┃  ├─ 28 (split)
+            ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃  │   pc: _PC_CELL:Int
+            ┃  │   callDepth: _CALLDEPTH_CELL:Int
+            ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃
+            ┃  ┃ (branch)
+            ┃  ┣━━┓ subst: .Subst
+            ┃  ┃  ┃ constraint:
+            ┃  ┃  ┃     _USEGAS_CELL:Bool
+            ┃  ┃  │
+            ┃  ┃  ├─ 37
+            ┃  ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃  ┃  │   pc: _PC_CELL:Int
+            ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+            ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃  │
+            ┃  ┃  │  (4 steps)
+            ┃  ┃  ├─ 55
+            ┃  ┃  │   k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+            ┃  ┃  │   pc: _PC_CELL:Int
+            ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+            ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃  ┃
+            ┃  ┃  ┃ (1 step)
+            ┃  ┃  ┣━━┓
+            ┃  ┃  ┃  │
+            ┃  ┃  ┃  └─ 74 (leaf, pending)
+            ┃  ┃  ┃      k: #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃  ┃  ┃      pc: _PC_CELL:Int
+            ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+            ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃  ┃
+            ┃  ┃  ┣━━┓
+            ┃  ┃  ┃  │
+            ┃  ┃  ┃  └─ 75 (leaf, pending)
+            ┃  ┃  ┃      k: #end EVMC_OUT_OF_GAS ~> #access [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc  ...
+            ┃  ┃  ┃      pc: _PC_CELL:Int
+            ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+            ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃  ┃
+            ┃  ┃  ┗━━┓
+            ┃  ┃     │
+            ┃  ┃     └─ 76 (leaf, pending)
+            ┃  ┃         k: Gwarmstorageread < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ TLOAD ,  ...
+            ┃  ┃         pc: _PC_CELL:Int
+            ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+            ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃
+            ┃  ┗━━┓ subst: .Subst
+            ┃     ┃ constraint:
+            ┃     ┃     ( notBool _USEGAS_CELL:Bool )
+            ┃     │
+            ┃     ├─ 38
+            ┃     │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃     │   pc: _PC_CELL:Int
+            ┃     │   callDepth: _CALLDEPTH_CELL:Int
+            ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃     │
+            ┃     │  (1 step)
+            ┃     ├─ 54
+            ┃     │   k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃     │   pc: _PC_CELL:Int
+            ┃     │   callDepth: _CALLDEPTH_CELL:Int
+            ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃     ┃
+            ┃     ┃ (1 step)
+            ┃     ┣━━┓
+            ┃     ┃  │
+            ┃     ┃  └─ 72 (leaf, pending)
+            ┃     ┃      k: #lookup ( TSTORAGE:Map , W0:Int ) ~> #push ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃     ┃      pc: _PC_CELL:Int
+            ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+            ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+            ┃     ┃
+            ┃     ┗━━┓
+            ┃        │
+            ┃        └─ 73 (leaf, pending)
+            ┃            k: TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+            ┃            pc: _PC_CELL:Int
+            ┃            callDepth: _CALLDEPTH_CELL:Int
+            ┃            statusCode: _STATUSCODE_CELL:StatusCode
+            ┃
+            ┗━━┓
+               │
+               ├─ 29
+               │   k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+               │   pc: _PC_CELL:Int
+               │   callDepth: _CALLDEPTH_CELL:Int
+               │   statusCode: _STATUSCODE_CELL:StatusCode
+               ┃
+               ┃ (1 step)
+               ┣━━┓
+               ┃  │
+               ┃  ├─ 42 (split)
+               ┃  │   k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+               ┃  │   pc: _PC_CELL:Int
+               ┃  │   callDepth: _CALLDEPTH_CELL:Int
+               ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+               ┃  ┃
+               ┃  ┃ (branch)
+               ┃  ┣━━┓ subst: .Subst
+               ┃  ┃  ┃ constraint:
+               ┃  ┃  ┃     _USEGAS_CELL:Bool
+               ┃  ┃  │
+               ┃  ┃  └─ 61 (leaf, pending)
+               ┃  ┃      k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+               ┃  ┃      pc: _PC_CELL:Int
+               ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+               ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+               ┃  ┃
+               ┃  ┗━━┓ subst: .Subst
+               ┃     ┃ constraint:
+               ┃     ┃     ( notBool _USEGAS_CELL:Bool )
+               ┃     │
+               ┃     └─ 62 (leaf, pending)
+               ┃         k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+               ┃         pc: _PC_CELL:Int
+               ┃         callDepth: _CALLDEPTH_CELL:Int
+               ┃         statusCode: _STATUSCODE_CELL:StatusCode
+               ┃
+               ┗━━┓
+                  │
+                  ├─ 43
+                  │   k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+                  │   pc: _PC_CELL:Int
+                  │   callDepth: _CALLDEPTH_CELL:Int
+                  │   statusCode: _STATUSCODE_CELL:StatusCode
+                  ┃
+                  ┃ (1 step)
+                  ┣━━┓
+                  ┃  │
+                  ┃  └─ 66 (leaf, pending)
+                  ┃      k: #gas [ TLOAD , TLOAD W0:Int ] ~> TLOAD W0:Int ~> #pc [ TLOAD ] ~> _K_CELL:K
+                  ┃      pc: _PC_CELL:Int
+                  ┃      callDepth: _CALLDEPTH_CELL:Int
+                  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+                  ┃
+                  ┗━━┓
+                     │
+                     └─ 67 (leaf, pending)
+                         k: #exec [ TLOAD ] ~> #pc [ TLOAD ] ~> _K_CELL:K
+                         pc: _PC_CELL:Int
+                         callDepth: _CALLDEPTH_CELL:Int
+                         statusCode: _STATUSCODE_CELL:StatusCode
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { false #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 }
+#And { false #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 } ) )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) } ) )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_OVERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 } )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_UNDERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 } )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) } ) ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
+#And #Not ( #Exists W0:Int . #Exists WS:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) } ) ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) } )
+#And #Not ( #Exists W0:Int . #Exists WS0:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) } ) ) ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) } ) ) ) ) )
+
+
+
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) } ) ) ) ) )
+
+
+
+Node 17:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) } ) ) ) ) )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) } )
+#And #Not ( #Exists W0:Int . #Exists WS1:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) } ) ) ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            _Gen25:StorageCell
+            _Gen26:OrigStorageCell
+            <transientStorage>
+              TSTORAGE:Map
+            </transientStorage>
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) )
+
+
+
+Node 21:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:StorageCell . #Exists _Gen26:OrigStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists TSTORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) )
+
+
+
+Node 22:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 23:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) )
+
+
+
+Node 24:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) )
+
+
+
+Node 25:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals ( notBool _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > ) }
+#And { true #Equals ( notBool Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) } ) ) ) ) ) )
+
+
+
+Node 26:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) )
+
+
+
+Node 27:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) )
+
+
+
+Node 28:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) )
+
+
+
+Node 29:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) } )
+#And #Not ( #Exists W0:Int . #Exists WS2:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) } ) ) ) ) ) ) )
+
+
+
+Node 30:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) } ) ) ) ) )
+
+
+
+Node 31:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE0:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT0:Int
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT0:Int
+            </acctID>
+            _Gen28:BalanceCell
+            _Gen29:CodeCell
+            _Gen30:StorageCell
+            _Gen31:OrigStorageCell
+            <transientStorage>
+              TSTORAGE0:Map
+            </transientStorage>
+            _Gen32:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 32:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen28:BalanceCell . #Exists _Gen29:CodeCell . #Exists _Gen30:StorageCell . #Exists _Gen31:OrigStorageCell . #Exists _Gen32:NonceCell . #Exists ACCT0:Int . #Exists TSTORAGE0:Map . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT0:Int } ) ) ) ) ) ) ) ) )
+
+
+
+Node 33:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) } ) ) ) ) )
+
+
+
+Node 34:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) )
+
+
+
+Node 35:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            _Gen25:StorageCell
+            _Gen26:OrigStorageCell
+            <transientStorage>
+              TSTORAGE:Map
+            </transientStorage>
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) )
+
+
+
+Node 36:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:StorageCell . #Exists _Gen26:OrigStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists TSTORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) ) )
+
+
+
+Node 37:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) )
+
+
+
+Node 38:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) )
+
+
+
+Node 39:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) ) )
+
+
+
+Node 40:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) ) )
+
+
+
+Node 41:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals ( notBool _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > ) }
+#And { true #Equals ( notBool Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) } ) ) ) ) ) ) )
+
+
+
+Node 42:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS3:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS3:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS2:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS3:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS3:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) )
+
+
+
+Node 43:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) } )
+#And #Not ( #Exists W0:Int . #Exists WS3:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS3:WordStack ) } ) ) ) ) ) ) ) )
+
+
+
+Node 44:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) )
+
+
+
+Node 45:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) )
+
+
+
+Node 46:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            _Gen25:StorageCell
+            _Gen26:OrigStorageCell
+            <transientStorage>
+              TSTORAGE:Map
+            </transientStorage>
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) )
+
+
+
+Node 47:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:StorageCell . #Exists _Gen26:OrigStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists TSTORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) ) )
+
+
+
+Node 48:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) )
+
+
+
+Node 49:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE1:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT1:Int
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT1:Int
+            </acctID>
+            _Gen33:BalanceCell
+            _Gen34:CodeCell
+            _Gen35:StorageCell
+            _Gen36:OrigStorageCell
+            <transientStorage>
+              TSTORAGE1:Map
+            </transientStorage>
+            _Gen37:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT1:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT1:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And ( #Not ( ( { ACCT:Int #Equals ACCT1:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( ( { ACCT0:Int #Equals ACCT1:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 50:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen33:BalanceCell . #Exists _Gen34:CodeCell . #Exists _Gen35:StorageCell . #Exists _Gen36:OrigStorageCell . #Exists _Gen37:NonceCell . #Exists ACCT1:Int . #Exists TSTORAGE1:Map . ( { false #Equals <acctID>
+  ACCT1:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT1:Int } ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 51:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE0:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT0:Int
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT0:Int
+            </acctID>
+            _Gen28:BalanceCell
+            _Gen29:CodeCell
+            _Gen30:StorageCell
+            _Gen31:OrigStorageCell
+            <transientStorage>
+              TSTORAGE0:Map
+            </transientStorage>
+            _Gen32:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 52:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen28:BalanceCell . #Exists _Gen29:CodeCell . #Exists _Gen30:StorageCell . #Exists _Gen31:OrigStorageCell . #Exists _Gen32:NonceCell . #Exists ACCT0:Int . #Exists TSTORAGE0:Map . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT0:Int } ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 53:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) ) )
+
+
+
+Node 54:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) )
+
+
+
+Node 55:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) )
+
+
+
+Node 56:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) ) ) )
+
+
+
+Node 57:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) ) ) )
+
+
+
+Node 58:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals ( notBool _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > ) }
+#And { true #Equals ( notBool Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) } ) ) ) ) ) ) ) )
+
+
+
+Node 59:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            _Gen25:StorageCell
+            _Gen26:OrigStorageCell
+            <transientStorage>
+              TSTORAGE:Map
+            </transientStorage>
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 60:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:StorageCell . #Exists _Gen26:OrigStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists TSTORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 61:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS3:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS3:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS2:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS3:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS3:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) ) )
+
+
+
+Node 62:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS3:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS3:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS2:WordStack ~> .K ==K WS3:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS3:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS3:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) ) )
+
+
+
+Node 63:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) ) )
+
+
+
+Node 64:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE0:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT0:Int
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT0:Int
+            </acctID>
+            _Gen28:BalanceCell
+            _Gen29:CodeCell
+            _Gen30:StorageCell
+            _Gen31:OrigStorageCell
+            <transientStorage>
+              TSTORAGE0:Map
+            </transientStorage>
+            _Gen32:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 65:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen28:BalanceCell . #Exists _Gen29:CodeCell . #Exists _Gen30:StorageCell . #Exists _Gen31:OrigStorageCell . #Exists _Gen32:NonceCell . #Exists ACCT0:Int . #Exists TSTORAGE0:Map . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  _Gen30:StorageCell
+  _Gen31:OrigStorageCell
+  <transientStorage>
+    TSTORAGE0:Map
+  </transientStorage>
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT0:Int } ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 66:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS4:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS4:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS4:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS4:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS4:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS2:WordStack ~> .K ==K WS4:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS3:WordStack ~> .K ==K WS4:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS4:WordStack , 1 ) <Int 1 ) }
+#And { true #Equals ( notBool #sizeWordStack ( WS4:WordStack , 1 ) >Int 1024 ) } ) ) ) ) ) ) ) )
+
+
+
+Node 67:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ TLOAD ]
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS3:WordStack ) } )
+#And #Not ( #Exists W0:Int . #Exists WS4:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS4:WordStack ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 68:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE2:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT2:Int
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT2:Int
+            </acctID>
+            _Gen38:BalanceCell
+            _Gen39:CodeCell
+            _Gen40:StorageCell
+            _Gen41:OrigStorageCell
+            <transientStorage>
+              TSTORAGE2:Map
+            </transientStorage>
+            _Gen42:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT2:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT2:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT2:Int
+  </acctID>
+  _Gen38:BalanceCell
+  _Gen39:CodeCell
+  _Gen40:StorageCell
+  _Gen41:OrigStorageCell
+  <transientStorage>
+    TSTORAGE2:Map
+  </transientStorage>
+  _Gen42:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And ( #Not ( ( { ACCT:Int #Equals ACCT2:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT2:Int
+  </acctID>
+  _Gen38:BalanceCell
+  _Gen39:CodeCell
+  _Gen40:StorageCell
+  _Gen41:OrigStorageCell
+  <transientStorage>
+    TSTORAGE2:Map
+  </transientStorage>
+  _Gen42:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And ( #Not ( ( { ACCT0:Int #Equals ACCT2:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT2:Int
+  </acctID>
+  _Gen38:BalanceCell
+  _Gen39:CodeCell
+  _Gen40:StorageCell
+  _Gen41:OrigStorageCell
+  <transientStorage>
+    TSTORAGE2:Map
+  </transientStorage>
+  _Gen42:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( ( { ACCT1:Int #Equals ACCT2:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT1:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT2:Int
+  </acctID>
+  _Gen38:BalanceCell
+  _Gen39:CodeCell
+  _Gen40:StorageCell
+  _Gen41:OrigStorageCell
+  <transientStorage>
+    TSTORAGE2:Map
+  </transientStorage>
+  _Gen42:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 69:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS:WordStack ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 1 ) >Int 1024 ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT1:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT1:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen38:BalanceCell . #Exists _Gen39:CodeCell . #Exists _Gen40:StorageCell . #Exists _Gen41:OrigStorageCell . #Exists _Gen42:NonceCell . #Exists ACCT2:Int . #Exists TSTORAGE2:Map . ( { false #Equals <acctID>
+  ACCT2:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT2:Int
+  </acctID>
+  _Gen38:BalanceCell
+  _Gen39:CodeCell
+  _Gen40:StorageCell
+  _Gen41:OrigStorageCell
+  <transientStorage>
+    TSTORAGE2:Map
+  </transientStorage>
+  _Gen42:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT2:Int } ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 70:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            _Gen25:StorageCell
+            _Gen26:OrigStorageCell
+            <transientStorage>
+              TSTORAGE:Map
+            </transientStorage>
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 71:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:StorageCell . #Exists _Gen26:OrigStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists TSTORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 72:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            _Gen25:StorageCell
+            _Gen26:OrigStorageCell
+            <transientStorage>
+              TSTORAGE:Map
+            </transientStorage>
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 73:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:StorageCell . #Exists _Gen26:OrigStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists TSTORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  _Gen25:StorageCell
+  _Gen26:OrigStorageCell
+  <transientStorage>
+    TSTORAGE:Map
+  </transientStorage>
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 74:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) ) ) ) )
+
+
+
+Node 75:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) ) ) ) )
+
+
+
+Node 76:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ TLOAD , TLOAD W0:Int ]
+      ~> TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS2:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS2:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS1:WordStack ~> .K ==K WS2:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS2:WordStack , 1 ) >Int 1024 ) }
+#And ( { true #Equals ( notBool _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > ) }
+#And { true #Equals ( notBool Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 77:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #lookup ( TSTORAGE1:Map , W0:Int )
+      ~> #push
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT1:Int
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT1:Int
+            </acctID>
+            _Gen33:BalanceCell
+            _Gen34:CodeCell
+            _Gen35:StorageCell
+            _Gen36:OrigStorageCell
+            <transientStorage>
+              TSTORAGE1:Map
+            </transientStorage>
+            _Gen37:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT1:Int }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT1:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And ( #Not ( ( { ACCT:Int #Equals ACCT1:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( ( { ACCT0:Int #Equals ACCT1:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 78:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <wordStack>
+            WS0:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS0:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS0:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS0:WordStack , 1 ) >Int 1024 ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen33:BalanceCell . #Exists _Gen34:CodeCell . #Exists _Gen35:StorageCell . #Exists _Gen36:OrigStorageCell . #Exists _Gen37:NonceCell . #Exists ACCT1:Int . #Exists TSTORAGE1:Map . ( { false #Equals <acctID>
+  ACCT1:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT1:Int
+  </acctID>
+  _Gen33:BalanceCell
+  _Gen34:CodeCell
+  _Gen35:StorageCell
+  _Gen36:OrigStorageCell
+  <transientStorage>
+    TSTORAGE1:Map
+  </transientStorage>
+  _Gen37:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT1:Int } ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 79:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      TLOAD W0:Int
+      ~> #pc [ TLOAD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas -Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule >
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals Gwarmstorageread < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) ) ) ) )
+
+
+
+Node 80:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : WS1:WordStack ) }
+#And ( { true #Equals ( notBool WS:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool WS0:WordStack ~> .K ==K WS1:WordStack ~> .K ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) <Int 1 ) }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 1 ) >Int 1024 ) }
+#And { true #Equals _GAS_CELL:Gas <Gas Gwarmstorageread < _SCHEDULE_CELL:Schedule > } ) ) ) ) ) ) )
+
+
+

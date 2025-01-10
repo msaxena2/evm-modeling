@@ -5,6 +5,9 @@ import json
 import logging
 import time
 from typing import TYPE_CHECKING
+from multiprocessing import Pool
+from pathlib import Path
+import traceback
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
 from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
@@ -33,8 +36,8 @@ OPCODES = {
     'SDIV': KApply('SDIV_EVM_BinStackOp'),
     'MOD': KApply('MOD_EVM_BinStackOp'),
     'SMOD': KApply('SMOD_EVM_BinStackOp'),
-    'ADDMOD': KApply('ADDMOD_EVM_BinStackOp'),
-    'MULMOD': KApply('MULMOD_EVM_BinStackOp'),
+    'ADDMOD': KApply('ADDMOD_EVM_TernStackOp'),
+    'MULMOD': KApply('ADDMOD_EVM_TernStackOp'),
     'EXP': KApply('EXP_EVM_BinStackOp'),
     'SIGNEXTEND': KApply('SIGNEXTEND_EVM_BinStackOp'),
     'LT': KApply('LT_EVM_BinStackOp'),
@@ -42,73 +45,76 @@ OPCODES = {
     'SLT': KApply('SLT_EVM_BinStackOp'),
     'SGT': KApply('SGT_EVM_BinStackOp'),
     'EQ': KApply('EQ_EVM_BinStackOp'),
-    'ISZERO': KApply('ISZERO_EVM_BinStackOp'),
+    'ISZERO': KApply('ISZERO_EVM_UnStackOp'),
     'AND': KApply('AND_EVM_BinStackOp'),
     'EVMOR': KApply('EVMOR_EVM_BinStackOp'),
     'XOR': KApply('XOR_EVM_BinStackOp'),
-    'NOT': KApply('NOT_EVM_BinStackOp'),
+    'NOT': KApply('NOT_EVM_UnStackOp'),
     'BYTE': KApply('BYTE_EVM_BinStackOp'),
     'SHL': KApply('SHL_EVM_BinStackOp'),
     'SHR': KApply('SHR_EVM_BinStackOp'),
     'SAR': KApply('SAR_EVM_BinStackOp'),
     'SHA3': KApply('SHA3_EVM_BinStackOp'),
-    'ADDRESS': KApply('ADDRESS_EVM_BinStackOp'),
-    'BALANCE': KApply('BALANCE_EVM_BinStackOp'),
-    'ORIGIN': KApply('ORIGIN_EVM_BinStackOp'),
-    'CALLER': KApply('CALLER_EVM_BinStackOp'),
-    'CALLVALUE': KApply('CALLVALUE_EVM_BinStackOp'),
-    'CALLDATALOAD': KApply('CALLDATALOAD_EVM_BinStackOp'),
-    'CALLDATASIZE': KApply('CALLDATASIZE_EVM_BinStackOp'),
-    'CALLDATACOPY': KApply('CALLDATACOPY_EVM_BinStackOp'),
-    'CODESIZE': KApply('CODESIZE_EVM_BinStackOp'),
-    'CODECOPY': KApply('CODECOPY_EVM_BinStackOp'),
-    'GASPRICE': KApply('GASPRICE_EVM_BinStackOp'),
-    'EXTCODESIZE': KApply('EXTCODESIZE_EVM_BinStackOp'),
-    'EXTCODECOPY': KApply('EXTCODECOPY_EVM_BinStackOp'),
-    'RETURNDATASIZE': KApply('RETURNDATASIZE_EVM_BinStackOp'),
-    'RETURNDATACOPY': KApply('RETURNDATACOPY_EVM_BinStackOp'),
-    'EXTCODEHASH': KApply('EXTCODEHASH_EVM_BinStackOp'),
-    'BLOCKHASH': KApply('BLOCKHASH_EVM_BinStackOp'),
-    'COINBASE': KApply('COINBASE_EVM_BinStackOp'),
-    'TIMESTAMP': KApply('TIMESTAMP_EVM_BinStackOp'),
-    'NUMBER': KApply('NUMBER_EVM_BinStackOp'),
-    'PREVRANDAO': KApply('PREVRANDAO_EVM_BinStackOp'),
-    'DIFFICULTY': KApply('DIFFICULTY_EVM_BinStackOp'),
-    'GASLIMIT': KApply('GASLIMIT_EVM_BinStackOp'),
-    'CHAINID': KApply('CHAINID_EVM_BinStackOp'),
-    'SELFBALANCE': KApply('SELFBALANCE_EVM_BinStackOp'),
-    'BASEFEE': KApply('BASEFEE_EVM_BinStackOp'),
-    'POP': KApply('POP_EVM_BinStackOp'),
-    'MLOAD': KApply('MLOAD_EVM_BinStackOp'),
+    'ADDRESS': KApply('ADDRESS_EVM_NullStackOp'),
+    'BALANCE': KApply('BALANCE_EVM_UnStackOp'),
+    'ORIGIN': KApply('ORIGIN_EVM_NullStackOp'),
+    'CALLER': KApply('CALLER_EVM_NullStackOp'),
+    'CALLVALUE': KApply('CALLVALUE_EVM_NullStackOp'),
+    'CALLDATALOAD': KApply('CALLDATALOAD_EVM_UnStackOp'),
+    'CALLDATASIZE': KApply('CALLDATASIZE_EVM_NullStackOp'),
+    'CALLDATACOPY': KApply('CALLDATACOPY_EVM_TernStackOp'),
+    'CODESIZE': KApply('CODESIZE_EVM_NullStackOp'),
+    'CODECOPY': KApply('CODECOPY_EVM_TernStackOp'),
+    'GASPRICE': KApply('GASPRICE_EVM_NullStackOp'),
+    'EXTCODESIZE': KApply('EXTCODESIZE_EVM_UnStackOp'),
+    'EXTCODECOPY': KApply('EXTCODECOPY_EVM_QuadStackOp'),
+    'RETURNDATASIZE': KApply('RETURNDATASIZE_EVM_NullStackOp'),
+    'RETURNDATACOPY': KApply('RETURNDATACOPY_EVM_TernStackOp'),
+    'EXTCODEHASH': KApply('EXTCODEHASH_EVM_UnStackOp'),
+    'BLOCKHASH': KApply('BLOCKHASH_EVM_UnStackOp'),
+    'COINBASE': KApply('COINBASE_EVM_NullStackOp'),
+    'TIMESTAMP': KApply('TIMESTAMP_EVM_NullStackOp'),
+    'NUMBER': KApply('NUMBER_EVM_NullStackOp'),
+    'PREVRANDAO': KApply('PREVRANDAO_EVM_NullStackOp'),
+    'DIFFICULTY': KApply('DIFFICULTY_EVM_NullStackOp'),
+    'GASLIMIT': KApply('GASLIMIT_EVM_NullStackOp'),
+    'CHAINID': KApply('CHAINID_EVM_NullStackOp'),
+    'SELFBALANCE': KApply('SELFBALANCE_EVM_NullStackOp'),
+    'BASEFEE': KApply('BASEFEE_EVM_NullStackOp'),
+    'POP': KApply('POP_EVM_UnStackOp'),
+    'MLOAD': KApply('MLOAD_EVM_UnStackOp'),
     'MSTORE': KApply('MSTORE_EVM_BinStackOp'),
     'MSTORE8': KApply('MSTORE8_EVM_BinStackOp'),
-    'SLOAD': KApply('SLOAD_EVM_BinStackOp'),
+    'SLOAD': KApply('SLOAD_EVM_UnStackOp'),
     'SSTORE': KApply('SSTORE_EVM_BinStackOp'),
-    'JUMP': KApply('JUMP_EVM_BinStackOp'),
+    'JUMP': KApply('JUMP_EVM_UnStackOp'),
     'JUMPI': KApply('JUMPI_EVM_BinStackOp'),
-    'PC': KApply('PC_EVM_BinStackOp'),
-    'MSIZE': KApply('MSIZE_EVM_BinStackOp'),
-    'GAS': KApply('GAS_EVM_BinStackOp'),
-    'JUMPDEST': KApply('JUMPDEST_EVM_BinStackOp'),
-    'TLOAD': KApply('TLOAD_EVM_BinStackOp'),
+    'PC': KApply('PC_EVM_NullStackOp'),
+    'MSIZE': KApply('MSIZE_EVM_NullStackOp'),
+    'GAS': KApply('GAS_EVM_NullStackOp'),
+    'JUMPDEST': KApply('JUMPDEST_EVM_NullStackOp'),
+    'TLOAD': KApply('TLOAD_EVM_UnStackOp'),
     'TSTORE': KApply('TSTORE_EVM_BinStackOp'),
-    'MCOPY': KApply('MCOPY_EVM_BinStackOp'),
-    'PUSHZERO': KApply('PUSHZERO_EVM_BinStackOp'),
-    'PUSH': KApply('PUSH_EVM_BinStackOp'),
-    'DUP': KApply('DUP_EVM_BinStackOp'),
-    'SWAP': KApply('SWAP_EVM_BinStackOp'),
-    'LOG': KApply('LOG_EVM_BinStackOp'),
-    'CREATE': KApply('CREATE_EVM_BinStackOp'),
-    'CALL': KApply('CALL_EVM_BinStackOp'),
-    'CALLCODE': KApply('CALLCODE_EVM_BinStackOp'),
+    'MCOPY': KApply('MCOPY_EVM_TernStackOp'),
+    'PUSHZERO': KApply('PUSHZERO_EVM_PushOp'),
+    'PUSH': KApply('PUSH', KVariable('N', KSort('Int'))),
+    'DUP': KApply('DUP', KVariable('N', KSort('Int'))),
+    'SWAP': KApply('SWAP', KVariable('N', KSort('Int'))),
+    'LOG': KApply('LOG', KVariable('N', KSort('Int'))),
+    'CREATE': KApply('CREATE_EVM_TernStackOp'),
+    'CALL': KApply('CALL_EVM_CallOp'),
+    'CALLCODE': KApply('CALLCODE_EVM_CallOp'),
     'RETURN': KApply('RETURN_EVM_BinStackOp'),
-    'DELEGATECALL': KApply('DELEGATECALL_EVM_BinStackOp'),
-    'CREATE2': KApply('CREATE2_EVM_BinStackOp'),
-    'STATICCALL': KApply('STATICCALL_EVM_BinStackOp'),
+    'DELEGATECALL': KApply('DELEGATECALL_EVM_CallSixOp'),
+    'CREATE2': KApply('CREATE2_EVM_QuadStackOp'),
+    'STATICCALL': KApply('STATICCALL_EVM_CallSixOp'),
     'REVERT': KApply('REVERT_EVM_BinStackOp'),
-    'INVALID': KApply('INVALID_EVM_BinStackOp'),
-    'SELFDESTRUCT': KApply('SELFDESTRUCT_EVM_BinStackOp'),
-    'UNDEFINED': KApply('UNDEFINED_EVM_BinStackOp'),
+    'INVALID': KApply('INVALID_EVM_InvalidOp'),
+    'SELFDESTRUCT': KApply('SELFDESTRUCT_EVM_UnStackOp'),
+    'UNDEFINED': KApply('UNDEFINED(_)_EVM_InvalidOp_Int', KVariable('W', KSort('Int'))),
+    
+    # OpCode Variable
+    # 'ALL': KVariable('OP_CODE', KSort('OpCode'))
 }
 
 OPCODES_SUMMARY_STATUS = {
@@ -278,3 +284,39 @@ class KEVMSummarizer:
             print('Type: ', type(successor))
             print('Source: ', successor.source.id)
             print('Target: ', [target.id for target in successor.targets])
+
+
+def _process_opcode(opcode: str) -> None:
+    try:
+        summarize(opcode)
+        _LOGGER.info(f'Successfully processed opcode: {opcode}')
+    except Exception as e:
+        _LOGGER.error(f'Failed to process opcode {opcode}: {str(e)}')
+        _LOGGER.debug(traceback.format_exc())
+
+def batch_summarize(num_processes: int = 4) -> None:
+    """
+    Parallelize the summarization of opcodes using multiple processes.
+    
+    Args:
+        num_processes: Number of parallel processes to use. Defaults to 4.
+    """
+
+    opcodes_to_process = [op for op in OPCODES.keys()]
+    
+    _LOGGER.info(f'Starting batch summarization of {len(opcodes_to_process)} opcodes with {num_processes} processes')
+    
+    with Pool(processes=num_processes) as pool:
+        pool.map(_process_opcode, opcodes_to_process)
+    
+    _LOGGER.info('Batch summarization completed')
+
+def summarize(opcode: str) -> None:
+    proof_dir = Path(__file__).parent / 'proofs'
+    save_directory = Path(__file__).parent / 'summaries'
+    summarizer = KEVMSummarizer(proof_dir, save_directory)
+    proof = summarizer.build_spec(opcode)
+    summarizer.explore(proof)
+    summarizer.summarize(proof)
+    # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')
+    

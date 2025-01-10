@@ -1,0 +1,431 @@
+Proof DELEGATECALL_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ DELEGATECALL ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ DELEGATECALL ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 8 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_UNDERFLOW
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024
+┃  │
+┃  ├─ 4
+┃  │   k: #next [ DELEGATECALL ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 7 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_OVERFLOW
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 )
+   ┃     ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 )
+   │
+   ├─ 5
+   │   k: #next [ DELEGATECALL ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (1 step)
+   ├─ 6
+   │   k: #addr [ DELEGATECALL ] ~> #exec [ DELEGATECALL ] ~> #pc [ DELEGATECALL ] ~> _K_C ...
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┃ (1 step)
+   ┣━━┓
+   ┃  │
+   ┃  └─ 9 (leaf, pending)
+   ┃      k: #exec [ DELEGATECALL ] ~> #pc [ DELEGATECALL ] ~> _K_CELL:K
+   ┃      pc: _PC_CELL:Int
+   ┃      callDepth: _CALLDEPTH_CELL:Int
+   ┃      statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┗━━┓
+      │
+      ├─ 10
+      │   k: #addr [ DELEGATECALL ] ~> #exec [ DELEGATECALL ] ~> #pc [ DELEGATECALL ] ~> _K_C ...
+      │   pc: _PC_CELL:Int
+      │   callDepth: _CALLDEPTH_CELL:Int
+      │   statusCode: _STATUSCODE_CELL:StatusCode
+      ┃
+      ┃ (1 step)
+      ┣━━┓
+      ┃  │
+      ┃  └─ 11 (leaf, pending)
+      ┃      k: #exec [ DELEGATECALL ] ~> #pc [ DELEGATECALL ] ~> _K_CELL:K
+      ┃      pc: _PC_CELL:Int
+      ┃      callDepth: _CALLDEPTH_CELL:Int
+      ┃      statusCode: _STATUSCODE_CELL:StatusCode
+      ┃
+      ┗━━┓
+         │
+         └─ 12 (leaf, pending)
+             k: #addr [ DELEGATECALL ] ~> #exec [ DELEGATECALL ] ~> #pc [ DELEGATECALL ] ~> _K_C ...
+             pc: _PC_CELL:Int
+             callDepth: _CALLDEPTH_CELL:Int
+             statusCode: _STATUSCODE_CELL:StatusCode
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { false #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 }
+#And { false #Equals ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 } ) )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #addr [ DELEGATECALL ]
+      ~> #exec [ DELEGATECALL ]
+      ~> #pc [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 ) } ) )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_OVERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 } )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_UNDERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 } )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ DELEGATECALL ]
+      ~> #pc [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( ( W1:Int modInt pow160 ) : _WS:WordStack ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WS:WordStack , 2 ) <Int 6 ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( _W0:Int : ( W1:Int : _WS:WordStack ) ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WS:WordStack , 2 ) +Int -5 ) >Int 1024 ) } ) ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #addr [ DELEGATECALL ]
+      ~> #exec [ DELEGATECALL ]
+      ~> #pc [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 ) }
+#And ( { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 ) }
+#And #Not ( #Exists _W0:Int . #Exists _WS:WordStack . #Exists W1:Int . { _WORDSTACK_CELL:WordStack #Equals ( _W0:Int : ( W1:Int : _WS:WordStack ) ) } ) ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ DELEGATECALL ]
+      ~> #pc [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( ( W2:Int modInt pow160 ) : _WS0:WordStack ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WS0:WordStack , 2 ) <Int 6 ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( _W0:Int : ( W2:Int : _WS0:WordStack ) ) }
+#And ( { true #Equals ( notBool ( #sizeWordStack ( _WS0:WordStack , 2 ) +Int -5 ) >Int 1024 ) }
+#And #Not ( ( { _WS:WordStack #Equals _WS0:WordStack }
+#And { W1:Int #Equals W2:Int } ) ) ) ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #addr [ DELEGATECALL ]
+      ~> #exec [ DELEGATECALL ]
+      ~> #pc [ DELEGATECALL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 6 ) }
+#And ( { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -5 ) >Int 1024 ) }
+#And ( #Not ( #Exists _W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( _W0:Int : ( W1:Int : _WS:WordStack ) ) } )
+#And #Not ( #Exists _W0:Int . #Exists _WS0:WordStack . #Exists W2:Int . { _WORDSTACK_CELL:WordStack #Equals ( _W0:Int : ( W2:Int : _WS0:WordStack ) ) } ) ) ) ) )
+
+
+
