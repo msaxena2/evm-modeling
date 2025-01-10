@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-
-import json
 import logging
 import time
-from typing import TYPE_CHECKING
+import traceback
 from multiprocessing import Pool
 from pathlib import Path
-import traceback
+from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
-from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
+from pyk.kast.inner import KApply, KInner, KSequence, KVariable, Subst
 from pyk.kast.outer import KSort
 from pyk.kcfg import KCFGExplore, KCFG
 from pyk.kdist import kdist
@@ -112,17 +110,26 @@ OPCODES = {
     'INVALID': KApply('INVALID_EVM_InvalidOp'),
     'SELFDESTRUCT': KApply('SELFDESTRUCT_EVM_UnStackOp'),
     'UNDEFINED': KApply('UNDEFINED(_)_EVM_InvalidOp_Int', KVariable('W', KSort('Int'))),
-    
     # OpCode Variable
     # 'ALL': KVariable('OP_CODE', KSort('OpCode'))
 }
 
+OPCODES_PRECONDITIONS = {
+    # 'STOP': 'TODICUSS, all the leaves are terminal or stuck, find NDBranch',
+    'STACK_UNDERFLOW': ''
+}
+
 OPCODES_SUMMARY_STATUS = {
     'STOP': 'TODICUSS, all the leaves are terminal or stuck, find NDBranch',
+    'ADD': 'TODICUSS, smt out of time, find NDBranch, inconsistent stack overflow check between the optimized rule and the original rule',
+    'MUL': '',
+    'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
+
 
 def get_summary_status(opcode: str) -> str:
     return OPCODES_SUMMARY_STATUS[opcode].split(',')[0]
+
 
 class KEVMSummarizer:
     """
@@ -258,7 +265,7 @@ class KEVMSummarizer:
             return passed, res_lines
 
         passed, res_lines = _init_and_run_proof(proof)
-        
+
         ensure_dir_path(self.save_directory / proof.id)
         with open(self.save_directory / proof.id / 'proof-result.txt', 'w') as f:
             f.write(f'Proof {proof.id} Passed' if passed else f'Proof {proof.id} Failed')
@@ -277,12 +284,14 @@ class KEVMSummarizer:
             for res_line in proof_show.show(proof, to_module=True):
                 f.write(res_line)
                 f.write('\n')
-    
-    def analyze_proof(self, proof_id: str) -> None:
+
+    def analyze_proof(self, proof_id: str, node_id: int) -> None:
         proof = APRProof.read_proof_data(self.proof_dir, proof_id)
-        for successor in proof.kcfg.successors(11):
+        for successor in proof.kcfg.successors(node_id):
             print('Type: ', type(successor))
             print('Source: ', successor.source.id)
+            if isinstance(successor, KCFG.Edge) or isinstance(successor, KCFG.NDBranch):
+                print('Rules: ', successor.rules)
             print('Target: ', [target.id for target in successor.targets])
 
 
@@ -294,22 +303,24 @@ def _process_opcode(opcode: str) -> None:
         _LOGGER.error(f'Failed to process opcode {opcode}: {str(e)}')
         _LOGGER.debug(traceback.format_exc())
 
+
 def batch_summarize(num_processes: int = 4) -> None:
     """
     Parallelize the summarization of opcodes using multiple processes.
-    
+
     Args:
         num_processes: Number of parallel processes to use. Defaults to 4.
     """
 
     opcodes_to_process = [op for op in OPCODES.keys()]
-    
+
     _LOGGER.info(f'Starting batch summarization of {len(opcodes_to_process)} opcodes with {num_processes} processes')
-    
+
     with Pool(processes=num_processes) as pool:
         pool.map(_process_opcode, opcodes_to_process)
-    
+
     _LOGGER.info('Batch summarization completed')
+
 
 def summarize(opcode: str) -> None:
     proof_dir = Path(__file__).parent / 'proofs'
@@ -320,3 +331,9 @@ def summarize(opcode: str) -> None:
     summarizer.summarize(proof)
     # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')
     
+
+def analyze_proof(opcode: str, node_id: int) -> None:
+    proof_dir = Path(__file__).parent / 'proofs'
+    save_directory = Path(__file__).parent / 'summaries'
+    summarizer = KEVMSummarizer(proof_dir, save_directory)
+    summarizer.analyze_proof(proof_dir / f'{opcode}_SPEC', node_id)
