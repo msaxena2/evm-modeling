@@ -92,7 +92,7 @@ Proof ADD_SPEC Failed
    ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
    ┃  ┃  │
    ┃  ┃  │  (4 steps)
-   ┃  ┃  ├─ 20
+   ┃  ┃  ├─ 18
    ┃  ┃  │   k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
    ┃  ┃  │   pc: _PC_CELL:Int
    ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
@@ -178,7 +178,7 @@ Proof ADD_SPEC Failed
       ┃  ┃  ┃ (1 step)
       ┃  ┃  ┣━━┓
       ┃  ┃  ┃  │
-      ┃  ┃  ┃  └─ 33 (leaf, pending)
+      ┃  ┃  ┃  └─ 32 (leaf, pending)
       ┃  ┃  ┃      k: #access [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ~> #pc [ ADD ] ~> _K_CE ...
       ┃  ┃  ┃      pc: _PC_CELL:Int
       ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
@@ -186,7 +186,7 @@ Proof ADD_SPEC Failed
       ┃  ┃  ┃
       ┃  ┃  ┣━━┓
       ┃  ┃  ┃  │
-      ┃  ┃  ┃  └─ 34 (leaf, pending)
+      ┃  ┃  ┃  └─ 33 (leaf, pending)
       ┃  ┃  ┃      k: #end EVMC_OUT_OF_GAS ~> #access [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ...
       ┃  ┃  ┃      pc: _PC_CELL:Int
       ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
@@ -194,7 +194,7 @@ Proof ADD_SPEC Failed
       ┃  ┃  ┃
       ┃  ┃  ┗━━┓
       ┃  ┃     │
-      ┃  ┃     └─ 35 (leaf, pending)
+      ┃  ┃     └─ 34 (leaf, pending)
       ┃  ┃         k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
       ┃  ┃         pc: _PC_CELL:Int
       ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
@@ -221,7 +221,7 @@ Proof ADD_SPEC Failed
          ┃ (1 step)
          ┣━━┓
          ┃  │
-         ┃  ├─ 18 (split)
+         ┃  ├─ 19 (split)
          ┃  │   k: #gas [ ADD , ADD W0:Int W3:Int ] ~> ADD W0:Int W3:Int ~> #pc [ ADD ] ~> _K_CELL: ...
          ┃  │   pc: _PC_CELL:Int
          ┃  │   callDepth: _CALLDEPTH_CELL:Int
@@ -239,7 +239,7 @@ Proof ADD_SPEC Failed
          ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
          ┃  ┃  │
          ┃  ┃  │  (4 steps)
-         ┃  ┃  └─ 32 (leaf, pending)
+         ┃  ┃  └─ 35 (leaf, pending)
          ┃  ┃      k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
          ┃  ┃      pc: _PC_CELL:Int
          ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
@@ -257,7 +257,7 @@ Proof ADD_SPEC Failed
          ┃
          ┗━━┓
             │
-            ├─ 19
+            ├─ 20
             │   k: #exec [ ADD ] ~> #pc [ ADD ] ~> _K_CELL:K
             │   pc: _PC_CELL:Int
             │   callDepth: _CALLDEPTH_CELL:Int
@@ -828,75 +828,6 @@ Node 18:
 ( <generatedTop>
   <kevm>
     <k>
-      #gas [ ADD , ADD W0:Int W3:Int ]
-      ~> ADD W0:Int W3:Int
-      ~> #pc [ ADD ]
-      ~> _K_CELL:K
-    </k>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            WS1:WordStack
-          </wordStack>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 2 ) <Int 2 ) }
-#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W3:Int : WS1:WordStack ) ) }
-#And ( { true #Equals ( notBool ( #sizeWordStack ( WS1:WordStack , 2 ) +Int -1 ) >Int 1024 ) }
-#And ( #Not ( ( { W1:Int #Equals W3:Int }
-#And { WS:WordStack #Equals WS1:WordStack } ) )
-#And #Not ( ( { W2:Int #Equals W3:Int }
-#And { WS0:WordStack #Equals WS1:WordStack } ) ) ) ) ) ) )
-
-
-
-Node 19:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #exec [ ADD ]
-      ~> #pc [ ADD ]
-      ~> _K_CELL:K
-    </k>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WORDSTACK_CELL:WordStack
-          </wordStack>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2 ) }
-#And ( { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024 ) }
-#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W1:Int : WS:WordStack ) ) } )
-#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W2:Int : WS0:WordStack ) ) } )
-#And #Not ( #Exists W0:Int . #Exists W3:Int . #Exists WS1:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W3:Int : WS1:WordStack ) ) } ) ) ) ) ) )
-
-
-
-Node 20:
-
-( <generatedTop>
-  <kevm>
-    <k>
       Gverylow < _SCHEDULE_CELL:Schedule >
       ~> #deductGas
       ~> #access [ ADD , ADD W0:Int W1:Int ]
@@ -930,6 +861,75 @@ Node 20:
 #And ( { true #Equals ( notBool #sizeWordStack ( WS:WordStack , 2 ) <Int 2 ) }
 #And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W1:Int : WS:WordStack ) ) }
 #And { true #Equals ( notBool ( #sizeWordStack ( WS:WordStack , 2 ) +Int -1 ) >Int 1024 ) } ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ ADD , ADD W0:Int W3:Int ]
+      ~> ADD W0:Int W3:Int
+      ~> #pc [ ADD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 2 ) <Int 2 ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W3:Int : WS1:WordStack ) ) }
+#And ( { true #Equals ( notBool ( #sizeWordStack ( WS1:WordStack , 2 ) +Int -1 ) >Int 1024 ) }
+#And ( #Not ( ( { W1:Int #Equals W3:Int }
+#And { WS:WordStack #Equals WS1:WordStack } ) )
+#And #Not ( ( { W2:Int #Equals W3:Int }
+#And { WS0:WordStack #Equals WS1:WordStack } ) ) ) ) ) ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ ADD ]
+      ~> #pc [ ADD ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2 ) }
+#And ( { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024 ) }
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W1:Int : WS:WordStack ) ) } )
+#And ( #Not ( #Exists W0:Int . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W2:Int : WS0:WordStack ) ) } )
+#And #Not ( #Exists W0:Int . #Exists W3:Int . #Exists WS1:WordStack . { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W3:Int : WS1:WordStack ) ) } ) ) ) ) ) )
 
 
 
@@ -1394,51 +1394,6 @@ Node 32:
 ( <generatedTop>
   <kevm>
     <k>
-      Gverylow < _SCHEDULE_CELL:Schedule >
-      ~> #deductGas
-      ~> #access [ ADD , ADD W0:Int W3:Int ]
-      ~> ADD W0:Int W3:Int
-      ~> #pc [ ADD ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            WS1:WordStack
-          </wordStack>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 2 ) <Int 2 ) }
-#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W3:Int : WS1:WordStack ) ) }
-#And ( { true #Equals ( notBool ( #sizeWordStack ( WS1:WordStack , 2 ) +Int -1 ) >Int 1024 ) }
-#And ( #Not ( ( { W1:Int #Equals W3:Int }
-#And { WS:WordStack #Equals WS1:WordStack } ) )
-#And #Not ( ( { W2:Int #Equals W3:Int }
-#And { WS0:WordStack #Equals WS1:WordStack } ) ) ) ) ) ) ) )
-
-
-
-Node 33:
-
-( <generatedTop>
-  <kevm>
-    <k>
       #access [ ADD , ADD W0:Int W2:Int ]
       ~> ADD W0:Int W2:Int
       ~> #pc [ ADD ]
@@ -1479,7 +1434,7 @@ Node 33:
 
 
 
-Node 34:
+Node 33:
 
 ( <generatedTop>
   <kevm>
@@ -1525,7 +1480,7 @@ Node 34:
 
 
 
-Node 35:
+Node 34:
 
 ( <generatedTop>
   <kevm>
@@ -1570,6 +1525,51 @@ Node 35:
 #And ( { true #Equals ( notBool Gverylow < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) }
 #And #Not ( ( { W1:Int #Equals W2:Int }
 #And { WS:WordStack #Equals WS0:WordStack } ) ) ) ) ) ) ) ) )
+
+
+
+Node 35:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Gverylow < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ ADD , ADD W0:Int W3:Int ]
+      ~> ADD W0:Int W3:Int
+      ~> #pc [ ADD ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            WS1:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool #sizeWordStack ( WS1:WordStack , 2 ) <Int 2 ) }
+#And ( { _WORDSTACK_CELL:WordStack #Equals ( W0:Int : ( W3:Int : WS1:WordStack ) ) }
+#And ( { true #Equals ( notBool ( #sizeWordStack ( WS1:WordStack , 2 ) +Int -1 ) >Int 1024 ) }
+#And ( #Not ( ( { W1:Int #Equals W3:Int }
+#And { WS:WordStack #Equals WS1:WordStack } ) )
+#And #Not ( ( { W2:Int #Equals W3:Int }
+#And { WS0:WordStack #Equals WS1:WordStack } ) ) ) ) ) ) ) )
 
 
 
