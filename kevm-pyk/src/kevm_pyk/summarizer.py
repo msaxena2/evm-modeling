@@ -120,7 +120,7 @@ OPCODES_PRECONDITIONS = {
 }
 
 OPCODES_SUMMARY_STATUS = {
-    'STOP': 'TODICUSS, all the leaves are terminal or stuck, find NDBranch',
+    'STOP': 'TOSUMMARIZE, One rule? Several rules?',
     'ADD': 'TODICUSS, smt out of time, find NDBranch, inconsistent stack overflow check between the optimized rule and the original rule',
     'MUL': '',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
