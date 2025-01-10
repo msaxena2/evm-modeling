@@ -32,7 +32,7 @@ from pyk.proof.show import APRProofShow
 from pyk.proof.tui import APRProofViewer
 from pyk.utils import FrozenDict, hash_str, single
 
-from kevm_pyk.summarizer import KEVMSummarizer, batch_summarize, summarize
+from kevm_pyk.summarizer import analyze_proof, batch_summarize, summarize
 
 from . import VERSION, config
 from .cli import _create_argument_parser, generate_options, get_argument_type_setter, get_option_string_destination
@@ -637,8 +637,10 @@ def exec_kast(options: KastOptions) -> None:
 
 
 def exec_summarize(options: ProveOptions) -> None:
-    batch_summarize()
-    # summarize('ADD')
+    # batch_summarize()
+    summarize('STOP')
+    # analyze_proof('STOP', 11)
+
 
 # Helpers
 

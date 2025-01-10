@@ -18,7 +18,7 @@ Proof STOP_SPEC Failed
 ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
-┃  └─ 10 (leaf, terminal)
+┃  └─ 8 (leaf, terminal)
 ┃      k: #halt ~> _K_CELL:K
 ┃      pc: _PC_CELL:Int
 ┃      callDepth: _CALLDEPTH_CELL:Int
@@ -64,70 +64,66 @@ Proof STOP_SPEC Failed
    ┃  ┃ constraint:
    ┃  ┃     _USEGAS_CELL:Bool
    ┃  │
-   ┃  ├─ 8
+   ┃  ├─ 9
    ┃  │   k: #gas [ STOP , STOP ] ~> STOP ~> #pc [ STOP ] ~> _K_CELL:K
    ┃  │   pc: _PC_CELL:Int
    ┃  │   callDepth: _CALLDEPTH_CELL:Int
    ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
    ┃  │
    ┃  │  (4 steps)
-   ┃  ├─ 11
+   ┃  ├─ 11 (split)
    ┃  │   k: Gzero < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ STOP , STOP ] ~> ST ...
    ┃  │   pc: _PC_CELL:Int
    ┃  │   callDepth: _CALLDEPTH_CELL:Int
    ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
    ┃  ┃
-   ┃  ┃ (1 step)
-   ┃  ┣━━┓
+   ┃  ┃ (branch)
+   ┃  ┣━━┓ subst: .Subst
+   ┃  ┃  ┃ constraint:
+   ┃  ┃  ┃     Gzero < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas
    ┃  ┃  │
    ┃  ┃  ├─ 12
-   ┃  ┃  │   k: #access [ STOP , STOP ] ~> STOP ~> #pc [ STOP ] ~> _K_CELL:K
+   ┃  ┃  │   k: Gzero < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ STOP , STOP ] ~> ST ...
    ┃  ┃  │   pc: _PC_CELL:Int
    ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
    ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
    ┃  ┃  │
-   ┃  ┃  │  (4 steps)
-   ┃  ┃  └─ 16 (leaf, terminal)
+   ┃  ┃  │  (5 steps)
+   ┃  ┃  └─ 15 (leaf, terminal)
    ┃  ┃      k: #halt ~> _K_CELL:K
    ┃  ┃      pc: _PC_CELL:Int
    ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
    ┃  ┃      statusCode: EVMC_SUCCESS
    ┃  ┃
-   ┃  ┣━━┓
-   ┃  ┃  │
-   ┃  ┃  ├─ 13
-   ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ STOP , STOP ] ~> STOP ~> #pc [ STOP ] ~> _K_CE ...
-   ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  │
-   ┃  ┃  │  (4 steps)
-   ┃  ┃  └─ 17 (leaf, terminal)
-   ┃  ┃      k: #halt ~> _K_CELL:K
-   ┃  ┃      pc: _PC_CELL:Int
-   ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃      statusCode: EVMC_OUT_OF_GAS
-   ┃  ┃
-   ┃  ┗━━┓
+   ┃  ┗━━┓ subst: .Subst
+   ┃     ┃ constraint:
+   ┃     ┃     _GAS_CELL:Gas <Gas Gzero < _SCHEDULE_CELL:Schedule >
    ┃     │
-   ┃     └─ 14 (stuck, leaf)
-   ┃         k: Gzero < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ STOP , STOP ] ~> ST ...
+   ┃     ├─ 13
+   ┃     │   k: Gzero < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ STOP , STOP ] ~> ST ...
+   ┃     │   pc: _PC_CELL:Int
+   ┃     │   callDepth: _CALLDEPTH_CELL:Int
+   ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃     │
+   ┃     │  (5 steps)
+   ┃     └─ 16 (leaf, terminal)
+   ┃         k: #halt ~> _K_CELL:K
    ┃         pc: _PC_CELL:Int
    ┃         callDepth: _CALLDEPTH_CELL:Int
-   ┃         statusCode: _STATUSCODE_CELL:StatusCode
+   ┃         statusCode: EVMC_OUT_OF_GAS
    ┃
    ┗━━┓ subst: .Subst
       ┃ constraint:
       ┃     ( notBool _USEGAS_CELL:Bool )
       │
-      ├─ 9
+      ├─ 10
       │   k: #gas [ STOP , STOP ] ~> STOP ~> #pc [ STOP ] ~> _K_CELL:K
       │   pc: _PC_CELL:Int
       │   callDepth: _CALLDEPTH_CELL:Int
       │   statusCode: _STATUSCODE_CELL:StatusCode
       │
       │  (4 steps)
-      └─ 15 (leaf, terminal)
+      └─ 14 (leaf, terminal)
           k: #halt ~> _K_CELL:K
           pc: _PC_CELL:Int
           callDepth: _CALLDEPTH_CELL:Int
@@ -314,16 +310,14 @@ Node 8:
 ( <generatedTop>
   <kevm>
     <k>
-      #gas [ STOP , STOP ]
-      ~> STOP
-      ~> #pc [ STOP ]
+      #halt
       ~> _K_CELL:K
     </k>
-    <useGas>
-      _USEGAS_CELL:Bool
-    </useGas>
     <ethereum>
       <evm>
+        <statusCode>
+          EVMC_STACK_UNDERFLOW
+        </statusCode>
         <callState>
           <wordStack>
             _WORDSTACK_CELL:WordStack
@@ -338,9 +332,7 @@ Node 8:
   </kevm>
   ...
 </generatedTop>
-#And ( { _USEGAS_CELL:Bool #Equals true }
-#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
-#And { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) } ) ) )
+#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 } )
 
 
 
@@ -373,7 +365,7 @@ Node 9:
   </kevm>
   ...
 </generatedTop>
-#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _USEGAS_CELL:Bool #Equals true }
 #And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
 #And { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) } ) ) )
 
@@ -384,14 +376,16 @@ Node 10:
 ( <generatedTop>
   <kevm>
     <k>
-      #halt
+      #gas [ STOP , STOP ]
+      ~> STOP
+      ~> #pc [ STOP ]
       ~> _K_CELL:K
     </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
     <ethereum>
       <evm>
-        <statusCode>
-          EVMC_STACK_UNDERFLOW
-        </statusCode>
         <callState>
           <wordStack>
             _WORDSTACK_CELL:WordStack
@@ -406,7 +400,9 @@ Node 10:
   </kevm>
   ...
 </generatedTop>
-#And { true #Equals #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 } )
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
+#And { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) } ) ) )
 
 
 
@@ -455,7 +451,9 @@ Node 12:
 ( <generatedTop>
   <kevm>
     <k>
-      #access [ STOP , STOP ]
+      Gzero < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ STOP , STOP ]
       ~> STOP
       ~> #pc [ STOP ]
       ~> _K_CELL:K
@@ -473,7 +471,7 @@ Node 12:
             _WORDSTACK_CELL:WordStack
           </wordStack>
           <gas>
-            _GAS_CELL:Gas -Gas Gzero < _SCHEDULE_CELL:Schedule >
+            _GAS_CELL:Gas
           </gas>
           ...
         </callState>
@@ -497,7 +495,8 @@ Node 13:
 ( <generatedTop>
   <kevm>
     <k>
-      #end EVMC_OUT_OF_GAS
+      Gzero < _SCHEDULE_CELL:Schedule >
+      ~> #deductGas
       ~> #access [ STOP , STOP ]
       ~> STOP
       ~> #pc [ STOP ]
@@ -540,51 +539,6 @@ Node 14:
 ( <generatedTop>
   <kevm>
     <k>
-      Gzero < _SCHEDULE_CELL:Schedule >
-      ~> #deductGas
-      ~> #access [ STOP , STOP ]
-      ~> STOP
-      ~> #pc [ STOP ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WORDSTACK_CELL:WordStack
-          </wordStack>
-          <gas>
-            _GAS_CELL:Gas
-          </gas>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 0 ) }
-#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) >Int 1024 ) }
-#And ( { true #Equals ( notBool _GAS_CELL:Gas <Gas Gzero < _SCHEDULE_CELL:Schedule > ) }
-#And { true #Equals ( notBool Gzero < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas ) } ) ) ) ) )
-
-
-
-Node 15:
-
-( <generatedTop>
-  <kevm>
-    <k>
       #halt
       ~> _K_CELL:K
     </k>
@@ -619,7 +573,7 @@ Node 15:
 
 
 
-Node 16:
+Node 15:
 
 ( <generatedTop>
   <kevm>
@@ -665,7 +619,7 @@ Node 16:
 
 
 
-Node 17:
+Node 16:
 
 ( <generatedTop>
   <kevm>
