@@ -11,7 +11,7 @@ requires "buf.md"
 requires "hashed-locations.md"
 requires "abi.md"
 requires "gas.md"
-requires "optimizations.md"
+// requires "optimizations.md"
 requires "lemmas/summary-simplification.k"
 
 module EDSL
@@ -19,7 +19,7 @@ module EDSL
     imports HASHED-LOCATIONS
     imports SOLIDITY-FIELDS
     imports EVM-ABI
-    imports EVM-OPTIMIZATIONS
+//    imports EVM-OPTIMIZATIONS
     imports INFINITE-GAS
     imports BIN-RUNTIME
     imports SUMMARY-SIMPLIFICATION
