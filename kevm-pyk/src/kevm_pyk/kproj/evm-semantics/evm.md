@@ -381,7 +381,7 @@ The `#next [_]` operator initiates execution by:
                   | #stackOverflow  ( WordStack , OpCode ) [symbol(#stackOverflow), macro]
  // --------------------------------------------------------------------------------------
     rule #stackUnderflow(WS, OP:OpCode) => #sizeWordStack(WS) <Int #stackNeeded(OP)
-    rule #stackOverflow (WS, OP) => #sizeWordStack(WS) +Int #stackDelta(OP) >Int 1024
+    rule #stackOverflow (WS, OP) => (#stackDelta(OP) >Int 0) andBool (#sizeWordStack(WS) +Int #stackDelta(OP) >Int 1024)
 
     syntax Int ::= #stackNeeded ( OpCode ) [symbol(#stackNeeded), function]
  // -----------------------------------------------------------------------
