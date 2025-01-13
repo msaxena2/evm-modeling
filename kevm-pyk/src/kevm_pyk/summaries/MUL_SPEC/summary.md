@@ -17,7 +17,7 @@
 ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
-┃  └─ 7 (leaf, terminal)
+┃  └─ 8 (leaf, terminal)
 ┃      k: #halt ~> _K_CELL:K
 ┃      pc: _PC_CELL:Int
 ┃      callDepth: _CALLDEPTH_CELL:Int
@@ -34,7 +34,7 @@
 ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
-┃  └─ 8 (leaf, terminal)
+┃  └─ 7 (leaf, terminal)
 ┃      k: #halt ~> _K_CELL:K
 ┃      pc: _PC_CELL:Int
 ┃      callDepth: _CALLDEPTH_CELL:Int
@@ -214,11 +214,32 @@
             ┃ (1 step)
             ┣━━┓
             ┃  │
-            ┃  └─ 25 (leaf, pending)
-            ┃      k: #gas [ MUL , MUL W0:Int W4:Int ] ~> MUL W0:Int W4:Int ~> #pc [ MUL ] ~> _K_CELL: ...
-            ┃      pc: _PC_CELL:Int
-            ┃      callDepth: _CALLDEPTH_CELL:Int
-            ┃      statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ├─ 25 (split)
+            ┃  │   k: #gas [ MUL , MUL W0:Int W4:Int ] ~> MUL W0:Int W4:Int ~> #pc [ MUL ] ~> _K_CELL: ...
+            ┃  │   pc: _PC_CELL:Int
+            ┃  │   callDepth: _CALLDEPTH_CELL:Int
+            ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃
+            ┃  ┃ (branch)
+            ┃  ┣━━┓ subst: .Subst
+            ┃  ┃  ┃ constraint:
+            ┃  ┃  ┃     _USEGAS_CELL:Bool
+            ┃  ┃  │
+            ┃  ┃  └─ 28 (leaf, pending)
+            ┃  ┃      k: #gas [ MUL , MUL W0:Int W4:Int ] ~> MUL W0:Int W4:Int ~> #pc [ MUL ] ~> _K_CELL: ...
+            ┃  ┃      pc: _PC_CELL:Int
+            ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+            ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+            ┃  ┃
+            ┃  ┗━━┓ subst: .Subst
+            ┃     ┃ constraint:
+            ┃     ┃     ( notBool _USEGAS_CELL:Bool )
+            ┃     │
+            ┃     └─ 29 (leaf, pending)
+            ┃         k: #gas [ MUL , MUL W0:Int W4:Int ] ~> MUL W0:Int W4:Int ~> #pc [ MUL ] ~> _K_CELL: ...
+            ┃         pc: _PC_CELL:Int
+            ┃         callDepth: _CALLDEPTH_CELL:Int
+            ┃         statusCode: _STATUSCODE_CELL:StatusCode
             ┃
             ┗━━┓
                │
@@ -265,32 +286,7 @@ module SUMMARY-MUL-SPEC
                ))
       [priority(20), label(BASIC-BLOCK-5-TO-6)]
     
-    rule [BASIC-BLOCK-3-TO-7]: <kevm>
-           <k>
-             ( #next [ MUL ] => #halt )
-             ~> __K_CELL
-           </k>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STACK_UNDERFLOW )
-               </statusCode>
-               <callState>
-                 <wordStack>
-                   _WORDSTACK_CELL:WordStack
-                 </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2
-      [priority(20), label(BASIC-BLOCK-3-TO-7)]
-    
-    rule [BASIC-BLOCK-4-TO-8]: <kevm>
+    rule [BASIC-BLOCK-4-TO-7]: <kevm>
            <k>
              ( #next [ MUL ] => #halt )
              ~> __K_CELL
@@ -313,7 +309,32 @@ module SUMMARY-MUL-SPEC
            ...
          </kevm>
       requires ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024
-      [priority(20), label(BASIC-BLOCK-4-TO-8)]
+      [priority(20), label(BASIC-BLOCK-4-TO-7)]
+    
+    rule [BASIC-BLOCK-3-TO-8]: <kevm>
+           <k>
+             ( #next [ MUL ] => #halt )
+             ~> __K_CELL
+           </k>
+           <ethereum>
+             <evm>
+               <statusCode>
+                 ( __STATUSCODE_CELL => EVMC_STACK_UNDERFLOW )
+               </statusCode>
+               <callState>
+                 <wordStack>
+                   _WORDSTACK_CELL:WordStack
+                 </wordStack>
+                 ...
+               </callState>
+               ...
+             </evm>
+             ...
+           </ethereum>
+           ...
+         </kevm>
+      requires #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2
+      [priority(20), label(BASIC-BLOCK-3-TO-8)]
     
     rule [BASIC-BLOCK-11-TO-19]: <kevm>
            <k>

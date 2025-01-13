@@ -8,322 +8,96 @@
 ┃ (branch)
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023
-┃  ┃     _WORDSTACK_CELL:WordStack ==K ( W0:Int : ( W1:Int : WS:WordStack ) )
-┃  ┃     #if _USEGAS_CELL:Bool #then Gverylow < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas #else true #fi
+┃  ┃     ( notBool _USEGAS_CELL:Bool )
 ┃  │
-┃  └─ 3 (leaf, pending)
-┃      k: #next [ ADD ] ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃
-┣━━┓ subst: .Subst
-┃  ┃ constraint:
-┃  ┃     #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2
-┃  │
-┃  ├─ 4
+┃  ├─ 13
 ┃  │   k: #next [ ADD ] ~> _K_CELL:K
 ┃  │   pc: _PC_CELL:Int
 ┃  │   callDepth: _CALLDEPTH_CELL:Int
 ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (2 steps)
-┃  └─ 8 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: EVMC_STACK_UNDERFLOW
+┃  │  (7 steps)
+┃  ├─ 10
+┃  │   k: _K_CELL:K
+┃  │   pc: ( _PC_CELL:Int +Int 1 )
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  ┊  constraint: true
+┃  ┊  subst: ...
+┃  └─ 2 (leaf, target)
+┃      k: _K_CELL:K
+┃      pc: ?_FINAL_PC_CELL:Int
+┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024
+┃  ┃     _USEGAS_CELL:Bool
+┃  ┃     Gverylow < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas
 ┃  │
-┃  ├─ 5
+┃  ├─ 16
 ┃  │   k: #next [ ADD ] ~> _K_CELL:K
 ┃  │   pc: _PC_CELL:Int
 ┃  │   callDepth: _CALLDEPTH_CELL:Int
 ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (2 steps)
-┃  └─ 9 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: EVMC_STACK_OVERFLOW
+┃  │  (12 steps)
+┃  ├─ 11
+┃  │   k: _K_CELL:K
+┃  │   pc: ( _PC_CELL:Int +Int 1 )
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  ┊  constraint: true
+┃  ┊  subst: ...
+┃  └─ 2 (leaf, target)
+┃      k: _K_CELL:K
+┃      pc: ?_FINAL_PC_CELL:Int
+┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
-   ┃     ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2 )
-   ┃     ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024 )
+   ┃     _USEGAS_CELL:Bool
+   ┃     _GAS_CELL:Gas <Gas Gverylow < _SCHEDULE_CELL:Schedule >
    │
-   ├─ 6
+   ├─ 17
    │   k: #next [ ADD ] ~> _K_CELL:K
    │   pc: _PC_CELL:Int
    │   callDepth: _CALLDEPTH_CELL:Int
    │   statusCode: _STATUSCODE_CELL:StatusCode
    │
-   │  (2 steps)
-   ├─ 7
-   │   k: #exec [ ADD ] ~> #pc [ ADD ] ~> _K_CELL:K
-   │   pc: _PC_CELL:Int
-   │   callDepth: _CALLDEPTH_CELL:Int
-   │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃
-   ┃ (1 step)
-   ┣━━┓
-   ┃  │
-   ┃  ├─ 10 (split)
-   ┃  │   k: #gas [ ADD , ADD W0:Int W1:Int ] ~> ADD W0:Int W1:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-   ┃  │   pc: _PC_CELL:Int
-   ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃
-   ┃  ┃ (branch)
-   ┃  ┣━━┓ subst: .Subst
-   ┃  ┃  ┃ constraint:
-   ┃  ┃  ┃     _USEGAS_CELL:Bool
-   ┃  ┃  │
-   ┃  ┃  ├─ 12
-   ┃  ┃  │   k: #gas [ ADD , ADD W0:Int W1:Int ] ~> ADD W0:Int W1:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-   ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  │
-   ┃  ┃  │  (4 steps)
-   ┃  ┃  ├─ 18
-   ┃  ┃  │   k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
-   ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃
-   ┃  ┃  ┃ (1 step)
-   ┃  ┃  ┣━━┓
-   ┃  ┃  ┃  │
-   ┃  ┃  ┃  └─ 21 (leaf, pending)
-   ┃  ┃  ┃      k: #access [ ADD , ADD W0:Int W1:Int ] ~> ADD W0:Int W1:Int ~> #pc [ ADD ] ~> _K_CE ...
-   ┃  ┃  ┃      pc: _PC_CELL:Int
-   ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃
-   ┃  ┃  ┣━━┓
-   ┃  ┃  ┃  │
-   ┃  ┃  ┃  ├─ 22
-   ┃  ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ ADD , ADD W0:Int W1:Int ] ~> ADD W0:Int W1:Int ...
-   ┃  ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃  │
-   ┃  ┃  ┃  │  (4 steps)
-   ┃  ┃  ┃  └─ 29 (leaf, terminal)
-   ┃  ┃  ┃      k: #halt ~> _K_CELL:K
-   ┃  ┃  ┃      pc: _PC_CELL:Int
-   ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  ┃      statusCode: EVMC_OUT_OF_GAS
-   ┃  ┃  ┃
-   ┃  ┃  ┗━━┓
-   ┃  ┃     │
-   ┃  ┃     └─ 23 (stuck, leaf)
-   ┃  ┃         k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
-   ┃  ┃         pc: _PC_CELL:Int
-   ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃
-   ┃  ┗━━┓ subst: .Subst
-   ┃     ┃ constraint:
-   ┃     ┃     ( notBool _USEGAS_CELL:Bool )
-   ┃     │
-   ┃     └─ 13 (leaf, pending)
-   ┃         k: #gas [ ADD , ADD W0:Int W1:Int ] ~> ADD W0:Int W1:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-   ┃         pc: _PC_CELL:Int
-   ┃         callDepth: _CALLDEPTH_CELL:Int
-   ┃         statusCode: _STATUSCODE_CELL:StatusCode
-   ┃
-   ┗━━┓
-      │
-      ├─ 11
-      │   k: #exec [ ADD ] ~> #pc [ ADD ] ~> _K_CELL:K
-      │   pc: _PC_CELL:Int
-      │   callDepth: _CALLDEPTH_CELL:Int
-      │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃
-      ┃ (1 step)
-      ┣━━┓
-      ┃  │
-      ┃  ├─ 14 (split)
-      ┃  │   k: #gas [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-      ┃  │   pc: _PC_CELL:Int
-      ┃  │   callDepth: _CALLDEPTH_CELL:Int
-      ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  ┃
-      ┃  ┃ (branch)
-      ┃  ┣━━┓ subst: .Subst
-      ┃  ┃  ┃ constraint:
-      ┃  ┃  ┃     _USEGAS_CELL:Bool
-      ┃  ┃  │
-      ┃  ┃  ├─ 16
-      ┃  ┃  │   k: #gas [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-      ┃  ┃  │   pc: _PC_CELL:Int
-      ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-      ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  ┃  │
-      ┃  ┃  │  (4 steps)
-      ┃  ┃  ├─ 28
-      ┃  ┃  │   k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
-      ┃  ┃  │   pc: _PC_CELL:Int
-      ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-      ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  ┃  ┃
-      ┃  ┃  ┃ (1 step)
-      ┃  ┃  ┣━━┓
-      ┃  ┃  ┃  │
-      ┃  ┃  ┃  └─ 32 (leaf, pending)
-      ┃  ┃  ┃      k: #access [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ~> #pc [ ADD ] ~> _K_CE ...
-      ┃  ┃  ┃      pc: _PC_CELL:Int
-      ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-      ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  ┃  ┃
-      ┃  ┃  ┣━━┓
-      ┃  ┃  ┃  │
-      ┃  ┃  ┃  └─ 33 (leaf, pending)
-      ┃  ┃  ┃      k: #end EVMC_OUT_OF_GAS ~> #access [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ...
-      ┃  ┃  ┃      pc: _PC_CELL:Int
-      ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-      ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  ┃  ┃
-      ┃  ┃  ┗━━┓
-      ┃  ┃     │
-      ┃  ┃     └─ 34 (leaf, pending)
-      ┃  ┃         k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
-      ┃  ┃         pc: _PC_CELL:Int
-      ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
-      ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  ┃
-      ┃  ┗━━┓ subst: .Subst
-      ┃     ┃ constraint:
-      ┃     ┃     ( notBool _USEGAS_CELL:Bool )
-      ┃     │
-      ┃     └─ 17 (leaf, pending)
-      ┃         k: #gas [ ADD , ADD W0:Int W2:Int ] ~> ADD W0:Int W2:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-      ┃         pc: _PC_CELL:Int
-      ┃         callDepth: _CALLDEPTH_CELL:Int
-      ┃         statusCode: _STATUSCODE_CELL:StatusCode
-      ┃
-      ┗━━┓
-         │
-         ├─ 15
-         │   k: #exec [ ADD ] ~> #pc [ ADD ] ~> _K_CELL:K
-         │   pc: _PC_CELL:Int
-         │   callDepth: _CALLDEPTH_CELL:Int
-         │   statusCode: _STATUSCODE_CELL:StatusCode
-         ┃
-         ┃ (1 step)
-         ┣━━┓
-         ┃  │
-         ┃  ├─ 19 (split)
-         ┃  │   k: #gas [ ADD , ADD W0:Int W3:Int ] ~> ADD W0:Int W3:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-         ┃  │   pc: _PC_CELL:Int
-         ┃  │   callDepth: _CALLDEPTH_CELL:Int
-         ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-         ┃  ┃
-         ┃  ┃ (branch)
-         ┃  ┣━━┓ subst: .Subst
-         ┃  ┃  ┃ constraint:
-         ┃  ┃  ┃     _USEGAS_CELL:Bool
-         ┃  ┃  │
-         ┃  ┃  ├─ 24
-         ┃  ┃  │   k: #gas [ ADD , ADD W0:Int W3:Int ] ~> ADD W0:Int W3:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-         ┃  ┃  │   pc: _PC_CELL:Int
-         ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-         ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-         ┃  ┃  │
-         ┃  ┃  │  (4 steps)
-         ┃  ┃  └─ 35 (leaf, pending)
-         ┃  ┃      k: Gverylow < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ADD , ADD W0:Int ...
-         ┃  ┃      pc: _PC_CELL:Int
-         ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-         ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-         ┃  ┃
-         ┃  ┗━━┓ subst: .Subst
-         ┃     ┃ constraint:
-         ┃     ┃     ( notBool _USEGAS_CELL:Bool )
-         ┃     │
-         ┃     └─ 25 (leaf, pending)
-         ┃         k: #gas [ ADD , ADD W0:Int W3:Int ] ~> ADD W0:Int W3:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-         ┃         pc: _PC_CELL:Int
-         ┃         callDepth: _CALLDEPTH_CELL:Int
-         ┃         statusCode: _STATUSCODE_CELL:StatusCode
-         ┃
-         ┗━━┓
-            │
-            ├─ 20
-            │   k: #exec [ ADD ] ~> #pc [ ADD ] ~> _K_CELL:K
-            │   pc: _PC_CELL:Int
-            │   callDepth: _CALLDEPTH_CELL:Int
-            │   statusCode: _STATUSCODE_CELL:StatusCode
-            ┃
-            ┃ (1 step)
-            ┣━━┓
-            ┃  │
-            ┃  ├─ 26 (split)
-            ┃  │   k: #gas [ ADD , ADD W0:Int W4:Int ] ~> ADD W0:Int W4:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-            ┃  │   pc: _PC_CELL:Int
-            ┃  │   callDepth: _CALLDEPTH_CELL:Int
-            ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-            ┃  ┃
-            ┃  ┃ (branch)
-            ┃  ┣━━┓ subst: .Subst
-            ┃  ┃  ┃ constraint:
-            ┃  ┃  ┃     _USEGAS_CELL:Bool
-            ┃  ┃  │
-            ┃  ┃  └─ 30 (leaf, pending)
-            ┃  ┃      k: #gas [ ADD , ADD W0:Int W4:Int ] ~> ADD W0:Int W4:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-            ┃  ┃      pc: _PC_CELL:Int
-            ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-            ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-            ┃  ┃
-            ┃  ┗━━┓ subst: .Subst
-            ┃     ┃ constraint:
-            ┃     ┃     ( notBool _USEGAS_CELL:Bool )
-            ┃     │
-            ┃     └─ 31 (leaf, pending)
-            ┃         k: #gas [ ADD , ADD W0:Int W4:Int ] ~> ADD W0:Int W4:Int ~> #pc [ ADD ] ~> _K_CELL: ...
-            ┃         pc: _PC_CELL:Int
-            ┃         callDepth: _CALLDEPTH_CELL:Int
-            ┃         statusCode: _STATUSCODE_CELL:StatusCode
-            ┃
-            ┗━━┓
-               │
-               └─ 27 (leaf, pending)
-                   k: #exec [ ADD ] ~> #pc [ ADD ] ~> _K_CELL:K
-                   pc: _PC_CELL:Int
-                   callDepth: _CALLDEPTH_CELL:Int
-                   statusCode: _STATUSCODE_CELL:StatusCode
+   │  (12 steps)
+   └─ 9 (leaf, terminal)
+       k: #halt ~> _K_CELL:K
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: EVMC_OUT_OF_GAS
 
-
-┌─ 2 (root, leaf, target)
-│   k: _K_CELL:K
-│   pc: ?_FINAL_PC_CELL:Int
-│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
 
 
 
 module SUMMARY-ADD-SPEC
     
     
-    rule [BASIC-BLOCK-6-TO-7]: <kevm>
+    rule [BASIC-BLOCK-13-TO-10]: <kevm>
            <k>
-             ( #next [ ADD ] ~> .K => #exec [ ADD ]
-             ~> #pc [ ADD ] )
+             ( #next [ ADD ] ~> .K => .K )
              ~> __K_CELL
            </k>
+           <useGas>
+             ( _USEGAS_CELL:Bool => false )
+           </useGas>
            <ethereum>
              <evm>
                <callState>
                  <wordStack>
-                   _WORDSTACK_CELL:WordStack
+                   ( ( _W0:Int => chop ( ( _W0:Int +Int _W1:Int ) ) ) : ( ( _W1:Int : _WS:WordStack ) => _WS:WordStack ) )
                  </wordStack>
+                 <pc>
+                   ( _PC_CELL:Int => ( _PC_CELL:Int +Int 1 ) )
+                 </pc>
                  ...
                </callState>
                ...
@@ -332,68 +106,48 @@ module SUMMARY-ADD-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2 )
-       andBool ( ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024 )
+      requires ( notBool _USEGAS_CELL:Bool )
+      [priority(20), label(BASIC-BLOCK-13-TO-10)]
+    
+    rule [BASIC-BLOCK-16-TO-11]: <kevm>
+           <k>
+             ( #next [ ADD ] ~> .K => .K )
+             ~> __K_CELL
+           </k>
+           <schedule>
+             _SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             ( _USEGAS_CELL:Bool => true )
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <wordStack>
+                   ( ( _W0:Int => chop ( ( _W0:Int +Int _W1:Int ) ) ) : ( ( _W1:Int : _WS:WordStack ) => _WS:WordStack ) )
+                 </wordStack>
+                 <pc>
+                   ( _PC_CELL:Int => ( _PC_CELL:Int +Int 1 ) )
+                 </pc>
+                 <gas>
+                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas Gverylow < _SCHEDULE_CELL:Schedule > )
+                 </gas>
+                 ...
+               </callState>
+               ...
+             </evm>
+             ...
+           </ethereum>
+           ...
+         </kevm>
+      requires ( _USEGAS_CELL:Bool
+       andBool ( Gverylow < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas
                ))
-      [priority(20), label(BASIC-BLOCK-6-TO-7)]
+      [priority(20), label(BASIC-BLOCK-16-TO-11)]
     
-    rule [BASIC-BLOCK-4-TO-8]: <kevm>
+    rule [BASIC-BLOCK-17-TO-9]: <kevm>
            <k>
              ( #next [ ADD ] => #halt )
-             ~> __K_CELL
-           </k>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STACK_UNDERFLOW )
-               </statusCode>
-               <callState>
-                 <wordStack>
-                   _WORDSTACK_CELL:WordStack
-                 </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2
-      [priority(20), label(BASIC-BLOCK-4-TO-8)]
-    
-    rule [BASIC-BLOCK-5-TO-9]: <kevm>
-           <k>
-             ( #next [ ADD ] => #halt )
-             ~> __K_CELL
-           </k>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STACK_OVERFLOW )
-               </statusCode>
-               <callState>
-                 <wordStack>
-                   _WORDSTACK_CELL:WordStack
-                 </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024
-      [priority(20), label(BASIC-BLOCK-5-TO-9)]
-    
-    rule [BASIC-BLOCK-12-TO-18]: <kevm>
-           <k>
-             ( #gas [ ADD , ADD W0:Int W1:Int ] ~> .K => Gverylow < _SCHEDULE_CELL:Schedule >
-             ~> #deductGas
-             ~> #access [ ADD , ADD W0:Int W1:Int ] )
-             ~> ADD W0:Int W1:Int
-             ~> #pc [ ADD ]
              ~> __K_CELL
            </k>
            <schedule>
@@ -401,78 +155,6 @@ module SUMMARY-ADD-SPEC
            </schedule>
            <useGas>
              ( _USEGAS_CELL:Bool => true )
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <wordStack>
-                   WS:WordStack
-                 </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool #sizeWordStack ( WS:WordStack , 2 ) <Int 2 )
-       andBool ( __WORDSTACK_CELL ==K ( W0:Int : ( W1:Int : WS:WordStack ) )
-       andBool ( ( notBool ( #sizeWordStack ( WS:WordStack , 2 ) +Int -1 ) >Int 1024 )
-               ))))
-      [priority(20), label(BASIC-BLOCK-12-TO-18)]
-    
-    rule [BASIC-BLOCK-16-TO-28]: <kevm>
-           <k>
-             ( #gas [ ADD , ADD W0:Int W2:Int ] ~> .K => Gverylow < _SCHEDULE_CELL:Schedule >
-             ~> #deductGas
-             ~> #access [ ADD , ADD W0:Int W2:Int ] )
-             ~> ADD W0:Int W2:Int
-             ~> #pc [ ADD ]
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             ( _USEGAS_CELL:Bool => true )
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <wordStack>
-                   WS0:WordStack
-                 </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool #sizeWordStack ( WS0:WordStack , 2 ) <Int 2 )
-       andBool ( __WORDSTACK_CELL ==K ( W0:Int : ( W2:Int : WS0:WordStack ) )
-       andBool ( ( notBool ( #sizeWordStack ( WS0:WordStack , 2 ) +Int -1 ) >Int 1024 )
-       andBool ( ( notBool ( _W1 ==Int W2:Int andBool _WS ==K WS0:WordStack ) )
-               )))))
-      [priority(20), label(BASIC-BLOCK-16-TO-28)]
-    
-    rule [BASIC-BLOCK-22-TO-29]: <kevm>
-           <k>
-             ( #end EVMC_OUT_OF_GAS
-             ~> #access [ ADD , ADD W0:Int W1:Int ]
-             ~> ADD W0:Int W1:Int
-             ~> #pc [ ADD ] => #halt ~> .K )
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             true
            </useGas>
            <ethereum>
              <evm>
@@ -481,7 +163,7 @@ module SUMMARY-ADD-SPEC
                </statusCode>
                <callState>
                  <wordStack>
-                   WS:WordStack
+                   ( ( __W0 : ( __W1 : _WS:WordStack ) ) => _WS:WordStack )
                  </wordStack>
                  <gas>
                    _GAS_CELL:Gas
@@ -494,50 +176,9 @@ module SUMMARY-ADD-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( __USEGAS_CELL
-       andBool ( ( notBool #sizeWordStack ( WS:WordStack , 2 ) <Int 2 )
-       andBool ( __WORDSTACK_CELL ==K ( W0:Int : ( W1:Int : WS:WordStack ) )
-       andBool ( _GAS_CELL:Gas <Gas Gverylow < _SCHEDULE_CELL:Schedule >
-       andBool ( ( notBool ( #sizeWordStack ( WS:WordStack , 2 ) +Int -1 ) >Int 1024 )
-               )))))
-      [priority(20), label(BASIC-BLOCK-22-TO-29)]
-    
-    rule [BASIC-BLOCK-24-TO-35]: <kevm>
-           <k>
-             ( #gas [ ADD , ADD W0:Int W3:Int ] ~> .K => Gverylow < _SCHEDULE_CELL:Schedule >
-             ~> #deductGas
-             ~> #access [ ADD , ADD W0:Int W3:Int ] )
-             ~> ADD W0:Int W3:Int
-             ~> #pc [ ADD ]
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             ( _USEGAS_CELL:Bool => true )
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <wordStack>
-                   WS1:WordStack
-                 </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
       requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool #sizeWordStack ( WS1:WordStack , 2 ) <Int 2 )
-       andBool ( __WORDSTACK_CELL ==K ( W0:Int : ( W3:Int : WS1:WordStack ) )
-       andBool ( ( notBool ( #sizeWordStack ( WS1:WordStack , 2 ) +Int -1 ) >Int 1024 )
-       andBool ( ( notBool ( _W1 ==Int W3:Int andBool _WS ==K WS1:WordStack ) )
-       andBool ( ( notBool ( _W2 ==Int W3:Int andBool _WS0 ==K WS1:WordStack ) )
-               ))))))
-      [priority(20), label(BASIC-BLOCK-24-TO-35)]
+       andBool ( _GAS_CELL:Gas <Gas Gverylow < _SCHEDULE_CELL:Schedule >
+               ))
+      [priority(20), label(BASIC-BLOCK-17-TO-9)]
 
 endmodule
