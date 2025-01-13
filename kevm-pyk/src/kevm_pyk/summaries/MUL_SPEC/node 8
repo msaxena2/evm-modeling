@@ -1,0 +1,27 @@
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ MUL ]
+      ~> #pc [ MUL ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WORDSTACK_CELL:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) <Int 2 ) }
+#And { true #Equals ( notBool ( #sizeWordStack ( _WORDSTACK_CELL:WordStack , 0 ) +Int -1 ) >Int 1024 ) } ) )

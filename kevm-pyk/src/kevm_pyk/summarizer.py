@@ -130,6 +130,18 @@ OPCODES_SUMMARY_STATUS = {
 def get_summary_status(opcode: str) -> str:
     return OPCODES_SUMMARY_STATUS[opcode].split(',')[0]
 
+def word_stack(size_over: int) -> KInner:
+    def _word_stack_var(n: int) -> KInner:
+        return KVariable(f'W{n}', KSort('Int'))
+    
+    def _word_stack(w0: KInner, w1: KInner) -> KInner:
+        return KApply('_:__EVM-TYPES_WordStack_Int_WordStack', [w0, w1])
+    
+    ws = KVariable('WS', KSort('WordStack'))
+    for i in reversed(range(size_over)):
+        ws = _word_stack(_word_stack_var(i), ws)
+    return ws
+
 
 class KEVMSummarizer:
     """
@@ -166,6 +178,7 @@ class KEVMSummarizer:
         opcode = OPCODES[opcode_symbol]
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
+        _init_subst['WORDSTACK_CELL'] = word_stack(2)
         init_subst = CSubst(Subst(_init_subst), ())
 
         # construct the final substitution
