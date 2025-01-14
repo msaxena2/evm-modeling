@@ -32,7 +32,7 @@ from pyk.proof.show import APRProofShow
 from pyk.proof.tui import APRProofViewer
 from pyk.utils import FrozenDict, hash_str, single
 
-from kevm_pyk.summarizer import analyze_proof, batch_summarize, stack_needed, summarize
+from kevm_pyk.summarizer import OPCODES, OPCODES_SUMMARY_STATUS, analyze_proof, batch_summarize, get_passed_opcodes, stack_needed, summarize
 
 from . import VERSION, config
 from .cli import _create_argument_parser, generate_options, get_argument_type_setter, get_option_string_destination
@@ -638,7 +638,11 @@ def exec_kast(options: KastOptions) -> None:
 
 def exec_summarize(options: ProveOptions) -> None:
     # batch_summarize()
-    summarize('SUB')
+    all_opcodes = OPCODES.keys()
+    passed_opcodes = get_passed_opcodes()
+    unpassed_opcodes = [opcode for opcode in all_opcodes if opcode not in passed_opcodes]
+    next_opcode = unpassed_opcodes[0]
+    summarize(next_opcode)
     # analyze_proof('STOP', 11)
 
 # Helpers
