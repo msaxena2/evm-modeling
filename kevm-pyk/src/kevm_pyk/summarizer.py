@@ -128,6 +128,7 @@ OPCODES_SUMMARY_STATUS = {
     'SDIV': 'PASSED, No underflow check in KCFG',
     'MOD': 'PASSED, No underflow check in KCFG',
     'SMOD': 'PASSED, No underflow check in KCFG',
+    'ADDMOD': 'PASSED, No underflow check in KCFG',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
 
