@@ -162,7 +162,48 @@ OPCODES_SUMMARY_STATUS = {
     'EXTCODECOPY': 'TODO, Proof crashed',
     'RETURNDATASIZE': 'TODO, Proof crashed',
     'RETURNDATACOPY': 'PASSED, No underflow check in KCFG',
-    
+    'EXTCODEHASH': 'TODO, Proof crashed',
+    'BLOCKHASH': 'PASSED, No underflow check in KCFG',
+    'COINBASE': 'TODO, Proof crashed',
+    'TIMESTAMP': 'PASSED, No underflow check in KCFG',
+    'NUMBER': 'PASSED, No underflow check in KCFG',
+    'PREVRANDAO': 'PASSED, No underflow check in KCFG',
+    'DIFFICULTY': 'PASSED, No underflow check in KCFG',
+    'GASLIMIT': 'PASSED, No underflow check in KCFG',
+    'CHAINID': 'PASSED, No underflow check in KCFG',
+    'SELFBALANCE': 'TODO, Proof crashed',
+    'BASEFEE': 'PASSED, No underflow check in KCFG',
+    'POP': 'TODO, Proof crashed',
+    'MLOAD': 'TODO, Proof crashed',
+    'MSTORE': 'PASSED, No underflow check in KCFG',
+    'MSTORE8': 'TODO, Proof crashed',
+    'SLOAD': 'TODO, Proof crashed',
+    'SSTORE': 'TODO, Proof crashed',
+    'JUMP': 'TODO, Proof crashed',
+    'JUMPI': 'TODO, Proof crashed',
+    'PC': 'PASSED, No underflow check in KCFG',
+    'MSIZE': 'TODO, Proof crashed',
+    'GAS': 'PASSED, No underflow check in KCFG',
+    'JUMPDEST': 'PASSED, No underflow check in KCFG',
+    'TLOAD': 'TODO, Proof crashed',
+    'TSTORE': 'TODO, Proof crashed',
+    'MCOPY': 'PASSED, No underflow check in KCFG',
+    'PUSHZERO': 'PASSED, No underflow check in KCFG',
+    'PUSH': 'TODO, Proof crashed',
+    'DUP': 'UNCHECKED, DUP 1-3 PASSED, possiblly all passed',
+    'SWAP': 'UNCHECKED, SWAP 1-4 PASSED, possiblly all passed',
+    'LOG': 'UNCHECKED',
+    'CREATE': 'UNCHECKED',
+    'CALL': 'UNCHECKED',
+    'CALLCODE': 'UNCHECKED',
+    'RETURN': 'UNCHECKED',
+    'DELEGATECALL': 'UNCHECKED',
+    'CREATE2': 'UNCHECKED',
+    'STATICCALL': 'UNCHECKED',
+    'REVERT': 'UNCHECKED',
+    'INVALID': 'UNCHECKED',
+    'SELFDESTRUCT': 'UNCHECKED',
+    'UNDEFINED': 'PASSED',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
 
@@ -175,6 +216,7 @@ def get_passed_opcodes() -> list[str]:
 
 
 def get_summary_status(opcode: str) -> str:
+    assert opcode in OPCODES_SUMMARY_STATUS
     return OPCODES_SUMMARY_STATUS[opcode].split(',')[0]
 
 def word_stack(size_over: int) -> KInner:
@@ -188,6 +230,17 @@ def word_stack(size_over: int) -> KInner:
     for i in reversed(range(size_over)):
         ws = _word_stack(_word_stack_var(i), ws)
     return ws
+
+def get_todo_list() -> list[str]:
+    todo_list = []
+    _LOGGER.info(f'Number of opcodes: {len(OPCODES)}')
+    for opcode in OPCODES:
+        if get_summary_status(opcode) != 'PASSED':
+            todo_list.append(opcode)
+    _LOGGER.info(f'Number of passed opcodes: {len(OPCODES)-len(todo_list)}')
+    _LOGGER.info(f'Number of todo opcodes: {len(todo_list)}')
+    _LOGGER.info(f'Todo opcodes: {todo_list}')
+    return todo_list
 
 def stack_needed(opcode_id: str) -> list[int]:
     """
