@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
-from pyk.kast.inner import KApply, KInner, KSequence, KVariable, Subst
+from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
 from pyk.kast.outer import KSort
 from pyk.kcfg import KCFGExplore, KCFG
 from pyk.kdist import kdist
@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 
 _LOGGER = logging.getLogger(__name__)
 
-OPCODES = {
+OPCODES: dict[str, KApply] = {
     'STOP': KApply('STOP_EVM_NullStackOp'),
     'ADD': KApply('ADD_EVM_BinStackOp'),
     'MUL': KApply('MUL_EVM_BinStackOp'),
@@ -120,9 +120,9 @@ OPCODES_PRECONDITIONS = {
 }
 
 OPCODES_SUMMARY_STATUS = {
-    'STOP': 'TOSUMMARIZE, One rule? Several rules?',
-    'ADD': 'TODICUSS, smt out of time, find NDBranch, inconsistent stack overflow check between the optimized rule and the original rule',
-    'MUL': '',
+    'STOP': 'PASSED, One rule? Several rules?',
+    'ADD': 'PASSED, No underflow check in KCFG',
+    'MUL': 'PASSED, No underflow check in KCFG',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
 
@@ -142,7 +142,33 @@ def word_stack(size_over: int) -> KInner:
         ws = _word_stack(_word_stack_var(i), ws)
     return ws
 
-
+def stack_needed(opcode_id: str) -> list[int]:
+    """
+    Return the stack size needed for the opcode, corresponding `#stackNeeded` in the semantics.
+    """
+    opcode = OPCODES[opcode_id].label.name
+    if 'CallOp' in opcode:
+        return [7]
+    elif 'CallSixOp' in opcode:
+        return [6]
+    elif 'LOG' in opcode:
+        return range(5)
+    elif 'SWAP' in opcode:
+        return range(1, 17)
+    elif 'DUP' in opcode:
+        return range(1, 17)
+    elif 'QuadStackOp' in opcode:
+        return [4]
+    elif 'TernStackOp' in opcode:
+        return [3]
+    elif 'BinStackOp' in opcode:
+        return [2]
+    elif 'UnStackOp' in opcode:
+        return [1]
+    return [0]
+    
+    
+    
 class KEVMSummarizer:
     """
     A class for summarizing the instructions of the KEVM.
@@ -165,7 +191,8 @@ class KEVMSummarizer:
 
     def build_spec(
         self,
-        opcode_symbol: str,
+        opcode: KApply,
+        stack_needed: int,
     ) -> APRProof:
         """
         Build the specification to symbolically execute one abitrary instruction.
@@ -173,12 +200,10 @@ class KEVMSummarizer:
         cterm = CTerm(self.kevm.definition.empty_config(KSort('GeneratedTopCell')))
 
         # construct the initial substitution
-        # opcode = KVariable('OP_CODE', KSort('OpCode'))
-        # opcode = KVariable('OP_CODE', KSort('BinStackOp'))
-        opcode = OPCODES[opcode_symbol]
+        # opcode = OPCODES[opcode_symbol]
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
-        _init_subst['WORDSTACK_CELL'] = word_stack(2)
+        _init_subst['WORDSTACK_CELL'] = word_stack(stack_needed)
         init_subst = CSubst(Subst(_init_subst), ())
 
         # construct the final substitution
@@ -186,7 +211,8 @@ class KEVMSummarizer:
         _final_subst['K_CELL'] = KVariable('K_CELL')
         final_subst = CSubst(Subst(_final_subst), ())
 
-        kclaim, _ = cterm_build_claim(f'{opcode_symbol}_SPEC', init_subst(cterm), final_subst(cterm))
+        opcode_symbol = opcode.label.name.split('_')[0]
+        kclaim, _ = cterm_build_claim(f'{opcode_symbol}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm))
         return APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
 
     def explore(self, proof: APRProof) -> None:
@@ -335,13 +361,18 @@ def batch_summarize(num_processes: int = 4) -> None:
     _LOGGER.info('Batch summarization completed')
 
 
-def summarize(opcode: str) -> None:
+def summarize(opcode_symbol: str) -> None:
     proof_dir = Path(__file__).parent / 'proofs'
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)
-    proof = summarizer.build_spec(opcode)
-    summarizer.explore(proof)
-    summarizer.summarize(proof)
+    needs = stack_needed(opcode_symbol)
+    opcode = OPCODES[opcode_symbol]
+    for need in needs:
+        if len(needs) > 1:
+            opcode = KApply(opcode.label.name, KToken(str(need), KSort('Int')))
+        proof = summarizer.build_spec(opcode, need)
+        summarizer.explore(proof)
+        summarizer.summarize(proof)
     # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')
     
 
