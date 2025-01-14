@@ -124,8 +124,16 @@ OPCODES_SUMMARY_STATUS = {
     'ADD': 'PASSED, No underflow check in KCFG',
     'MUL': 'PASSED, No underflow check in KCFG',
     'SUB': 'PASSED, No underflow check in KCFG',
+    'DIV': 'PASSED, No underflow check in KCFG',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
+
+def get_passed_opcodes() -> list[str]:
+    passed_opcodes = []
+    for opcode in OPCODES_SUMMARY_STATUS:
+        if get_summary_status(opcode) == 'PASSED':
+            passed_opcodes.append(opcode)
+    return passed_opcodes
 
 
 def get_summary_status(opcode: str) -> str:
