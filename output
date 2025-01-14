@@ -1,189 +1,199 @@
-INFO 2025-01-14 04:56:06,614 pyk.kast.outer - Loading JSON definition: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
-INFO 2025-01-14 04:56:06,739 pyk.kast.outer - Converting JSON definition to Kast: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
-INFO 2025-01-14 04:56:07,233 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/kcfg
-INFO 2025-01-14 04:56:07,233 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/kcfg/nodes
-INFO 2025-01-14 04:56:07,237 pyk.kore.rpc - Starting KoreServer: kore-rpc-booster /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore --module EDSL --server-port 0 --llvm-backend-library /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/llvm-library/interpreter.so --interim-simplification 25
-INFO 2025-01-14 04:56:07,242 pyk.kore.rpc - [PID=1106546][stde] [proxy] Loading definition from /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore, main module "EDSL"
-INFO 2025-01-14 04:56:08,243 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 25454963}
-INFO 2025-01-14 04:56:09,245 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 130}
-INFO 2025-01-14 04:56:10,246 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 221}
-INFO 2025-01-14 04:56:11,247 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Executing TimeSpec {sec = 0, nsec = 723783478}
-INFO 2025-01-14 04:56:11,247 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 28533729}
-INFO 2025-01-14 04:56:11,247 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 120}
-INFO 2025-01-14 04:56:12,177 pyk.kore.rpc - KoreServer started: 0.0.0.0:43419, pid=1106546
-INFO 2025-01-14 04:56:12,177 pyk.kore.rpc - Connecting to host: localhost:43419
-INFO 2025-01-14 04:56:12,177 pyk.kore.rpc - Connected to host: localhost:43419
-INFO 2025-01-14 04:56:12,177 kevm_pyk.utils - Computing definedness constraint for initial node: MOD_2_SPEC
-INFO 2025-01-14 04:56:12,191 pyk.kore.rpc - Sending request to localhost:43419: 140122958123920-001 - simplify
-INFO 2025-01-14 04:56:12,248 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958123920-001
-INFO 2025-01-14 04:56:12,248 pyk.kore.rpc - [PID=1106546][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 230}
-INFO 2025-01-14 04:56:12,248 pyk.kore.rpc - [PID=1106546][stde] [proxy] Starting RPC server
-INFO 2025-01-14 04:56:12,745 pyk.kore.rpc - Received response from localhost:43419: 140122958123920-001 - simplify
-INFO 2025-01-14 04:56:12,758 pyk.kore.rpc - Sending request to localhost:43419: 140122958123920-002 - simplify
-INFO 2025-01-14 04:56:13,249 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958123920-002
-INFO 2025-01-14 04:56:13,378 pyk.kore.rpc - Received response from localhost:43419: 140122958123920-002 - simplify
-INFO 2025-01-14 04:56:13,379 kevm_pyk.utils - Simplifying initial and target node: MOD_2_SPEC
-INFO 2025-01-14 04:56:13,388 pyk.kore.rpc - Sending request to localhost:43419: 140122958123920-003 - simplify
-INFO 2025-01-14 04:56:13,974 pyk.kore.rpc - Received response from localhost:43419: 140122958123920-003 - simplify
-INFO 2025-01-14 04:56:13,981 pyk.kore.rpc - Sending request to localhost:43419: 140122958123920-004 - simplify
-INFO 2025-01-14 04:56:14,250 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958123920-004
-INFO 2025-01-14 04:56:14,250 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958123920-003
-INFO 2025-01-14 04:56:14,569 pyk.kore.rpc - Received response from localhost:43419: 140122958123920-004 - simplify
-INFO 2025-01-14 04:56:14,576 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:14,577 pyk.kore.rpc - Connecting to host: localhost:43419
-INFO 2025-01-14 04:56:14,577 pyk.kore.rpc - Connected to host: localhost:43419
-INFO 2025-01-14 04:56:14,577 pyk.proof.proof - [ZJH] prover type: <class 'pyk.proof.reachability.APRProver'>
-INFO 2025-01-14 04:56:14,577 pyk.proof.reachability - [ZJH] init proof
-INFO 2025-01-14 04:56:14,584 pyk.kore.rpc - Sending request to localhost:43419: 140122958345232-001 - add-module
-INFO 2025-01-14 04:56:15,250 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958345232-001
-INFO 2025-01-14 04:56:15,407 pyk.kore.rpc - Received response from localhost:43419: 140122958345232-001 - add-module
-INFO 2025-01-14 04:56:15,434 pyk.kore.rpc - Sending request to localhost:43419: 140122958345232-002 - add-module
-INFO 2025-01-14 04:56:16,252 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958345232-002
-INFO 2025-01-14 04:56:16,289 pyk.kore.rpc - Received response from localhost:43419: 140122958345232-002 - add-module
-INFO 2025-01-14 04:56:16,289 pyk.proof.reachability - [ZJH] pending: [1]
-INFO 2025-01-14 04:56:16,289 pyk.proof.reachability - [ZJH] node_id: 1
-INFO 2025-01-14 04:56:16,290 pyk.proof.reachability - [ZJH] is_terminal: False
-INFO 2025-01-14 04:56:16,290 pyk.proof.reachability - [ZJH] node_id: 2
-INFO 2025-01-14 04:56:16,290 pyk.proof.reachability - [ZJH] is_terminal: False
-INFO 2025-01-14 04:56:16,290 pyk.proof.reachability - [ZJH] pending: [1]
-INFO 2025-01-14 04:56:16,290 pyk.proof.proof - [ZJH] proof initialized
-INFO 2025-01-14 04:56:16,290 pyk.proof.proof - [ZJH] pending: [1]
-INFO 2025-01-14 04:56:16,291 pyk.proof.reachability - Before appending step: 1
-INFO 2025-01-14 04:56:16,291 pyk.kore.rpc - Connecting to host: localhost:43419
-INFO 2025-01-14 04:56:16,291 pyk.proof.proof - Submitted steps for proof: MOD_2_SPEC
-INFO 2025-01-14 04:56:16,291 pyk.kore.rpc - Connected to host: localhost:43419
-INFO 2025-01-14 04:56:16,321 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-001 - implies
-INFO 2025-01-14 04:56:16,868 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-001 - implies
-INFO 2025-01-14 04:56:16,875 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
-INFO 2025-01-14 04:56:16,875 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
-INFO 2025-01-14 04:56:16,875 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-002 - execute
-INFO 2025-01-14 04:56:17,253 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-001
-INFO 2025-01-14 04:56:17,253 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-002
-INFO 2025-01-14 04:56:19,730 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-002 - execute
-INFO 2025-01-14 04:56:19,731 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
-INFO 2025-01-14 04:56:19,756 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 3: 1 --> 3
-INFO 2025-01-14 04:56:19,756 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:19,757 pyk.proof.reachability - Before appending step: 3
-INFO 2025-01-14 04:56:19,787 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-003 - implies
-INFO 2025-01-14 04:56:19,790 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-003
-INFO 2025-01-14 04:56:20,381 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-003 - implies
-INFO 2025-01-14 04:56:20,389 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
-INFO 2025-01-14 04:56:20,389 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
-INFO 2025-01-14 04:56:20,389 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-004 - execute
-INFO 2025-01-14 04:56:20,792 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-004
-INFO 2025-01-14 04:56:23,185 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-004 - execute
-INFO 2025-01-14 04:56:23,186 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
-INFO 2025-01-14 04:56:23,196 pyk.kcfg.kcfg - Extending current KCFG with the following: 2 branches: 3 --> [4, 5]: ['_USEGAS_CELL:Bool', 'notBool _USEGAS_CELL:Bool']
-INFO 2025-01-14 04:56:23,197 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:23,198 pyk.proof.reachability - Before appending step: 4
-INFO 2025-01-14 04:56:23,198 pyk.proof.reachability - Before appending step: 5
-INFO 2025-01-14 04:56:23,204 pyk.kore.rpc - Connecting to host: localhost:43419
-INFO 2025-01-14 04:56:23,229 pyk.kore.rpc - Connected to host: localhost:43419
-INFO 2025-01-14 04:56:23,252 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-005 - implies
-INFO 2025-01-14 04:56:23,257 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-005
-INFO 2025-01-14 04:56:23,281 pyk.kore.rpc - Sending request to localhost:43419: 140122958582288-001 - implies
-INFO 2025-01-14 04:56:23,833 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-005 - implies
-INFO 2025-01-14 04:56:23,847 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
-INFO 2025-01-14 04:56:23,847 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
-INFO 2025-01-14 04:56:23,847 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-006 - execute
-INFO 2025-01-14 04:56:23,958 pyk.kore.rpc - Received response from localhost:43419: 140122958582288-001 - implies
-INFO 2025-01-14 04:56:23,965 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
-INFO 2025-01-14 04:56:23,965 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
-INFO 2025-01-14 04:56:23,966 pyk.kore.rpc - Sending request to localhost:43419: 140122958582288-002 - execute
-INFO 2025-01-14 04:56:24,255 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-006
-INFO 2025-01-14 04:56:24,255 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958582288-001
-INFO 2025-01-14 04:56:24,256 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958582288-002
-INFO 2025-01-14 04:56:28,981 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-006 - execute
-INFO 2025-01-14 04:56:28,983 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
-INFO 2025-01-14 04:56:28,992 pyk.proof.reachability - Caching next step for edge starting from 4
-INFO 2025-01-14 04:56:28,993 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 4: 4 --> 6
-INFO 2025-01-14 04:56:28,994 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:28,995 pyk.proof.reachability - Before appending step: 5
-INFO 2025-01-14 04:56:28,995 pyk.proof.reachability - Before appending step: 6
-INFO 2025-01-14 04:56:29,040 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-007 - implies
-INFO 2025-01-14 04:56:29,042 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-007
-INFO 2025-01-14 04:56:29,619 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-007 - implies
-INFO 2025-01-14 04:56:29,621 pyk.proof.reachability - Using cached step for edge 4 --> 6
-INFO 2025-01-14 04:56:29,624 pyk.kcfg.kcfg - Extending current KCFG with the following: 2 branches: 6 --> [7, 8]: ['Glow < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas', '_GAS_CELL:Gas <Gas Glow < _SCHEDULE_CELL:Schedule >']
-INFO 2025-01-14 04:56:29,624 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:29,626 pyk.proof.reachability - Before appending step: 5
-INFO 2025-01-14 04:56:29,626 pyk.proof.reachability - Before appending step: 7
-INFO 2025-01-14 04:56:29,626 pyk.proof.reachability - Before appending step: 8
-INFO 2025-01-14 04:56:29,632 pyk.kore.rpc - Connecting to host: localhost:43419
-INFO 2025-01-14 04:56:29,658 pyk.kore.rpc - Connected to host: localhost:43419
-INFO 2025-01-14 04:56:29,658 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-008 - implies
-INFO 2025-01-14 04:56:29,689 pyk.kore.rpc - Sending request to localhost:43419: 140122957176528-001 - implies
-INFO 2025-01-14 04:56:30,043 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-008
-INFO 2025-01-14 04:56:30,043 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122957176528-001
-INFO 2025-01-14 04:56:30,371 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-008 - implies
-INFO 2025-01-14 04:56:30,381 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
-INFO 2025-01-14 04:56:30,381 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
-INFO 2025-01-14 04:56:30,381 pyk.kore.rpc - Sending request to localhost:43419: 140122958530256-009 - execute
-INFO 2025-01-14 04:56:30,388 pyk.kore.rpc - Received response from localhost:43419: 140122957176528-001 - implies
-INFO 2025-01-14 04:56:30,395 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
-INFO 2025-01-14 04:56:30,395 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
-INFO 2025-01-14 04:56:30,396 pyk.kore.rpc - Sending request to localhost:43419: 140122957176528-002 - execute
-INFO 2025-01-14 04:56:31,045 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958530256-009
-INFO 2025-01-14 04:56:31,045 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122957176528-002
-INFO 2025-01-14 04:56:41,355 pyk.kore.rpc - Received response from localhost:43419: 140122957176528-002 - execute
-INFO 2025-01-14 04:56:41,358 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
-INFO 2025-01-14 04:56:41,382 pyk.kcfg.explore - [zjh] next_node_logs: ()
-INFO 2025-01-14 04:56:41,382 pyk.kcfg.explore - [zjh] rules: []
-INFO 2025-01-14 04:56:41,382 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
-INFO 2025-01-14 04:56:41,382 pyk.proof.reachability - Caching next step for edge starting from 8
-INFO 2025-01-14 04:56:41,382 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 5: 8 --> 9
-INFO 2025-01-14 04:56:41,383 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:41,384 pyk.proof.reachability - Before appending step: 5
-INFO 2025-01-14 04:56:41,384 pyk.proof.reachability - Before appending step: 7
-INFO 2025-01-14 04:56:41,384 pyk.proof.reachability - Before appending step: 9
-INFO 2025-01-14 04:56:41,387 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 04:56:41,389 pyk.proof.reachability - Before appending step: 5
-INFO 2025-01-14 04:56:41,389 pyk.proof.reachability - Before appending step: 7
-INFO 2025-01-14 05:02:16,052 pyk.kore.rpc - Received response from localhost:43419: 140122958582288-002 - execute
-INFO 2025-01-14 05:02:16,746 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
-INFO 2025-01-14 05:02:18,562 pyk.kcfg.explore - [zjh] next_node_logs: ()
-INFO 2025-01-14 05:02:18,562 pyk.kcfg.explore - [zjh] rules: []
-INFO 2025-01-14 05:02:18,562 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
-INFO 2025-01-14 05:02:18,564 pyk.proof.reachability - Caching next step for edge starting from 5
-INFO 2025-01-14 05:02:18,565 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 4: 5 --> 10
-INFO 2025-01-14 05:02:18,565 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 05:02:18,567 pyk.proof.reachability - Before appending step: 7
-INFO 2025-01-14 05:02:18,567 pyk.proof.reachability - Before appending step: 10
-INFO 2025-01-14 05:02:18,619 pyk.kore.rpc - Sending request to localhost:43419: 140122957176528-003 - implies
-INFO 2025-01-14 05:02:18,623 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122957176528-003
-INFO 2025-01-14 05:02:19,292 pyk.kore.rpc - Received response from localhost:43419: 140122957176528-003 - implies
-INFO 2025-01-14 05:02:19,298 pyk.proof.reachability - Subsumed into target node MOD_2_SPEC: (10, 2)
-INFO 2025-01-14 05:02:19,298 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 05:02:19,299 pyk.proof.reachability - Before appending step: 7
-INFO 2025-01-14 05:02:38,829 pyk.kore.rpc - Received response from localhost:43419: 140122958530256-009 - execute
-INFO 2025-01-14 05:02:39,660 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
-INFO 2025-01-14 05:02:41,632 pyk.kcfg.explore - [zjh] next_node_logs: ()
-INFO 2025-01-14 05:02:41,632 pyk.kcfg.explore - [zjh] rules: []
-INFO 2025-01-14 05:02:41,632 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
-INFO 2025-01-14 05:02:41,634 pyk.proof.reachability - Caching next step for edge starting from 7
-INFO 2025-01-14 05:02:41,635 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 5: 7 --> 11
-INFO 2025-01-14 05:02:41,636 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 05:02:41,637 pyk.proof.reachability - Before appending step: 11
-INFO 2025-01-14 05:02:41,668 pyk.kore.rpc - Sending request to localhost:43419: 140122958582288-003 - implies
-INFO 2025-01-14 05:02:41,671 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958582288-003
-INFO 2025-01-14 05:02:42,352 pyk.kore.rpc - Received response from localhost:43419: 140122958582288-003 - implies
-INFO 2025-01-14 05:02:42,359 pyk.proof.reachability - Subsumed into target node MOD_2_SPEC: (11, 2)
-INFO 2025-01-14 05:02:42,360 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 05:02:42,366 pyk.kore.rpc - Sending request to localhost:43419: 140122958345232-003 - simplify
-INFO 2025-01-14 05:02:42,672 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958345232-003
-INFO 2025-01-14 05:02:42,981 pyk.kore.rpc - Received response from localhost:43419: 140122958345232-003 - simplify
-INFO 2025-01-14 05:02:42,994 pyk.kore.rpc - Sending request to localhost:43419: 140122958345232-004 - simplify
-INFO 2025-01-14 05:02:43,549 pyk.kore.rpc - Received response from localhost:43419: 140122958345232-004 - simplify
-INFO 2025-01-14 05:02:43,581 pyk.kore.rpc - Sending request to localhost:43419: 140122958345232-005 - implies
-INFO 2025-01-14 05:02:43,673 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958345232-004
-INFO 2025-01-14 05:02:43,673 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958345232-005
-INFO 2025-01-14 05:02:44,185 pyk.kore.rpc - Received response from localhost:43419: 140122958345232-005 - implies
-INFO 2025-01-14 05:02:44,217 pyk.kore.rpc - Sending request to localhost:43419: 140122958345232-006 - implies
-INFO 2025-01-14 05:02:44,674 pyk.kore.rpc - [PID=1106546][stde] [proxy] Processing request 140122958345232-006
-INFO 2025-01-14 05:02:44,769 pyk.kore.rpc - Received response from localhost:43419: 140122958345232-006 - implies
-INFO 2025-01-14 05:02:44,778 pyk.proof.reachability - Wrote proof data for MOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MOD_2_SPEC/proof.json
-INFO 2025-01-14 05:02:44,780 kevm_pyk.utils - Proof status MOD_2_SPEC: ProofStatus.FAILED
-INFO 2025-01-14 05:02:44,780 pyk.kore.rpc - Stopping KoreServer: 0.0.0.0:43419, pid=1106546
-INFO 2025-01-14 05:02:44,849 pyk.kore.rpc - KoreServer stopped: 0.0.0.0:43419, pid=1106546
-INFO 2025-01-14 05:02:45,098 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/summaries/MOD_2_SPEC
-Proof timing MOD_2_SPEC: 390.2719359397888s
+INFO 2025-01-14 05:06:00,518 pyk.kast.outer - Loading JSON definition: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-14 05:06:00,675 pyk.kast.outer - Converting JSON definition to Kast: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-14 05:06:01,245 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/kcfg
+INFO 2025-01-14 05:06:01,245 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/kcfg/nodes
+INFO 2025-01-14 05:06:01,248 pyk.kore.rpc - Starting KoreServer: kore-rpc-booster /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore --module EDSL --server-port 0 --llvm-backend-library /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/llvm-library/interpreter.so --interim-simplification 25
+INFO 2025-01-14 05:06:01,254 pyk.kore.rpc - [PID=1113906][stde] [proxy] Loading definition from /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore, main module "EDSL"
+INFO 2025-01-14 05:06:02,255 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 25272397}
+INFO 2025-01-14 05:06:03,256 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 110}
+INFO 2025-01-14 05:06:04,258 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 210}
+INFO 2025-01-14 05:06:05,259 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Executing TimeSpec {sec = 0, nsec = 724183715}
+INFO 2025-01-14 05:06:05,259 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 27506595}
+INFO 2025-01-14 05:06:05,259 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 120}
+INFO 2025-01-14 05:06:06,222 pyk.kore.rpc - KoreServer started: 0.0.0.0:46235, pid=1113906
+INFO 2025-01-14 05:06:06,222 pyk.kore.rpc - Connecting to host: localhost:46235
+INFO 2025-01-14 05:06:06,223 pyk.kore.rpc - Connected to host: localhost:46235
+INFO 2025-01-14 05:06:06,223 kevm_pyk.utils - Computing definedness constraint for initial node: SMOD_2_SPEC
+INFO 2025-01-14 05:06:06,248 pyk.kore.rpc - Sending request to localhost:46235: 139929307682640-001 - simplify
+INFO 2025-01-14 05:06:06,260 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307682640-001
+INFO 2025-01-14 05:06:06,260 pyk.kore.rpc - [PID=1113906][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 210}
+INFO 2025-01-14 05:06:06,260 pyk.kore.rpc - [PID=1113906][stde] [proxy] Starting RPC server
+INFO 2025-01-14 05:06:06,798 pyk.kore.rpc - Received response from localhost:46235: 139929307682640-001 - simplify
+INFO 2025-01-14 05:06:06,804 pyk.kore.rpc - Sending request to localhost:46235: 139929307682640-002 - simplify
+INFO 2025-01-14 05:06:07,261 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307682640-002
+INFO 2025-01-14 05:06:07,420 pyk.kore.rpc - Received response from localhost:46235: 139929307682640-002 - simplify
+INFO 2025-01-14 05:06:07,420 kevm_pyk.utils - Simplifying initial and target node: SMOD_2_SPEC
+INFO 2025-01-14 05:06:07,425 pyk.kore.rpc - Sending request to localhost:46235: 139929307682640-003 - simplify
+INFO 2025-01-14 05:06:07,978 pyk.kore.rpc - Received response from localhost:46235: 139929307682640-003 - simplify
+INFO 2025-01-14 05:06:07,990 pyk.kore.rpc - Sending request to localhost:46235: 139929307682640-004 - simplify
+INFO 2025-01-14 05:06:08,262 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307682640-003
+INFO 2025-01-14 05:06:08,262 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307682640-004
+INFO 2025-01-14 05:06:08,578 pyk.kore.rpc - Received response from localhost:46235: 139929307682640-004 - simplify
+INFO 2025-01-14 05:06:08,584 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:08,586 pyk.kore.rpc - Connecting to host: localhost:46235
+INFO 2025-01-14 05:06:08,586 pyk.kore.rpc - Connected to host: localhost:46235
+INFO 2025-01-14 05:06:08,586 pyk.proof.proof - [ZJH] prover type: <class 'pyk.proof.reachability.APRProver'>
+INFO 2025-01-14 05:06:08,586 pyk.proof.reachability - [ZJH] init proof
+INFO 2025-01-14 05:06:08,593 pyk.kore.rpc - Sending request to localhost:46235: 139929340152720-001 - add-module
+INFO 2025-01-14 05:06:09,264 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929340152720-001
+INFO 2025-01-14 05:06:09,400 pyk.kore.rpc - Received response from localhost:46235: 139929340152720-001 - add-module
+INFO 2025-01-14 05:06:09,416 pyk.kore.rpc - Sending request to localhost:46235: 139929340152720-002 - add-module
+INFO 2025-01-14 05:06:10,265 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929340152720-002
+INFO 2025-01-14 05:06:10,277 pyk.kore.rpc - Received response from localhost:46235: 139929340152720-002 - add-module
+INFO 2025-01-14 05:06:10,277 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-14 05:06:10,277 pyk.proof.reachability - [ZJH] node_id: 1
+INFO 2025-01-14 05:06:10,278 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-14 05:06:10,278 pyk.proof.reachability - [ZJH] node_id: 2
+INFO 2025-01-14 05:06:10,279 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-14 05:06:10,279 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-14 05:06:10,279 pyk.proof.proof - [ZJH] proof initialized
+INFO 2025-01-14 05:06:10,279 pyk.proof.proof - [ZJH] pending: [1]
+INFO 2025-01-14 05:06:10,279 pyk.proof.reachability - Before appending step: 1
+INFO 2025-01-14 05:06:10,280 pyk.kore.rpc - Connecting to host: localhost:46235
+INFO 2025-01-14 05:06:10,280 pyk.proof.proof - Submitted steps for proof: SMOD_2_SPEC
+INFO 2025-01-14 05:06:10,280 pyk.kore.rpc - Connected to host: localhost:46235
+INFO 2025-01-14 05:06:10,310 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-001 - implies
+INFO 2025-01-14 05:06:10,888 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-001 - implies
+INFO 2025-01-14 05:06:10,894 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-14 05:06:10,894 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-14 05:06:10,895 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-002 - execute
+INFO 2025-01-14 05:06:11,266 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-001
+INFO 2025-01-14 05:06:11,266 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-002
+INFO 2025-01-14 05:06:13,711 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-002 - execute
+INFO 2025-01-14 05:06:13,712 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-14 05:06:13,712 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'a49bbf5c4b82ee9c477b266571ac6462951ccd1a83f52cbf657b2c60368c2c04'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'f445bdd373dac8403ad00559717364f6630b19cbc6e53d3bbd6fa784e4089f0d'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'c4541707a8e5bc2969999e4e355042498b9631ffa4b568642915b512fe35d286'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-14 05:06:13,737 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 3: 1 --> 3
+INFO 2025-01-14 05:06:13,738 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:13,739 pyk.proof.reachability - Before appending step: 3
+INFO 2025-01-14 05:06:13,769 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-003 - implies
+INFO 2025-01-14 05:06:13,773 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-003
+INFO 2025-01-14 05:06:14,396 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-003 - implies
+INFO 2025-01-14 05:06:14,404 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-14 05:06:14,404 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-14 05:06:14,404 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-004 - execute
+INFO 2025-01-14 05:06:14,774 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-004
+INFO 2025-01-14 05:06:17,268 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-004 - execute
+INFO 2025-01-14 05:06:17,269 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-14 05:06:17,269 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-14 05:06:17,280 pyk.kcfg.kcfg - Extending current KCFG with the following: 2 branches: 3 --> [4, 5]: ['_USEGAS_CELL:Bool', 'notBool _USEGAS_CELL:Bool']
+INFO 2025-01-14 05:06:17,280 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:17,281 pyk.proof.reachability - Before appending step: 4
+INFO 2025-01-14 05:06:17,281 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-14 05:06:17,287 pyk.kore.rpc - Connecting to host: localhost:46235
+INFO 2025-01-14 05:06:17,312 pyk.kore.rpc - Connected to host: localhost:46235
+INFO 2025-01-14 05:06:17,326 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-005 - implies
+INFO 2025-01-14 05:06:17,331 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-005
+INFO 2025-01-14 05:06:17,352 pyk.kore.rpc - Sending request to localhost:46235: 139929307168976-001 - implies
+INFO 2025-01-14 05:06:17,916 pyk.kore.rpc - Received response from localhost:46235: 139929307168976-001 - implies
+INFO 2025-01-14 05:06:17,923 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-14 05:06:17,923 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-005 - implies
+INFO 2025-01-14 05:06:17,923 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-14 05:06:17,931 pyk.kore.rpc - Sending request to localhost:46235: 139929307168976-002 - execute
+INFO 2025-01-14 05:06:17,930 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-14 05:06:17,931 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-14 05:06:17,931 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-006 - execute
+INFO 2025-01-14 05:06:18,330 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307168976-002
+INFO 2025-01-14 05:06:18,330 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307168976-001
+INFO 2025-01-14 05:06:18,330 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-006
+INFO 2025-01-14 05:06:23,123 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-006 - execute
+INFO 2025-01-14 05:06:23,125 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-14 05:06:23,126 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'kore-rpc', 'result': {'tag': 'success', 'rule-id': 'add363ff9fa24e9a97a4cad5848a44dce9315dd67365b44dd01db1cc969472f1'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '8b54e9e5fee12981ade4af6b3f4faeef7fe859bf84b18b4f87a416e5ad14b766'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '858e480d252334ee5df36fb446d3a1c0273f543cd8cce906d5480997378b8af8'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '0cc409b933746b053622bb2fd3c39fb70b86fb1fbc75027b55e74d4ce3e5b446'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'Uncertain about the remainder after applying a rule', 'rule-id': 'a0a224658695b9eeae4eecf43289c46f78c5b34020e5e6ef966eaaf80525eccf'}}]
+INFO 2025-01-14 05:06:23,141 pyk.proof.reachability - Caching next step for edge starting from 4
+INFO 2025-01-14 05:06:23,142 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 4: 4 --> 6
+INFO 2025-01-14 05:06:23,143 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:23,144 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-14 05:06:23,144 pyk.proof.reachability - Before appending step: 6
+INFO 2025-01-14 05:06:23,187 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-007 - implies
+INFO 2025-01-14 05:06:23,190 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-007
+INFO 2025-01-14 05:06:23,907 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-007 - implies
+INFO 2025-01-14 05:06:23,909 pyk.proof.reachability - Using cached step for edge 4 --> 6
+INFO 2025-01-14 05:06:23,912 pyk.kcfg.kcfg - Extending current KCFG with the following: 2 branches: 6 --> [7, 8]: ['Glow < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas', '_GAS_CELL:Gas <Gas Glow < _SCHEDULE_CELL:Schedule >']
+INFO 2025-01-14 05:06:23,912 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:23,914 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-14 05:06:23,914 pyk.proof.reachability - Before appending step: 7
+INFO 2025-01-14 05:06:23,914 pyk.proof.reachability - Before appending step: 8
+INFO 2025-01-14 05:06:23,920 pyk.kore.rpc - Connecting to host: localhost:46235
+INFO 2025-01-14 05:06:23,945 pyk.kore.rpc - Connected to host: localhost:46235
+INFO 2025-01-14 05:06:23,947 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-008 - implies
+INFO 2025-01-14 05:06:23,979 pyk.kore.rpc - Sending request to localhost:46235: 139929308222608-001 - implies
+INFO 2025-01-14 05:06:24,191 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-008
+INFO 2025-01-14 05:06:24,191 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308222608-001
+INFO 2025-01-14 05:06:24,660 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-008 - implies
+INFO 2025-01-14 05:06:24,668 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-14 05:06:24,669 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-14 05:06:24,669 pyk.kore.rpc - Sending request to localhost:46235: 139929308194960-009 - execute
+INFO 2025-01-14 05:06:24,679 pyk.kore.rpc - Received response from localhost:46235: 139929308222608-001 - implies
+INFO 2025-01-14 05:06:24,687 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-14 05:06:24,687 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-14 05:06:24,688 pyk.kore.rpc - Sending request to localhost:46235: 139929308222608-002 - execute
+INFO 2025-01-14 05:06:25,192 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308222608-002
+INFO 2025-01-14 05:06:25,192 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308194960-009
+INFO 2025-01-14 05:06:35,766 pyk.kore.rpc - Received response from localhost:46235: 139929308222608-002 - execute
+INFO 2025-01-14 05:06:35,768 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-14 05:06:35,768 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'proxy', 'result': {'tag': 'success', 'rule-id': 'a0a224658695b9eeae4eecf43289c46f78c5b34020e5e6ef966eaaf80525eccf'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '7c6df1b7a841ef7cce64eaae0c332bb9383a2692d649e88e8ea49fcb7fa5d540'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '3d8b3569577237015e49cc215f5fa1a74dc5cdaa9dddea7123dd1215bd3b0435'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '3d8b3569577237015e49cc215f5fa1a74dc5cdaa9dddea7123dd1215bd3b0435'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '3d8b3569577237015e49cc215f5fa1a74dc5cdaa9dddea7123dd1215bd3b0435'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-14 05:06:35,792 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-14 05:06:35,792 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-14 05:06:35,792 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-14 05:06:35,792 pyk.proof.reachability - Caching next step for edge starting from 8
+INFO 2025-01-14 05:06:35,793 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 5: 8 --> 9
+INFO 2025-01-14 05:06:35,793 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:35,795 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-14 05:06:35,795 pyk.proof.reachability - Before appending step: 7
+INFO 2025-01-14 05:06:35,795 pyk.proof.reachability - Before appending step: 9
+INFO 2025-01-14 05:06:35,797 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:06:35,798 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-14 05:06:35,798 pyk.proof.reachability - Before appending step: 7
+INFO 2025-01-14 05:23:54,348 pyk.kore.rpc - Received response from localhost:46235: 139929307168976-002 - execute
+INFO 2025-01-14 05:23:55,119 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-14 05:23:55,120 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'kore-rpc', 'result': {'tag': 'success', 'rule-id': '9940b671074c218a6c5f0f9e7b90d05efbcc000ee2884306b43860e14f6979e4'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'Uncertain about definedness of rule because of: [UndefinedSymbol "Lbl\'UndsPerc\'sWord\'UndsUnds\'EVM-TYPES\'Unds\'Int\'Unds\'Int\'Unds\'Int"]', 'rule-id': '4b1bddadbc836d81b4b0d5d1f82f322bf0c03a2e812f9c44eb7aeceeb5e62388'}}, {'tag': 'rewrite', 'origin': 'kore-rpc', 'result': {'tag': 'success', 'rule-id': '4b1bddadbc836d81b4b0d5d1f82f322bf0c03a2e812f9c44eb7aeceeb5e62388'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'cf46a1c55ae03d7124b8c4d35be85667c49f90ee5e2aa9e23faa9190b8e37682'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '27458eb47839269121ea93b912b579bddb9557fccc51e69983d94b2e6ed21335'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-14 05:23:56,898 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-14 05:23:56,898 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-14 05:23:56,898 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-14 05:23:56,900 pyk.proof.reachability - Caching next step for edge starting from 5
+INFO 2025-01-14 05:23:56,901 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 4: 5 --> 10
+INFO 2025-01-14 05:23:56,902 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:23:56,903 pyk.proof.reachability - Before appending step: 7
+INFO 2025-01-14 05:23:56,903 pyk.proof.reachability - Before appending step: 10
+INFO 2025-01-14 05:23:57,152 pyk.kore.rpc - Sending request to localhost:46235: 139929308222608-003 - implies
+INFO 2025-01-14 05:23:57,156 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929308222608-003
+INFO 2025-01-14 05:23:58,057 pyk.kore.rpc - Received response from localhost:46235: 139929308222608-003 - implies
+INFO 2025-01-14 05:23:58,063 pyk.proof.reachability - Subsumed into target node SMOD_2_SPEC: (10, 2)
+INFO 2025-01-14 05:23:58,064 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:23:58,065 pyk.proof.reachability - Before appending step: 7
+INFO 2025-01-14 05:25:41,415 pyk.kore.rpc - Received response from localhost:46235: 139929308194960-009 - execute
+INFO 2025-01-14 05:25:42,276 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-14 05:25:42,276 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'e80dae2349dc4cf016147f969cff262399d625e3e979474e412b3c14914c4e77'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '09cfd697b5082c31c9858675910694785a13b2ceafcbea2e875941ef2a778df8'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'Uncertain about definedness of rule because of: [UndefinedSymbol "Lbl\'UndsPerc\'sWord\'UndsUnds\'EVM-TYPES\'Unds\'Int\'Unds\'Int\'Unds\'Int"]', 'rule-id': '4b1bddadbc836d81b4b0d5d1f82f322bf0c03a2e812f9c44eb7aeceeb5e62388'}}, {'tag': 'rewrite', 'origin': 'kore-rpc', 'result': {'tag': 'success', 'rule-id': '4b1bddadbc836d81b4b0d5d1f82f322bf0c03a2e812f9c44eb7aeceeb5e62388'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'cf46a1c55ae03d7124b8c4d35be85667c49f90ee5e2aa9e23faa9190b8e37682'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '27458eb47839269121ea93b912b579bddb9557fccc51e69983d94b2e6ed21335'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-14 05:25:44,315 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-14 05:25:44,315 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-14 05:25:44,315 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-14 05:25:44,318 pyk.proof.reachability - Caching next step for edge starting from 7
+INFO 2025-01-14 05:25:44,319 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 5: 7 --> 11
+INFO 2025-01-14 05:25:44,320 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:25:44,323 pyk.proof.reachability - Before appending step: 11
+INFO 2025-01-14 05:25:44,354 pyk.kore.rpc - Sending request to localhost:46235: 139929307168976-003 - implies
+INFO 2025-01-14 05:25:44,357 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929307168976-003
+INFO 2025-01-14 05:25:45,548 pyk.kore.rpc - Received response from localhost:46235: 139929307168976-003 - implies
+INFO 2025-01-14 05:25:45,555 pyk.proof.reachability - Subsumed into target node SMOD_2_SPEC: (11, 2)
+INFO 2025-01-14 05:25:45,556 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:25:45,569 pyk.kore.rpc - Sending request to localhost:46235: 139929340152720-003 - simplify
+INFO 2025-01-14 05:25:45,570 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929340152720-003
+INFO 2025-01-14 05:25:46,199 pyk.kore.rpc - Received response from localhost:46235: 139929340152720-003 - simplify
+INFO 2025-01-14 05:25:46,206 pyk.kore.rpc - Sending request to localhost:46235: 139929340152720-004 - simplify
+INFO 2025-01-14 05:25:46,572 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929340152720-004
+INFO 2025-01-14 05:25:46,799 pyk.kore.rpc - Received response from localhost:46235: 139929340152720-004 - simplify
+INFO 2025-01-14 05:25:46,831 pyk.kore.rpc - Sending request to localhost:46235: 139929340152720-005 - implies
+INFO 2025-01-14 05:25:47,424 pyk.kore.rpc - Received response from localhost:46235: 139929340152720-005 - implies
+INFO 2025-01-14 05:25:47,455 pyk.kore.rpc - Sending request to localhost:46235: 139929340152720-006 - implies
+INFO 2025-01-14 05:25:47,573 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929340152720-005
+INFO 2025-01-14 05:25:47,573 pyk.kore.rpc - [PID=1113906][stde] [proxy] Processing request 139929340152720-006
+INFO 2025-01-14 05:25:48,044 pyk.kore.rpc - Received response from localhost:46235: 139929340152720-006 - implies
+INFO 2025-01-14 05:25:48,053 pyk.proof.reachability - Wrote proof data for SMOD_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/SMOD_2_SPEC/proof.json
+INFO 2025-01-14 05:25:48,055 kevm_pyk.utils - Proof status SMOD_2_SPEC: ProofStatus.FAILED
+INFO 2025-01-14 05:25:48,056 pyk.kore.rpc - Stopping KoreServer: 0.0.0.0:46235, pid=1113906
+INFO 2025-01-14 05:25:48,132 pyk.kore.rpc - KoreServer stopped: 0.0.0.0:46235, pid=1113906
+WARNING 2025-01-14 05:25:48,222 pyk.kast.manip - Converting #Ceil condition to variable Ceil_bbaa9a28: KApply(label=KLabel(name='#Ceil', params=(KSort(name='Int'), KSort(name='GeneratedTopCell'))), args=(KApply(label=KLabel(name='_%sWord__EVM-TYPES_Int_Int_Int', params=()), args=(KVariable(name='_W0', sort=KSort(name='Int')), KVariable(name='_W1', sort=KSort(name='Int')))),))
+WARNING 2025-01-14 05:25:48,300 pyk.kast.manip - Converting #Ceil condition to variable Ceil_bbaa9a28: KApply(label=KLabel(name='#Ceil', params=(KSort(name='Int'), KSort(name='GeneratedTopCell'))), args=(KApply(label=KLabel(name='_%sWord__EVM-TYPES_Int_Int_Int', params=()), args=(KVariable(name='_W0', sort=KSort(name='Int')), KVariable(name='_W1', sort=KSort(name='Int')))),))
+INFO 2025-01-14 05:25:48,382 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/summaries/SMOD_2_SPEC
+WARNING 2025-01-14 05:25:48,438 pyk.kast.manip - Converting #Ceil condition to variable Ceil_bbaa9a28: KApply(label=KLabel(name='#Ceil', params=(KSort(name='Int'), KSort(name='GeneratedTopCell'))), args=(KApply(label=KLabel(name='_%sWord__EVM-TYPES_Int_Int_Int', params=()), args=(KVariable(name='_W0', sort=KSort(name='Int')), KVariable(name='_W1', sort=KSort(name='Int')))),))
+WARNING 2025-01-14 05:25:48,485 pyk.kast.manip - Converting #Ceil condition to variable Ceil_bbaa9a28: KApply(label=KLabel(name='#Ceil', params=(KSort(name='Int'), KSort(name='GeneratedTopCell'))), args=(KApply(label=KLabel(name='_%sWord__EVM-TYPES_Int_Int_Int', params=()), args=(KVariable(name='_W0', sort=KSort(name='Int')), KVariable(name='_W1', sort=KSort(name='Int')))),))
+Proof timing SMOD_2_SPEC: 1179.5462243556976s
