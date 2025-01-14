@@ -1,0 +1,289 @@
+Proof MSTORE8_2_SPEC Failed
+
+┌─ 1 (root, init)
+│   k: #next [ MSTORE8 ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+│
+│  (3 steps)
+├─ 3 (split)
+│   k: #gas [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ] ~> MSTORE8 _W0:Int _W1:Int ~> #pc [ M ...
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     _USEGAS_CELL:Bool
+┃  │
+┃  ├─ 4
+┃  │   k: #gas [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ] ~> MSTORE8 _W0:Int _W1:Int ~> #pc [ M ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (4 steps)
+┃  ├─ 6 (split)
+┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
+┃  ┃  │
+┃  ┃  └─ 7 (leaf, pending)
+┃  ┃      k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  ┃      pc: _PC_CELL:Int
+┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint:
+┃     ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃     │
+┃     └─ 8 (leaf, pending)
+┃         k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃         pc: _PC_CELL:Int
+┃         callDepth: _CALLDEPTH_CELL:Int
+┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     ( notBool _USEGAS_CELL:Bool )
+   │
+   └─ 5 (leaf, pending)
+       k: #gas [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ] ~> MSTORE8 _W0:Int _W1:Int ~> #pc [ M ...
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: _STATUSCODE_CELL:StatusCode
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : _WS:WordStack ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #gas [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ]
+      ~> MSTORE8 _W0:Int _W1:Int
+      ~> #pc [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ]
+      ~> MSTORE8 _W0:Int _W1:Int
+      ~> #pc [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _USEGAS_CELL:Bool #Equals true } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ]
+      ~> MSTORE8 _W0:Int _W1:Int
+      ~> #pc [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _USEGAS_CELL:Bool #Equals false } )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ MSTORE8 _W0:Int _W1:Int ]
+      ~> #access [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ]
+      ~> MSTORE8 _W0:Int _W1:Int
+      ~> #pc [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals _USEGAS_CELL:Bool } )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ MSTORE8 _W0:Int _W1:Int ]
+      ~> #access [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ]
+      ~> MSTORE8 _W0:Int _W1:Int
+      ~> #pc [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ MSTORE8 _W0:Int _W1:Int ]
+      ~> #access [ MSTORE8 , MSTORE8 _W0:Int _W1:Int ]
+      ~> MSTORE8 _W0:Int _W1:Int
+      ~> #pc [ MSTORE8 ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , 1 ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) )
+
+
+

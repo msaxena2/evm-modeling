@@ -1,0 +1,1001 @@
+Proof RETURNDATACOPY_3_SPEC Failed
+
+┌─ 1 (root, init)
+│   k: #next [ RETURNDATACOPY ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+│
+│  (3 steps)
+├─ 3 (split)
+│   k: #gas [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ] ~> RETURNDATACO ...
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     _USEGAS_CELL:Bool
+┃  │
+┃  ├─ 4
+┃  │   k: #gas [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ] ~> RETURNDATACO ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (4 steps)
+┃  ├─ 9 (split)
+┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
+┃  ┃  │
+┃  ┃  ├─ 10
+┃  ┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  │
+┃  ┃  │  (3 steps)
+┃  ┃  ├─ 12 (split)
+┃  ┃  │   k: ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule >  ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (branch)
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 13
+┃  ┃  ┃  │   k: ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule >  ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (2 steps)
+┃  ┃  ┃  ├─ 16 (split)
+┃  ┃  ┃  │   k: RETURNDATACOPY _W0:Int _W1:Int _W2:Int ~> #pc [ RETURNDATACOPY ] ~> _K_CELL:K
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃ (branch)
+┃  ┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃  ┃     ( _W1:Int +Int _W2:Int ) <=Int lengthBytes ( _OUTPUT_CELL:Bytes )
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ├─ 17
+┃  ┃  ┃  ┃  │   k: RETURNDATACOPY _W0:Int _W1:Int _W2:Int ~> #pc [ RETURNDATACOPY ] ~> _K_CELL:K
+┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  │  (2 steps)
+┃  ┃  ┃  ┃  ├─ 23
+┃  ┃  ┃  ┃  │   k: _K_CELL:K
+┃  ┃  ┃  ┃  │   pc: ( _PC_CELL:Int +Int 1 )
+┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ┊  constraint: true
+┃  ┃  ┃  ┃  ┊  subst: ...
+┃  ┃  ┃  ┃  └─ 2 (leaf, target)
+┃  ┃  ┃  ┃      k: _K_CELL:K
+┃  ┃  ┃  ┃      pc: ?_FINAL_PC_CELL:Int
+┃  ┃  ┃  ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃     ┃ constraint:
+┃  ┃  ┃     ┃     lengthBytes ( _OUTPUT_CELL:Bytes ) <Int ( _W1:Int +Int _W2:Int )
+┃  ┃  ┃     │
+┃  ┃  ┃     ├─ 18
+┃  ┃  ┃     │   k: RETURNDATACOPY _W0:Int _W1:Int _W2:Int ~> #pc [ RETURNDATACOPY ] ~> _K_CELL:K
+┃  ┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     │
+┃  ┃  ┃     │  (3 steps)
+┃  ┃  ┃     └─ 21 (leaf, terminal)
+┃  ┃  ┃         k: #halt ~> _K_CELL:K
+┃  ┃  ┃         pc: _PC_CELL:Int
+┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃         statusCode: EVMC_INVALID_MEMORY_ACCESS
+┃  ┃  ┃
+┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃     ┃ constraint:
+┃  ┃     ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+┃  ┃     │
+┃  ┃     ├─ 14
+┃  ┃     │   k: ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule >  ...
+┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     │
+┃  ┃     │  (5 steps)
+┃  ┃     └─ 20 (leaf, terminal)
+┃  ┃         k: #halt ~> _K_CELL:K
+┃  ┃         pc: _PC_CELL:Int
+┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃         statusCode: EVMC_OUT_OF_GAS
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint:
+┃     ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃     │
+┃     ├─ 11
+┃     │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     │
+┃     │  (6 steps)
+┃     └─ 19 (leaf, terminal)
+┃         k: #halt ~> _K_CELL:K
+┃         pc: _PC_CELL:Int
+┃         callDepth: _CALLDEPTH_CELL:Int
+┃         statusCode: EVMC_OUT_OF_GAS
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     ( notBool _USEGAS_CELL:Bool )
+   │
+   ├─ 5
+   │   k: #gas [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ] ~> RETURNDATACO ...
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (1 step)
+   ├─ 6 (split)
+   │   k: RETURNDATACOPY _W0:Int _W1:Int _W2:Int ~> #pc [ RETURNDATACOPY ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃
+   ┃ (branch)
+   ┣━━┓ subst: .Subst
+   ┃  ┃ constraint:
+   ┃  ┃     ( _W1:Int +Int _W2:Int ) <=Int lengthBytes ( _OUTPUT_CELL:Bytes )
+   ┃  │
+   ┃  ├─ 7
+   ┃  │   k: RETURNDATACOPY _W0:Int _W1:Int _W2:Int ~> #pc [ RETURNDATACOPY ] ~> _K_CELL:K
+   ┃  │   pc: _PC_CELL:Int
+   ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  │
+   ┃  │  (2 steps)
+   ┃  ├─ 22
+   ┃  │   k: _K_CELL:K
+   ┃  │   pc: ( _PC_CELL:Int +Int 1 )
+   ┃  │   callDepth: _CALLDEPTH_CELL:Int
+   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  │
+   ┃  ┊  constraint: true
+   ┃  ┊  subst: ...
+   ┃  └─ 2 (leaf, target)
+   ┃      k: _K_CELL:K
+   ┃      pc: ?_FINAL_PC_CELL:Int
+   ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+   ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+   ┃
+   ┗━━┓ subst: .Subst
+      ┃ constraint:
+      ┃     lengthBytes ( _OUTPUT_CELL:Bytes ) <Int ( _W1:Int +Int _W2:Int )
+      │
+      ├─ 8
+      │   k: RETURNDATACOPY _W0:Int _W1:Int _W2:Int ~> #pc [ RETURNDATACOPY ] ~> _K_CELL:K
+      │   pc: _PC_CELL:Int
+      │   callDepth: _CALLDEPTH_CELL:Int
+      │   statusCode: _STATUSCODE_CELL:StatusCode
+      │
+      │  (3 steps)
+      └─ 15 (leaf, terminal)
+          k: #halt ~> _K_CELL:K
+          pc: _PC_CELL:Int
+          callDepth: _CALLDEPTH_CELL:Int
+          statusCode: EVMC_INVALID_MEMORY_ACCESS
+
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #gas [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _USEGAS_CELL:Bool #Equals true } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _USEGAS_CELL:Bool #Equals false } )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( notBool _USEGAS_CELL:Bool ) } )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And { true #Equals ( _W1:Int +Int _W2:Int ) <=Int lengthBytes ( _OUTPUT_CELL:Bytes ) } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And { true #Equals lengthBytes ( _OUTPUT_CELL:Bytes ) <Int ( _W1:Int +Int _W2:Int ) } ) )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> #access [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals _USEGAS_CELL:Bool } )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> #access [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> #access [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+      ~> #deductGas
+      ~> #access [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+      ~> #deductGas
+      ~> #access [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+      ~> #deductGas
+      ~> #access [ RETURNDATACOPY , RETURNDATACOPY _W0:Int _W1:Int _W2:Int ]
+      ~> RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) } ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        <statusCode>
+          EVMC_INVALID_MEMORY_ACCESS
+        </statusCode>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And { true #Equals lengthBytes ( _OUTPUT_CELL:Bytes ) <Int ( _W1:Int +Int _W2:Int ) } ) )
+
+
+
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 17:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( _W1:Int +Int _W2:Int ) <=Int lengthBytes ( _OUTPUT_CELL:Bytes ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      RETURNDATACOPY _W0:Int _W1:Int _W2:Int
+      ~> #pc [ RETURNDATACOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals lengthBytes ( _OUTPUT_CELL:Bytes ) <Int ( _W1:Int +Int _W2:Int ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) } ) ) )
+
+
+
+Node 21:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        <statusCode>
+          EVMC_INVALID_MEMORY_ACCESS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals lengthBytes ( _OUTPUT_CELL:Bytes ) <Int ( _W1:Int +Int _W2:Int ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 22:
+
+( <generatedTop>
+  <kevm>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        <callState>
+          <localMem>
+            _LOCALMEM_CELL:Bytes [ _W0:Int := #range ( _OUTPUT_CELL:Bytes , _W1:Int , _W2:Int ) ]
+          </localMem>
+          <pc>
+            ( _PC_CELL:Int +Int 1 )
+          </pc>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And { true #Equals ( _W1:Int +Int _W2:Int ) <=Int lengthBytes ( _OUTPUT_CELL:Bytes ) } ) )
+
+
+
+Node 23:
+
+( <generatedTop>
+  <kevm>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          _OUTPUT_CELL:Bytes
+        </output>
+        <callState>
+          <localMem>
+            _LOCALMEM_CELL:Bytes [ _W0:Int := #range ( _OUTPUT_CELL:Bytes , _W1:Int , _W2:Int ) ]
+          </localMem>
+          <pc>
+            ( _PC_CELL:Int +Int 1 )
+          </pc>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( _W1:Int +Int _W2:Int ) <=Int lengthBytes ( _OUTPUT_CELL:Bytes ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gverylow < _SCHEDULE_CELL:Schedule > +Int ( Gcopy < _SCHEDULE_CELL:Schedule > *Int ( _W2:Int up/Int 32 ) ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+

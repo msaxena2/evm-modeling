@@ -1,0 +1,1490 @@
+Proof SELFDESTRUCT_1_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ SELFDESTRUCT ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool _STATIC_CELL:Bool )
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ SELFDESTRUCT ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (3 steps)
+┃  ├─ 5 (split)
+┃  │   k: #gas [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ] ~> SELFDESTRUCT ( ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     _USEGAS_CELL:Bool
+┃  ┃  │
+┃  ┃  ├─ 7
+┃  ┃  │   k: #gas [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ] ~> SELFDESTRUCT ( ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  │
+┃  ┃  │  (3 steps)
+┃  ┃  ├─ 9
+┃  ┃  │   k: #gasExec ( _SCHEDULE_CELL:Schedule , SELFDESTRUCT ( _W0:Int modInt pow160 ) ) ~> ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (1 step)
+┃  ┃  ┣━━┓
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 10
+┃  ┃  ┃  │   k: Cselfdestruct ( _SCHEDULE_CELL:Schedule , #accountNonexistent ( ( _W0:Int modInt ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (1 step)
+┃  ┃  ┃  └─ 18 (leaf, pending)
+┃  ┃  ┃      k: #accountNonexistent ( ( _W0:Int modInt pow160 ) ) ~> #freezerCselfdestruct1_ ( _ ...
+┃  ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┗━━┓
+┃  ┃     │
+┃  ┃     ├─ 11
+┃  ┃     │   k: #gasExec ( _SCHEDULE_CELL:Schedule , SELFDESTRUCT ( _W0:Int modInt pow160 ) ) ~> ...
+┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     ┃
+┃  ┃     ┃ (1 step)
+┃  ┃     ┣━━┓
+┃  ┃     ┃  │
+┃  ┃     ┃  └─ 16 (leaf, pending)
+┃  ┃     ┃      k: Cselfdestruct ( _SCHEDULE_CELL:Schedule , #accountNonexistent ( ( _W0:Int modInt ...
+┃  ┃     ┃      pc: _PC_CELL:Int
+┃  ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     ┃
+┃  ┃     ┗━━┓
+┃  ┃        │
+┃  ┃        └─ 17 (leaf, pending)
+┃  ┃            k: #gasExec ( _SCHEDULE_CELL:Schedule , SELFDESTRUCT ( _W0:Int modInt pow160 ) ) ~> ...
+┃  ┃            pc: _PC_CELL:Int
+┃  ┃            callDepth: _CALLDEPTH_CELL:Int
+┃  ┃            statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint:
+┃     ┃     ( notBool _USEGAS_CELL:Bool )
+┃     │
+┃     ├─ 8
+┃     │   k: #gas [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ] ~> SELFDESTRUCT ( ...
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     │
+┃     │  (1 step)
+┃     ├─ 12
+┃     │   k: SELFDESTRUCT ( _W0:Int modInt pow160 ) ~> #pc [ SELFDESTRUCT ] ~> _K_CELL:K
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     ┃
+┃     ┃ (1 step)
+┃     ┣━━┓
+┃     ┃  │
+┃     ┃  └─ 13 (leaf, pending)
+┃     ┃      k: #touchAccounts ACCT:Int ( _W0:Int modInt pow160 ) ~> #accessAccounts ( _W0:Int m ...
+┃     ┃      pc: _PC_CELL:Int
+┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃     ┃
+┃     ┣━━┓
+┃     ┃  │
+┃     ┃  └─ 14 (leaf, pending)
+┃     ┃      k: #touchAccounts ( _W0:Int modInt pow160 ) ~> #accessAccounts ( _W0:Int modInt pow ...
+┃     ┃      pc: _PC_CELL:Int
+┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃     ┃
+┃     ┗━━┓
+┃        │
+┃        ├─ 15
+┃        │   k: SELFDESTRUCT ( _W0:Int modInt pow160 ) ~> #pc [ SELFDESTRUCT ] ~> _K_CELL:K
+┃        │   pc: _PC_CELL:Int
+┃        │   callDepth: _CALLDEPTH_CELL:Int
+┃        │   statusCode: _STATUSCODE_CELL:StatusCode
+┃        ┃
+┃        ┃ (1 step)
+┃        ┣━━┓
+┃        ┃  │
+┃        ┃  └─ 19 (leaf, pending)
+┃        ┃      k: #touchAccounts ACCT0:Int ( _W0:Int modInt pow160 ) ~> #accessAccounts ( _W0:Int  ...
+┃        ┃      pc: _PC_CELL:Int
+┃        ┃      callDepth: _CALLDEPTH_CELL:Int
+┃        ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃        ┃
+┃        ┣━━┓
+┃        ┃  │
+┃        ┃  └─ 20 (leaf, pending)
+┃        ┃      k: #touchAccounts ( _W0:Int modInt pow160 ) ~> #accessAccounts ( _W0:Int modInt pow ...
+┃        ┃      pc: _PC_CELL:Int
+┃        ┃      callDepth: _CALLDEPTH_CELL:Int
+┃        ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃        ┃
+┃        ┗━━┓
+┃           │
+┃           └─ 21 (leaf, pending)
+┃               k: SELFDESTRUCT ( _W0:Int modInt pow160 ) ~> #pc [ SELFDESTRUCT ] ~> _K_CELL:K
+┃               pc: _PC_CELL:Int
+┃               callDepth: _CALLDEPTH_CELL:Int
+┃               statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     _STATIC_CELL:Bool
+   │
+   ├─ 4
+   │   k: #next [ SELFDESTRUCT ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (2 steps)
+   └─ 6 (leaf, terminal)
+       k: #halt ~> _K_CELL:K
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: EVMC_STATIC_MODE_VIOLATION
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : _WS:WordStack )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : _WS:WordStack )
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _STATIC_CELL:Bool #Equals false } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : _WS:WordStack )
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _STATIC_CELL:Bool #Equals true } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STATIC_MODE_VIOLATION
+        </statusCode>
+        <callState>
+          <wordStack>
+            ( _W0:Int : _WS:WordStack )
+          </wordStack>
+          <static>
+            true
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals _STATIC_CELL:Bool } )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gasExec ( _SCHEDULE_CELL:Schedule , SELFDESTRUCT ( _W0:Int modInt pow160 ) )
+      ~> #deductGas
+      ~> #access [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Cselfdestruct ( _SCHEDULE_CELL:Schedule , #accountNonexistent ( ( _W0:Int modInt pow160 ) ) , BAL:Int )
+      ~> #deductGas
+      ~> #access [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCTFROM:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set
+          </selfDestruct>
+          <refund>
+            #if ACCTFROM:Int in _SELFDESTRUCT_CELL:Set #then _REFUND_CELL:Int #else chop ( ( _REFUND_CELL:Int +Int Rselfdestruct < _SCHEDULE_CELL:Schedule > ) ) #fi
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCTFROM:Int
+            </acctID>
+            <balance>
+              BAL:Int
+            </balance>
+            _Gen25:CodeCell
+            _Gen26:StorageCell
+            _Gen27:OrigStorageCell
+            _Gen28:TransientStorageCell
+            _Gen29:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCTFROM:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCTFROM:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCTFROM:Int
+  </acctID>
+  <balance>
+    BAL:Int
+  </balance>
+  _Gen25:CodeCell
+  _Gen26:StorageCell
+  _Gen27:OrigStorageCell
+  _Gen28:TransientStorageCell
+  _Gen29:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gasExec ( _SCHEDULE_CELL:Schedule , SELFDESTRUCT ( _W0:Int modInt pow160 ) )
+      ~> #deductGas
+      ~> #access [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen25:CodeCell . #Exists _Gen26:StorageCell . #Exists _Gen27:OrigStorageCell . #Exists _Gen28:TransientStorageCell . #Exists _Gen29:NonceCell . #Exists ACCTFROM:Int . #Exists BAL:Int . ( { false #Equals <acctID>
+  ACCTFROM:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCTFROM:Int
+  </acctID>
+  <balance>
+    BAL:Int
+  </balance>
+  _Gen25:CodeCell
+  _Gen26:StorageCell
+  _Gen27:OrigStorageCell
+  _Gen28:TransientStorageCell
+  _Gen29:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCTFROM:Int } ) ) ) ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals ( notBool _USEGAS_CELL:Bool ) } ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #touchAccounts ACCT:Int ( _W0:Int modInt pow160 )
+      ~> #accessAccounts ( _W0:Int modInt pow160 )
+      ~> #transferFunds ACCT:Int ( _W0:Int modInt pow160 ) BALFROM:Int
+      ~> #end EVMC_SUCCESS
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          b""
+        </output>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set |Set SetItem ( ACCT:Int )
+          </selfDestruct>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            <balance>
+              BALFROM:Int
+            </balance>
+            _Gen26:CodeCell
+            _Gen27:StorageCell
+            _Gen28:OrigStorageCell
+            _Gen29:TransientStorageCell
+            _Gen30:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool ACCT:Int ==Int ( _W0:Int modInt pow160 ) ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  <balance>
+    BALFROM:Int
+  </balance>
+  _Gen26:CodeCell
+  _Gen27:StorageCell
+  _Gen28:OrigStorageCell
+  _Gen29:TransientStorageCell
+  _Gen30:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #touchAccounts ( _W0:Int modInt pow160 )
+      ~> #accessAccounts ( _W0:Int modInt pow160 )
+      ~> #end EVMC_SUCCESS
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          b""
+        </output>
+        <callState>
+          <id>
+            ( _W0:Int modInt pow160 )
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set |Set SetItem ( ( _W0:Int modInt pow160 ) )
+          </selfDestruct>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ( _W0:Int modInt pow160 )
+            </acctID>
+            <balance>
+              0
+            </balance>
+            _Gen27:CodeCell
+            _Gen28:StorageCell
+            _Gen29:OrigStorageCell
+            _Gen30:TransientStorageCell
+            _Gen31:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { _ID_CELL:Account #Equals ( _W0:Int modInt pow160 ) }
+#And ( { true #Equals ( notBool <acctID>
+  ( _W0:Int modInt pow160 )
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ( _W0:Int modInt pow160 )
+  </acctID>
+  _Gen27:CodeCell
+  _Gen28:StorageCell
+  _Gen29:OrigStorageCell
+  _Gen30:TransientStorageCell
+  _Gen31:NonceCell
+  ...
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen0:Int . #Exists _Gen27:CodeCell . #Exists _Gen28:StorageCell . #Exists _Gen29:OrigStorageCell . #Exists _Gen30:TransientStorageCell . #Exists _Gen31:NonceCell . ( { false #Equals <acctID>
+  ( _W0:Int modInt pow160 )
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ( _W0:Int modInt pow160 )
+  </acctID>
+  <balance>
+    _Gen0:Int
+  </balance>
+  _Gen27:CodeCell
+  _Gen28:StorageCell
+  _Gen29:OrigStorageCell
+  _Gen30:TransientStorageCell
+  _Gen31:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ( _W0:Int modInt pow160 ) } ) ) )
+#And #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen26:CodeCell . #Exists _Gen27:StorageCell . #Exists _Gen28:OrigStorageCell . #Exists _Gen29:TransientStorageCell . #Exists _Gen30:NonceCell . #Exists ACCT:Int . #Exists BALFROM:Int . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  <balance>
+    BALFROM:Int
+  </balance>
+  _Gen26:CodeCell
+  _Gen27:StorageCell
+  _Gen28:OrigStorageCell
+  _Gen29:TransientStorageCell
+  _Gen30:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Not ( { ACCT:Int #Equals ( _W0:Int modInt pow160 ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Cselfdestruct ( _SCHEDULE_CELL:Schedule , #accountNonexistent ( ( _W0:Int modInt pow160 ) ) , BAL0:Int )
+      ~> #deductGas
+      ~> #access [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCTFROM0:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set
+          </selfDestruct>
+          <refund>
+            #if ACCTFROM0:Int in _SELFDESTRUCT_CELL:Set #then _REFUND_CELL:Int #else chop ( ( _REFUND_CELL:Int +Int Rselfdestruct < _SCHEDULE_CELL:Schedule > ) ) #fi
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCTFROM0:Int
+            </acctID>
+            <balance>
+              BAL0:Int
+            </balance>
+            _Gen30:CodeCell
+            _Gen31:StorageCell
+            _Gen32:OrigStorageCell
+            _Gen33:TransientStorageCell
+            _Gen34:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCTFROM0:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCTFROM0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCTFROM0:Int
+  </acctID>
+  <balance>
+    BAL0:Int
+  </balance>
+  _Gen30:CodeCell
+  _Gen31:StorageCell
+  _Gen32:OrigStorageCell
+  _Gen33:TransientStorageCell
+  _Gen34:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And #Not ( ( { ACCTFROM:Int #Equals ACCTFROM0:Int }
+#And #Exists _DotVar9:AccountCellMap . ( { false #Equals <acctID>
+  ACCTFROM:Int
+</acctID> in_keys ( _DotVar9:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCTFROM:Int
+  </acctID>
+  ...
+</account>
+_DotVar9:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCTFROM0:Int
+  </acctID>
+  <balance>
+    BAL0:Int
+  </balance>
+  _Gen30:CodeCell
+  _Gen31:StorageCell
+  _Gen32:OrigStorageCell
+  _Gen33:TransientStorageCell
+  _Gen34:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 17:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gasExec ( _SCHEDULE_CELL:Schedule , SELFDESTRUCT ( _W0:Int modInt pow160 ) )
+      ~> #deductGas
+      ~> #access [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCTFROM:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCTFROM:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCTFROM:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen30:CodeCell . #Exists _Gen31:StorageCell . #Exists _Gen32:OrigStorageCell . #Exists _Gen33:TransientStorageCell . #Exists _Gen34:NonceCell . #Exists ACCTFROM0:Int . #Exists BAL0:Int . ( { false #Equals <acctID>
+  ACCTFROM0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCTFROM0:Int
+  </acctID>
+  <balance>
+    BAL0:Int
+  </balance>
+  _Gen30:CodeCell
+  _Gen31:StorageCell
+  _Gen32:OrigStorageCell
+  _Gen33:TransientStorageCell
+  _Gen34:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCTFROM0:Int } ) ) ) ) ) ) )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #accountNonexistent ( ( _W0:Int modInt pow160 ) )
+      ~> #freezerCselfdestruct1_ ( _SCHEDULE_CELL:Schedule ~> .K , BAL:Int ~> .K )
+      ~> #deductGas
+      ~> #access [ SELFDESTRUCT , SELFDESTRUCT ( _W0:Int modInt pow160 ) ]
+      ~> SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCTFROM:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set
+          </selfDestruct>
+          <refund>
+            #if ACCTFROM:Int in _SELFDESTRUCT_CELL:Set #then _REFUND_CELL:Int #else chop ( ( _REFUND_CELL:Int +Int Rselfdestruct < _SCHEDULE_CELL:Schedule > ) ) #fi
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCTFROM:Int
+            </acctID>
+            <balance>
+              BAL:Int
+            </balance>
+            _Gen25:CodeCell
+            _Gen26:StorageCell
+            _Gen27:OrigStorageCell
+            _Gen28:TransientStorageCell
+            _Gen29:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCTFROM:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCTFROM:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCTFROM:Int
+  </acctID>
+  <balance>
+    BAL:Int
+  </balance>
+  _Gen25:CodeCell
+  _Gen26:StorageCell
+  _Gen27:OrigStorageCell
+  _Gen28:TransientStorageCell
+  _Gen29:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #touchAccounts ACCT0:Int ( _W0:Int modInt pow160 )
+      ~> #accessAccounts ( _W0:Int modInt pow160 )
+      ~> #transferFunds ACCT0:Int ( _W0:Int modInt pow160 ) BALFROM0:Int
+      ~> #end EVMC_SUCCESS
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          b""
+        </output>
+        <callState>
+          <id>
+            ACCT0:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set |Set SetItem ( ACCT0:Int )
+          </selfDestruct>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT0:Int
+            </acctID>
+            <balance>
+              BALFROM0:Int
+            </balance>
+            _Gen32:CodeCell
+            _Gen33:StorageCell
+            _Gen34:OrigStorageCell
+            _Gen35:TransientStorageCell
+            _Gen36:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { true #Equals ( notBool ACCT0:Int ==Int ( _W0:Int modInt pow160 ) ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  <balance>
+    BALFROM0:Int
+  </balance>
+  _Gen32:CodeCell
+  _Gen33:StorageCell
+  _Gen34:OrigStorageCell
+  _Gen35:TransientStorageCell
+  _Gen36:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
+#And #Exists _DotVar9:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar9:AccountCellMap ) }
+#And ( { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar9:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  <balance>
+    BALFROM0:Int
+  </balance>
+  _Gen32:CodeCell
+  _Gen33:StorageCell
+  _Gen34:OrigStorageCell
+  _Gen35:TransientStorageCell
+  _Gen36:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And #Not ( { ACCT:Int #Equals ( _W0:Int modInt pow160 ) } ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #touchAccounts ( _W0:Int modInt pow160 )
+      ~> #accessAccounts ( _W0:Int modInt pow160 )
+      ~> #end EVMC_SUCCESS
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          b""
+        </output>
+        <callState>
+          <id>
+            ( _W0:Int modInt pow160 )
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <selfDestruct>
+            _SELFDESTRUCT_CELL:Set |Set SetItem ( ( _W0:Int modInt pow160 ) )
+          </selfDestruct>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ( _W0:Int modInt pow160 )
+            </acctID>
+            <balance>
+              0
+            </balance>
+            _Gen33:CodeCell
+            _Gen34:StorageCell
+            _Gen35:OrigStorageCell
+            _Gen36:TransientStorageCell
+            _Gen37:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _STATIC_CELL:Bool #Equals false }
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( { _ID_CELL:Account #Equals ( _W0:Int modInt pow160 ) }
+#And ( { false #Equals <acctID>
+  ( _W0:Int modInt pow160 )
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ( _W0:Int modInt pow160 )
+  </acctID>
+  <balance>
+    _Gen32:Int
+  </balance>
+  _Gen33:CodeCell
+  _Gen34:StorageCell
+  _Gen35:OrigStorageCell
+  _Gen36:TransientStorageCell
+  _Gen37:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And ( #Not ( ( { _Gen0:Int #Equals _Gen32:Int }
+#And ( { _Gen27:CodeCell #Equals _Gen33:CodeCell }
+#And ( { _Gen28:StorageCell #Equals _Gen34:StorageCell }
+#And ( { _Gen29:OrigStorageCell #Equals _Gen35:OrigStorageCell }
+#And ( { _Gen30:TransientStorageCell #Equals _Gen36:TransientStorageCell }
+#And { _Gen31:NonceCell #Equals _Gen37:NonceCell } ) ) ) ) ) )
+#And #Not ( ( { ACCT:Int #Equals ( _W0:Int modInt pow160 ) }
+#And #Exists _DotVar9:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar9:AccountCellMap ) }
+#And ( { ( <account>
+  <acctID>
+    ( _W0:Int modInt pow160 )
+  </acctID>
+  <balance>
+    _Gen32:Int
+  </balance>
+  _Gen33:CodeCell
+  _Gen34:StorageCell
+  _Gen35:OrigStorageCell
+  _Gen36:TransientStorageCell
+  _Gen37:NonceCell
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen27:StorageCell
+  _Gen28:OrigStorageCell
+  _Gen29:TransientStorageCell
+  _Gen30:NonceCell
+  ...
+</account>
+_DotVar9:AccountCellMap ) }
+#And #Not ( { ACCT:Int #Equals ( _W0:Int modInt pow160 ) } ) ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 21:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      SELFDESTRUCT ( _W0:Int modInt pow160 )
+      ~> #pc [ SELFDESTRUCT ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _STATIC_CELL:Bool #Equals false }
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ( _W0:Int modInt pow160 ) }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ( _W0:Int modInt pow160 )
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ( _W0:Int modInt pow160 )
+  </acctID>
+  <balance>
+    _Gen0:Int
+  </balance>
+  _Gen27:CodeCell
+  _Gen28:StorageCell
+  _Gen29:OrigStorageCell
+  _Gen30:TransientStorageCell
+  _Gen31:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) )
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  <balance>
+    BALFROM:Int
+  </balance>
+  _Gen26:CodeCell
+  _Gen27:StorageCell
+  _Gen28:OrigStorageCell
+  _Gen29:TransientStorageCell
+  _Gen30:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And #Not ( { ACCT:Int #Equals ( _W0:Int modInt pow160 ) } ) ) ) ) )
+#And ( #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen0:Int . #Exists _Gen27:CodeCell . #Exists _Gen28:StorageCell . #Exists _Gen29:OrigStorageCell . #Exists _Gen30:TransientStorageCell . #Exists _Gen31:NonceCell . ( { false #Equals <acctID>
+  ( _W0:Int modInt pow160 )
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ( _W0:Int modInt pow160 )
+  </acctID>
+  <balance>
+    _Gen0:Int
+  </balance>
+  _Gen27:CodeCell
+  _Gen28:StorageCell
+  _Gen29:OrigStorageCell
+  _Gen30:TransientStorageCell
+  _Gen31:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ( _W0:Int modInt pow160 ) } ) ) )
+#And #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen26:CodeCell . #Exists _Gen27:StorageCell . #Exists _Gen28:OrigStorageCell . #Exists _Gen29:TransientStorageCell . #Exists _Gen30:NonceCell . #Exists ACCT:Int . #Exists BALFROM:Int . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  <balance>
+    BALFROM:Int
+  </balance>
+  _Gen26:CodeCell
+  _Gen27:StorageCell
+  _Gen28:OrigStorageCell
+  _Gen29:TransientStorageCell
+  _Gen30:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Not ( { ACCT:Int #Equals ( _W0:Int modInt pow160 ) } ) ) ) ) ) ) ) ) ) ) )
+
+
+

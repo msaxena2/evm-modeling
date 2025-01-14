@@ -1,0 +1,1377 @@
+Proof SSTORE_2_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ SSTORE ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool _STATIC_CELL:Bool )
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ SSTORE ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (3 steps)
+┃  ├─ 5 (split)
+┃  │   k: #gas [ SSTORE , SSTORE _W0:Int _W1:Int ] ~> SSTORE _W0:Int _W1:Int ~> #pc [ SSTO ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     _USEGAS_CELL:Bool
+┃  ┃  │
+┃  ┃  ├─ 6
+┃  ┃  │   k: #gas [ SSTORE , SSTORE _W0:Int _W1:Int ] ~> SSTORE _W0:Int _W1:Int ~> #pc [ SSTO ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  │
+┃  ┃  │  (3 steps)
+┃  ┃  ├─ 12
+┃  ┃  │   k: #gasExec ( _SCHEDULE_CELL:Schedule , SSTORE _W0:Int _W1:Int ) ~> #deductGas ~> # ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (1 step)
+┃  ┃  ┣━━┓
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 13 (split)
+┃  ┃  ┃  │   k: Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int )  ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃ (branch)
+┃  ┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃  ┃     Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) ) <=Gas _GAS_CELL:Gas
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  └─ 20 (leaf, pending)
+┃  ┃  ┃  ┃      k: Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int )  ...
+┃  ┃  ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃     ┃ constraint:
+┃  ┃  ┃     ┃     _GAS_CELL:Gas <Gas Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) )
+┃  ┃  ┃     │
+┃  ┃  ┃     └─ 21 (leaf, pending)
+┃  ┃  ┃         k: Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int )  ...
+┃  ┃  ┃         pc: _PC_CELL:Int
+┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┣━━┓
+┃  ┃  ┃  │
+┃  ┃  ┃  └─ 14 (leaf, pending)
+┃  ┃  ┃      k: #end EVMC_OUT_OF_GAS ~> #deductGas ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int  ...
+┃  ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┗━━┓
+┃  ┃     │
+┃  ┃     ├─ 15
+┃  ┃     │   k: #gasExec ( _SCHEDULE_CELL:Schedule , SSTORE _W0:Int _W1:Int ) ~> #deductGas ~> # ...
+┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     ┃
+┃  ┃     ┃ (1 step)
+┃  ┃     ┣━━┓
+┃  ┃     ┃  │
+┃  ┃     ┃  └─ 18 (leaf, pending)
+┃  ┃     ┃      k: Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE0:Map , _W0:Int ) ...
+┃  ┃     ┃      pc: _PC_CELL:Int
+┃  ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     ┃
+┃  ┃     ┗━━┓
+┃  ┃        │
+┃  ┃        └─ 19 (leaf, pending)
+┃  ┃            k: #gasExec ( _SCHEDULE_CELL:Schedule , SSTORE _W0:Int _W1:Int ) ~> #deductGas ~> # ...
+┃  ┃            pc: _PC_CELL:Int
+┃  ┃            callDepth: _CALLDEPTH_CELL:Int
+┃  ┃            statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint:
+┃     ┃     ( notBool _USEGAS_CELL:Bool )
+┃     │
+┃     ├─ 7
+┃     │   k: #gas [ SSTORE , SSTORE _W0:Int _W1:Int ] ~> SSTORE _W0:Int _W1:Int ~> #pc [ SSTO ...
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     │
+┃     │  (1 step)
+┃     ├─ 9
+┃     │   k: SSTORE _W0:Int _W1:Int ~> #pc [ SSTORE ] ~> _K_CELL:K
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     ┃
+┃     ┃ (1 step)
+┃     ┣━━┓
+┃     ┃  │
+┃     ┃  └─ 10 (leaf, pending)
+┃     ┃      k: #pc [ SSTORE ] ~> _K_CELL:K
+┃     ┃      pc: _PC_CELL:Int
+┃     ┃      callDepth: _CALLDEPTH_CELL:Int
+┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃     ┃
+┃     ┗━━┓
+┃        │
+┃        ├─ 11
+┃        │   k: SSTORE _W0:Int _W1:Int ~> #pc [ SSTORE ] ~> _K_CELL:K
+┃        │   pc: _PC_CELL:Int
+┃        │   callDepth: _CALLDEPTH_CELL:Int
+┃        │   statusCode: _STATUSCODE_CELL:StatusCode
+┃        ┃
+┃        ┃ (1 step)
+┃        ┣━━┓
+┃        ┃  │
+┃        ┃  └─ 16 (leaf, pending)
+┃        ┃      k: #pc [ SSTORE ] ~> _K_CELL:K
+┃        ┃      pc: _PC_CELL:Int
+┃        ┃      callDepth: _CALLDEPTH_CELL:Int
+┃        ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃        ┃
+┃        ┗━━┓
+┃           │
+┃           └─ 17 (leaf, pending)
+┃               k: SSTORE _W0:Int _W1:Int ~> #pc [ SSTORE ] ~> _K_CELL:K
+┃               pc: _PC_CELL:Int
+┃               callDepth: _CALLDEPTH_CELL:Int
+┃               statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     _STATIC_CELL:Bool
+   │
+   ├─ 4
+   │   k: #next [ SSTORE ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (2 steps)
+   └─ 8 (leaf, terminal)
+       k: #halt ~> _K_CELL:K
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: EVMC_STATIC_MODE_VIOLATION
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : _WS:WordStack ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : _WS:WordStack ) )
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _STATIC_CELL:Bool #Equals false } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : _WS:WordStack ) )
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _STATIC_CELL:Bool #Equals true } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STATIC_MODE_VIOLATION
+        </statusCode>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : _WS:WordStack ) )
+          </wordStack>
+          <static>
+            true
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals _STATIC_CELL:Bool } )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals ( notBool _USEGAS_CELL:Bool ) } ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen23:BalanceCell
+            _Gen24:CodeCell
+            <storage>
+              STORAGE:Map [ _W0:Int <- _W1:Int ]
+            </storage>
+            _Gen25:OrigStorageCell
+            _Gen26:TransientStorageCell
+            _Gen27:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  <storage>
+    STORAGE:Map
+  </storage>
+  _Gen25:OrigStorageCell
+  _Gen26:TransientStorageCell
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:OrigStorageCell . #Exists _Gen26:TransientStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists STORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen23:BalanceCell
+  _Gen24:CodeCell
+  <storage>
+    STORAGE:Map
+  </storage>
+  _Gen25:OrigStorageCell
+  _Gen26:TransientStorageCell
+  _Gen27:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gasExec ( _SCHEDULE_CELL:Schedule , SSTORE _W0:Int _W1:Int )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <refund>
+            ( _REFUND_CELL:Int +Int Rsstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) ) )
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen25:BalanceCell
+            _Gen26:CodeCell
+            <storage>
+              STORAGE:Map
+            </storage>
+            <origStorage>
+              ORIGSTORAGE:Map
+            </origStorage>
+            _Gen27:TransientStorageCell
+            _Gen28:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen25:BalanceCell
+  _Gen26:CodeCell
+  <storage>
+    STORAGE:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE:Map
+  </origStorage>
+  _Gen27:TransientStorageCell
+  _Gen28:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals Ghassstorestipend << _SCHEDULE_CELL:Schedule >> }
+#And { true #Equals _GAS_CELL:Gas <=Gas Gcallstipend < _SCHEDULE_CELL:Schedule > } ) ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gasExec ( _SCHEDULE_CELL:Schedule , SSTORE _W0:Int _W1:Int )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( #Not ( ( { true #Equals Ghassstorestipend << _SCHEDULE_CELL:Schedule >> }
+#And { true #Equals _GAS_CELL:Gas <=Gas Gcallstipend < _SCHEDULE_CELL:Schedule > } ) )
+#And #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen25:BalanceCell . #Exists _Gen26:CodeCell . #Exists _Gen27:TransientStorageCell . #Exists _Gen28:NonceCell . #Exists ACCT:Int . #Exists ORIGSTORAGE:Map . #Exists STORAGE:Map . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen25:BalanceCell
+  _Gen26:CodeCell
+  <storage>
+    STORAGE:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE:Map
+  </origStorage>
+  _Gen27:TransientStorageCell
+  _Gen28:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT:Int } ) ) ) ) ) ) ) )
+
+
+
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT0:Int
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT0:Int
+            </acctID>
+            _Gen28:BalanceCell
+            _Gen29:CodeCell
+            <storage>
+              STORAGE0:Map [ _W0:Int <- _W1:Int ]
+            </storage>
+            _Gen30:OrigStorageCell
+            _Gen31:TransientStorageCell
+            _Gen32:NonceCell
+          </account>
+          _DotVar7:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  <storage>
+    STORAGE0:Map
+  </storage>
+  _Gen30:OrigStorageCell
+  _Gen31:TransientStorageCell
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  <storage>
+    STORAGE0:Map
+  </storage>
+  _Gen30:OrigStorageCell
+  _Gen31:TransientStorageCell
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) )
+
+
+
+Node 17:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar7:AccountCellMap ) } ) ) )
+#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen28:BalanceCell . #Exists _Gen29:CodeCell . #Exists _Gen30:OrigStorageCell . #Exists _Gen31:TransientStorageCell . #Exists _Gen32:NonceCell . #Exists ACCT0:Int . #Exists STORAGE0:Map . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar7:AccountCellMap ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen28:BalanceCell
+  _Gen29:CodeCell
+  <storage>
+    STORAGE0:Map
+  </storage>
+  _Gen30:OrigStorageCell
+  _Gen31:TransientStorageCell
+  _Gen32:NonceCell
+</account>
+_DotVar7:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT0:Int } ) ) ) ) ) ) )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE0:Map , _W0:Int ) , #lookup ( ORIGSTORAGE0:Map , _W0:Int ) )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT0:Int
+          </id>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <refund>
+            ( _REFUND_CELL:Int +Int Rsstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE0:Map , _W0:Int ) , #lookup ( ORIGSTORAGE0:Map , _W0:Int ) ) )
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT0:Int
+            </acctID>
+            _Gen29:BalanceCell
+            _Gen30:CodeCell
+            <storage>
+              STORAGE0:Map
+            </storage>
+            <origStorage>
+              ORIGSTORAGE0:Map
+            </origStorage>
+            _Gen31:TransientStorageCell
+            _Gen32:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT0:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen29:BalanceCell
+  _Gen30:CodeCell
+  <storage>
+    STORAGE0:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE0:Map
+  </origStorage>
+  _Gen31:TransientStorageCell
+  _Gen32:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And ( #Not ( ( { true #Equals Ghassstorestipend << _SCHEDULE_CELL:Schedule >> }
+#And { true #Equals _GAS_CELL:Gas <=Gas Gcallstipend < _SCHEDULE_CELL:Schedule > } ) )
+#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
+#And #Exists _DotVar9:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar9:AccountCellMap ) }
+#And { ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar9:AccountCellMap ) #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen29:BalanceCell
+  _Gen30:CodeCell
+  <storage>
+    STORAGE0:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE0:Map
+  </origStorage>
+  _Gen31:TransientStorageCell
+  _Gen32:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gasExec ( _SCHEDULE_CELL:Schedule , SSTORE _W0:Int _W1:Int )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            _ID_CELL:Account
+          </id>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          _ACCOUNTS_CELL:AccountCellMap
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( #Not ( ( { true #Equals Ghassstorestipend << _SCHEDULE_CELL:Schedule >> }
+#And { true #Equals _GAS_CELL:Gas <=Gas Gcallstipend < _SCHEDULE_CELL:Schedule > } ) )
+#And ( #Not ( ( { _ID_CELL:Account #Equals ACCT:Int }
+#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  ...
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) )
+#And #Not ( #Exists _DotVar8:AccountCellMap . #Exists _Gen29:BalanceCell . #Exists _Gen30:CodeCell . #Exists _Gen31:TransientStorageCell . #Exists _Gen32:NonceCell . #Exists ACCT0:Int . #Exists ORIGSTORAGE0:Map . #Exists STORAGE0:Map . ( { false #Equals <acctID>
+  ACCT0:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And ( { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT0:Int
+  </acctID>
+  _Gen29:BalanceCell
+  _Gen30:CodeCell
+  <storage>
+    STORAGE0:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE0:Map
+  </origStorage>
+  _Gen31:TransientStorageCell
+  _Gen32:NonceCell
+</account>
+_DotVar8:AccountCellMap ) }
+#And { _ID_CELL:Account #Equals ACCT0:Int } ) ) ) ) ) ) ) ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <refund>
+            ( _REFUND_CELL:Int +Int Rsstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) ) )
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen25:BalanceCell
+            _Gen26:CodeCell
+            <storage>
+              STORAGE:Map
+            </storage>
+            <origStorage>
+              ORIGSTORAGE:Map
+            </origStorage>
+            _Gen27:TransientStorageCell
+            _Gen28:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { true #Equals Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen25:BalanceCell
+  _Gen26:CodeCell
+  <storage>
+    STORAGE:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE:Map
+  </origStorage>
+  _Gen27:TransientStorageCell
+  _Gen28:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) ) ) )
+
+
+
+Node 21:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) )
+      ~> #deductGas
+      ~> #access [ SSTORE , SSTORE _W0:Int _W1:Int ]
+      ~> SSTORE _W0:Int _W1:Int
+      ~> #pc [ SSTORE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <id>
+            ACCT:Int
+          </id>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        <substate>
+          <refund>
+            ( _REFUND_CELL:Int +Int Rsstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) ) )
+          </refund>
+          ...
+        </substate>
+        ...
+      </evm>
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ACCT:Int
+            </acctID>
+            _Gen25:BalanceCell
+            _Gen26:CodeCell
+            <storage>
+              STORAGE:Map
+            </storage>
+            <origStorage>
+              ORIGSTORAGE:Map
+            </origStorage>
+            _Gen27:TransientStorageCell
+            _Gen28:NonceCell
+          </account>
+          _DotVar8:AccountCellMap )
+        </accounts>
+        ...
+      </network>
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { _ID_CELL:Account #Equals ACCT:Int }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( notBool <acctID>
+  ACCT:Int
+</acctID> in_keys ( _DotVar8:AccountCellMap ) ) }
+#And ( { true #Equals _GAS_CELL:Gas <Gas Csstore ( _SCHEDULE_CELL:Schedule , _W1:Int , #lookup ( STORAGE:Map , _W0:Int ) , #lookup ( ORIGSTORAGE:Map , _W0:Int ) ) }
+#And ( { true #Equals ( ( notBool Ghassstorestipend << _SCHEDULE_CELL:Schedule >> ) orBool Gcallstipend < _SCHEDULE_CELL:Schedule > <Gas _GAS_CELL:Gas ) }
+#And { _ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
+  <acctID>
+    ACCT:Int
+  </acctID>
+  _Gen25:BalanceCell
+  _Gen26:CodeCell
+  <storage>
+    STORAGE:Map
+  </storage>
+  <origStorage>
+    ORIGSTORAGE:Map
+  </origStorage>
+  _Gen27:TransientStorageCell
+  _Gen28:NonceCell
+</account>
+_DotVar8:AccountCellMap ) } ) ) ) ) ) ) )
+
+
+
