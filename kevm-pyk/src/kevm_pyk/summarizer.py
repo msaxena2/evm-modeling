@@ -130,6 +130,39 @@ OPCODES_SUMMARY_STATUS = {
     'SMOD': 'PASSED, No underflow check in KCFG',
     'ADDMOD': 'PASSED, No underflow check in KCFG',
     'MULMOD': 'PASSED, No underflow check in KCFG',
+    'EXP': 'TODO, Actually not passed, because of the ndbranches, I just want to skip this during batch summarization, No underflow check in KCFG',
+    'SIGNEXTEND': 'PASSED, No underflow check in KCFG',
+    'LT': 'PASSED, No underflow check in KCFG',
+    'GT': 'PASSED, No underflow check in KCFG',
+    'SLT': 'PASSED, No underflow check in KCFG',
+    'SGT': 'PASSED, No underflow check in KCFG',
+    'EQ' : 'PASSED, No underflow check in KCFG',
+    'ISZERO': 'PASSED, No underflow check in KCFG',
+    'AND': 'PASSED, No underflow check in KCFG',
+    'EVMOR': 'PASSED, No underflow check in KCFG',
+    'XOR': 'PASSED, No underflow check in KCFG',
+    'NOT': 'PASSED, No underflow check in KCFG',
+    'BYTE': 'PASSED, No underflow check in KCFG',
+    'SHL': 'PASSED, No underflow check in KCFG',
+    'SHR': 'PASSED, No underflow check in KCFG',
+    'SAR': 'PASSED, No underflow check in KCFG',
+    'SHA3': 'PASSED, No underflow check in KCFG',
+    'ADDRESS': 'TODO, Found NDBranch',
+    'BALANCE': 'TODO, Proof crashed',
+    'ORIGIN': 'TODO, Found NDBranch',
+    'CALLER': 'TODO, Found NDBranch',
+    'CALLVALUE': 'PASSED, No underflow check in KCFG',
+    'CALLDATALOAD': 'PASSED, No underflow check in KCFG',
+    'CALLDATASIZE': 'PASSED, No underflow check in KCFG',
+    'CALLDATACOPY': 'PASSED, No underflow check in KCFG',
+    'CODESIZE': 'PASSED, No underflow check in KCFG',
+    'CODECOPY': 'PASSED, No underflow check in KCFG',
+    'GASPRICE': 'PASSED, No underflow check in KCFG',
+    'EXTCODESIZE': 'TODO, Proof crashed',
+    'EXTCODECOPY': 'TODO, Proof crashed',
+    'RETURNDATASIZE': 'TODO, Proof crashed',
+    'RETURNDATACOPY': 'PASSED, No underflow check in KCFG',
+    
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
 
@@ -366,11 +399,19 @@ def batch_summarize(num_processes: int = 4) -> None:
     """
 
     opcodes_to_process = [op for op in OPCODES.keys()]
-
-    _LOGGER.info(f'Starting batch summarization of {len(opcodes_to_process)} opcodes with {num_processes} processes')
+    passed_opcodes = get_passed_opcodes()
+    unpassed_opcodes = [opcode for opcode in opcodes_to_process if opcode not in passed_opcodes]
+    # 分成两组，一组是有CALL的，一组是没有的
+    has_call_opcodes = [opcode for opcode in unpassed_opcodes if 'Call' in OPCODES[opcode].label.name]
+    no_call_opcodes = [opcode for opcode in unpassed_opcodes if 'Call' not in OPCODES[opcode].label.name]
+    
+    _LOGGER.info(f'Starting batch summarization of {len(unpassed_opcodes)} opcodes with {num_processes} processes')
 
     with Pool(processes=num_processes) as pool:
-        pool.map(_process_opcode, opcodes_to_process)
+        _LOGGER.info(f'Summarizing {len(no_call_opcodes)} opcodes without CALL')
+        pool.map(_process_opcode, no_call_opcodes)
+        _LOGGER.info(f'Summarizing {len(has_call_opcodes)} opcodes with CALL')
+        pool.map(_process_opcode, has_call_opcodes)
 
     _LOGGER.info('Batch summarization completed')
 

@@ -1,0 +1,1533 @@
+Proof EXTCODECOPY_4_SPEC Failed
+
+┌─ 1 (root, init)
+│   k: #next [ EXTCODECOPY ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+│
+│  (3 steps)
+├─ 3 (split)
+│   k: #gas [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:I ...
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     _USEGAS_CELL:Bool
+┃  │
+┃  ├─ 4
+┃  │   k: #gas [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:I ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (4 steps)
+┃  ├─ 6 (split)
+┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
+┃  ┃  │
+┃  ┃  ├─ 7
+┃  ┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  │
+┃  ┃  │  (3 steps)
+┃  ┃  ├─ 9 (split)
+┃  ┃  │   k: Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) ~> #deductGas ~> #access [ EX ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (branch)
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 10
+┃  ┃  ┃  │   k: Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) ~> #deductGas ~> #access [ EX ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (1 step)
+┃  ┃  ┃  ├─ 12 (split)
+┃  ┃  ┃  │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃ (branch)
+┃  ┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃  ┃     Ghasaccesslist << _SCHEDULE_CELL:Schedule >>
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ├─ 13
+┃  ┃  ┃  ┃  │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  │  (2 steps)
+┃  ┃  ┃  ┃  ├─ 18 (split)
+┃  ┃  ┃  ┃  │   k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃  ┃ (branch)
+┃  ┃  ┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃  ┃  ┃     #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+┃  ┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ┃  └─ 19 (leaf, pending)
+┃  ┃  ┃  ┃  ┃      k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃  ┃     ┃ constraint:
+┃  ┃  ┃  ┃     ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <Gas #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+┃  ┃  ┃  ┃     │
+┃  ┃  ┃  ┃     └─ 20 (leaf, pending)
+┃  ┃  ┃  ┃         k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃  ┃         pc: _PC_CELL:Int
+┃  ┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃     ┃ constraint: true
+┃  ┃  ┃     │
+┃  ┃  ┃     ├─ 14 (split)
+┃  ┃  ┃     │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     ┃
+┃  ┃  ┃     ┃ (branch)
+┃  ┃  ┃     ┣━━┓ subst: .Subst
+┃  ┃  ┃     ┃  ┃ constraint:
+┃  ┃  ┃     ┃  ┃     Ghasaccesslist << _SCHEDULE_CELL:Schedule >>
+┃  ┃  ┃     ┃  │
+┃  ┃  ┃     ┃  ├─ 16
+┃  ┃  ┃     ┃  │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃     ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃     ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     ┃  │
+┃  ┃  ┃     ┃  │  (2 steps)
+┃  ┃  ┃     ┃  ├─ 24 (split)
+┃  ┃  ┃     ┃  │   k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃     ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃     ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     ┃  ┃
+┃  ┃  ┃     ┃  ┃ (branch)
+┃  ┃  ┃     ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃     ┃  ┃  ┃ constraint:
+┃  ┃  ┃     ┃  ┃  ┃     #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+┃  ┃  ┃     ┃  ┃  │
+┃  ┃  ┃     ┃  ┃  └─ 25 (leaf, pending)
+┃  ┃  ┃     ┃  ┃      k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃     ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃     ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     ┃  ┃
+┃  ┃  ┃     ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃     ┃     ┃ constraint:
+┃  ┃  ┃     ┃     ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <Gas #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+┃  ┃  ┃     ┃     │
+┃  ┃  ┃     ┃     └─ 26 (leaf, pending)
+┃  ┃  ┃     ┃         k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃     ┃         pc: _PC_CELL:Int
+┃  ┃  ┃     ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     ┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     ┃
+┃  ┃  ┃     ┗━━┓ subst: .Subst
+┃  ┃  ┃        ┃ constraint: true
+┃  ┃  ┃        │
+┃  ┃  ┃        ├─ 17 (split)
+┃  ┃  ┃        │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃        │   pc: _PC_CELL:Int
+┃  ┃  ┃        │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃        │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃        ┃
+┃  ┃  ┃        ┃ (branch)
+┃  ┃  ┃        ┣━━┓ subst: .Subst
+┃  ┃  ┃        ┃  ┃ constraint:
+┃  ┃  ┃        ┃  ┃     Ghasaccesslist << _SCHEDULE_CELL:Schedule >>
+┃  ┃  ┃        ┃  │
+┃  ┃  ┃        ┃  ├─ 22
+┃  ┃  ┃        ┃  │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃        ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃        ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃        ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃        ┃  │
+┃  ┃  ┃        ┃  │  (2 steps)
+┃  ┃  ┃        ┃  ├─ 29 (split)
+┃  ┃  ┃        ┃  │   k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃        ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃        ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃        ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃        ┃  ┃
+┃  ┃  ┃        ┃  ┃ (branch)
+┃  ┃  ┃        ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃        ┃  ┃  ┃ constraint:
+┃  ┃  ┃        ┃  ┃  ┃     #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+┃  ┃  ┃        ┃  ┃  │
+┃  ┃  ┃        ┃  ┃  └─ 30 (leaf, pending)
+┃  ┃  ┃        ┃  ┃      k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃        ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃        ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃        ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃        ┃  ┃
+┃  ┃  ┃        ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃        ┃     ┃ constraint:
+┃  ┃  ┃        ┃     ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <Gas #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+┃  ┃  ┃        ┃     │
+┃  ┃  ┃        ┃     └─ 31 (leaf, pending)
+┃  ┃  ┃        ┃         k: #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstoragere ...
+┃  ┃  ┃        ┃         pc: _PC_CELL:Int
+┃  ┃  ┃        ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃        ┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃        ┃
+┃  ┃  ┃        ┗━━┓ subst: .Subst
+┃  ┃  ┃           ┃ constraint: true
+┃  ┃  ┃           │
+┃  ┃  ┃           ├─ 23 (split)
+┃  ┃  ┃           │   k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃           │   pc: _PC_CELL:Int
+┃  ┃  ┃           │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃           │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃           ┃
+┃  ┃  ┃           ┃ (branch)
+┃  ┃  ┃           ┣━━┓ subst: .Subst
+┃  ┃  ┃           ┃  ┃ constraint:
+┃  ┃  ┃           ┃  ┃     Ghasaccesslist << _SCHEDULE_CELL:Schedule >>
+┃  ┃  ┃           ┃  │
+┃  ┃  ┃           ┃  └─ 27 (leaf, pending)
+┃  ┃  ┃           ┃      k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃           ┃      pc: _PC_CELL:Int
+┃  ┃  ┃           ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃           ┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃           ┃
+┃  ┃  ┃           ┗━━┓ subst: .Subst
+┃  ┃  ┃              ┃ constraint: true
+┃  ┃  ┃              │
+┃  ┃  ┃              └─ 28 (leaf, pending)
+┃  ┃  ┃                  k: #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W ...
+┃  ┃  ┃                  pc: _PC_CELL:Int
+┃  ┃  ┃                  callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃                  statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃     ┃ constraint:
+┃  ┃     ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+┃  ┃     │
+┃  ┃     ├─ 11
+┃  ┃     │   k: Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) ~> #deductGas ~> #access [ EX ...
+┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     │
+┃  ┃     │  (5 steps)
+┃  ┃     └─ 21 (leaf, terminal)
+┃  ┃         k: #halt ~> _K_CELL:K
+┃  ┃         pc: _PC_CELL:Int
+┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃         statusCode: EVMC_OUT_OF_GAS
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint:
+┃     ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃     │
+┃     ├─ 8
+┃     │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     │
+┃     │  (6 steps)
+┃     └─ 15 (leaf, terminal)
+┃         k: #halt ~> _K_CELL:K
+┃         pc: _PC_CELL:Int
+┃         callDepth: _CALLDEPTH_CELL:Int
+┃         statusCode: EVMC_OUT_OF_GAS
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     ( notBool _USEGAS_CELL:Bool )
+   │
+   └─ 5 (leaf, pending)
+       k: #gas [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:I ...
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: _STATUSCODE_CELL:StatusCode
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : _WS:WordStack ) ) ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #gas [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _USEGAS_CELL:Bool #Equals true } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _USEGAS_CELL:Bool #Equals false } )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals _USEGAS_CELL:Bool } )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+      ~> #deductGas
+      ~> #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+      ~> #deductGas
+      ~> #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+      ~> #deductGas
+      ~> #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) } ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) )
+
+
+
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 17:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And { true #Equals #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) } ) ) ) ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <Gas #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi } ) ) ) ) )
+
+
+
+Node 21:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) } ) ) )
+
+
+
+Node 22:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 23:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 24:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 25:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And { true #Equals #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) } ) ) ) ) )
+
+
+
+Node 26:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <Gas #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi } ) ) ) ) )
+
+
+
+Node 27:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 28:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ EXTCODECOPY , EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int ]
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 29:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 30:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And { true #Equals #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) } ) ) ) ) )
+
+
+
+Node 31:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi
+      ~> #deductGas
+      ~> EXTCODECOPY ( _W0:Int modInt pow160 ) _W1:Int _W2:Int _W3:Int
+      ~> #pc [ EXTCODECOPY ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int )
+          </memoryUsed>
+          ...
+        </callState>
+        <substate>
+          <accessedAccounts>
+            _ACCESSEDACCOUNTS_CELL:Set
+          </accessedAccounts>
+          ...
+        </substate>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals Ghasaccesslist << _SCHEDULE_CELL:Schedule >> }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W3:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextcodecopy ( _SCHEDULE_CELL:Schedule , _W3:Int ) <Gas #if ( _W0:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set #then Gwarmstorageread < _SCHEDULE_CELL:Schedule > #else Gcoldaccountaccess < _SCHEDULE_CELL:Schedule > #fi } ) ) ) ) )
+
+
+
