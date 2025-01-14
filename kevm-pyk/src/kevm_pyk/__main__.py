@@ -642,6 +642,7 @@ def exec_summarize(options: ProveOptions) -> None:
     passed_opcodes = get_passed_opcodes()
     unpassed_opcodes = [opcode for opcode in all_opcodes if opcode not in passed_opcodes]
     next_opcode = unpassed_opcodes[0]
+    _LOGGER.info(f'summarizing {next_opcode}')
     summarize(next_opcode)
     # analyze_proof('STOP', 11)
 

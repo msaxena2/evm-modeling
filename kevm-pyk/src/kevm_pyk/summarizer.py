@@ -35,7 +35,7 @@ OPCODES: dict[str, KApply] = {
     'MOD': KApply('MOD_EVM_BinStackOp'),
     'SMOD': KApply('SMOD_EVM_BinStackOp'),
     'ADDMOD': KApply('ADDMOD_EVM_TernStackOp'),
-    'MULMOD': KApply('ADDMOD_EVM_TernStackOp'),
+    'MULMOD': KApply('MULMOD_EVM_TernStackOp'),
     'EXP': KApply('EXP_EVM_BinStackOp'),
     'SIGNEXTEND': KApply('SIGNEXTEND_EVM_BinStackOp'),
     'LT': KApply('LT_EVM_BinStackOp'),
@@ -129,6 +129,7 @@ OPCODES_SUMMARY_STATUS = {
     'MOD': 'PASSED, No underflow check in KCFG',
     'SMOD': 'PASSED, No underflow check in KCFG',
     'ADDMOD': 'PASSED, No underflow check in KCFG',
+    'MULMOD': 'PASSED, No underflow check in KCFG',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
 
