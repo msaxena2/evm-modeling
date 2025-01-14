@@ -638,7 +638,7 @@ def exec_kast(options: KastOptions) -> None:
 
 def exec_summarize(options: ProveOptions) -> None:
     # batch_summarize()
-    summarize('MUL')
+    summarize('SUB')
     # analyze_proof('STOP', 11)
 
 # Helpers
