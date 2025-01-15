@@ -223,4 +223,9 @@ module INT-SIMPLIFICATION-COMMON
 
     rule A -Int B +Int C <=Int D => false requires D <Int A -Int B andBool 0 <=Int C [simplification]
 
+  // ###########################################################################
+  // log
+  // ###########################################################################
+
+    rule #Ceil ( log2Int ( X:Int ) ) => { true #Equals X >Int 0 } [simplification]
 endmodule
