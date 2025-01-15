@@ -148,8 +148,8 @@ OPCODES_SUMMARY_STATUS = {
     'SHR': 'PASSED, No underflow check in KCFG',
     'SAR': 'PASSED, No underflow check in KCFG',
     'SHA3': 'PASSED, No underflow check in KCFG',
-    'ADDRESS': 'TODO, Found NDBranch',
-    'BALANCE': 'TODO, Proof crashed',
+    'ADDRESS': 'PASSED, No underflow check, no .Account',
+    'BALANCE': 'PASSED, no underflow check, no gas usage',
     'ORIGIN': 'TODO, Found NDBranch',
     'CALLER': 'TODO, Found NDBranch',
     'CALLVALUE': 'PASSED, No underflow check in KCFG',
@@ -317,11 +317,19 @@ class KEVMSummarizer:
         # >> TODO: The cterm_build_claim will remove all the type I've set.
         kclaim = KClaim(subst(kclaim.body), subst(kclaim.requires), subst(kclaim.ensures), kclaim.att)
         proof = APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
-        # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `_ID_CELL` to `Int`
-        _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
-        type_subst = CSubst(Subst(_type_subst), ())
-        node = proof.kcfg.get_node(1)
-        proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
+        if opcode_symbol == 'ADDRESS':
+            # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `_ID_CELL` to `Int`
+            _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
+            type_subst = CSubst(Subst(_type_subst), ())
+            node = proof.kcfg.get_node(1)
+            proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
+        if opcode_symbol == 'BALANCE':
+            # >> CHECK THIS: don't calculate Gas
+            _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
+            gas_subst = CSubst(Subst(_gas_subst), ())
+            node = proof.kcfg.get_node(1)
+            proof.kcfg.let_node(1, cterm=gas_subst(node.cterm), attrs=node.attrs)
+            
         _LOGGER.debug(proof.kcfg.nodes[0].cterm.to_dict())
         return proof
 
