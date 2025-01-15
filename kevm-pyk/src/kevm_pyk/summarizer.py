@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from platform import node
 import time
 import traceback
 from multiprocessing import Pool
@@ -9,7 +10,7 @@ from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
 from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
-from pyk.kast.outer import KSort
+from pyk.kast.outer import KSort, KClaim
 from pyk.kcfg import KCFGExplore, KCFG
 from pyk.kdist import kdist
 from pyk.kore.rpc import KoreClient
@@ -312,8 +313,17 @@ class KEVMSummarizer:
         final_subst = CSubst(Subst(_final_subst), ())
 
         opcode_symbol = opcode.label.name.split('_')[0]
-        kclaim, _ = cterm_build_claim(f'{opcode_symbol}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm))
-        return APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
+        kclaim, subst = cterm_build_claim(f'{opcode_symbol}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm))
+        # >> TODO: The cterm_build_claim will remove all the type I've set.
+        kclaim = KClaim(subst(kclaim.body), subst(kclaim.requires), subst(kclaim.ensures), kclaim.att)
+        proof = APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
+        # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `_ID_CELL` to `Int`
+        _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
+        type_subst = CSubst(Subst(_type_subst), ())
+        node = proof.kcfg.get_node(1)
+        proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
+        _LOGGER.debug(proof.kcfg.nodes[0].cterm.to_dict())
+        return proof
 
     def explore(self, proof: APRProof) -> None:
         """
