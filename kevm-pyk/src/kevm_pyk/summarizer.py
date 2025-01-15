@@ -130,7 +130,7 @@ OPCODES_SUMMARY_STATUS = {
     'SMOD': 'PASSED, No underflow check in KCFG',
     'ADDMOD': 'PASSED, No underflow check in KCFG',
     'MULMOD': 'PASSED, No underflow check in KCFG',
-    'EXP': 'TODO, Actually not passed, because of the ndbranches, I just want to skip this during batch summarization, No underflow check in KCFG',
+    'EXP': 'PASSED, No underflow check in KCFG',
     'SIGNEXTEND': 'PASSED, No underflow check in KCFG',
     'LT': 'PASSED, No underflow check in KCFG',
     'GT': 'PASSED, No underflow check in KCFG',

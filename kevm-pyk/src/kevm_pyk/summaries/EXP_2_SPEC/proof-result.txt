@@ -86,7 +86,7 @@ Proof EXP_2_SPEC Failed
 ┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃  ┃     │
 ┃  ┃     │  (5 steps)
-┃  ┃     └─ 17 (leaf, terminal)
+┃  ┃     └─ 15 (leaf, terminal)
 ┃  ┃         k: #halt ~> _K_CELL:K
 ┃  ┃         pc: _PC_CELL:Int
 ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
@@ -103,30 +103,32 @@ Proof EXP_2_SPEC Failed
 ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃     │
 ┃     │  (1 step)
-┃     ├─ 10
+┃     ├─ 10 (split)
 ┃     │   k: ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > * ...
 ┃     │   pc: _PC_CELL:Int
 ┃     │   callDepth: _CALLDEPTH_CELL:Int
 ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃     ┃
-┃     ┃ (1 step)
-┃     ┣━━┓
+┃     ┃ (branch)
+┃     ┣━━┓ subst: .Subst
+┃     ┃  ┃ constraint:
+┃     ┃  ┃     ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) <=Gas _GAS_CELL:Gas
 ┃     ┃  │
 ┃     ┃  ├─ 13
-┃     ┃  │   k: #access [ EXP , EXP _W0:Int _W1:Int ] ~> EXP _W0:Int _W1:Int ~> #pc [ EXP ] ~> _ ...
+┃     ┃  │   k: ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > * ...
 ┃     ┃  │   pc: _PC_CELL:Int
 ┃     ┃  │   callDepth: _CALLDEPTH_CELL:Int
 ┃     ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃     ┃  │
-┃     ┃  │  (4 steps)
-┃     ┃  ├─ 20
+┃     ┃  │  (5 steps)
+┃     ┃  ├─ 18
 ┃     ┃  │   k: _K_CELL:K
 ┃     ┃  │   pc: ( _PC_CELL:Int +Int 1 )
 ┃     ┃  │   callDepth: _CALLDEPTH_CELL:Int
 ┃     ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
 ┃     ┃  │
 ┃     ┃  ┊  constraint:
-┃     ┃  ┊      Ceil_f22a2e60
+┃     ┃  ┊      0 <Int _W1:Int
 ┃     ┃  ┊  subst: ...
 ┃     ┃  └─ 2 (leaf, target)
 ┃     ┃      k: _K_CELL:K
@@ -134,28 +136,22 @@ Proof EXP_2_SPEC Failed
 ┃     ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
 ┃     ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
 ┃     ┃
-┃     ┣━━┓
-┃     ┃  │
-┃     ┃  ├─ 14
-┃     ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ EXP , EXP _W0:Int _W1:Int ] ~> EXP _W0:Int _W1 ...
-┃     ┃  │   pc: _PC_CELL:Int
-┃     ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃     ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃     ┃  │
-┃     ┃  │  (4 steps)
-┃     ┃  └─ 16 (leaf, terminal)
-┃     ┃      k: #halt ~> _K_CELL:K
-┃     ┃      pc: _PC_CELL:Int
-┃     ┃      callDepth: _CALLDEPTH_CELL:Int
-┃     ┃      statusCode: EVMC_OUT_OF_GAS
-┃     ┃
-┃     ┗━━┓
+┃     ┗━━┓ subst: .Subst
+┃        ┃ constraint:
+┃        ┃     _GAS_CELL:Gas <Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) )
 ┃        │
-┃        └─ 15 (stuck, leaf)
-┃            k: ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > * ...
+┃        ├─ 14
+┃        │   k: ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > * ...
+┃        │   pc: _PC_CELL:Int
+┃        │   callDepth: _CALLDEPTH_CELL:Int
+┃        │   statusCode: _STATUSCODE_CELL:StatusCode
+┃        │
+┃        │  (5 steps)
+┃        └─ 16 (leaf, terminal)
+┃            k: #halt ~> _K_CELL:K
 ┃            pc: _PC_CELL:Int
 ┃            callDepth: _CALLDEPTH_CELL:Int
-┃            statusCode: _STATUSCODE_CELL:StatusCode
+┃            statusCode: EVMC_OUT_OF_GAS
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
@@ -168,7 +164,7 @@ Proof EXP_2_SPEC Failed
    │   statusCode: _STATUSCODE_CELL:StatusCode
    │
    │  (4 steps)
-   ├─ 18
+   ├─ 17
    │   k: _K_CELL:K
    │   pc: ( _PC_CELL:Int +Int 1 )
    │   callDepth: _CALLDEPTH_CELL:Int
@@ -495,46 +491,8 @@ Node 13:
 ( <generatedTop>
   <kevm>
     <k>
-      #access [ EXP , EXP _W0:Int _W1:Int ]
-      ~> EXP _W0:Int _W1:Int
-      ~> #pc [ EXP ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <gas>
-            _GAS_CELL:Gas -Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) )
-          </gas>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( #Ceil ( log2Int ( _W1:Int ) )
-#And ( { true #Equals 0 <Int _W1:Int }
-#And { true #Equals ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) <=Gas _GAS_CELL:Gas } ) ) ) )
-
-
-
-Node 14:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #end EVMC_OUT_OF_GAS
+      ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) )
+      ~> #deductGas
       ~> #access [ EXP , EXP _W0:Int _W1:Int ]
       ~> EXP _W0:Int _W1:Int
       ~> #pc [ EXP ]
@@ -563,13 +521,12 @@ Node 14:
   ...
 </generatedTop>
 #And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( #Ceil ( log2Int ( _W1:Int ) )
 #And ( { true #Equals 0 <Int _W1:Int }
-#And { true #Equals _GAS_CELL:Gas <Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) } ) ) ) )
+#And { true #Equals ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) <=Gas _GAS_CELL:Gas } ) ) )
 
 
 
-Node 15:
+Node 14:
 
 ( <generatedTop>
   <kevm>
@@ -605,54 +562,11 @@ Node 15:
 </generatedTop>
 #And ( { true #Equals _USEGAS_CELL:Bool }
 #And ( { true #Equals 0 <Int _W1:Int }
-#And ( #Not ( ( #Ceil ( log2Int ( _W1:Int ) )
-#And { true #Equals _GAS_CELL:Gas <Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) } ) )
-#And #Not ( ( #Ceil ( log2Int ( _W1:Int ) )
-#And { true #Equals ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) <=Gas _GAS_CELL:Gas } ) ) ) ) ) )
+#And { true #Equals _GAS_CELL:Gas <Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) } ) ) )
 
 
 
-Node 16:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #halt
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <statusCode>
-          EVMC_OUT_OF_GAS
-        </statusCode>
-        <callState>
-          <gas>
-            _GAS_CELL:Gas
-          </gas>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( #Ceil ( log2Int ( _W1:Int ) )
-#And ( { true #Equals 0 <Int _W1:Int }
-#And { true #Equals _GAS_CELL:Gas <Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) } ) ) ) )
-
-
-
-Node 17:
+Node 15:
 
 ( <generatedTop>
   <kevm>
@@ -691,7 +605,46 @@ Node 17:
 
 
 
-Node 18:
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals 0 <Int _W1:Int }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) } ) ) )
+
+
+
+Node 17:
 
 ( <generatedTop>
   <kevm>
@@ -718,6 +671,44 @@ Node 18:
   ...
 </generatedTop>
 #And { true #Equals ( notBool _USEGAS_CELL:Bool ) } )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( powmod ( _W0:Int , _W1:Int , pow256 ) : _WS:WordStack )
+          </wordStack>
+          <pc>
+            ( _PC_CELL:Int +Int 1 )
+          </pc>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) )
+          </gas>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals 0 <Int _W1:Int }
+#And { true #Equals ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) <=Gas _GAS_CELL:Gas } ) ) )
 
 
 
@@ -756,45 +747,6 @@ Node 19:
 #And ( { true #Equals _USEGAS_CELL:Bool }
 #And ( { true #Equals _W1:Int <=Int 0 }
 #And { true #Equals Gexp < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) )
-
-
-
-Node 20:
-
-( <generatedTop>
-  <kevm>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            ( powmod ( _W0:Int , _W1:Int , pow256 ) : _WS:WordStack )
-          </wordStack>
-          <pc>
-            ( _PC_CELL:Int +Int 1 )
-          </pc>
-          <gas>
-            _GAS_CELL:Gas -Gas ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) )
-          </gas>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( #Ceil ( log2Int ( _W1:Int ) )
-#And ( { true #Equals 0 <Int _W1:Int }
-#And { true #Equals ( Gexp < _SCHEDULE_CELL:Schedule > +Int ( Gexpbyte < _SCHEDULE_CELL:Schedule > *Int ( ( log2Int ( _W1:Int ) /Int 8 ) +Int 1 ) ) ) <=Gas _GAS_CELL:Gas } ) ) ) )
 
 
 
