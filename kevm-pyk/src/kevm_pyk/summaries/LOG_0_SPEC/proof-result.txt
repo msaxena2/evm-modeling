@@ -1,0 +1,282 @@
+Proof LOG_0_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ LOG ( 0 ) ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     #sizeWordStack ( _WS:WordStack , 0 ) <Int 2
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ LOG ( 0 ) ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 8 (leaf, terminal)
+┃      k: #halt ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: EVMC_STACK_UNDERFLOW
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool _STATIC_CELL:Bool )
+┃  ┃     2 <=Int #sizeWordStack ( _WS:WordStack , 0 )
+┃  │
+┃  ├─ 4
+┃  │   k: #next [ LOG ( 0 ) ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (2 steps)
+┃  └─ 6 (leaf, pending)
+┃      k: #exec [ LOG ( 0 ) ] ~> #pc [ LOG ( 0 ) ] ~> _K_CELL:K
+┃      pc: _PC_CELL:Int
+┃      callDepth: _CALLDEPTH_CELL:Int
+┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     _STATIC_CELL:Bool
+   ┃     2 <=Int #sizeWordStack ( _WS:WordStack , 0 )
+   │
+   ├─ 5
+   │   k: #next [ LOG ( 0 ) ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (2 steps)
+   └─ 7 (leaf, terminal)
+       k: #halt ~> _K_CELL:K
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: EVMC_STATIC_MODE_VIOLATION
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ LOG ( 0 ) ]
+      ~> _K_CELL:K
+    </k>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ LOG ( 0 ) ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <Int 2 } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ LOG ( 0 ) ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WS:WordStack
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _STATIC_CELL:Bool #Equals false }
+#And { true #Equals 2 <=Int #sizeWordStack ( _WS:WordStack , 0 ) } ) )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ LOG ( 0 ) ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WS:WordStack
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _STATIC_CELL:Bool #Equals true }
+#And { true #Equals 2 <=Int #sizeWordStack ( _WS:WordStack , 0 ) } ) )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #exec [ LOG ( 0 ) ]
+      ~> #pc [ LOG ( 0 ) ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            _WS:WordStack
+          </wordStack>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals 2 <=Int #sizeWordStack ( _WS:WordStack , 0 ) } ) )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STATIC_MODE_VIOLATION
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WS:WordStack
+          </wordStack>
+          <static>
+            true
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _STATIC_CELL:Bool }
+#And { true #Equals 2 <=Int #sizeWordStack ( _WS:WordStack , 0 ) } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STACK_UNDERFLOW
+        </statusCode>
+        <callState>
+          <wordStack>
+            _WS:WordStack
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <Int 2 } )
+
+
+

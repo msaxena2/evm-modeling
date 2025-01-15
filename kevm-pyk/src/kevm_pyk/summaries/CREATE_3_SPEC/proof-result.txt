@@ -1,0 +1,1141 @@
+Proof CREATE_3_SPEC Failed
+
+┌─ 1 (root, split, init)
+│   k: #next [ CREATE ] ~> _K_CELL:K
+│   pc: _PC_CELL:Int
+│   callDepth: _CALLDEPTH_CELL:Int
+│   statusCode: _STATUSCODE_CELL:StatusCode
+┃
+┃ (branch)
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool _STATIC_CELL:Bool )
+┃  │
+┃  ├─ 3
+┃  │   k: #next [ CREATE ] ~> _K_CELL:K
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (3 steps)
+┃  ├─ 5 (split)
+┃  │   k: #gas [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE _W0:Int _W1:Int _W2:I ...
+┃  │   pc: _PC_CELL:Int
+┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     _USEGAS_CELL:Bool
+┃  ┃  │
+┃  ┃  ├─ 6
+┃  ┃  │   k: #gas [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE _W0:Int _W1:Int _W2:I ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  │
+┃  ┃  │  (4 steps)
+┃  ┃  ├─ 9 (split)
+┃  ┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (branch)
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 10
+┃  ┃  ┃  │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (3 steps)
+┃  ┃  ┃  ├─ 13 (split)
+┃  ┃  ┃  │   k: ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , ...
+┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃ (branch)
+┃  ┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃  ┃     ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ├─ 14
+┃  ┃  ┃  ┃  │   k: ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , ...
+┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  │  (2 steps)
+┃  ┃  ┃  ┃  ├─ 16
+┃  ┃  ┃  ┃  │   k: 0 ~> #deductGas ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE ...
+┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃  ┃ (1 step)
+┃  ┃  ┃  ┃  ┣━━┓
+┃  ┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ┃  ├─ 18
+┃  ┃  ┃  ┃  ┃  │   k: #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE _W0:Int _W1:Int _W ...
+┃  ┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ┃  │  (4 steps)
+┃  ┃  ┃  ┃  ┃  └─ 22 (leaf, terminal)
+┃  ┃  ┃  ┃  ┃      k: #halt ~> _K_CELL:K
+┃  ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  ┃      statusCode: EVMC_OUT_OF_GAS
+┃  ┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃  ┣━━┓
+┃  ┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ┃  ├─ 19
+┃  ┃  ┃  ┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> C ...
+┃  ┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃  ┃  │
+┃  ┃  ┃  ┃  ┃  │  (4 steps)
+┃  ┃  ┃  ┃  ┃  └─ 23 (leaf, terminal)
+┃  ┃  ┃  ┃  ┃      k: #halt ~> _K_CELL:K
+┃  ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
+┃  ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃  ┃      statusCode: EVMC_OUT_OF_GAS
+┃  ┃  ┃  ┃  ┃
+┃  ┃  ┃  ┃  ┗━━┓
+┃  ┃  ┃  ┃     │
+┃  ┃  ┃  ┃     └─ 20 (stuck, leaf)
+┃  ┃  ┃  ┃         k: 0 ~> #deductGas ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE ...
+┃  ┃  ┃  ┃         pc: _PC_CELL:Int
+┃  ┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  ┃
+┃  ┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃  ┃     ┃ constraint:
+┃  ┃  ┃     ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) )
+┃  ┃  ┃     │
+┃  ┃  ┃     ├─ 15
+┃  ┃  ┃     │   k: ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , ...
+┃  ┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃  ┃     │
+┃  ┃  ┃     │  (8 steps)
+┃  ┃  ┃     └─ 21 (leaf, terminal)
+┃  ┃  ┃         k: #halt ~> _K_CELL:K
+┃  ┃  ┃         pc: _PC_CELL:Int
+┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃  ┃         statusCode: EVMC_OUT_OF_GAS
+┃  ┃  ┃
+┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃     ┃ constraint:
+┃  ┃     ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃     │
+┃  ┃     ├─ 11
+┃  ┃     │   k: ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _ ...
+┃  ┃     │   pc: _PC_CELL:Int
+┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ┃     │
+┃  ┃     │  (6 steps)
+┃  ┃     └─ 17 (leaf, terminal)
+┃  ┃         k: #halt ~> _K_CELL:K
+┃  ┃         pc: _PC_CELL:Int
+┃  ┃         callDepth: _CALLDEPTH_CELL:Int
+┃  ┃         statusCode: EVMC_OUT_OF_GAS
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint:
+┃     ┃     ( notBool _USEGAS_CELL:Bool )
+┃     │
+┃     ├─ 7
+┃     │   k: #gas [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE _W0:Int _W1:Int _W2:I ...
+┃     │   pc: _PC_CELL:Int
+┃     │   callDepth: _CALLDEPTH_CELL:Int
+┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+┃     │
+┃     │  (4 steps)
+┃     └─ 12 (leaf, terminal)
+┃         k: #halt ~> _K_CELL:K
+┃         pc: _PC_CELL:Int
+┃         callDepth: _CALLDEPTH_CELL:Int
+┃         statusCode: EVMC_OUT_OF_GAS
+┃
+┗━━┓ subst: .Subst
+   ┃ constraint:
+   ┃     _STATIC_CELL:Bool
+   │
+   ├─ 4
+   │   k: #next [ CREATE ] ~> _K_CELL:K
+   │   pc: _PC_CELL:Int
+   │   callDepth: _CALLDEPTH_CELL:Int
+   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │
+   │  (2 steps)
+   └─ 8 (leaf, terminal)
+       k: #halt ~> _K_CELL:K
+       pc: _PC_CELL:Int
+       callDepth: _CALLDEPTH_CELL:Int
+       statusCode: EVMC_STATIC_MODE_VIOLATION
+
+
+┌─ 2 (root, leaf, target)
+│   k: _K_CELL:K
+│   pc: ?_FINAL_PC_CELL:Int
+│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
+│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+
+
+Node 1:
+
+<generatedTop>
+  <kevm>
+    <k>
+      #next [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) )
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _STATIC_CELL:Bool #Equals false } )
+
+
+
+Node 4:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) )
+          </wordStack>
+          <static>
+            _STATIC_CELL:Bool
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { _STATIC_CELL:Bool #Equals true } )
+
+
+
+Node 5:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } )
+
+
+
+Node 6:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals true }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 7:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #gas [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      _USEGAS_CELL:Bool
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { _USEGAS_CELL:Bool #Equals false }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 8:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_STATIC_MODE_VIOLATION
+        </statusCode>
+        <callState>
+          <wordStack>
+            ( _W0:Int : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) )
+          </wordStack>
+          <static>
+            true
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { true #Equals _STATIC_CELL:Bool } )
+
+
+
+Node 9:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And { true #Equals ( notBool _STATIC_CELL:Bool ) } ) )
+
+
+
+Node 10:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) ) )
+
+
+
+Node 11:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      ~> #deductGas
+      ~> #gas [ CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 12:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals ( notBool _USEGAS_CELL:Bool ) } ) )
+
+
+
+Node 13:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) )
+      ~> #deductGas
+      ~> #allocateCreateGas
+      ~> 0
+      ~> #deductGas
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas } ) ) )
+
+
+
+Node 14:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) )
+      ~> #deductGas
+      ~> #allocateCreateGas
+      ~> 0
+      ~> #deductGas
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 15:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) )
+      ~> #deductGas
+      ~> #allocateCreateGas
+      ~> 0
+      ~> #deductGas
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) } ) ) ) )
+
+
+
+Node 16:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      0
+      ~> #deductGas
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <callGas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
+          </callGas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) ) )
+
+
+
+Node 17:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And { true #Equals _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) } ) ) )
+
+
+
+Node 18:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi -Gas 0
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <callGas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
+          </callGas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And ( #Ceil ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 )
+#And { true #Equals 0 <=Gas #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi } ) ) ) ) ) )
+
+
+
+Node 19:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #end EVMC_OUT_OF_GAS
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <callGas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
+          </callGas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And ( #Ceil ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 )
+#And { true #Equals #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi <Gas 0 } ) ) ) ) ) )
+
+
+
+Node 20:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      0
+      ~> #deductGas
+      ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
+      ~> CREATE _W0:Int _W1:Int _W2:Int
+      ~> #pc [ CREATE ]
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <gas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <callGas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
+          </callGas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And ( #Not ( ( #Ceil ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 )
+#And { true #Equals #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi <Gas 0 } ) )
+#And #Not ( ( #Ceil ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 )
+#And { true #Equals 0 <=Gas #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi } ) ) ) ) ) ) ) )
+
+
+
+Node 21:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And { true #Equals _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) } ) ) ) )
+
+
+
+Node 22:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi -Gas 0
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <callGas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
+          </callGas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And ( #Ceil ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 )
+#And { true #Equals 0 <=Gas #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi } ) ) ) ) ) )
+
+
+
+Node 23:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #halt
+      ~> _K_CELL:K
+    </k>
+    <schedule>
+      _SCHEDULE_CELL:Schedule
+    </schedule>
+    <useGas>
+      true
+    </useGas>
+    <ethereum>
+      <evm>
+        <statusCode>
+          EVMC_OUT_OF_GAS
+        </statusCode>
+        <callState>
+          <gas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi
+          </gas>
+          <memoryUsed>
+            #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
+          </memoryUsed>
+          <callGas>
+            #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
+          </callGas>
+          <static>
+            false
+          </static>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And ( { true #Equals _USEGAS_CELL:Bool }
+#And ( { true #Equals ( notBool _STATIC_CELL:Bool ) }
+#And ( { true #Equals ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas }
+#And ( { true #Equals ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) }
+#And ( #Ceil ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 )
+#And { true #Equals #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi <Gas 0 } ) ) ) ) ) )
+
+
+
