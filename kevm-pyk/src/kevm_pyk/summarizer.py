@@ -150,7 +150,7 @@ OPCODES_SUMMARY_STATUS = {
     'SHA3': 'PASSED, No underflow check in KCFG',
     'ADDRESS': 'PASSED, No underflow check, no .Account',
     'BALANCE': 'PASSED, no underflow check, no gas usage',
-    'ORIGIN': 'TODO, Found NDBranch',
+    'ORIGIN': 'PASSED, no underflow check, no .Account in origin cell',
     'CALLER': 'TODO, Found NDBranch',
     'CALLVALUE': 'PASSED, No underflow check in KCFG',
     'CALLDATALOAD': 'PASSED, No underflow check in KCFG',
@@ -160,7 +160,7 @@ OPCODES_SUMMARY_STATUS = {
     'CODECOPY': 'PASSED, No underflow check in KCFG',
     'GASPRICE': 'PASSED, No underflow check in KCFG',
     'EXTCODESIZE': 'TODO, Proof crashed',
-    'EXTCODECOPY': 'TODO, Proof crashed',
+    'EXTCODECOPY': 'PASSED, No underflow check, No gas usage',
     'RETURNDATASIZE': 'TODO, Proof crashed',
     'RETURNDATACOPY': 'PASSED, No underflow check in KCFG',
     'EXTCODEHASH': 'TODO, Proof crashed',
@@ -318,13 +318,27 @@ class KEVMSummarizer:
         kclaim = KClaim(subst(kclaim.body), subst(kclaim.requires), subst(kclaim.ensures), kclaim.att)
         proof = APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
         if opcode_symbol == 'ADDRESS':
-            # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `_ID_CELL` to `Int`
+            # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `ID_CELL` to `Int`
+            _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
             _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol == 'BALANCE':
+        if opcode_symbol == 'CALLER':
+            _LOGGER.info(f'Setting the type of `CALLER_CELL` to `Int` for {opcode_symbol}')
+            _type_subst: dict[str, KInner] = {'CALLER_CELL': KVariable('CALLER_CELL', KSort('Int'))}
+            type_subst = CSubst(Subst(_type_subst), ())
+            node = proof.kcfg.get_node(1)
+            proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
+        if opcode_symbol == 'ORIGIN':
+            _LOGGER.info(f'Setting the type of `ORIGIN_CELL` to `Int` for {opcode_symbol}')
+            _type_subst: dict[str, KInner] = {'ORIGIN_CELL': KVariable('ORIGIN_CELL', KSort('Int'))}
+            type_subst = CSubst(Subst(_type_subst), ())
+            node = proof.kcfg.get_node(1)
+            proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
+        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY']:
             # >> CHECK THIS: don't calculate Gas
+            _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
             gas_subst = CSubst(Subst(_gas_subst), ())
             node = proof.kcfg.get_node(1)
