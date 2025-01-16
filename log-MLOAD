@@ -1,0 +1,67 @@
+INFO 2025-01-16 09:32:07,325 kevm_pyk.summarizer - Number of opcodes: 84
+INFO 2025-01-16 09:32:07,325 kevm_pyk.summarizer - Number of passed opcodes: 62
+INFO 2025-01-16 09:32:07,325 kevm_pyk.summarizer - Number of todo opcodes: 22
+INFO 2025-01-16 09:32:07,325 kevm_pyk.summarizer - Todo opcodes: ['SELFBALANCE', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH', 'LOG', 'CREATE', 'CALL', 'CALLCODE', 'RETURN', 'DELEGATECALL', 'CREATE2', 'STATICCALL', 'REVERT', 'INVALID', 'SELFDESTRUCT']
+INFO 2025-01-16 09:32:07,325 kevm_pyk.__main__ - summarizing ['SELFBALANCE', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH', 'LOG', 'CREATE', 'CALL', 'CALLCODE', 'RETURN', 'DELEGATECALL', 'CREATE2', 'STATICCALL', 'REVERT', 'INVALID', 'SELFDESTRUCT']
+INFO 2025-01-16 09:32:07,325 pyk.kast.outer - Loading JSON definition: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-16 09:32:07,520 pyk.kast.outer - Converting JSON definition to Kast: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-16 09:32:08,182 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MLOAD_1_SPEC/kcfg
+INFO 2025-01-16 09:32:08,182 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MLOAD_1_SPEC/kcfg/nodes
+INFO 2025-01-16 09:32:08,186 kevm_pyk.summarizer - Setting the type of `USEGAS_CELL` to `false` for MLOAD
+INFO 2025-01-16 09:32:08,187 pyk.kore.rpc - Starting KoreServer: kore-rpc-booster /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore --module EDSL --server-port 0 --llvm-backend-library /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/llvm-library/interpreter.so --interim-simplification 25
+INFO 2025-01-16 09:32:08,192 pyk.kore.rpc - [PID=2785099][stde] [proxy] Loading definition from /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore, main module "EDSL"
+INFO 2025-01-16 09:32:09,383 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 28078226}
+INFO 2025-01-16 09:32:10,384 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 90}
+INFO 2025-01-16 09:32:11,479 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 250}
+INFO 2025-01-16 09:32:12,480 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Executing TimeSpec {sec = 0, nsec = 850609147}
+INFO 2025-01-16 09:32:13,482 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 31590228}
+INFO 2025-01-16 09:32:13,482 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 130}
+INFO 2025-01-16 09:32:14,584 pyk.kore.rpc - [PID=2785099][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 130}
+INFO 2025-01-16 09:32:14,600 pyk.kore.rpc - KoreServer started: 0.0.0.0:42179, pid=2785099
+INFO 2025-01-16 09:32:14,601 pyk.kore.rpc - Connecting to host: localhost:42179
+INFO 2025-01-16 09:32:14,601 pyk.kore.rpc - Connected to host: localhost:42179
+INFO 2025-01-16 09:32:14,601 kevm_pyk.utils - Computing definedness constraint for initial node: MLOAD_1_SPEC
+INFO 2025-01-16 09:32:14,616 pyk.kore.rpc - Sending request to localhost:42179: 139952090674576-001 - simplify
+INFO 2025-01-16 09:32:15,266 pyk.kore.rpc - Received response from localhost:42179: 139952090674576-001 - simplify
+INFO 2025-01-16 09:32:15,273 pyk.kore.rpc - Sending request to localhost:42179: 139952090674576-002 - simplify
+INFO 2025-01-16 09:32:15,585 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952090674576-001
+INFO 2025-01-16 09:32:15,585 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952090674576-002
+INFO 2025-01-16 09:32:15,585 pyk.kore.rpc - [PID=2785099][stde] [proxy] Starting RPC server
+INFO 2025-01-16 09:32:16,086 pyk.kore.rpc - Received response from localhost:42179: 139952090674576-002 - simplify
+INFO 2025-01-16 09:32:16,087 kevm_pyk.utils - Simplifying initial and target node: MLOAD_1_SPEC
+INFO 2025-01-16 09:32:16,092 pyk.kore.rpc - Sending request to localhost:42179: 139952090674576-003 - simplify
+INFO 2025-01-16 09:32:16,586 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952090674576-003
+INFO 2025-01-16 09:32:16,727 pyk.kore.rpc - Received response from localhost:42179: 139952090674576-003 - simplify
+INFO 2025-01-16 09:32:16,734 pyk.kore.rpc - Sending request to localhost:42179: 139952090674576-004 - simplify
+INFO 2025-01-16 09:32:17,349 pyk.kore.rpc - Received response from localhost:42179: 139952090674576-004 - simplify
+INFO 2025-01-16 09:32:17,353 pyk.proof.reachability - Wrote proof data for MLOAD_1_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MLOAD_1_SPEC/proof.json
+INFO 2025-01-16 09:32:17,354 pyk.kore.rpc - Connecting to host: localhost:42179
+INFO 2025-01-16 09:32:17,354 pyk.kore.rpc - Connected to host: localhost:42179
+INFO 2025-01-16 09:32:17,354 pyk.proof.proof - [ZJH] prover type: <class 'pyk.proof.reachability.APRProver'>
+INFO 2025-01-16 09:32:17,355 pyk.proof.reachability - [ZJH] init proof
+INFO 2025-01-16 09:32:17,358 pyk.kore.rpc - Sending request to localhost:42179: 139952090639696-001 - add-module
+INFO 2025-01-16 09:32:17,587 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952090639696-001
+INFO 2025-01-16 09:32:17,587 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952090674576-004
+INFO 2025-01-16 09:32:18,307 pyk.kore.rpc - Received response from localhost:42179: 139952090639696-001 - add-module
+INFO 2025-01-16 09:32:18,322 pyk.kore.rpc - Sending request to localhost:42179: 139952090639696-002 - add-module
+INFO 2025-01-16 09:32:18,588 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952090639696-002
+INFO 2025-01-16 09:32:19,302 pyk.kore.rpc - Received response from localhost:42179: 139952090639696-002 - add-module
+INFO 2025-01-16 09:32:19,302 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-16 09:32:19,302 pyk.proof.reachability - [ZJH] node_id: 1
+INFO 2025-01-16 09:32:19,303 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-16 09:32:19,303 pyk.proof.reachability - [ZJH] node_id: 2
+INFO 2025-01-16 09:32:19,303 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-16 09:32:19,303 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-16 09:32:19,303 pyk.proof.proof - [ZJH] proof initialized
+INFO 2025-01-16 09:32:19,303 pyk.proof.proof - [ZJH] pending: [1]
+INFO 2025-01-16 09:32:19,303 pyk.proof.reachability - Before appending step: 1
+INFO 2025-01-16 09:32:19,304 pyk.kore.rpc - Connecting to host: localhost:42179
+INFO 2025-01-16 09:32:19,304 pyk.proof.proof - Submitted steps for proof: MLOAD_1_SPEC
+INFO 2025-01-16 09:32:19,304 pyk.kore.rpc - Connected to host: localhost:42179
+INFO 2025-01-16 09:32:19,335 pyk.kore.rpc - Sending request to localhost:42179: 139952089243088-001 - implies
+INFO 2025-01-16 09:32:19,589 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952089243088-001
+INFO 2025-01-16 09:32:20,102 pyk.kore.rpc - Received response from localhost:42179: 139952089243088-001 - implies
+INFO 2025-01-16 09:32:20,109 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-16 09:32:20,109 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-16 09:32:20,109 pyk.kore.rpc - Sending request to localhost:42179: 139952089243088-002 - execute
+INFO 2025-01-16 09:32:20,590 pyk.kore.rpc - [PID=2785099][stde] [proxy] Processing request 139952089243088-002
