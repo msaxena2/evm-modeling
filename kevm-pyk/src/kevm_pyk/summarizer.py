@@ -163,9 +163,9 @@ OPCODES_SUMMARY_STATUS = {
     'EXTCODECOPY': 'PASSED, No underflow check, No gas usage',
     'RETURNDATASIZE': 'PASSED, No underflow check, No gas usage',
     'RETURNDATACOPY': 'PASSED, No underflow check in KCFG',
-    'EXTCODEHASH': 'TODO, Proof crashed',
+    'EXTCODEHASH': 'PASSED, No underflow check, No gas usage',
     'BLOCKHASH': 'PASSED, No underflow check in KCFG',
-    'COINBASE': 'TODO, Proof crashed',
+    'COINBASE': 'PASSED, No underflow check, No gas usage',
     'TIMESTAMP': 'PASSED, No underflow check in KCFG',
     'NUMBER': 'PASSED, No underflow check in KCFG',
     'PREVRANDAO': 'PASSED, No underflow check in KCFG',
@@ -174,7 +174,7 @@ OPCODES_SUMMARY_STATUS = {
     'CHAINID': 'PASSED, No underflow check in KCFG',
     'SELFBALANCE': 'TODO, Proof crashed',
     'BASEFEE': 'PASSED, No underflow check in KCFG',
-    'POP': 'TODO, Proof crashed',
+    'POP': 'PASSED, No underflow check, no gas usage',
     'MLOAD': 'TODO, Proof crashed',
     'MSTORE': 'PASSED, No underflow check in KCFG',
     'MSTORE8': 'TODO, Proof crashed',
@@ -336,7 +336,7 @@ class KEVMSummarizer:
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE']:
+        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD']:
             # >> CHECK THIS: don't calculate Gas
             _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
