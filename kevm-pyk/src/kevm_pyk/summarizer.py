@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from itertools import count
 import logging
 from platform import node
 import time
@@ -17,6 +18,7 @@ from pyk.kore.rpc import KoreClient
 from pyk.proof import APRProof
 from pyk.proof.show import APRProofShow
 from pyk.utils import ensure_dir_path
+from pyk.prelude.ml import mlEqualsFalse
 
 from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
 from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
@@ -336,13 +338,37 @@ class KEVMSummarizer:
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8']:
+        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI']:
             # >> CHECK THIS: don't calculate Gas
             _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
             gas_subst = CSubst(Subst(_gas_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=gas_subst(node.cterm), attrs=node.attrs)
+        if opcode_symbol in ['SELFBALANCE']:
+            _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
+            _subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
+            
+            _LOGGER.info(f'Setting more concrete `ACCOUNTS_CELL` for {opcode_symbol}')
+            acct_id_cell = KApply('<acctID>', KVariable('ID_CELL', KSort('Int')))
+            balance_cell = KApply('<balance>', KVariable('BALANCE_CELL', KSort('Int')))
+            code_cell = KApply('<code>', KVariable('CODE_CELL', KSort('AccountCode')))
+            storage_cell = KApply('<storage>', KVariable('STORAGE_CELL', KSort('Map')))
+            orig_storage_cell = KApply('<origStorage>', KVariable('ORIG_STORAGE_CELL', KSort('Map')))
+            transient_storage_cell = KApply('<transientStorage>', KVariable('TRANSIENT_STORAGE_CELL', KSort('Map')))
+            nonce_cell = KApply('<nonce>', KVariable('NONCE_CELL', KSort('Int')))
+            account_cell = KApply('<account>', [acct_id_cell, balance_cell, code_cell, storage_cell, orig_storage_cell, transient_storage_cell, nonce_cell])
+            dot_account_var = KVariable('DotAccountVar', KSort('AccountCellMap'))
+            _subst['ACCOUNTS_CELL'] = KApply('_AccountCellMap_', [account_cell, dot_account_var])
+            
+            _LOGGER.info(f'Setting constraints on `ACCOUNTS_CELL` for {opcode_symbol}')
+            constraint = mlEqualsFalse(KApply('AccountCellMap:in_keys', [KApply('<acctID>', KVariable('ID_CELL', KSort('Int'))), KVariable('DotAccountVar', KSort('AccountCellMap'))]))
+            
+            subst = CSubst(Subst(_subst), ())
+            node = proof.kcfg.get_node(1)
+            new_cterm = subst(node.cterm)
+            new_cterm = new_cterm.add_constraint(constraint)
+            proof.kcfg.let_node(1, cterm=new_cterm, attrs=node.attrs)
             
         _LOGGER.debug(proof.kcfg.nodes[0].cterm.to_dict())
         return proof
