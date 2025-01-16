@@ -151,7 +151,7 @@ OPCODES_SUMMARY_STATUS = {
     'ADDRESS': 'PASSED, No underflow check, no .Account',
     'BALANCE': 'PASSED, no underflow check, no gas usage',
     'ORIGIN': 'PASSED, no underflow check, no .Account in origin cell',
-    'CALLER': 'TODO, Found NDBranch',
+    'CALLER': 'PASSED, no underflow check, no gas usage',
     'CALLVALUE': 'PASSED, No underflow check in KCFG',
     'CALLDATALOAD': 'PASSED, No underflow check in KCFG',
     'CALLDATASIZE': 'PASSED, No underflow check in KCFG',
@@ -336,7 +336,7 @@ class KEVMSummarizer:
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY']:
+        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER']:
             # >> CHECK THIS: don't calculate Gas
             _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
