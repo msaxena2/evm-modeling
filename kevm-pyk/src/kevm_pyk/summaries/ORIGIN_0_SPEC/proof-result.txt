@@ -1,180 +1,132 @@
 Proof ORIGIN_0_SPEC Failed
 
 ┌─ 1 (root, split, init)
-│   k: #next [ ORIGIN ] ~> _K_CELL:K
-│   pc: _PC_CELL:Int
-│   callDepth: _CALLDEPTH_CELL:Int
-│   statusCode: _STATUSCODE_CELL:StatusCode
+│   k: #next [ ORIGIN ] ~> K_CELL:K
+│   pc: PC_CELL:Int
+│   callDepth: CALLDEPTH_CELL:Int
+│   statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┃ (branch)
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     1023 <Int #sizeWordStack ( _WS:WordStack , 0 )
+┃  ┃     1023 <Int #sizeWordStack ( WS:WordStack , 0 )
 ┃  │
 ┃  ├─ 3
-┃  │   k: #next [ ORIGIN ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │   k: #next [ ORIGIN ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
 ┃  └─ 8 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
+┃      k: #halt ~> K_CELL:K
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
 ┃      statusCode: EVMC_STACK_OVERFLOW
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
-   ┃     ( notBool #sizeWordStack ( _WS:WordStack , 0 ) <Int 0 )
-   ┃     ( notBool 1023 <Int #sizeWordStack ( _WS:WordStack , 0 ) )
+   ┃     ( notBool #sizeWordStack ( WS:WordStack , 0 ) <Int 0 )
+   ┃     ( notBool 1023 <Int #sizeWordStack ( WS:WordStack , 0 ) )
    │
    ├─ 4
-   │   k: #next [ ORIGIN ] ~> _K_CELL:K
-   │   pc: _PC_CELL:Int
-   │   callDepth: _CALLDEPTH_CELL:Int
-   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │   k: #next [ ORIGIN ] ~> K_CELL:K
+   │   pc: PC_CELL:Int
+   │   callDepth: CALLDEPTH_CELL:Int
+   │   statusCode: STATUSCODE_CELL:StatusCode
    │
    │  (3 steps)
    ├─ 5 (split)
-   │   k: #gas [ ORIGIN , ORIGIN ] ~> ORIGIN ~> #pc [ ORIGIN ] ~> _K_CELL:K
-   │   pc: _PC_CELL:Int
-   │   callDepth: _CALLDEPTH_CELL:Int
-   │   statusCode: _STATUSCODE_CELL:StatusCode
+   │   k: #gas [ ORIGIN , ORIGIN ] ~> ORIGIN ~> #pc [ ORIGIN ] ~> K_CELL:K
+   │   pc: PC_CELL:Int
+   │   callDepth: CALLDEPTH_CELL:Int
+   │   statusCode: STATUSCODE_CELL:StatusCode
    ┃
    ┃ (branch)
    ┣━━┓ subst: .Subst
    ┃  ┃ constraint:
-   ┃  ┃     _USEGAS_CELL:Bool
+   ┃  ┃     USEGAS_CELL:Bool
    ┃  │
    ┃  ├─ 6
-   ┃  │   k: #gas [ ORIGIN , ORIGIN ] ~> ORIGIN ~> #pc [ ORIGIN ] ~> _K_CELL:K
-   ┃  │   pc: _PC_CELL:Int
-   ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  │   k: #gas [ ORIGIN , ORIGIN ] ~> ORIGIN ~> #pc [ ORIGIN ] ~> K_CELL:K
+   ┃  │   pc: PC_CELL:Int
+   ┃  │   callDepth: CALLDEPTH_CELL:Int
+   ┃  │   statusCode: STATUSCODE_CELL:StatusCode
    ┃  │
    ┃  │  (4 steps)
-   ┃  ├─ 12 (split)
-   ┃  │   k: Gbase < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ORIGIN , ORIGIN ] ~ ...
-   ┃  │   pc: _PC_CELL:Int
-   ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ├─ 9 (split)
+   ┃  │   k: Gbase < SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ORIGIN , ORIGIN ] ~> ...
+   ┃  │   pc: PC_CELL:Int
+   ┃  │   callDepth: CALLDEPTH_CELL:Int
+   ┃  │   statusCode: STATUSCODE_CELL:StatusCode
    ┃  ┃
    ┃  ┃ (branch)
    ┃  ┣━━┓ subst: .Subst
    ┃  ┃  ┃ constraint:
-   ┃  ┃  ┃     Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas
+   ┃  ┃  ┃     Gbase < SCHEDULE_CELL:Schedule > <=Gas GAS_CELL:Gas
    ┃  ┃  │
-   ┃  ┃  ├─ 13
-   ┃  ┃  │   k: Gbase < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ORIGIN , ORIGIN ] ~ ...
-   ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  ├─ 10
+   ┃  ┃  │   k: Gbase < SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ORIGIN , ORIGIN ] ~> ...
+   ┃  ┃  │   pc: PC_CELL:Int
+   ┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+   ┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
    ┃  ┃  │
-   ┃  ┃  │  (3 steps)
-   ┃  ┃  ├─ 15
-   ┃  ┃  │   k: _ORIGIN_CELL:Account ~> #push ~> #pc [ ORIGIN ] ~> _K_CELL:K
-   ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃
-   ┃  ┃  ┃ (1 step)
-   ┃  ┃  ┣━━┓
-   ┃  ┃  ┃  │
-   ┃  ┃  ┃  ├─ 16
-   ┃  ┃  ┃  │   k: #pc [ ORIGIN ] ~> _K_CELL:K
-   ┃  ┃  ┃  │   pc: _PC_CELL:Int
-   ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃  │
-   ┃  ┃  ┃  │  (1 step)
-   ┃  ┃  ┃  ├─ 20
-   ┃  ┃  ┃  │   k: _K_CELL:K
-   ┃  ┃  ┃  │   pc: ( _PC_CELL:Int +Int 1 )
-   ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃  │
-   ┃  ┃  ┃  ┊  constraint: true
-   ┃  ┃  ┃  ┊  subst: ...
-   ┃  ┃  ┃  └─ 2 (leaf, target)
-   ┃  ┃  ┃      k: _K_CELL:K
-   ┃  ┃  ┃      pc: ?_FINAL_PC_CELL:Int
-   ┃  ┃  ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-   ┃  ┃  ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
-   ┃  ┃  ┃
-   ┃  ┃  ┗━━┓
-   ┃  ┃     │
-   ┃  ┃     └─ 17 (stuck, leaf)
-   ┃  ┃         k: _ORIGIN_CELL:Account ~> #push ~> #pc [ ORIGIN ] ~> _K_CELL:K
-   ┃  ┃         pc: _PC_CELL:Int
-   ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
-   ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
+   ┃  ┃  │  (5 steps)
+   ┃  ┃  ├─ 14
+   ┃  ┃  │   k: K_CELL:K
+   ┃  ┃  │   pc: ( PC_CELL:Int +Int 1 )
+   ┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+   ┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+   ┃  ┃  │
+   ┃  ┃  ┊  constraint: true
+   ┃  ┃  ┊  subst: ...
+   ┃  ┃  └─ 2 (leaf, target)
+   ┃  ┃      k: K_CELL:K
+   ┃  ┃      pc: FINAL_PC_CELL:Int
+   ┃  ┃      callDepth: FINAL_CALLDEPTH_CELL:Int
+   ┃  ┃      statusCode: FINAL_STATUSCODE_CELL:StatusCode
    ┃  ┃
    ┃  ┗━━┓ subst: .Subst
    ┃     ┃ constraint:
-   ┃     ┃     _GAS_CELL:Gas <Gas Gbase < _SCHEDULE_CELL:Schedule >
+   ┃     ┃     GAS_CELL:Gas <Gas Gbase < SCHEDULE_CELL:Schedule >
    ┃     │
-   ┃     ├─ 14
-   ┃     │   k: Gbase < _SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ORIGIN , ORIGIN ] ~ ...
-   ┃     │   pc: _PC_CELL:Int
-   ┃     │   callDepth: _CALLDEPTH_CELL:Int
-   ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
+   ┃     ├─ 11
+   ┃     │   k: Gbase < SCHEDULE_CELL:Schedule > ~> #deductGas ~> #access [ ORIGIN , ORIGIN ] ~> ...
+   ┃     │   pc: PC_CELL:Int
+   ┃     │   callDepth: CALLDEPTH_CELL:Int
+   ┃     │   statusCode: STATUSCODE_CELL:StatusCode
    ┃     │
    ┃     │  (5 steps)
-   ┃     └─ 18 (leaf, terminal)
-   ┃         k: #halt ~> _K_CELL:K
-   ┃         pc: _PC_CELL:Int
-   ┃         callDepth: _CALLDEPTH_CELL:Int
+   ┃     └─ 12 (leaf, terminal)
+   ┃         k: #halt ~> K_CELL:K
+   ┃         pc: PC_CELL:Int
+   ┃         callDepth: CALLDEPTH_CELL:Int
    ┃         statusCode: EVMC_OUT_OF_GAS
    ┃
    ┗━━┓ subst: .Subst
       ┃ constraint:
-      ┃     ( notBool _USEGAS_CELL:Bool )
+      ┃     ( notBool USEGAS_CELL:Bool )
       │
       ├─ 7
-      │   k: #gas [ ORIGIN , ORIGIN ] ~> ORIGIN ~> #pc [ ORIGIN ] ~> _K_CELL:K
-      │   pc: _PC_CELL:Int
-      │   callDepth: _CALLDEPTH_CELL:Int
-      │   statusCode: _STATUSCODE_CELL:StatusCode
+      │   k: #gas [ ORIGIN , ORIGIN ] ~> ORIGIN ~> #pc [ ORIGIN ] ~> K_CELL:K
+      │   pc: PC_CELL:Int
+      │   callDepth: CALLDEPTH_CELL:Int
+      │   statusCode: STATUSCODE_CELL:StatusCode
       │
-      │  (2 steps)
-      ├─ 9
-      │   k: _ORIGIN_CELL:Account ~> #push ~> #pc [ ORIGIN ] ~> _K_CELL:K
-      │   pc: _PC_CELL:Int
-      │   callDepth: _CALLDEPTH_CELL:Int
-      │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃
-      ┃ (1 step)
-      ┣━━┓
-      ┃  │
-      ┃  ├─ 10
-      ┃  │   k: #pc [ ORIGIN ] ~> _K_CELL:K
-      ┃  │   pc: _PC_CELL:Int
-      ┃  │   callDepth: _CALLDEPTH_CELL:Int
-      ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  │
-      ┃  │  (1 step)
-      ┃  ├─ 19
-      ┃  │   k: _K_CELL:K
-      ┃  │   pc: ( _PC_CELL:Int +Int 1 )
-      ┃  │   callDepth: _CALLDEPTH_CELL:Int
-      ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-      ┃  │
-      ┃  ┊  constraint: true
-      ┃  ┊  subst: ...
-      ┃  └─ 2 (leaf, target)
-      ┃      k: _K_CELL:K
-      ┃      pc: ?_FINAL_PC_CELL:Int
-      ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-      ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
-      ┃
-      ┗━━┓
-         │
-         └─ 11 (stuck, leaf)
-             k: _ORIGIN_CELL:Account ~> #push ~> #pc [ ORIGIN ] ~> _K_CELL:K
-             pc: _PC_CELL:Int
-             callDepth: _CALLDEPTH_CELL:Int
-             statusCode: _STATUSCODE_CELL:StatusCode
+      │  (4 steps)
+      ├─ 13
+      │   k: K_CELL:K
+      │   pc: ( PC_CELL:Int +Int 1 )
+      │   callDepth: CALLDEPTH_CELL:Int
+      │   statusCode: STATUSCODE_CELL:StatusCode
+      │
+      ┊  constraint: true
+      ┊  subst: ...
+      └─ 2 (leaf, target)
+          k: K_CELL:K
+          pc: FINAL_PC_CELL:Int
+          callDepth: FINAL_CALLDEPTH_CELL:Int
+          statusCode: FINAL_STATUSCODE_CELL:StatusCode
 
 
 
@@ -184,7 +136,7 @@ Node 1:
   <kevm>
     <k>
       #next [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     ...
   </kevm>
@@ -205,13 +157,13 @@ Node 3:
   <kevm>
     <k>
       #next [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
@@ -223,7 +175,7 @@ Node 3:
   </kevm>
   ...
 </generatedTop>
-#And { true #Equals 1023 <Int #sizeWordStack ( _WS:WordStack , 0 ) } )
+#And { true #Equals 1023 <Int #sizeWordStack ( WS:WordStack , 0 ) } )
 
 
 
@@ -233,13 +185,13 @@ Node 4:
   <kevm>
     <k>
       #next [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
@@ -251,8 +203,8 @@ Node 4:
   </kevm>
   ...
 </generatedTop>
-#And ( { false #Equals #sizeWordStack ( _WS:WordStack , 0 ) <Int 0 }
-#And { false #Equals 1023 <Int #sizeWordStack ( _WS:WordStack , 0 ) } ) )
+#And ( { false #Equals #sizeWordStack ( WS:WordStack , 0 ) <Int 0 }
+#And { false #Equals 1023 <Int #sizeWordStack ( WS:WordStack , 0 ) } ) )
 
 
 
@@ -264,13 +216,13 @@ Node 5:
       #gas [ ORIGIN , ORIGIN ]
       ~> ORIGIN
       ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
@@ -282,7 +234,7 @@ Node 5:
   </kevm>
   ...
 </generatedTop>
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } )
+#And { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 } )
 
 
 
@@ -294,16 +246,16 @@ Node 6:
       #gas [ ORIGIN , ORIGIN ]
       ~> ORIGIN
       ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <useGas>
-      _USEGAS_CELL:Bool
+      USEGAS_CELL:Bool
     </useGas>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
@@ -315,8 +267,8 @@ Node 6:
   </kevm>
   ...
 </generatedTop>
-#And ( { _USEGAS_CELL:Bool #Equals true }
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } ) )
+#And ( { USEGAS_CELL:Bool #Equals true }
+#And { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 } ) )
 
 
 
@@ -328,16 +280,16 @@ Node 7:
       #gas [ ORIGIN , ORIGIN ]
       ~> ORIGIN
       ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <useGas>
-      _USEGAS_CELL:Bool
+      USEGAS_CELL:Bool
     </useGas>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
@@ -349,8 +301,8 @@ Node 7:
   </kevm>
   ...
 </generatedTop>
-#And ( { _USEGAS_CELL:Bool #Equals false }
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } ) )
+#And ( { USEGAS_CELL:Bool #Equals false }
+#And { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 } ) )
 
 
 
@@ -360,7 +312,7 @@ Node 8:
   <kevm>
     <k>
       #halt
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <ethereum>
       <evm>
@@ -369,7 +321,7 @@ Node 8:
         </statusCode>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
@@ -381,7 +333,7 @@ Node 8:
   </kevm>
   ...
 </generatedTop>
-#And { true #Equals 1023 <Int #sizeWordStack ( _WS:WordStack , 0 ) } )
+#And { true #Equals 1023 <Int #sizeWordStack ( WS:WordStack , 0 ) } )
 
 
 
@@ -390,25 +342,27 @@ Node 9:
 ( <generatedTop>
   <kevm>
     <k>
-      _ORIGIN_CELL:Account
-      ~> #push
+      Gbase < SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ ORIGIN , ORIGIN ]
+      ~> ORIGIN
       ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
+    <schedule>
+      SCHEDULE_CELL:Schedule
+    </schedule>
     <useGas>
-      false
+      true
     </useGas>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           ...
         </callState>
-        <origin>
-          _ORIGIN_CELL:Account
-        </origin>
         ...
       </evm>
       ...
@@ -417,8 +371,8 @@ Node 9:
   </kevm>
   ...
 </generatedTop>
-#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } ) )
+#And ( { true #Equals USEGAS_CELL:Bool }
+#And { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 } ) )
 
 
 
@@ -427,23 +381,30 @@ Node 10:
 ( <generatedTop>
   <kevm>
     <k>
-      #pc [ ORIGIN ]
-      ~> _K_CELL:K
+      Gbase < SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ ORIGIN , ORIGIN ]
+      ~> ORIGIN
+      ~> #pc [ ORIGIN ]
+      ~> K_CELL:K
     </k>
+    <schedule>
+      SCHEDULE_CELL:Schedule
+    </schedule>
     <useGas>
-      false
+      true
     </useGas>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            ( W0:Int : _WS:WordStack )
+            WS:WordStack
           </wordStack>
+          <gas>
+            GAS_CELL:Gas
+          </gas>
           ...
         </callState>
-        <origin>
-          W0:Int
-        </origin>
         ...
       </evm>
       ...
@@ -452,9 +413,9 @@ Node 10:
   </kevm>
   ...
 </generatedTop>
-#And ( { _ORIGIN_CELL:Account #Equals W0:Int }
-#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } ) ) )
+#And ( { true #Equals USEGAS_CELL:Bool }
+#And ( { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 }
+#And { true #Equals Gbase < SCHEDULE_CELL:Schedule > <=Gas GAS_CELL:Gas } ) ) )
 
 
 
@@ -463,25 +424,30 @@ Node 11:
 ( <generatedTop>
   <kevm>
     <k>
-      _ORIGIN_CELL:Account
-      ~> #push
+      Gbase < SCHEDULE_CELL:Schedule >
+      ~> #deductGas
+      ~> #access [ ORIGIN , ORIGIN ]
+      ~> ORIGIN
       ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
+    <schedule>
+      SCHEDULE_CELL:Schedule
+    </schedule>
     <useGas>
-      false
+      true
     </useGas>
     <ethereum>
       <evm>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
+          <gas>
+            GAS_CELL:Gas
+          </gas>
           ...
         </callState>
-        <origin>
-          _ORIGIN_CELL:Account
-        </origin>
         ...
       </evm>
       ...
@@ -490,9 +456,9 @@ Node 11:
   </kevm>
   ...
 </generatedTop>
-#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And #Not ( #Exists W0:Int . { _ORIGIN_CELL:Account #Equals W0:Int } ) ) ) )
+#And ( { true #Equals USEGAS_CELL:Bool }
+#And ( { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 }
+#And { true #Equals GAS_CELL:Gas <Gas Gbase < SCHEDULE_CELL:Schedule > } ) ) )
 
 
 
@@ -501,268 +467,11 @@ Node 12:
 ( <generatedTop>
   <kevm>
     <k>
-      Gbase < _SCHEDULE_CELL:Schedule >
-      ~> #deductGas
-      ~> #access [ ORIGIN , ORIGIN ]
-      ~> ORIGIN
-      ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WS:WordStack
-          </wordStack>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } ) )
-
-
-
-Node 13:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      Gbase < _SCHEDULE_CELL:Schedule >
-      ~> #deductGas
-      ~> #access [ ORIGIN , ORIGIN ]
-      ~> ORIGIN
-      ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WS:WordStack
-          </wordStack>
-          <gas>
-            _GAS_CELL:Gas
-          </gas>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And { true #Equals Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) )
-
-
-
-Node 14:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      Gbase < _SCHEDULE_CELL:Schedule >
-      ~> #deductGas
-      ~> #access [ ORIGIN , ORIGIN ]
-      ~> ORIGIN
-      ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WS:WordStack
-          </wordStack>
-          <gas>
-            _GAS_CELL:Gas
-          </gas>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And { true #Equals _GAS_CELL:Gas <Gas Gbase < _SCHEDULE_CELL:Schedule > } ) ) )
-
-
-
-Node 15:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      _ORIGIN_CELL:Account
-      ~> #push
-      ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WS:WordStack
-          </wordStack>
-          <gas>
-            _GAS_CELL:Gas -Gas Gbase < _SCHEDULE_CELL:Schedule >
-          </gas>
-          ...
-        </callState>
-        <origin>
-          _ORIGIN_CELL:Account
-        </origin>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And { true #Equals Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) )
-
-
-
-Node 16:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ ORIGIN ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            ( W0:Int : _WS:WordStack )
-          </wordStack>
-          <gas>
-            _GAS_CELL:Gas -Gas Gbase < _SCHEDULE_CELL:Schedule >
-          </gas>
-          ...
-        </callState>
-        <origin>
-          W0:Int
-        </origin>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { _ORIGIN_CELL:Account #Equals W0:Int }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And { true #Equals Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) )
-
-
-
-Node 17:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      _ORIGIN_CELL:Account
-      ~> #push
-      ~> #pc [ ORIGIN ]
-      ~> _K_CELL:K
-    </k>
-    <schedule>
-      _SCHEDULE_CELL:Schedule
-    </schedule>
-    <useGas>
-      true
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <wordStack>
-            _WS:WordStack
-          </wordStack>
-          <gas>
-            _GAS_CELL:Gas -Gas Gbase < _SCHEDULE_CELL:Schedule >
-          </gas>
-          ...
-        </callState>
-        <origin>
-          _ORIGIN_CELL:Account
-        </origin>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And ( #Not ( #Exists W0:Int . { _ORIGIN_CELL:Account #Equals W0:Int } )
-#And { true #Equals Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) )
-
-
-
-Node 18:
-
-( <generatedTop>
-  <kevm>
-    <k>
       #halt
-      ~> _K_CELL:K
+      ~> K_CELL:K
     </k>
     <schedule>
-      _SCHEDULE_CELL:Schedule
+      SCHEDULE_CELL:Schedule
     </schedule>
     <useGas>
       true
@@ -774,10 +483,10 @@ Node 18:
         </statusCode>
         <callState>
           <wordStack>
-            _WS:WordStack
+            WS:WordStack
           </wordStack>
           <gas>
-            _GAS_CELL:Gas
+            GAS_CELL:Gas
           </gas>
           ...
         </callState>
@@ -789,13 +498,13 @@ Node 18:
   </kevm>
   ...
 </generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And { true #Equals _GAS_CELL:Gas <Gas Gbase < _SCHEDULE_CELL:Schedule > } ) ) )
+#And ( { true #Equals USEGAS_CELL:Bool }
+#And ( { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 }
+#And { true #Equals GAS_CELL:Gas <Gas Gbase < SCHEDULE_CELL:Schedule > } ) ) )
 
 
 
-Node 19:
+Node 13:
 
 ( <generatedTop>
   <kevm>
@@ -806,15 +515,15 @@ Node 19:
       <evm>
         <callState>
           <wordStack>
-            ( W0:Int : _WS:WordStack )
+            ( ORIGIN_CELL:Int : WS:WordStack )
           </wordStack>
           <pc>
-            ( _PC_CELL:Int +Int 1 )
+            ( PC_CELL:Int +Int 1 )
           </pc>
           ...
         </callState>
         <origin>
-          W0:Int
+          ORIGIN_CELL:Int
         </origin>
         ...
       </evm>
@@ -824,18 +533,17 @@ Node 19:
   </kevm>
   ...
 </generatedTop>
-#And ( { _ORIGIN_CELL:Account #Equals W0:Int }
-#And ( { true #Equals ( notBool _USEGAS_CELL:Bool ) }
-#And { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 } ) ) )
+#And ( { true #Equals ( notBool USEGAS_CELL:Bool ) }
+#And { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 } ) )
 
 
 
-Node 20:
+Node 14:
 
 ( <generatedTop>
   <kevm>
     <schedule>
-      _SCHEDULE_CELL:Schedule
+      SCHEDULE_CELL:Schedule
     </schedule>
     <useGas>
       true
@@ -844,18 +552,18 @@ Node 20:
       <evm>
         <callState>
           <wordStack>
-            ( W0:Int : _WS:WordStack )
+            ( ORIGIN_CELL:Int : WS:WordStack )
           </wordStack>
           <pc>
-            ( _PC_CELL:Int +Int 1 )
+            ( PC_CELL:Int +Int 1 )
           </pc>
           <gas>
-            _GAS_CELL:Gas -Gas Gbase < _SCHEDULE_CELL:Schedule >
+            GAS_CELL:Gas -Gas Gbase < SCHEDULE_CELL:Schedule >
           </gas>
           ...
         </callState>
         <origin>
-          W0:Int
+          ORIGIN_CELL:Int
         </origin>
         ...
       </evm>
@@ -865,10 +573,9 @@ Node 20:
   </kevm>
   ...
 </generatedTop>
-#And ( { true #Equals _USEGAS_CELL:Bool }
-#And ( { _ORIGIN_CELL:Account #Equals W0:Int }
-#And ( { true #Equals #sizeWordStack ( _WS:WordStack , 0 ) <=Int 1023 }
-#And { true #Equals Gbase < _SCHEDULE_CELL:Schedule > <=Gas _GAS_CELL:Gas } ) ) ) )
+#And ( { true #Equals USEGAS_CELL:Bool }
+#And ( { true #Equals #sizeWordStack ( WS:WordStack , 0 ) <=Int 1023 }
+#And { true #Equals Gbase < SCHEDULE_CELL:Schedule > <=Gas GAS_CELL:Gas } ) ) )
 
 
 
