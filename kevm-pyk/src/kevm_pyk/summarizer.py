@@ -161,7 +161,7 @@ OPCODES_SUMMARY_STATUS = {
     'GASPRICE': 'PASSED, No underflow check in KCFG',
     'EXTCODESIZE': 'PASSED, No underflow check, No gas usage',
     'EXTCODECOPY': 'PASSED, No underflow check, No gas usage',
-    'RETURNDATASIZE': 'TODO, Proof crashed',
+    'RETURNDATASIZE': 'PASSED, No underflow check, No gas usage',
     'RETURNDATACOPY': 'PASSED, No underflow check in KCFG',
     'EXTCODEHASH': 'TODO, Proof crashed',
     'BLOCKHASH': 'PASSED, No underflow check in KCFG',
