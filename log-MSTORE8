@@ -1,0 +1,86 @@
+INFO 2025-01-16 09:42:08,543 kevm_pyk.summarizer - Number of opcodes: 84
+INFO 2025-01-16 09:42:08,543 kevm_pyk.summarizer - Number of passed opcodes: 63
+INFO 2025-01-16 09:42:08,543 kevm_pyk.summarizer - Number of todo opcodes: 21
+INFO 2025-01-16 09:42:08,543 kevm_pyk.summarizer - Todo opcodes: ['SELFBALANCE', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH', 'LOG', 'CREATE', 'CALL', 'CALLCODE', 'RETURN', 'DELEGATECALL', 'CREATE2', 'STATICCALL', 'REVERT', 'INVALID', 'SELFDESTRUCT']
+INFO 2025-01-16 09:42:08,543 kevm_pyk.__main__ - summarizing ['SELFBALANCE', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH', 'LOG', 'CREATE', 'CALL', 'CALLCODE', 'RETURN', 'DELEGATECALL', 'CREATE2', 'STATICCALL', 'REVERT', 'INVALID', 'SELFDESTRUCT']
+INFO 2025-01-16 09:42:08,543 pyk.kast.outer - Loading JSON definition: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-16 09:42:08,714 pyk.kast.outer - Converting JSON definition to Kast: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-16 09:42:09,340 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MSTORE8_2_SPEC/kcfg
+INFO 2025-01-16 09:42:09,340 pyk.utils - Making directory: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MSTORE8_2_SPEC/kcfg/nodes
+INFO 2025-01-16 09:42:09,343 kevm_pyk.summarizer - Setting the type of `USEGAS_CELL` to `false` for MSTORE8
+INFO 2025-01-16 09:42:09,344 pyk.kore.rpc - Starting KoreServer: kore-rpc-booster /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore --module EDSL --server-port 0 --llvm-backend-library /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/llvm-library/interpreter.so --interim-simplification 25
+INFO 2025-01-16 09:42:09,350 pyk.kore.rpc - [PID=2799191][stde] [proxy] Loading definition from /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore, main module "EDSL"
+INFO 2025-01-16 09:42:10,388 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 28170770}
+INFO 2025-01-16 09:42:11,390 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 120}
+INFO 2025-01-16 09:42:12,399 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 210}
+INFO 2025-01-16 09:42:13,400 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Executing TimeSpec {sec = 0, nsec = 835357078}
+INFO 2025-01-16 09:42:14,401 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 36751924}
+INFO 2025-01-16 09:42:14,401 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 120}
+INFO 2025-01-16 09:42:15,411 pyk.kore.rpc - [PID=2799191][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 220}
+INFO 2025-01-16 09:42:15,411 pyk.kore.rpc - [PID=2799191][stde] [proxy] Starting RPC server
+INFO 2025-01-16 09:42:15,422 pyk.kore.rpc - KoreServer started: 0.0.0.0:38847, pid=2799191
+INFO 2025-01-16 09:42:15,422 pyk.kore.rpc - Connecting to host: localhost:38847
+INFO 2025-01-16 09:42:15,422 pyk.kore.rpc - Connected to host: localhost:38847
+INFO 2025-01-16 09:42:15,423 kevm_pyk.utils - Computing definedness constraint for initial node: MSTORE8_2_SPEC
+INFO 2025-01-16 09:42:15,438 pyk.kore.rpc - Sending request to localhost:38847: 139671390834320-001 - simplify
+INFO 2025-01-16 09:42:16,084 pyk.kore.rpc - Received response from localhost:38847: 139671390834320-001 - simplify
+INFO 2025-01-16 09:42:16,090 pyk.kore.rpc - Sending request to localhost:38847: 139671390834320-002 - simplify
+INFO 2025-01-16 09:42:16,412 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671390834320-001
+INFO 2025-01-16 09:42:16,412 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671390834320-002
+INFO 2025-01-16 09:42:16,866 pyk.kore.rpc - Received response from localhost:38847: 139671390834320-002 - simplify
+INFO 2025-01-16 09:42:16,866 kevm_pyk.utils - Simplifying initial and target node: MSTORE8_2_SPEC
+INFO 2025-01-16 09:42:16,871 pyk.kore.rpc - Sending request to localhost:38847: 139671390834320-003 - simplify
+INFO 2025-01-16 09:42:17,413 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671390834320-003
+INFO 2025-01-16 09:42:17,512 pyk.kore.rpc - Received response from localhost:38847: 139671390834320-003 - simplify
+INFO 2025-01-16 09:42:17,519 pyk.kore.rpc - Sending request to localhost:38847: 139671390834320-004 - simplify
+INFO 2025-01-16 09:42:18,138 pyk.kore.rpc - Received response from localhost:38847: 139671390834320-004 - simplify
+INFO 2025-01-16 09:42:18,141 pyk.proof.reachability - Wrote proof data for MSTORE8_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MSTORE8_2_SPEC/proof.json
+INFO 2025-01-16 09:42:18,142 pyk.kore.rpc - Connecting to host: localhost:38847
+INFO 2025-01-16 09:42:18,142 pyk.kore.rpc - Connected to host: localhost:38847
+INFO 2025-01-16 09:42:18,142 pyk.proof.proof - [ZJH] prover type: <class 'pyk.proof.reachability.APRProver'>
+INFO 2025-01-16 09:42:18,142 pyk.proof.reachability - [ZJH] init proof
+INFO 2025-01-16 09:42:18,146 pyk.kore.rpc - Sending request to localhost:38847: 139671390618832-001 - add-module
+INFO 2025-01-16 09:42:18,414 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671390618832-001
+INFO 2025-01-16 09:42:18,414 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671390834320-004
+INFO 2025-01-16 09:42:19,091 pyk.kore.rpc - Received response from localhost:38847: 139671390618832-001 - add-module
+INFO 2025-01-16 09:42:19,106 pyk.kore.rpc - Sending request to localhost:38847: 139671390618832-002 - add-module
+INFO 2025-01-16 09:42:19,416 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671390618832-002
+INFO 2025-01-16 09:42:20,025 pyk.kore.rpc - Received response from localhost:38847: 139671390618832-002 - add-module
+INFO 2025-01-16 09:42:20,025 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-16 09:42:20,025 pyk.proof.reachability - [ZJH] node_id: 1
+INFO 2025-01-16 09:42:20,026 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-16 09:42:20,026 pyk.proof.reachability - [ZJH] node_id: 2
+INFO 2025-01-16 09:42:20,026 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-16 09:42:20,026 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-16 09:42:20,026 pyk.proof.proof - [ZJH] proof initialized
+INFO 2025-01-16 09:42:20,026 pyk.proof.proof - [ZJH] pending: [1]
+INFO 2025-01-16 09:42:20,027 pyk.proof.reachability - Before appending step: 1
+INFO 2025-01-16 09:42:20,027 pyk.kore.rpc - Connecting to host: localhost:38847
+INFO 2025-01-16 09:42:20,027 pyk.proof.proof - Submitted steps for proof: MSTORE8_2_SPEC
+INFO 2025-01-16 09:42:20,027 pyk.kore.rpc - Connected to host: localhost:38847
+INFO 2025-01-16 09:42:20,058 pyk.kore.rpc - Sending request to localhost:38847: 139671389588304-001 - implies
+INFO 2025-01-16 09:42:20,417 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671389588304-001
+INFO 2025-01-16 09:42:20,744 pyk.kore.rpc - Received response from localhost:38847: 139671389588304-001 - implies
+INFO 2025-01-16 09:42:20,750 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-16 09:42:20,750 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-16 09:42:20,750 pyk.kore.rpc - Sending request to localhost:38847: 139671389588304-002 - execute
+INFO 2025-01-16 09:42:21,418 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671389588304-002
+INFO 2025-01-16 09:50:07,061 pyk.kore.rpc - Received response from localhost:38847: 139671389588304-002 - execute
+INFO 2025-01-16 09:50:07,990 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-16 09:50:07,990 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'a49bbf5c4b82ee9c477b266571ac6462951ccd1a83f52cbf657b2c60368c2c04'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'f445bdd373dac8403ad00559717364f6630b19cbc6e53d3bbd6fa784e4089f0d'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'c4541707a8e5bc2969999e4e355042498b9631ffa4b568642915b512fe35d286'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '9940b671074c218a6c5f0f9e7b90d05efbcc000ee2884306b43860e14f6979e4'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'Uncertain about definedness of rule because of: [UndefinedSymbol "Lbl\'Hash\'write\'LParUndsCommUndsCommUndsRParUnds\'EVM-TYPES\'Unds\'Bytes\'Unds\'Bytes\'Unds\'Int\'Unds\'Int",UndefinedSymbol "Lbl\'Unds\'modInt\'Unds\'"]', 'rule-id': '2274f5e5a70eff580d45898d4dea18eef743fae0f26b7d255be52c039a57462f'}}, {'tag': 'rewrite', 'origin': 'kore-rpc', 'result': {'tag': 'success', 'rule-id': '2274f5e5a70eff580d45898d4dea18eef743fae0f26b7d255be52c039a57462f'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '27458eb47839269121ea93b912b579bddb9557fccc51e69983d94b2e6ed21335'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-16 09:50:09,718 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-16 09:50:09,718 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-16 09:50:09,718 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-16 09:50:09,736 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 6: 1 --> 3
+INFO 2025-01-16 09:50:09,736 pyk.proof.reachability - Wrote proof data for MSTORE8_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MSTORE8_2_SPEC/proof.json
+INFO 2025-01-16 09:50:09,737 pyk.proof.reachability - Before appending step: 3
+INFO 2025-01-16 09:50:09,768 pyk.kore.rpc - Sending request to localhost:38847: 139671389588304-003 - implies
+INFO 2025-01-16 09:50:09,771 pyk.kore.rpc - [PID=2799191][stde] [proxy] Processing request 139671389588304-003
+INFO 2025-01-16 09:50:10,560 pyk.kore.rpc - Received response from localhost:38847: 139671389588304-003 - implies
+INFO 2025-01-16 09:50:10,566 pyk.proof.reachability - Subsumed into target node MSTORE8_2_SPEC: (3, 2)
+INFO 2025-01-16 09:50:10,567 pyk.proof.reachability - Wrote proof data for MSTORE8_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MSTORE8_2_SPEC/proof.json
+INFO 2025-01-16 09:50:10,568 pyk.proof.reachability - Wrote proof data for MSTORE8_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/MSTORE8_2_SPEC/proof.json
+INFO 2025-01-16 09:50:10,569 kevm_pyk.utils - Proof status MSTORE8_2_SPEC: ProofStatus.PASSED
+INFO 2025-01-16 09:50:10,569 pyk.kore.rpc - Stopping KoreServer: 0.0.0.0:38847, pid=2799191
+INFO 2025-01-16 09:50:10,642 pyk.kore.rpc - KoreServer stopped: 0.0.0.0:38847, pid=2799191
+Proof timing MSTORE8_2_SPEC: 472.5005512237549s
