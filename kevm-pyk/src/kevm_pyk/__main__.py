@@ -640,7 +640,7 @@ def exec_summarize(options: ProveOptions) -> None:
     # batch_summarize()
     next_opcode = get_todo_list()
     _LOGGER.info(f'summarizing {next_opcode}')
-    summarize(next_opcode[0])
+    summarize(next_opcode[1])
     # analyze_proof('STOP', 11)
 
 # Helpers

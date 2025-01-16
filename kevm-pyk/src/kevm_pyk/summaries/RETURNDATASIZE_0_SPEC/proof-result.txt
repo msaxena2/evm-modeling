@@ -88,7 +88,7 @@ Proof RETURNDATASIZE_0_SPEC Failed
    ┃         callDepth: _CALLDEPTH_CELL:Int
    ┃         statusCode: EVMC_OUT_OF_GAS
    ┃
-   ┗━━┓ subst: .Subst
+   ┗━━┓ subst: .Substf
       ┃ constraint:
       ┃     ( notBool _USEGAS_CELL:Bool )
       │
