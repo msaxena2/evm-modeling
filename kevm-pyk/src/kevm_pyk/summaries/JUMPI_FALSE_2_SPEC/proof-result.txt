@@ -1,0 +1,89 @@
+Proof JUMPI_FALSE_2_SPEC Passed
+
+┌─ 1 (root, init)
+│   k: #next [ JUMPI ] ~> K_CELL:K
+│   pc: PC_CELL:Int
+│   callDepth: CALLDEPTH_CELL:Int
+│   statusCode: STATUSCODE_CELL:StatusCode
+│
+│  (6 steps)
+├─ 3
+│   k: K_CELL:K
+│   pc: ( PC_CELL:Int +Int 1 )
+│   callDepth: CALLDEPTH_CELL:Int
+│   statusCode: STATUSCODE_CELL:StatusCode
+│
+┊  constraint: true
+┊  subst: ...
+└─ 2 (leaf, target)
+    k: K_CELL:K
+    pc: FINAL_PC_CELL:Int
+    callDepth: FINAL_CALLDEPTH_CELL:Int
+    statusCode: FINAL_STATUSCODE_CELL:StatusCode
+
+
+
+Node 1:
+
+( <generatedTop>
+  <kevm>
+    <k>
+      #next [ JUMPI ]
+      ~> K_CELL:K
+    </k>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <wordStack>
+            ( W0:Int : ( 0 : WS:WordStack ) )
+          </wordStack>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { W1:Int #Equals 0 } )
+
+
+
+Node 2:
+
+...
+
+
+
+Node 3:
+
+( <generatedTop>
+  <kevm>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <callState>
+          <pc>
+            ( PC_CELL:Int +Int 1 )
+          </pc>
+          ...
+        </callState>
+        ...
+      </evm>
+      ...
+    </ethereum>
+    ...
+  </kevm>
+  ...
+</generatedTop>
+#And { W1:Int #Equals 0 } )
+
+
+
