@@ -1,189 +1,119 @@
 
 ┌─ 1 (root, split, init)
-│   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-│   pc: _PC_CELL:Int
-│   callDepth: _CALLDEPTH_CELL:Int
-│   statusCode: _STATUSCODE_CELL:StatusCode
+│   k: #next [ LOG ( 0 ) ] ~> K_CELL:K
+│   pc: PC_CELL:Int
+│   callDepth: CALLDEPTH_CELL:Int
+│   statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┃ (branch)
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     #sizeWordStack ( _WS:WordStack , 2 ) <Int 4
+┃  ┃     STATIC_CELL:Bool
 ┃  │
-┃  ├─ 3
-┃  │   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 4
+┃  │   k: #next [ LOG ( 0 ) ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
 ┃  └─ 8 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: EVMC_STACK_UNDERFLOW
-┃
-┣━━┓ subst: .Subst
-┃  ┃ constraint:
-┃  ┃     _STATIC_CELL:Bool
-┃  ┃     4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-┃  │
-┃  ├─ 5
-┃  │   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  │
-┃  │  (2 steps)
-┃  └─ 7 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
+┃      k: #halt ~> K_CELL:K
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
 ┃      statusCode: EVMC_STATIC_MODE_VIOLATION
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     ( notBool _STATIC_CELL:Bool )
-┃  ┃     ( notBool _USEGAS_CELL:Bool )
-┃  ┃     4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( notBool USEGAS_CELL:Bool )
 ┃  │
-┃  ├─ 28
-┃  │   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 20
+┃  │   k: #next [ LOG ( 0 ) ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (4 steps)
-┃  ├─ 11
-┃  │   k: LOG ( 2 ) _W0:Int _W1:Int ~> #pc [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┃ (1 step)
-┃  ┣━━┓
-┃  ┃  │
-┃  ┃  ├─ 13
-┃  ┃  │   k: #pc [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  │  (1 step)
-┃  ┃  ├─ 25
-┃  ┃  │   k: _K_CELL:K
-┃  ┃  │   pc: ( _PC_CELL:Int +Int 1 )
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  ┊  constraint: true
-┃  ┃  ┊  subst: ...
-┃  ┃  └─ 2 (leaf, target)
-┃  ┃      k: _K_CELL:K
-┃  ┃      pc: ?_FINAL_PC_CELL:Int
-┃  ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-┃  ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┗━━┓
-┃     │
-┃     └─ 14 (stuck, leaf)
-┃         k: LOG ( 2 ) _W0:Int _W1:Int ~> #pc [ LOG ( 2 ) ] ~> _K_CELL:K
-┃         pc: _PC_CELL:Int
-┃         callDepth: _CALLDEPTH_CELL:Int
-┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  │  (6 steps)
+┃  ├─ 17
+┃  │   k: K_CELL:K
+┃  │   pc: ( PC_CELL:Int +Int 1 )
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  ┊  constraint: true
+┃  ┊  subst: ...
+┃  └─ 2 (leaf, target)
+┃      k: K_CELL:K
+┃      pc: FINAL_PC_CELL:Int
+┃      callDepth: FINAL_CALLDEPTH_CELL:Int
+┃      statusCode: FINAL_STATUSCODE_CELL:StatusCode
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     ( notBool _STATIC_CELL:Bool )
-┃  ┃     4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-┃  ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃     USEGAS_CELL:Bool
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     GAS_CELL:Gas <Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
 ┃  │
-┃  ├─ 34
-┃  │   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 26
+┃  │   k: #next [ LOG ( 0 ) ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (13 steps)
-┃  └─ 23 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
+┃  └─ 15 (leaf, terminal)
+┃      k: #halt ~> K_CELL:K
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
 ┃      statusCode: EVMC_OUT_OF_GAS
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     ( notBool _STATIC_CELL:Bool )
-┃  ┃     4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-┃  ┃     ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃     USEGAS_CELL:Bool
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <=Gas GAS_CELL:Gas
+┃  ┃     ( Glog < SCHEDULE_CELL:Schedule > +Int ( Glogdata < SCHEDULE_CELL:Schedule > *Int W1:Int ) ) <=Gas GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
 ┃  │
-┃  ├─ 37
-┃  │   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 29
+┃  │   k: #next [ LOG ( 0 ) ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (12 steps)
-┃  ├─ 20
-┃  │   k: LOG ( 2 ) _W0:Int _W1:Int ~> #pc [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┃ (1 step)
-┃  ┣━━┓
-┃  ┃  │
-┃  ┃  ├─ 21
-┃  ┃  │   k: #pc [ LOG ( 2 ) ] ~> _K_CELL:K
-┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  │  (1 step)
-┃  ┃  ├─ 26
-┃  ┃  │   k: _K_CELL:K
-┃  ┃  │   pc: ( _PC_CELL:Int +Int 1 )
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  ┊  constraint: true
-┃  ┃  ┊  subst: ...
-┃  ┃  └─ 2 (leaf, target)
-┃  ┃      k: _K_CELL:K
-┃  ┃      pc: ?_FINAL_PC_CELL:Int
-┃  ┃      callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-┃  ┃      statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┗━━┓
-┃     │
-┃     └─ 22 (stuck, leaf)
-┃         k: LOG ( 2 ) _W0:Int _W1:Int ~> #pc [ LOG ( 2 ) ] ~> _K_CELL:K
-┃         pc: _PC_CELL:Int
-┃         callDepth: _CALLDEPTH_CELL:Int
-┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃  │  (14 steps)
+┃  ├─ 18
+┃  │   k: K_CELL:K
+┃  │   pc: ( PC_CELL:Int +Int 1 )
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  ┊  constraint: true
+┃  ┊  subst: ...
+┃  └─ 2 (leaf, target)
+┃      k: K_CELL:K
+┃      pc: FINAL_PC_CELL:Int
+┃      callDepth: FINAL_CALLDEPTH_CELL:Int
+┃      statusCode: FINAL_STATUSCODE_CELL:StatusCode
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
-   ┃     _USEGAS_CELL:Bool
-   ┃     ( notBool _STATIC_CELL:Bool )
-   ┃     4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-   ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-   ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) )
+   ┃     USEGAS_CELL:Bool
+   ┃     ( notBool STATIC_CELL:Bool )
+   ┃     ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <=Gas GAS_CELL:Gas
+   ┃     GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <Gas ( Glog < SCHEDULE_CELL:Schedule > +Int ( Glogdata < SCHEDULE_CELL:Schedule > *Int W1:Int ) )
    │
-   ├─ 38
-   │   k: #next [ LOG ( 2 ) ] ~> _K_CELL:K
-   │   pc: _PC_CELL:Int
-   │   callDepth: _CALLDEPTH_CELL:Int
-   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ├─ 30
+   │   k: #next [ LOG ( 0 ) ] ~> K_CELL:K
+   │   pc: PC_CELL:Int
+   │   callDepth: CALLDEPTH_CELL:Int
+   │   statusCode: STATUSCODE_CELL:StatusCode
    │
    │  (15 steps)
-   └─ 24 (leaf, terminal)
-       k: #halt ~> _K_CELL:K
-       pc: _PC_CELL:Int
-       callDepth: _CALLDEPTH_CELL:Int
+   └─ 16 (leaf, terminal)
+       k: #halt ~> K_CELL:K
+       pc: PC_CELL:Int
+       callDepth: CALLDEPTH_CELL:Int
        statusCode: EVMC_OUT_OF_GAS
 
 
@@ -192,22 +122,22 @@
 module SUMMARY-LOG-2-SPEC
     
     
-    rule [BASIC-BLOCK-5-TO-7]: <kevm>
+    rule [BASIC-BLOCK-4-TO-8]: <kevm>
            <k>
-             ( #next [ LOG ( 2 ) ] => #halt )
-             ~> __K_CELL
+             ( #next [ LOG ( 0 ) ] => #halt )
+             ~> _K_CELL
            </k>
            <ethereum>
              <evm>
                <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
+                 ( _STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
                </statusCode>
                <callState>
                  <wordStack>
-                   ( __W0 : ( __W1 : _WS:WordStack ) )
+                   ( _W0 : ( _W1 : _WS ) )
                  </wordStack>
                  <static>
-                   ( _STATIC_CELL:Bool => true )
+                   ( STATIC_CELL:Bool => true )
                  </static>
                  ...
                </callState>
@@ -217,160 +147,82 @@ module SUMMARY-LOG-2-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( _STATIC_CELL:Bool
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
+      requires STATIC_CELL:Bool
+      [priority(20), label(BASIC-BLOCK-4-TO-8)]
+    
+    rule [BASIC-BLOCK-20-TO-17]: <kevm>
+           <k>
+             ( #next [ LOG ( 0 ) ] ~> .K => .K )
+             ~> _K_CELL
+           </k>
+           <useGas>
+             ( USEGAS_CELL:Bool => false )
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <pc>
+                   ( PC_CELL:Int => ( PC_CELL:Int +Int 1 ) )
+                 </pc>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               <substate>
+                 <log>
+                   ( LOG_CELL:List => LOG_CELL:List ListItem ( { ID_CELL:Int | .List | #range ( LOCALMEM_CELL:Bytes , W0:Int , W1:Int ) } ) )
+                 </log>
+                 ...
+               </substate>
+               ...
+             </evm>
+             ...
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool USEGAS_CELL:Bool )
                ))
-      [priority(20), label(BASIC-BLOCK-5-TO-7)]
+      [priority(20), label(BASIC-BLOCK-20-TO-17)]
     
-    rule [BASIC-BLOCK-3-TO-8]: <kevm>
+    rule [BASIC-BLOCK-26-TO-15]: <kevm>
            <k>
-             ( #next [ LOG ( 2 ) ] => #halt )
-             ~> __K_CELL
+             ( #next [ LOG ( 0 ) ] => #halt )
+             ~> _K_CELL
            </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             ( USEGAS_CELL:Bool => true )
+           </useGas>
            <ethereum>
              <evm>
                <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STACK_UNDERFLOW )
+                 ( _STATUSCODE_CELL => EVMC_OUT_OF_GAS )
                </statusCode>
                <callState>
                  <wordStack>
-                   ( __W0 : ( __W1 : _WS:WordStack ) )
+                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
                  </wordStack>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires #sizeWordStack ( _WS:WordStack , 2 ) <Int 4
-      [priority(20), label(BASIC-BLOCK-3-TO-8)]
-    
-    rule [BASIC-BLOCK-13-TO-25]: <kevm>
-           <k>
-             ( #pc [ LOG ( 2 ) ] ~> .K => .K )
-             ~> __K_CELL
-           </k>
-           <useGas>
-             false
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <id>
-                   ACCT:Int
-                 </id>
-                 <wordStack>
-                   #drop ( 2 , _WS:WordStack )
-                 </wordStack>
-                 <localMem>
-                   _LOCALMEM_CELL:Bytes
-                 </localMem>
-                 <pc>
-                   ( _PC_CELL:Int => ( _PC_CELL:Int +Int 1 ) )
-                 </pc>
-                 <static>
-                   false
-                 </static>
-                 ...
-               </callState>
-               <substate>
-                 <log>
-                   __LOG_CELL ListItem ( { ACCT:Int | WordStack2List ( #take ( 2 , _WS:WordStack ) ) | #range ( _LOCALMEM_CELL:Bytes , __W0 , __W1 ) } )
-                 </log>
-                 ...
-               </substate>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __ID_CELL ==K ACCT:Int
-       andBool ( ( notBool __STATIC_CELL )
-       andBool ( ( notBool __USEGAS_CELL )
-       andBool ( 2 <=Int #sizeWordStack ( _WS:WordStack , 0 )
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-               )))))
-      [priority(20), label(BASIC-BLOCK-13-TO-25)]
-    
-    rule [BASIC-BLOCK-21-TO-26]: <kevm>
-           <k>
-             ( #pc [ LOG ( 2 ) ] ~> .K => .K )
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             true
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <id>
-                   ACCT:Int
-                 </id>
-                 <wordStack>
-                   #drop ( 2 , _WS:WordStack )
-                 </wordStack>
-                 <localMem>
-                   _LOCALMEM_CELL:Bytes
-                 </localMem>
-                 <pc>
-                   ( _PC_CELL:Int => ( _PC_CELL:Int +Int 1 ) )
-                 </pc>
                  <gas>
-                   _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) )
+                   GAS_CELL:Gas
                  </gas>
                  <memoryUsed>
-                   #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int )
+                   ( MEMORYUSED_CELL:Int => #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) )
                  </memoryUsed>
                  <static>
-                   false
-                 </static>
-                 ...
-               </callState>
-               <substate>
-                 <log>
-                   __LOG_CELL ListItem ( { ACCT:Int | WordStack2List ( #take ( 2 , _WS:WordStack ) ) | #range ( _LOCALMEM_CELL:Bytes , _W0:Int , _W1:Int ) } )
-                 </log>
-                 ...
-               </substate>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __USEGAS_CELL
-       andBool ( __ID_CELL ==K ACCT:Int
-       andBool ( ( notBool __STATIC_CELL )
-       andBool ( 2 <=Int #sizeWordStack ( _WS:WordStack , 0 )
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-               )))))))
-      [priority(20), label(BASIC-BLOCK-21-TO-26)]
-    
-    rule [BASIC-BLOCK-28-TO-11]: <kevm>
-           <k>
-             ( #next [ LOG ( 2 ) ] ~> .K => LOG ( 2 ) _W0:Int _W1:Int
-             ~> #pc [ LOG ( 2 ) ] )
-             ~> __K_CELL
-           </k>
-           <useGas>
-             ( _USEGAS_CELL:Bool => false )
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : _WS:WordStack ) ) => _WS:WordStack )
-                 </wordStack>
-                 <static>
-                   ( _STATIC_CELL:Bool => false )
+                   ( STATIC_CELL:Bool => false )
                  </static>
                  ...
                </callState>
@@ -380,127 +232,96 @@ module SUMMARY-LOG-2-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( ( notBool _STATIC_CELL:Bool )
-       andBool ( ( notBool _USEGAS_CELL:Bool )
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
+      requires ( USEGAS_CELL:Bool
+       andBool ( ( notBool STATIC_CELL:Bool )
+       andBool ( GAS_CELL:Gas <Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
                )))
-      [priority(20), label(BASIC-BLOCK-28-TO-11)]
+      [priority(20), label(BASIC-BLOCK-26-TO-15)]
     
-    rule [BASIC-BLOCK-34-TO-23]: <kevm>
+    rule [BASIC-BLOCK-29-TO-18]: <kevm>
            <k>
-             ( #next [ LOG ( 2 ) ] => #halt )
-             ~> __K_CELL
+             ( #next [ LOG ( 0 ) ] ~> .K => .K )
+             ~> _K_CELL
            </k>
            <schedule>
-             _SCHEDULE_CELL:Schedule
+             SCHEDULE_CELL:Schedule
            </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             ( USEGAS_CELL:Bool => true )
            </useGas>
            <ethereum>
              <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : _WS:WordStack ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
                  </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <pc>
+                   ( PC_CELL:Int => ( PC_CELL:Int +Int 1 ) )
+                 </pc>
                  <gas>
-                   _GAS_CELL:Gas
+                   ( GAS_CELL:Gas => GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) -Gas ( Glog < SCHEDULE_CELL:Schedule > +Int ( Glogdata < SCHEDULE_CELL:Schedule > *Int W1:Int ) ) )
                  </gas>
                  <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) )
+                   ( MEMORYUSED_CELL:Int => #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) )
                  </memoryUsed>
                  <static>
-                   ( _STATIC_CELL:Bool => false )
+                   ( STATIC_CELL:Bool => false )
                  </static>
                  ...
                </callState>
+               <substate>
+                 <log>
+                   ( LOG_CELL:List => LOG_CELL:List ListItem ( { ID_CELL:Int | .List | #range ( LOCALMEM_CELL:Bytes , W0:Int , W1:Int ) } ) )
+                 </log>
+                 ...
+               </substate>
                ...
              </evm>
              ...
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool _STATIC_CELL:Bool )
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-       andBool ( _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      requires ( USEGAS_CELL:Bool
+       andBool ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <=Gas GAS_CELL:Gas
+       andBool ( ( Glog < SCHEDULE_CELL:Schedule > +Int ( Glogdata < SCHEDULE_CELL:Schedule > *Int W1:Int ) ) <=Gas GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
                ))))
-      [priority(20), label(BASIC-BLOCK-34-TO-23)]
+      [priority(20), label(BASIC-BLOCK-29-TO-18)]
     
-    rule [BASIC-BLOCK-37-TO-20]: <kevm>
+    rule [BASIC-BLOCK-30-TO-16]: <kevm>
            <k>
-             ( #next [ LOG ( 2 ) ] ~> .K => LOG ( 2 ) _W0:Int _W1:Int
-             ~> #pc [ LOG ( 2 ) ] )
-             ~> __K_CELL
+             ( #next [ LOG ( 0 ) ] => #halt )
+             ~> _K_CELL
            </k>
            <schedule>
-             _SCHEDULE_CELL:Schedule
+             SCHEDULE_CELL:Schedule
            </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : _WS:WordStack ) ) => _WS:WordStack )
-                 </wordStack>
-                 <gas>
-                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) ) )
-                 </gas>
-                 <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) )
-                 </memoryUsed>
-                 <static>
-                   ( _STATIC_CELL:Bool => false )
-                 </static>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool _STATIC_CELL:Bool )
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-               )))))
-      [priority(20), label(BASIC-BLOCK-37-TO-20)]
-    
-    rule [BASIC-BLOCK-38-TO-24]: <kevm>
-           <k>
-             ( #next [ LOG ( 2 ) ] => #halt )
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             ( USEGAS_CELL:Bool => true )
            </useGas>
            <ethereum>
              <evm>
                <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
+                 ( _STATUSCODE_CELL => EVMC_OUT_OF_GAS )
                </statusCode>
                <callState>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : _WS:WordStack ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
                  </wordStack>
                  <gas>
-                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) )
+                   ( GAS_CELL:Gas => GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) )
                  </gas>
                  <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) )
+                   ( MEMORYUSED_CELL:Int => #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) )
                  </memoryUsed>
                  <static>
-                   ( _STATIC_CELL:Bool => false )
+                   ( STATIC_CELL:Bool => false )
                  </static>
                  ...
                </callState>
@@ -510,12 +331,11 @@ module SUMMARY-LOG-2-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool _STATIC_CELL:Bool )
-       andBool ( 4 <=Int #sizeWordStack ( _WS:WordStack , 2 )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W0:Int , _W1:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( ( Glog < _SCHEDULE_CELL:Schedule > +Int ( Glogdata < _SCHEDULE_CELL:Schedule > *Int _W1:Int ) ) +Int ( 2 *Int Glogtopic < _SCHEDULE_CELL:Schedule > ) )
-               )))))
-      [priority(20), label(BASIC-BLOCK-38-TO-24)]
+      requires ( USEGAS_CELL:Bool
+       andBool ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <=Gas GAS_CELL:Gas
+       andBool ( GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W0:Int , W1:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <Gas ( Glog < SCHEDULE_CELL:Schedule > +Int ( Glogdata < SCHEDULE_CELL:Schedule > *Int W1:Int ) )
+               ))))
+      [priority(20), label(BASIC-BLOCK-30-TO-16)]
 
 endmodule

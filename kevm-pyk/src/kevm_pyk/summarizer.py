@@ -195,7 +195,7 @@ OPCODES_SUMMARY_STATUS = {
     'PUSH': 'PASSED, No underflow check, no gas usage',
     'DUP': 'PASSED, No underflow check in KCFG',
     'SWAP': 'PASSED, No underflow check in KCFG',
-    'LOG': 'TODO, Proof crashed',
+    'LOG': 'PASSED, No underflow check, no gas usage',
     'CREATE': 'TODO, Proof crashed',
     'CALL': 'UNCHECKED',
     'CALLCODE': 'UNCHECKED',
@@ -321,7 +321,7 @@ class KEVMSummarizer:
         # >> TODO: The cterm_build_claim will remove all the type I've set.
         kclaim = KClaim(subst(kclaim.body), subst(kclaim.requires), subst(kclaim.ensures), kclaim.att)
         proof = APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
-        if opcode_symbol == 'ADDRESS':
+        if opcode_symbol in ['ADDRESS', 'LOG']:
             # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `ID_CELL` to `Int`
             _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
             _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
@@ -340,14 +340,14 @@ class KEVMSummarizer:
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH']:
+        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH', 'CREATE']:
             # >> CHECK THIS: don't calculate Gas
             _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
             gas_subst = CSubst(Subst(_gas_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=gas_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['SELFBALANCE', 'SLOAD', 'SSTORE', 'TLOAD', 'TSTORE']:
+        if opcode_symbol in ['SELFBALANCE', 'SLOAD', 'SSTORE', 'TLOAD', 'TSTORE', 'CREATE']:
             _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
             _subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
             
@@ -568,6 +568,11 @@ def summarize(opcode_symbol: str) -> None:
             constraint = mlNot(mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int'))
             proof.kcfg.let_node(1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs)
             proof.kcfg.let_node(2, cterm=subst(proof.kcfg.get_node(2).cterm), attrs=proof.kcfg.get_node(2).attrs)
+            summarizer.explore(proof)
+            summarizer.summarize(proof)
+        elif opcode_symbol == 'LOG':
+            need += 2
+            proof = summarizer.build_spec(opcode, need)
             summarizer.explore(proof)
             summarizer.summarize(proof)
         else:
