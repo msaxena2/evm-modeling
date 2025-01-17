@@ -1,445 +1,1177 @@
 
 ┌─ 1 (root, split, init)
-│   k: #next [ CREATE ] ~> _K_CELL:K
-│   pc: _PC_CELL:Int
-│   callDepth: _CALLDEPTH_CELL:Int
-│   statusCode: _STATUSCODE_CELL:StatusCode
+│   k: #next [ CREATE ] ~> K_CELL:K
+│   pc: PC_CELL:Int
+│   callDepth: CALLDEPTH_CELL:Int
+│   statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┃ (branch)
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _STATIC_CELL:Bool
+┃  ┃     STATIC_CELL:Bool
 ┃  │
 ┃  ├─ 4
-┃  │   k: #next [ CREATE ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
-┃  └─ 8 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
+┃  └─ 6 (leaf, terminal)
+┃      k: #halt ~> K_CELL:K
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
 ┃      statusCode: EVMC_STATIC_MODE_VIOLATION
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     ( notBool _STATIC_CELL:Bool )
-┃  ┃     ( notBool _USEGAS_CELL:Bool )
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> ) orBool W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule > )
 ┃  │
-┃  ├─ 25
-┃  │   k: #next [ CREATE ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 47
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (7 steps)
-┃  └─ 12 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: EVMC_OUT_OF_GAS
-┃
-┣━━┓ subst: .Subst
-┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     ( notBool _STATIC_CELL:Bool )
-┃  ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-┃  │
-┃  ├─ 31
-┃  │   k: #next [ CREATE ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  │
-┃  │  (13 steps)
-┃  └─ 17 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: EVMC_OUT_OF_GAS
-┃
-┣━━┓ subst: .Subst
-┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     ( notBool _STATIC_CELL:Bool )
-┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-┃  ┃     ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-┃  │
-┃  ├─ 34
-┃  │   k: #next [ CREATE ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  │
-┃  │  (12 steps)
-┃  ├─ 16
-┃  │   k: 0 ~> #deductGas ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE ...
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 11
+┃  │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  ┃
 ┃  ┃ (1 step)
 ┃  ┣━━┓
 ┃  ┃  │
-┃  ┃  ├─ 18
-┃  ┃  │   k: #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE _W0:Int _W1:Int _W ...
-┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  │  (4 steps)
-┃  ┃  └─ 22 (leaf, terminal)
-┃  ┃      k: #halt ~> _K_CELL:K
-┃  ┃      pc: _PC_CELL:Int
-┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃      statusCode: EVMC_OUT_OF_GAS
+┃  ┃  └─ 12 (leaf, pending)
+┃  ┃      k: #refund CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALAN ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
 ┃  ┃
 ┃  ┣━━┓
 ┃  ┃  │
-┃  ┃  ├─ 19
-┃  ┃  │   k: #end EVMC_OUT_OF_GAS ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> C ...
-┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  │  (4 steps)
-┃  ┃  └─ 23 (leaf, terminal)
-┃  ┃      k: #halt ~> _K_CELL:K
-┃  ┃      pc: _PC_CELL:Int
-┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃      statusCode: EVMC_OUT_OF_GAS
+┃  ┃  ├─ 13 (split)
+┃  ┃  │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  │   pc: PC_CELL:Int
+┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (branch)
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     1024 <=Int CALLDEPTH_CELL:Int
+┃  ┃  ┃  │
+┃  ┃  ┃  └─ 22 (leaf, pending)
+┃  ┃  ┃      k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  ┃      pc: PC_CELL:Int
+┃  ┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     CALLDEPTH_CELL:Int <Int 1024
+┃  ┃  ┃  ┃     ( notBool #rangeNonce ( NONCE_CELL:Int ) )
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 49
+┃  ┃  ┃  │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  ┃  │   pc: PC_CELL:Int
+┃  ┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (1 step)
+┃  ┃  ┃  └─ 35 (leaf, pending)
+┃  ┃  ┃      k: #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int ,  ...
+┃  ┃  ┃      pc: PC_CELL:Int
+┃  ┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃     ┃ constraint:
+┃  ┃     ┃     0 <=Int NONCE_CELL:Int
+┃  ┃     ┃     CALLDEPTH_CELL:Int <Int 1024
+┃  ┃     ┃     NONCE_CELL:Int <Int maxUInt64
+┃  ┃     │
+┃  ┃     ├─ 50
+┃  ┃     │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃     │   pc: PC_CELL:Int
+┃  ┃     │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃     │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃     │
+┃  ┃     │  (1 step)
+┃  ┃     └─ 36 (leaf, pending)
+┃  ┃         k: #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int ,  ...
+┃  ┃         pc: PC_CELL:Int
+┃  ┃         callDepth: CALLDEPTH_CELL:Int
+┃  ┃         statusCode: STATUSCODE_CELL:StatusCode
 ┃  ┃
 ┃  ┗━━┓
 ┃     │
-┃     └─ 20 (stuck, leaf)
-┃         k: 0 ~> #deductGas ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ] ~> CREATE ...
-┃         pc: _PC_CELL:Int
-┃         callDepth: _CALLDEPTH_CELL:Int
-┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃     ├─ 14
+┃     │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃     │   pc: PC_CELL:Int
+┃     │   callDepth: CALLDEPTH_CELL:Int
+┃     │   statusCode: STATUSCODE_CELL:StatusCode
+┃     │
+┃     ┊  constraint:
+┃     ┊      false
+┃     ┊  subst: .Subst
+┃     └─ 2 (leaf, target)
+┃         k: K_CELL:K
+┃         pc: FINAL_PC_CELL:Int
+┃         callDepth: FINAL_CALLDEPTH_CELL:Int
+┃         statusCode: FINAL_STATUSCODE_CELL:StatusCode
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> ) orBool W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule > )
+┃  │
+┃  ├─ 51
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (7 steps)
+┃  ├─ 17
+┃  │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (1 step)
+┃  ┣━━┓
+┃  ┃  │
+┃  ┃  └─ 18 (leaf, pending)
+┃  ┃      k: #refund CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALAN ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┣━━┓
+┃  ┃  │
+┃  ┃  ├─ 19 (split)
+┃  ┃  │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  │   pc: PC_CELL:Int
+┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (branch)
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     CALLDEPTH_CELL:Int <Int 1024
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 29
+┃  ┃  ┃  │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  ┃  │   pc: PC_CELL:Int
+┃  ┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (1 step)
+┃  ┃  ┃  └─ 39 (leaf, pending)
+┃  ┃  ┃      k: #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int ,  ...
+┃  ┃  ┃      pc: PC_CELL:Int
+┃  ┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃     ┃ constraint:
+┃  ┃     ┃     1024 <=Int CALLDEPTH_CELL:Int
+┃  ┃     │
+┃  ┃     └─ 30 (leaf, pending)
+┃  ┃         k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃         pc: PC_CELL:Int
+┃  ┃         callDepth: CALLDEPTH_CELL:Int
+┃  ┃         statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓
+┃     │
+┃     ├─ 20
+┃     │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃     │   pc: PC_CELL:Int
+┃     │   callDepth: CALLDEPTH_CELL:Int
+┃     │   statusCode: STATUSCODE_CELL:StatusCode
+┃     │
+┃     ┊  constraint:
+┃     ┊      false
+┃     ┊  subst: .Subst
+┃     └─ 2 (leaf, target)
+┃         k: K_CELL:K
+┃         pc: FINAL_PC_CELL:Int
+┃         callDepth: FINAL_CALLDEPTH_CELL:Int
+┃         statusCode: FINAL_STATUSCODE_CELL:StatusCode
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> ) orBool W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule > )
+┃  │
+┃  ├─ 53
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (7 steps)
+┃  ├─ 25
+┃  │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (1 step)
+┃  ┣━━┓
+┃  ┃  │
+┃  ┃  └─ 26 (leaf, pending)
+┃  ┃      k: #refund CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALAN ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┣━━┓
+┃  ┃  │
+┃  ┃  ├─ 27 (split)
+┃  ┃  │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  │   pc: PC_CELL:Int
+┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┃ (branch)
+┃  ┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃  ┃ constraint:
+┃  ┃  ┃  ┃     CALLDEPTH_CELL:Int <Int 1024
+┃  ┃  ┃  │
+┃  ┃  ┃  ├─ 37
+┃  ┃  ┃  │   k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃  ┃  │   pc: PC_CELL:Int
+┃  ┃  ┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃  │
+┃  ┃  ┃  │  (1 step)
+┃  ┃  ┃  └─ 46 (leaf, pending)
+┃  ┃  ┃      k: #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int ,  ...
+┃  ┃  ┃      pc: PC_CELL:Int
+┃  ┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃  ┃
+┃  ┃  ┗━━┓ subst: .Subst
+┃  ┃     ┃ constraint:
+┃  ┃     ┃     1024 <=Int CALLDEPTH_CELL:Int
+┃  ┃     │
+┃  ┃     └─ 38 (leaf, pending)
+┃  ┃         k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃         pc: PC_CELL:Int
+┃  ┃         callDepth: CALLDEPTH_CELL:Int
+┃  ┃         statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓
+┃     │
+┃     ├─ 28
+┃     │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃     │   pc: PC_CELL:Int
+┃     │   callDepth: CALLDEPTH_CELL:Int
+┃     │   statusCode: STATUSCODE_CELL:StatusCode
+┃     │
+┃     ┊  constraint:
+┃     ┊      false
+┃     ┊  subst: .Subst
+┃     └─ 2 (leaf, target)
+┃         k: K_CELL:K
+┃         pc: FINAL_PC_CELL:Int
+┃         callDepth: FINAL_CALLDEPTH_CELL:Int
+┃         statusCode: FINAL_STATUSCODE_CELL:StatusCode
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> ) orBool W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule > )
+┃  │
+┃  ├─ 55
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (7 steps)
+┃  ├─ 34
+┃  │   k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (1 step)
+┃  ┣━━┓
+┃  ┃  │
+┃  ┃  └─ 40 (leaf, pending)
+┃  ┃      k: #refund CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALAN ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┣━━┓
+┃  ┃  │
+┃  ┃  └─ 41 (leaf, pending)
+┃  ┃      k: #checkDepthExceeded ~> #checkNonceExceeded ID_CELL:Int ~> #create ID_CELL:Int #n ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓
+┃     │
+┃     └─ 42 (leaf, pending)
+┃         k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃         pc: PC_CELL:Int
+┃         callDepth: CALLDEPTH_CELL:Int
+┃         statusCode: STATUSCODE_CELL:StatusCode
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> ) orBool W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule > )
+┃  │
+┃  ├─ 57
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (7 steps)
+┃  └─ 45 (leaf, pending)
+┃      k: #checkBalanceUnderflow ID_CELL:Int W0:Int ~> #checkDepthExceeded ~> #checkNonceE ...
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
+┃      statusCode: STATUSCODE_CELL:StatusCode
+┃
+┣━━┓ subst: .Subst
+┃  ┃ constraint:
+┃  ┃     ( notBool STATIC_CELL:Bool )
+┃  ┃     ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> ) orBool W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule > )
+┃  │
+┃  ├─ 59
+┃  │   k: #next [ CREATE ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  │  (4 steps)
+┃  └─ 43 (leaf, pending)
+┃      k: CREATE W0:Int W1:Int W2:Int ~> #pc [ CREATE ] ~> K_CELL:K
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
+┃      statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
-   ┃     _USEGAS_CELL:Bool
-   ┃     ( notBool _STATIC_CELL:Bool )
-   ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-   ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) )
+   ┃     ( notBool STATIC_CELL:Bool )
    │
-   ├─ 35
-   │   k: #next [ CREATE ] ~> _K_CELL:K
-   │   pc: _PC_CELL:Int
-   │   callDepth: _CALLDEPTH_CELL:Int
-   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ├─ 60
+   │   k: #next [ CREATE ] ~> K_CELL:K
+   │   pc: PC_CELL:Int
+   │   callDepth: CALLDEPTH_CELL:Int
+   │   statusCode: STATUSCODE_CELL:StatusCode
    │
-   │  (18 steps)
-   └─ 21 (leaf, terminal)
-       k: #halt ~> _K_CELL:K
-       pc: _PC_CELL:Int
-       callDepth: _CALLDEPTH_CELL:Int
-       statusCode: EVMC_OUT_OF_GAS
+   │  (4 steps)
+   └─ 44 (leaf, pending)
+       k: CREATE W0:Int W1:Int W2:Int ~> #pc [ CREATE ] ~> K_CELL:K
+       pc: PC_CELL:Int
+       callDepth: CALLDEPTH_CELL:Int
+       statusCode: STATUSCODE_CELL:StatusCode
 
-
-┌─ 2 (root, leaf, target)
-│   k: _K_CELL:K
-│   pc: ?_FINAL_PC_CELL:Int
-│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
 
 
 
 module SUMMARY-CREATE-3-SPEC
     
     
-    rule [BASIC-BLOCK-4-TO-8]: <kevm>
+    rule [BASIC-BLOCK-4-TO-6]: <kevm>
            <k>
              ( #next [ CREATE ] => #halt )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
+           <useGas>
+             false
+           </useGas>
            <ethereum>
              <evm>
                <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
+                 ( _STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
                </statusCode>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( __W0 : ( __W1 : ( __W2 : __WS ) ) )
+                   ( _W0 : ( _W1 : ( _W2 : _WS ) ) )
                  </wordStack>
                  <static>
-                   ( _STATIC_CELL:Bool => true )
+                   ( STATIC_CELL:Bool => true )
                  </static>
                  ...
                </callState>
                ...
              </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires _STATIC_CELL:Bool
-      [priority(20), label(BASIC-BLOCK-4-TO-8)]
-    
-    rule [BASIC-BLOCK-18-TO-22]: <kevm>
-           <k>
-             ( #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
-             ~> CREATE _W0:Int _W1:Int _W2:Int
-             ~> #pc [ CREATE ] => #halt ~> .K )
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             true
-           </useGas>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
-               <callState>
-                 <gas>
-                   #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi -Gas 0
-                 </gas>
-                 <memoryUsed>
-                   #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
-                 </memoryUsed>
-                 <callGas>
-                   #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
-                 </callGas>
-                 <static>
-                   false
-                 </static>
-                 ...
-               </callState>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
                ...
-             </evm>
-             ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( __USEGAS_CELL
-       andBool ( ( notBool __STATIC_CELL )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-       andBool ( 0 <=Gas #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi
-               )))))
-      [priority(20), label(BASIC-BLOCK-18-TO-22)]
-    
-    rule [BASIC-BLOCK-19-TO-23]: <kevm>
-           <k>
-             ( #end EVMC_OUT_OF_GAS
-             ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
-             ~> CREATE _W0:Int _W1:Int _W2:Int
-             ~> #pc [ CREATE ] => #halt ~> .K )
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             true
-           </useGas>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
-               <callState>
-                 <gas>
-                   #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi
-                 </gas>
-                 <memoryUsed>
-                   #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int )
-                 </memoryUsed>
-                 <callGas>
-                   #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi
-                 </callGas>
-                 <static>
-                   false
-                 </static>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __USEGAS_CELL
-       andBool ( ( notBool __STATIC_CELL )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-       andBool ( #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi <Gas 0
-               )))))
-      [priority(20), label(BASIC-BLOCK-19-TO-23)]
-    
-    rule [BASIC-BLOCK-25-TO-12]: <kevm>
-           <k>
-             ( #next [ CREATE ] => #halt )
-             ~> __K_CELL
-           </k>
-           <useGas>
-             ( _USEGAS_CELL:Bool => false )
-           </useGas>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
-               <callState>
-                 <wordStack>
-                   ( ( __W0 : ( __W1 : ( __W2 : _WS:WordStack ) ) ) => _WS:WordStack )
-                 </wordStack>
-                 <static>
-                   ( _STATIC_CELL:Bool => false )
-                 </static>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( ( notBool _STATIC_CELL:Bool )
-       andBool ( ( notBool _USEGAS_CELL:Bool )
+      requires ( STATIC_CELL:Bool
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
                ))
-      [priority(20), label(BASIC-BLOCK-25-TO-12)]
+      [priority(20), label(BASIC-BLOCK-4-TO-6)]
     
-    rule [BASIC-BLOCK-31-TO-17]: <kevm>
+    rule [BASIC-BLOCK-29-TO-39]: <kevm>
            <k>
-             ( #next [ CREATE ] => #halt )
-             ~> __K_CELL
+             ( #checkDepthExceeded ~> .K => .K )
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , _W1 , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ]
+             ~> _K_CELL
            </k>
            <schedule>
-             _SCHEDULE_CELL:Schedule
+             SCHEDULE_CELL:Schedule
            </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             false
            </useGas>
            <ethereum>
              <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
                <callState>
-                 <wordStack>
-                   ( ( __W0 : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) ) => _WS:WordStack )
-                 </wordStack>
-                 <gas>
-                   _GAS_CELL:Gas
-                 </gas>
-                 <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) )
-                 </memoryUsed>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
                  <static>
-                   ( _STATIC_CELL:Bool => false )
+                   false
                  </static>
+                 <callDepth>
+                   CALLDEPTH_CELL:Int
+                 </callDepth>
                  ...
                </callState>
+               <substate>
+                 <accessedAccounts>
+                   _ACCESSEDACCOUNTS_CELL |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool _STATIC_CELL:Bool )
-       andBool ( _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-               )))
-      [priority(20), label(BASIC-BLOCK-31-TO-17)]
+      requires ( ( notBool _STATIC_CELL )
+       andBool ( W0:Int <=Int BALANCE_CELL:Int
+       andBool ( CALLDEPTH_CELL:Int <Int 1024
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))))
+      [priority(20), label(BASIC-BLOCK-29-TO-39)]
     
-    rule [BASIC-BLOCK-34-TO-16]: <kevm>
+    rule [BASIC-BLOCK-37-TO-46]: <kevm>
            <k>
-             ( #next [ CREATE ] ~> .K => 0
-             ~> #deductGas
-             ~> #access [ CREATE , CREATE _W0:Int _W1:Int _W2:Int ]
-             ~> CREATE _W0:Int _W1:Int _W2:Int
+             ( #checkDepthExceeded ~> .K => .K )
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , _W1 , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ]
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   false
+                 </static>
+                 <callDepth>
+                   CALLDEPTH_CELL:Int
+                 </callDepth>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   _ACCESSEDACCOUNTS_CELL |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool _STATIC_CELL )
+       andBool ( W0:Int <=Int BALANCE_CELL:Int
+       andBool ( CALLDEPTH_CELL:Int <Int 1024
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))))
+      [priority(20), label(BASIC-BLOCK-37-TO-46)]
+    
+    rule [BASIC-BLOCK-49-TO-35]: <kevm>
+           <k>
+             ( #checkDepthExceeded ~> .K => .K )
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , _W1 , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ]
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   false
+                 </static>
+                 <callDepth>
+                   CALLDEPTH_CELL:Int
+                 </callDepth>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   _ACCESSEDACCOUNTS_CELL |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool _STATIC_CELL )
+       andBool ( W0:Int <=Int BALANCE_CELL:Int
+       andBool ( CALLDEPTH_CELL:Int <Int 1024
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( notBool #rangeNonce ( NONCE_CELL:Int ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               ))))))
+      [priority(20), label(BASIC-BLOCK-49-TO-35)]
+    
+    rule [BASIC-BLOCK-50-TO-36]: <kevm>
+           <k>
+             ( #checkDepthExceeded ~> .K => .K )
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , _W1 , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ]
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   false
+                 </static>
+                 <callDepth>
+                   CALLDEPTH_CELL:Int
+                 </callDepth>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   _ACCESSEDACCOUNTS_CELL |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool _STATIC_CELL )
+       andBool ( 0 <=Int NONCE_CELL:Int
+       andBool ( W0:Int <=Int BALANCE_CELL:Int
+       andBool ( CALLDEPTH_CELL:Int <Int 1024
+       andBool ( NONCE_CELL:Int <Int maxUInt64
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))))))
+      [priority(20), label(BASIC-BLOCK-50-TO-36)]
+    
+    rule [BASIC-BLOCK-59-TO-43]: <kevm>
+           <k>
+             ( #next [ CREATE ] ~> .K => CREATE W0:Int W1:Int W2:Int
              ~> #pc [ CREATE ] )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
            <schedule>
-             _SCHEDULE_CELL:Schedule
+             SCHEDULE_CELL:Schedule
            </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             false
            </useGas>
            <ethereum>
              <evm>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
                  </wordStack>
-                 <gas>
-                   ( _GAS_CELL:Gas => #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then 0 #else _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) /Gas 64 #fi )
-                 </gas>
-                 <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) )
-                 </memoryUsed>
-                 <callGas>
-                   ( __CALLGAS_CELL => #if Gstaticcalldepth << _SCHEDULE_CELL:Schedule >> #then _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) #else #allBut64th ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) ) #fi )
-                 </callGas>
                  <static>
-                   ( _STATIC_CELL:Bool => false )
+                   ( STATIC_CELL:Bool => false )
                  </static>
                  ...
                </callState>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool _STATIC_CELL:Bool )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-               ))))
-      [priority(20), label(BASIC-BLOCK-34-TO-16)]
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))
+      [priority(20), label(BASIC-BLOCK-59-TO-43)]
     
-    rule [BASIC-BLOCK-35-TO-21]: <kevm>
+    rule [BASIC-BLOCK-60-TO-44]: <kevm>
            <k>
-             ( #next [ CREATE ] => #halt )
-             ~> __K_CELL
+             ( #next [ CREATE ] ~> .K => CREATE W0:Int W1:Int W2:Int
+             ~> #pc [ CREATE ] )
+             ~> _K_CELL
            </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             false
            </useGas>
            <ethereum>
              <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( __W0 : ( _W1:Int : ( _W2:Int : _WS:WordStack ) ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
                  </wordStack>
-                 <gas>
-                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) )
-                 </gas>
-                 <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) )
-                 </memoryUsed>
                  <static>
-                   ( _STATIC_CELL:Bool => false )
+                   ( STATIC_CELL:Bool => false )
                  </static>
                  ...
                </callState>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( notBool _STATIC_CELL:Bool )
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W1:Int , _W2:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas ( Gcreate < _SCHEDULE_CELL:Schedule > +Int Cinitcode ( _SCHEDULE_CELL:Schedule , _W2:Int ) )
-               ))))
-      [priority(20), label(BASIC-BLOCK-35-TO-21)]
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+               ))
+      [priority(20), label(BASIC-BLOCK-60-TO-44)]
+    
+    rule [BASIC-BLOCK-47-TO-11]: <kevm>
+           <k>
+             ( #next [ CREATE ] ~> .K => #checkBalanceUnderflow ID_CELL:Int W0:Int
+             ~> #checkDepthExceeded
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , W1:Int , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ] )
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))
+      [priority(20), label(BASIC-BLOCK-47-TO-11)]
+    
+    rule [BASIC-BLOCK-51-TO-17]: <kevm>
+           <k>
+             ( #next [ CREATE ] ~> .K => #checkBalanceUnderflow ID_CELL:Int W0:Int
+             ~> #checkDepthExceeded
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , W1:Int , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ] )
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))
+      [priority(20), label(BASIC-BLOCK-51-TO-17)]
+    
+    rule [BASIC-BLOCK-53-TO-25]: <kevm>
+           <k>
+             ( #next [ CREATE ] ~> .K => #checkBalanceUnderflow ID_CELL:Int W0:Int
+             ~> #checkDepthExceeded
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , W1:Int , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ] )
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))
+      [priority(20), label(BASIC-BLOCK-53-TO-25)]
+    
+    rule [BASIC-BLOCK-55-TO-34]: <kevm>
+           <k>
+             ( #next [ CREATE ] ~> .K => #checkBalanceUnderflow ID_CELL:Int W0:Int
+             ~> #checkDepthExceeded
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , W1:Int , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ] )
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))
+      [priority(20), label(BASIC-BLOCK-55-TO-34)]
+    
+    rule [BASIC-BLOCK-57-TO-45]: <kevm>
+           <k>
+             ( #next [ CREATE ] ~> .K => #checkBalanceUnderflow ID_CELL:Int W0:Int
+             ~> #checkDepthExceeded
+             ~> #checkNonceExceeded ID_CELL:Int
+             ~> #create ID_CELL:Int #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) W0:Int #range ( LOCALMEM_CELL:Bytes , W1:Int , W2:Int )
+             ~> #codeDeposit #newAddr ( ID_CELL:Int , NONCE_CELL:Int )
+             ~> #pc [ CREATE ] )
+             ~> _K_CELL
+           </k>
+           <schedule>
+             SCHEDULE_CELL:Schedule
+           </schedule>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : WS:WordStack ) ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               <substate>
+                 <accessedAccounts>
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( #newAddr ( ID_CELL:Int , NONCE_CELL:Int ) ) )
+                 </accessedAccounts>
+                 ...
+               </substate>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <nonce>
+                     NONCE_CELL:Int
+                   </nonce>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( ( notBool Ghasmaxinitcodesize << SCHEDULE_CELL:Schedule >> )
+          orBool ( W2:Int <=Int maxInitCodeSize < SCHEDULE_CELL:Schedule >
+                 ))
+               )))
+      [priority(20), label(BASIC-BLOCK-57-TO-45)]
 
 endmodule
