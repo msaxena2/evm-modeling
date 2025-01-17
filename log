@@ -1,0 +1,230 @@
+INFO 2025-01-17 03:44:35,038 kevm_pyk.summarizer - Number of opcodes: 84
+INFO 2025-01-17 03:44:35,038 kevm_pyk.summarizer - Number of passed opcodes: 71
+INFO 2025-01-17 03:44:35,038 kevm_pyk.summarizer - Number of todo opcodes: 13
+INFO 2025-01-17 03:44:35,038 kevm_pyk.summarizer - Todo opcodes: ['JUMPI', 'PUSH', 'LOG', 'CREATE', 'CALL', 'CALLCODE', 'RETURN', 'DELEGATECALL', 'CREATE2', 'STATICCALL', 'REVERT', 'INVALID', 'SELFDESTRUCT']
+INFO 2025-01-17 03:44:35,038 kevm_pyk.__main__ - summarizing ['JUMPI', 'PUSH', 'LOG', 'CREATE', 'CALL', 'CALLCODE', 'RETURN', 'DELEGATECALL', 'CREATE2', 'STATICCALL', 'REVERT', 'INVALID', 'SELFDESTRUCT']
+INFO 2025-01-17 03:44:35,038 pyk.kast.outer - Loading JSON definition: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-17 03:44:35,164 pyk.kast.outer - Converting JSON definition to Kast: /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/compiled.json
+INFO 2025-01-17 03:44:35,674 kevm_pyk.summarizer - Setting the type of `USEGAS_CELL` to `false` for JUMPI
+INFO 2025-01-17 03:44:35,676 pyk.kore.rpc - Starting KoreServer: kore-rpc-booster /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore --module EDSL --server-port 0 --llvm-backend-library /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/llvm-library/interpreter.so --interim-simplification 25
+INFO 2025-01-17 03:44:35,682 pyk.kore.rpc - [PID=3240337][stde] [proxy] Loading definition from /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore, main module "EDSL"
+INFO 2025-01-17 03:44:36,683 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 25724666}
+INFO 2025-01-17 03:44:37,684 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 131}
+INFO 2025-01-17 03:44:38,685 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 371}
+INFO 2025-01-17 03:44:39,686 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Executing TimeSpec {sec = 0, nsec = 720748883}
+INFO 2025-01-17 03:44:39,686 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 26121218}
+INFO 2025-01-17 03:44:39,686 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 110}
+INFO 2025-01-17 03:44:40,619 pyk.kore.rpc - KoreServer started: 0.0.0.0:33449, pid=3240337
+INFO 2025-01-17 03:44:40,620 pyk.kore.rpc - Connecting to host: localhost:33449
+INFO 2025-01-17 03:44:40,620 pyk.kore.rpc - Connected to host: localhost:33449
+INFO 2025-01-17 03:44:40,620 kevm_pyk.utils - Computing definedness constraint for initial node: JUMPI_FALSE_2_SPEC
+INFO 2025-01-17 03:44:40,634 pyk.kore.rpc - Sending request to localhost:33449: 140021198286800-001 - simplify
+INFO 2025-01-17 03:44:40,687 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021198286800-001
+INFO 2025-01-17 03:44:40,687 pyk.kore.rpc - [PID=3240337][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 210}
+INFO 2025-01-17 03:44:40,687 pyk.kore.rpc - [PID=3240337][stde] [proxy] Starting RPC server
+INFO 2025-01-17 03:44:41,222 pyk.kore.rpc - Received response from localhost:33449: 140021198286800-001 - simplify
+INFO 2025-01-17 03:44:41,235 pyk.kore.rpc - Sending request to localhost:33449: 140021198286800-002 - simplify
+INFO 2025-01-17 03:44:41,737 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021198286800-002
+INFO 2025-01-17 03:44:41,874 pyk.kore.rpc - Received response from localhost:33449: 140021198286800-002 - simplify
+INFO 2025-01-17 03:44:41,874 kevm_pyk.utils - Simplifying initial and target node: JUMPI_FALSE_2_SPEC
+INFO 2025-01-17 03:44:41,884 pyk.kore.rpc - Sending request to localhost:33449: 140021198286800-003 - simplify
+INFO 2025-01-17 03:44:42,443 pyk.kore.rpc - Received response from localhost:33449: 140021198286800-003 - simplify
+INFO 2025-01-17 03:44:42,455 pyk.kore.rpc - Sending request to localhost:33449: 140021198286800-004 - simplify
+INFO 2025-01-17 03:44:42,738 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021198286800-003
+INFO 2025-01-17 03:44:42,738 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021198286800-004
+INFO 2025-01-17 03:44:43,044 pyk.kore.rpc - Received response from localhost:33449: 140021198286800-004 - simplify
+INFO 2025-01-17 03:44:43,048 pyk.proof.reachability - Wrote proof data for JUMPI_FALSE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_FALSE_2_SPEC/proof.json
+INFO 2025-01-17 03:44:43,049 pyk.kore.rpc - Connecting to host: localhost:33449
+INFO 2025-01-17 03:44:43,049 pyk.kore.rpc - Connected to host: localhost:33449
+INFO 2025-01-17 03:44:43,049 pyk.proof.proof - [ZJH] prover type: <class 'pyk.proof.reachability.APRProver'>
+INFO 2025-01-17 03:44:43,049 pyk.proof.reachability - [ZJH] init proof
+INFO 2025-01-17 03:44:43,053 pyk.kore.rpc - Sending request to localhost:33449: 140021198120336-001 - add-module
+INFO 2025-01-17 03:44:43,739 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021198120336-001
+INFO 2025-01-17 03:44:43,872 pyk.kore.rpc - Received response from localhost:33449: 140021198120336-001 - add-module
+INFO 2025-01-17 03:44:43,887 pyk.kore.rpc - Sending request to localhost:33449: 140021198120336-002 - add-module
+INFO 2025-01-17 03:44:44,740 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021198120336-002
+INFO 2025-01-17 03:44:44,776 pyk.kore.rpc - Received response from localhost:33449: 140021198120336-002 - add-module
+INFO 2025-01-17 03:44:44,776 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-17 03:44:44,776 pyk.proof.reachability - [ZJH] node_id: 1
+INFO 2025-01-17 03:44:44,777 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-17 03:44:44,777 pyk.proof.reachability - [ZJH] node_id: 2
+INFO 2025-01-17 03:44:44,777 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-17 03:44:44,777 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-17 03:44:44,777 pyk.proof.proof - [ZJH] proof initialized
+INFO 2025-01-17 03:44:44,777 pyk.proof.proof - [ZJH] pending: [1]
+INFO 2025-01-17 03:44:44,777 pyk.proof.reachability - Before appending step: 1
+INFO 2025-01-17 03:44:44,778 pyk.kore.rpc - Connecting to host: localhost:33449
+INFO 2025-01-17 03:44:44,778 pyk.proof.proof - Submitted steps for proof: JUMPI_FALSE_2_SPEC
+INFO 2025-01-17 03:44:44,778 pyk.kore.rpc - Connected to host: localhost:33449
+INFO 2025-01-17 03:44:44,808 pyk.kore.rpc - Sending request to localhost:33449: 140021196804816-001 - implies
+INFO 2025-01-17 03:44:45,357 pyk.kore.rpc - Received response from localhost:33449: 140021196804816-001 - implies
+INFO 2025-01-17 03:44:45,363 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-17 03:44:45,363 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-17 03:44:45,364 pyk.kore.rpc - Sending request to localhost:33449: 140021196804816-002 - execute
+INFO 2025-01-17 03:44:45,741 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021196804816-001
+INFO 2025-01-17 03:44:45,741 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021196804816-002
+INFO 2025-01-17 03:50:19,513 pyk.kore.rpc - Received response from localhost:33449: 140021196804816-002 - execute
+INFO 2025-01-17 03:50:20,283 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-17 03:50:20,283 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'a49bbf5c4b82ee9c477b266571ac6462951ccd1a83f52cbf657b2c60368c2c04'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'f445bdd373dac8403ad00559717364f6630b19cbc6e53d3bbd6fa784e4089f0d'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'c4541707a8e5bc2969999e4e355042498b9631ffa4b568642915b512fe35d286'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '9940b671074c218a6c5f0f9e7b90d05efbcc000ee2884306b43860e14f6979e4'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'fcb6fead674d9669ee59734ee8a4bad3d45e5361dd18ab3a66476148e75ee2c6'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '27458eb47839269121ea93b912b579bddb9557fccc51e69983d94b2e6ed21335'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-17 03:50:21,864 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-17 03:50:21,864 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-17 03:50:21,864 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-17 03:50:21,882 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 6: 1 --> 3
+INFO 2025-01-17 03:50:21,882 pyk.proof.reachability - Wrote proof data for JUMPI_FALSE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_FALSE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:21,883 pyk.proof.reachability - Before appending step: 3
+INFO 2025-01-17 03:50:21,913 pyk.kore.rpc - Sending request to localhost:33449: 140021196804816-003 - implies
+INFO 2025-01-17 03:50:21,916 pyk.kore.rpc - [PID=3240337][stde] [proxy] Processing request 140021196804816-003
+INFO 2025-01-17 03:50:22,511 pyk.kore.rpc - Received response from localhost:33449: 140021196804816-003 - implies
+INFO 2025-01-17 03:50:22,517 pyk.proof.reachability - Subsumed into target node JUMPI_FALSE_2_SPEC: (3, 2)
+INFO 2025-01-17 03:50:22,517 pyk.proof.reachability - Wrote proof data for JUMPI_FALSE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_FALSE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:22,526 pyk.proof.reachability - Wrote proof data for JUMPI_FALSE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_FALSE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:22,527 kevm_pyk.utils - Proof status JUMPI_FALSE_2_SPEC: ProofStatus.PASSED
+INFO 2025-01-17 03:50:22,527 pyk.kore.rpc - Stopping KoreServer: 0.0.0.0:33449, pid=3240337
+INFO 2025-01-17 03:50:22,603 pyk.kore.rpc - KoreServer stopped: 0.0.0.0:33449, pid=3240337
+INFO 2025-01-17 03:50:22,745 kevm_pyk.summarizer - Setting the type of `USEGAS_CELL` to `false` for JUMPI
+INFO 2025-01-17 03:50:22,748 pyk.kore.rpc - Starting KoreServer: kore-rpc-booster /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore --module EDSL --server-port 0 --llvm-backend-library /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/llvm-library/interpreter.so --interim-simplification 25
+INFO 2025-01-17 03:50:22,752 pyk.kore.rpc - [PID=3244020][stde] [proxy] Loading definition from /home/zhaoji/.cache/kdist-9ffc41e/evm-semantics/haskell/definition.kore, main module "EDSL"
+INFO 2025-01-17 03:50:23,754 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 25555099}
+INFO 2025-01-17 03:50:24,755 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 111}
+INFO 2025-01-17 03:50:25,756 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 211}
+INFO 2025-01-17 03:50:26,757 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Executing TimeSpec {sec = 0, nsec = 718587433}
+INFO 2025-01-17 03:50:26,757 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Reading the input file TimeSpec {sec = 0, nsec = 26438950}
+INFO 2025-01-17 03:50:26,757 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Parsing the file TimeSpec {sec = 0, nsec = 121}
+INFO 2025-01-17 03:50:27,690 pyk.kore.rpc - KoreServer started: 0.0.0.0:37903, pid=3244020
+INFO 2025-01-17 03:50:27,690 pyk.kore.rpc - Connecting to host: localhost:37903
+INFO 2025-01-17 03:50:27,691 pyk.kore.rpc - Connected to host: localhost:37903
+INFO 2025-01-17 03:50:27,691 kevm_pyk.utils - Computing definedness constraint for initial node: JUMPI_TRUE_2_SPEC
+INFO 2025-01-17 03:50:27,696 pyk.kore.rpc - Sending request to localhost:37903: 140021195809488-001 - simplify
+INFO 2025-01-17 03:50:27,758 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195809488-001
+INFO 2025-01-17 03:50:27,758 pyk.kore.rpc - [PID=3244020][stde] [kore][info] Verifying the definition TimeSpec {sec = 0, nsec = 281}
+INFO 2025-01-17 03:50:27,758 pyk.kore.rpc - [PID=3244020][stde] [proxy] Starting RPC server
+INFO 2025-01-17 03:50:28,276 pyk.kore.rpc - Received response from localhost:37903: 140021195809488-001 - simplify
+INFO 2025-01-17 03:50:28,287 pyk.kore.rpc - Sending request to localhost:37903: 140021195809488-002 - simplify
+INFO 2025-01-17 03:50:28,762 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195809488-002
+INFO 2025-01-17 03:50:28,917 pyk.kore.rpc - Received response from localhost:37903: 140021195809488-002 - simplify
+INFO 2025-01-17 03:50:28,918 kevm_pyk.utils - Simplifying initial and target node: JUMPI_TRUE_2_SPEC
+INFO 2025-01-17 03:50:28,923 pyk.kore.rpc - Sending request to localhost:37903: 140021195809488-003 - simplify
+INFO 2025-01-17 03:50:29,500 pyk.kore.rpc - Received response from localhost:37903: 140021195809488-003 - simplify
+INFO 2025-01-17 03:50:29,507 pyk.kore.rpc - Sending request to localhost:37903: 140021195809488-004 - simplify
+INFO 2025-01-17 03:50:29,769 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195809488-003
+INFO 2025-01-17 03:50:29,769 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195809488-004
+INFO 2025-01-17 03:50:30,093 pyk.kore.rpc - Received response from localhost:37903: 140021195809488-004 - simplify
+INFO 2025-01-17 03:50:30,099 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:30,101 pyk.kore.rpc - Connecting to host: localhost:37903
+INFO 2025-01-17 03:50:30,101 pyk.kore.rpc - Connected to host: localhost:37903
+INFO 2025-01-17 03:50:30,101 pyk.proof.proof - [ZJH] prover type: <class 'pyk.proof.reachability.APRProver'>
+INFO 2025-01-17 03:50:30,101 pyk.proof.reachability - [ZJH] init proof
+INFO 2025-01-17 03:50:30,109 pyk.kore.rpc - Sending request to localhost:37903: 140021195738832-001 - add-module
+INFO 2025-01-17 03:50:30,781 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195738832-001
+INFO 2025-01-17 03:50:30,917 pyk.kore.rpc - Received response from localhost:37903: 140021195738832-001 - add-module
+INFO 2025-01-17 03:50:30,939 pyk.kore.rpc - Sending request to localhost:37903: 140021195738832-002 - add-module
+INFO 2025-01-17 03:50:31,783 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195738832-002
+INFO 2025-01-17 03:50:31,822 pyk.kore.rpc - Received response from localhost:37903: 140021195738832-002 - add-module
+INFO 2025-01-17 03:50:31,822 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-17 03:50:31,822 pyk.proof.reachability - [ZJH] node_id: 1
+INFO 2025-01-17 03:50:31,822 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-17 03:50:31,823 pyk.proof.reachability - [ZJH] node_id: 2
+INFO 2025-01-17 03:50:31,823 pyk.proof.reachability - [ZJH] is_terminal: False
+INFO 2025-01-17 03:50:31,823 pyk.proof.reachability - [ZJH] pending: [1]
+INFO 2025-01-17 03:50:31,823 pyk.proof.proof - [ZJH] proof initialized
+INFO 2025-01-17 03:50:31,823 pyk.proof.proof - [ZJH] pending: [1]
+INFO 2025-01-17 03:50:31,824 pyk.proof.reachability - Before appending step: 1
+INFO 2025-01-17 03:50:31,824 pyk.kore.rpc - Connecting to host: localhost:37903
+INFO 2025-01-17 03:50:31,824 pyk.proof.proof - Submitted steps for proof: JUMPI_TRUE_2_SPEC
+INFO 2025-01-17 03:50:31,824 pyk.kore.rpc - Connected to host: localhost:37903
+INFO 2025-01-17 03:50:31,854 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-001 - implies
+INFO 2025-01-17 03:50:32,424 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-001 - implies
+INFO 2025-01-17 03:50:32,430 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-17 03:50:32,431 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-17 03:50:32,431 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-002 - execute
+INFO 2025-01-17 03:50:32,784 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-002
+INFO 2025-01-17 03:50:32,784 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-001
+INFO 2025-01-17 03:50:35,560 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-002 - execute
+INFO 2025-01-17 03:50:35,562 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-17 03:50:35,562 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'a49bbf5c4b82ee9c477b266571ac6462951ccd1a83f52cbf657b2c60368c2c04'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'f445bdd373dac8403ad00559717364f6630b19cbc6e53d3bbd6fa784e4089f0d'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'c4541707a8e5bc2969999e4e355042498b9631ffa4b568642915b512fe35d286'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '9940b671074c218a6c5f0f9e7b90d05efbcc000ee2884306b43860e14f6979e4'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '0ee7a2c1d6ff36a91ac9e9ed19a2c624ba21b97f4511af22044f6169bb8adfa1'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'Uncertain about the remainder after applying a rule', 'rule-id': '470c1a1acb43deed3846806e848b7fe390b38cfcae01485d4d9e2f08d70a3b24'}}]
+INFO 2025-01-17 03:50:35,569 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-17 03:50:35,569 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-17 03:50:35,569 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-17 03:50:35,570 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 5: 1 --> 3
+INFO 2025-01-17 03:50:35,571 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:35,572 pyk.proof.reachability - Before appending step: 3
+INFO 2025-01-17 03:50:35,602 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-003 - implies
+INFO 2025-01-17 03:50:35,605 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-003
+INFO 2025-01-17 03:50:36,197 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-003 - implies
+INFO 2025-01-17 03:50:36,204 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-17 03:50:36,204 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-17 03:50:36,204 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-004 - execute
+INFO 2025-01-17 03:50:36,606 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-004
+INFO 2025-01-17 03:50:39,335 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-004 - execute
+INFO 2025-01-17 03:50:39,336 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-17 03:50:39,336 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'Uncertain about the remainder after applying a rule', 'rule-id': '470c1a1acb43deed3846806e848b7fe390b38cfcae01485d4d9e2f08d70a3b24'}}]
+INFO 2025-01-17 03:50:39,343 pyk.kcfg.explore - [zjh] next_node_logs: (LogRewrite(origin=<LogOrigin.BOOSTER: 'booster'>, result=RewriteFailure(rule_id='470c1a1acb43deed3846806e848b7fe390b38cfcae01485d4d9e2f08d70a3b24', reason='Uncertain about the remainder after applying a rule')),)
+INFO 2025-01-17 03:50:39,343 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-17 03:50:39,343 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-17 03:50:39,345 pyk.kcfg.kcfg - Extending current KCFG with the following: 2 non-deterministic branches: 3 --> [4, 5]
+INFO 2025-01-17 03:50:39,345 pyk.kcfg.kcfg - rule_labels: ()
+INFO 2025-01-17 03:50:39,345 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:39,346 pyk.proof.reachability - Before appending step: 4
+INFO 2025-01-17 03:50:39,347 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-17 03:50:39,352 pyk.kore.rpc - Connecting to host: localhost:37903
+INFO 2025-01-17 03:50:39,378 pyk.kore.rpc - Connected to host: localhost:37903
+INFO 2025-01-17 03:50:39,378 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-005 - implies
+INFO 2025-01-17 03:50:39,393 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-005
+INFO 2025-01-17 03:50:39,409 pyk.kore.rpc - Sending request to localhost:37903: 140021196415888-001 - implies
+INFO 2025-01-17 03:50:40,072 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-005 - implies
+INFO 2025-01-17 03:50:40,080 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-17 03:50:40,080 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-17 03:50:40,080 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-006 - execute
+INFO 2025-01-17 03:50:40,080 pyk.kore.rpc - Received response from localhost:37903: 140021196415888-001 - implies
+INFO 2025-01-17 03:50:40,087 pyk.kore.rpc - [zjh] [kore-client] log-successful-rewrites: True
+INFO 2025-01-17 03:50:40,087 pyk.kore.rpc - [zjh] [kore-client] log-failed-rewrites: True
+INFO 2025-01-17 03:50:40,087 pyk.kore.rpc - Sending request to localhost:37903: 140021196415888-002 - execute
+INFO 2025-01-17 03:50:40,392 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021196415888-002
+INFO 2025-01-17 03:50:40,392 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021196415888-001
+INFO 2025-01-17 03:50:40,392 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-006
+INFO 2025-01-17 03:50:43,892 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-006 - execute
+INFO 2025-01-17 03:50:43,893 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-17 03:50:43,893 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': 'd40db55be13c107a708382df2ae9cea0d6305bbf5d6804de46250d7076a392e2'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-17 03:50:43,902 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-17 03:50:43,902 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-17 03:50:43,902 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-17 03:50:43,902 pyk.proof.reachability - Caching next step for edge starting from 4
+INFO 2025-01-17 03:50:43,903 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 1: 4 --> 6
+INFO 2025-01-17 03:50:43,903 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:43,904 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-17 03:50:43,904 pyk.proof.reachability - Before appending step: 6
+INFO 2025-01-17 03:50:43,935 pyk.kore.rpc - Sending request to localhost:37903: 140020855325200-007 - implies
+INFO 2025-01-17 03:50:43,937 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140020855325200-007
+INFO 2025-01-17 03:50:44,591 pyk.kore.rpc - Received response from localhost:37903: 140020855325200-007 - implies
+INFO 2025-01-17 03:50:44,597 pyk.proof.reachability - Subsumed into target node JUMPI_TRUE_2_SPEC: (6, 2)
+INFO 2025-01-17 03:50:44,597 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:44,597 pyk.proof.reachability - Before appending step: 5
+INFO 2025-01-17 03:50:46,964 pyk.kore.rpc - Received response from localhost:37903: 140021196415888-002 - execute
+INFO 2025-01-17 03:50:46,969 pyk.kore.rpc - [zjh] [kore-client] result: dict_keys(['reason', 'depth', 'state', 'next-states', 'logs'])
+INFO 2025-01-17 03:50:46,969 pyk.kore.rpc - [zjh] [kore-client] logs: [{'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '7c6df1b7a841ef7cce64eaae0c332bb9383a2692d649e88e8ea49fcb7fa5d540'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'success', 'rule-id': '3d8b3569577237015e49cc215f5fa1a74dc5cdaa9dddea7123dd1215bd3b0435'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}, {'tag': 'rewrite', 'origin': 'booster', 'result': {'tag': 'failure', 'reason': 'No applicable rules found'}}]
+INFO 2025-01-17 03:50:47,014 pyk.kcfg.explore - [zjh] next_node_logs: ()
+INFO 2025-01-17 03:50:47,014 pyk.kcfg.explore - [zjh] rules: []
+INFO 2025-01-17 03:50:47,014 pyk.kcfg.explore - [zjh] _log_succ_rewrites: True
+INFO 2025-01-17 03:50:47,014 pyk.proof.reachability - Caching next step for edge starting from 5
+INFO 2025-01-17 03:50:47,015 pyk.kcfg.kcfg - Extending current KCFG with the following: basic block at depth 2: 5 --> 7
+INFO 2025-01-17 03:50:47,015 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:47,016 pyk.proof.reachability - Before appending step: 7
+INFO 2025-01-17 03:50:47,018 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:47,024 pyk.kore.rpc - Sending request to localhost:37903: 140021195738832-003 - simplify
+INFO 2025-01-17 03:50:47,025 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195738832-003
+INFO 2025-01-17 03:50:47,593 pyk.kore.rpc - Received response from localhost:37903: 140021195738832-003 - simplify
+INFO 2025-01-17 03:50:47,600 pyk.kore.rpc - Sending request to localhost:37903: 140021195738832-004 - simplify
+INFO 2025-01-17 03:50:48,027 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195738832-004
+INFO 2025-01-17 03:50:48,191 pyk.kore.rpc - Received response from localhost:37903: 140021195738832-004 - simplify
+INFO 2025-01-17 03:50:48,224 pyk.kore.rpc - Sending request to localhost:37903: 140021195738832-005 - implies
+INFO 2025-01-17 03:50:48,795 pyk.kore.rpc - Received response from localhost:37903: 140021195738832-005 - implies
+INFO 2025-01-17 03:50:48,826 pyk.kore.rpc - Sending request to localhost:37903: 140021195738832-006 - implies
+INFO 2025-01-17 03:50:49,028 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195738832-005
+INFO 2025-01-17 03:50:49,028 pyk.kore.rpc - [PID=3244020][stde] [proxy] Processing request 140021195738832-006
+INFO 2025-01-17 03:50:49,433 pyk.kore.rpc - Received response from localhost:37903: 140021195738832-006 - implies
+INFO 2025-01-17 03:50:49,445 pyk.proof.reachability - Wrote proof data for JUMPI_TRUE_2_SPEC: /home/zhaoji/evm-semantics/kevm-pyk/src/kevm_pyk/proofs/JUMPI_TRUE_2_SPEC/proof.json
+INFO 2025-01-17 03:50:49,446 kevm_pyk.utils - Proof status JUMPI_TRUE_2_SPEC: ProofStatus.FAILED
+INFO 2025-01-17 03:50:49,446 pyk.kore.rpc - Stopping KoreServer: 0.0.0.0:37903, pid=3244020
+INFO 2025-01-17 03:50:49,510 pyk.kore.rpc - KoreServer stopped: 0.0.0.0:37903, pid=3244020
+Proof timing JUMPI_FALSE_2_SPEC: 339.5544557571411s
+Proof timing JUMPI_TRUE_2_SPEC: 19.40950298309326s

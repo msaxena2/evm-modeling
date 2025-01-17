@@ -1,13 +1,13 @@
 
 ┌─ 1 (root, init)
-│   k: #next [ JUMP ] ~> K_CELL:K
+│   k: #next [ JUMPI ] ~> K_CELL:K
 │   pc: PC_CELL:Int
 │   callDepth: CALLDEPTH_CELL:Int
 │   statusCode: STATUSCODE_CELL:StatusCode
 │
-│  (4 steps)
+│  (5 steps)
 ├─ 3
-│   k: JUMP W0:Int ~> #pc [ JUMP ] ~> K_CELL:K
+│   k: JUMP W0:Int ~> #pc [ JUMPI ] ~> K_CELL:K
 │   pc: PC_CELL:Int
 │   callDepth: CALLDEPTH_CELL:Int
 │   statusCode: STATUSCODE_CELL:StatusCode
@@ -16,7 +16,7 @@
 ┣━━┓
 ┃  │
 ┃  ├─ 4
-┃  │   k: #endBasicBlock ~> #pc [ JUMP ] ~> K_CELL:K
+┃  │   k: #endBasicBlock ~> #pc [ JUMPI ] ~> K_CELL:K
 ┃  │   pc: W0:Int
 ┃  │   callDepth: CALLDEPTH_CELL:Int
 ┃  │   statusCode: STATUSCODE_CELL:StatusCode
@@ -39,7 +39,7 @@
 ┗━━┓
    │
    ├─ 5
-   │   k: #end EVMC_BAD_JUMP_DESTINATION ~> #pc [ JUMP ] ~> K_CELL:K
+   │   k: #end EVMC_BAD_JUMP_DESTINATION ~> #pc [ JUMPI ] ~> K_CELL:K
    │   pc: PC_CELL:Int
    │   callDepth: CALLDEPTH_CELL:Int
    │   statusCode: STATUSCODE_CELL:StatusCode
@@ -54,13 +54,13 @@
 
 
 
-module SUMMARY-JUMP-1-SPEC
+module SUMMARY-JUMPI-TRUE-2-SPEC
     
     
     rule [BASIC-BLOCK-1-TO-3]: <kevm>
            <k>
-             ( #next [ JUMP ] ~> .K => JUMP W0:Int
-             ~> #pc [ JUMP ] )
+             ( #next [ JUMPI ] ~> .K => JUMP W0:Int
+             ~> #pc [ JUMPI ] )
              ~> _K_CELL
            </k>
            <useGas>
@@ -70,7 +70,7 @@ module SUMMARY-JUMP-1-SPEC
              <evm>
                <callState>
                  <wordStack>
-                   ( ( W0:Int : WS:WordStack ) => WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
                  </wordStack>
                  ...
                </callState>
@@ -80,12 +80,13 @@ module SUMMARY-JUMP-1-SPEC
            </ethereum>
            ...
          </kevm>
+      requires W1:Int =/=Int 0
       [priority(20), label(BASIC-BLOCK-1-TO-3)]
     
     rule [BASIC-BLOCK-4-TO-6]: <kevm>
            <k>
              #endBasicBlock
-             ~> ( #pc [ JUMP ] ~> .K => .K )
+             ~> ( #pc [ JUMPI ] ~> .K => .K )
              ~> _K_CELL
            </k>
            <useGas>
@@ -108,15 +109,16 @@ module SUMMARY-JUMP-1-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes )
+      requires ( _W1 =/=Int 0
+       andBool ( W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes )
        andBool ( 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ]
-               ))
+               )))
       [priority(20), label(BASIC-BLOCK-4-TO-6)]
     
     rule [BASIC-BLOCK-5-TO-7]: <kevm>
            <k>
              ( #end EVMC_BAD_JUMP_DESTINATION
-             ~> #pc [ JUMP ] => #halt ~> .K )
+             ~> #pc [ JUMPI ] => #halt ~> .K )
              ~> _K_CELL
            </k>
            <useGas>
@@ -139,7 +141,9 @@ module SUMMARY-JUMP-1-SPEC
            </ethereum>
            ...
          </kevm>
-      requires ( notBool ( W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes ) andBool 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ] ) )
+      requires ( _W1 =/=Int 0
+       andBool ( ( notBool ( W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes ) andBool 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ] ) )
+               ))
       [priority(20), label(BASIC-BLOCK-5-TO-7)]
 
 endmodule

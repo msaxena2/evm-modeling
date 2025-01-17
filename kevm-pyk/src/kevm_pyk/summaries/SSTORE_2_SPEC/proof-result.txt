@@ -17,148 +17,23 @@ Proof SSTORE_2_SPEC Failed
 ┃  │   callDepth: CALLDEPTH_CELL:Int
 ┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (4 steps)
-┃  ├─ 5
-┃  │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃  │   pc: PC_CELL:Int
+┃  │  (6 steps)
+┃  ├─ 6
+┃  │   k: K_CELL:K
+┃  │   pc: ( PC_CELL:Int +Int 1 )
 ┃  │   callDepth: CALLDEPTH_CELL:Int
 ┃  │   statusCode: STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┃ (1 step)
-┃  ┣━━┓
-┃  ┃  │
-┃  ┃  └─ 7 (leaf, pending)
-┃  ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃  ┃      pc: PC_CELL:Int
-┃  ┃      callDepth: CALLDEPTH_CELL:Int
-┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┗━━┓
-┃     │
-┃     ├─ 8
-┃     │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃     │   pc: PC_CELL:Int
-┃     │   callDepth: CALLDEPTH_CELL:Int
-┃     │   statusCode: STATUSCODE_CELL:StatusCode
-┃     ┃
-┃     ┃ (1 step)
-┃     ┣━━┓
-┃     ┃  │
-┃     ┃  └─ 9 (leaf, pending)
-┃     ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃     ┃      pc: PC_CELL:Int
-┃     ┃      callDepth: CALLDEPTH_CELL:Int
-┃     ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃     ┃
-┃     ┗━━┓
-┃        │
-┃        ├─ 10
-┃        │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃        │   pc: PC_CELL:Int
-┃        │   callDepth: CALLDEPTH_CELL:Int
-┃        │   statusCode: STATUSCODE_CELL:StatusCode
-┃        ┃
-┃        ┃ (1 step)
-┃        ┣━━┓
-┃        ┃  │
-┃        ┃  └─ 11 (leaf, pending)
-┃        ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃        ┃      pc: PC_CELL:Int
-┃        ┃      callDepth: CALLDEPTH_CELL:Int
-┃        ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃        ┃
-┃        ┗━━┓
-┃           │
-┃           ├─ 12
-┃           │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃           │   pc: PC_CELL:Int
-┃           │   callDepth: CALLDEPTH_CELL:Int
-┃           │   statusCode: STATUSCODE_CELL:StatusCode
-┃           ┃
-┃           ┃ (1 step)
-┃           ┣━━┓
-┃           ┃  │
-┃           ┃  └─ 13 (leaf, pending)
-┃           ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃           ┃      pc: PC_CELL:Int
-┃           ┃      callDepth: CALLDEPTH_CELL:Int
-┃           ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃           ┃
-┃           ┗━━┓
-┃              │
-┃              ├─ 14
-┃              │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃              │   pc: PC_CELL:Int
-┃              │   callDepth: CALLDEPTH_CELL:Int
-┃              │   statusCode: STATUSCODE_CELL:StatusCode
-┃              ┃
-┃              ┃ (1 step)
-┃              ┣━━┓
-┃              ┃  │
-┃              ┃  └─ 15 (leaf, pending)
-┃              ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃              ┃      pc: PC_CELL:Int
-┃              ┃      callDepth: CALLDEPTH_CELL:Int
-┃              ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃              ┃
-┃              ┗━━┓
-┃                 │
-┃                 ├─ 16
-┃                 │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                 │   pc: PC_CELL:Int
-┃                 │   callDepth: CALLDEPTH_CELL:Int
-┃                 │   statusCode: STATUSCODE_CELL:StatusCode
-┃                 ┃
-┃                 ┃ (1 step)
-┃                 ┣━━┓
-┃                 ┃  │
-┃                 ┃  └─ 17 (leaf, pending)
-┃                 ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃                 ┃      pc: PC_CELL:Int
-┃                 ┃      callDepth: CALLDEPTH_CELL:Int
-┃                 ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃                 ┃
-┃                 ┗━━┓
-┃                    │
-┃                    ├─ 18
-┃                    │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                    │   pc: PC_CELL:Int
-┃                    │   callDepth: CALLDEPTH_CELL:Int
-┃                    │   statusCode: STATUSCODE_CELL:StatusCode
-┃                    ┃
-┃                    ┃ (1 step)
-┃                    ┣━━┓
-┃                    ┃  │
-┃                    ┃  └─ 19 (leaf, pending)
-┃                    ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃                    ┃      pc: PC_CELL:Int
-┃                    ┃      callDepth: CALLDEPTH_CELL:Int
-┃                    ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃                    ┃
-┃                    ┗━━┓
-┃                       │
-┃                       ├─ 20
-┃                       │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                       │   pc: PC_CELL:Int
-┃                       │   callDepth: CALLDEPTH_CELL:Int
-┃                       │   statusCode: STATUSCODE_CELL:StatusCode
-┃                       ┃
-┃                       ┃ (1 step)
-┃                       ┣━━┓
-┃                       ┃  │
-┃                       ┃  └─ 21 (leaf, pending)
-┃                       ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃                       ┃      pc: PC_CELL:Int
-┃                       ┃      callDepth: CALLDEPTH_CELL:Int
-┃                       ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃                       ┃
-┃                       ┗━━┓
-┃                          │
-┃                          └─ 22 (leaf, pending)
-┃                              k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                              pc: PC_CELL:Int
-┃                              callDepth: CALLDEPTH_CELL:Int
-┃                              statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  ┊  constraint:
+┃  ┊      ( notBool <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+┃  ┊  subst: ...
+┃  └─ 2 (leaf, target)
+┃      k: K_CELL:K
+┃      pc: FINAL_PC_CELL:Int
+┃      callDepth: FINAL_CALLDEPTH_CELL:Int
+┃      statusCode: FINAL_STATUSCODE_CELL:StatusCode
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
@@ -171,23 +46,17 @@ Proof SSTORE_2_SPEC Failed
    │   statusCode: STATUSCODE_CELL:StatusCode
    │
    │  (2 steps)
-   └─ 6 (leaf, terminal)
+   └─ 5 (leaf, terminal)
        k: #halt ~> K_CELL:K
        pc: PC_CELL:Int
        callDepth: CALLDEPTH_CELL:Int
        statusCode: EVMC_STATIC_MODE_VIOLATION
 
 
-┌─ 2 (root, leaf, target)
-│   k: K_CELL:K
-│   pc: FINAL_PC_CELL:Int
-│   callDepth: FINAL_CALLDEPTH_CELL:Int
-│   statusCode: FINAL_STATUSCODE_CELL:StatusCode
-
 
 Node 1:
 
-<generatedTop>
+( <generatedTop>
   <kevm>
     <k>
       #next [ SSTORE ]
@@ -199,6 +68,9 @@ Node 1:
     <ethereum>
       <evm>
         <callState>
+          <id>
+            ID_CELL:Int
+          </id>
           <wordStack>
             ( W0:Int : ( W1:Int : WS:WordStack ) )
           </wordStack>
@@ -206,12 +78,26 @@ Node 1:
         </callState>
         ...
       </evm>
-      ...
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ID_CELL:Int
+            </acctID>
+            ...
+          </account>
+          DotAccountVar:AccountCellMap )
+        </accounts>
+        ...
+      </network>
     </ethereum>
     ...
   </kevm>
   ...
 </generatedTop>
+#And { false #Equals <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) } )
 
 
 
@@ -235,6 +121,9 @@ Node 3:
     <ethereum>
       <evm>
         <callState>
+          <id>
+            ID_CELL:Int
+          </id>
           <wordStack>
             ( W0:Int : ( W1:Int : WS:WordStack ) )
           </wordStack>
@@ -245,13 +134,27 @@ Node 3:
         </callState>
         ...
       </evm>
-      ...
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ID_CELL:Int
+            </acctID>
+            ...
+          </account>
+          DotAccountVar:AccountCellMap )
+        </accounts>
+        ...
+      </network>
     </ethereum>
     ...
   </kevm>
   ...
 </generatedTop>
-#And { STATIC_CELL:Bool #Equals false } )
+#And ( { STATIC_CELL:Bool #Equals false }
+#And { false #Equals <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) } ) )
 
 
 
@@ -269,6 +172,9 @@ Node 4:
     <ethereum>
       <evm>
         <callState>
+          <id>
+            ID_CELL:Int
+          </id>
           <wordStack>
             ( W0:Int : ( W1:Int : WS:WordStack ) )
           </wordStack>
@@ -279,49 +185,31 @@ Node 4:
         </callState>
         ...
       </evm>
-      ...
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ID_CELL:Int
+            </acctID>
+            ...
+          </account>
+          DotAccountVar:AccountCellMap )
+        </accounts>
+        ...
+      </network>
     </ethereum>
     ...
   </kevm>
   ...
 </generatedTop>
-#And { STATIC_CELL:Bool #Equals true } )
+#And ( { STATIC_CELL:Bool #Equals true }
+#And { false #Equals <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) } ) )
 
 
 
 Node 5:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      ...
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And { true #Equals ( notBool STATIC_CELL:Bool ) } )
-
-
-
-Node 6:
 
 ( <generatedTop>
   <kevm>
@@ -338,6 +226,9 @@ Node 6:
           EVMC_STATIC_MODE_VIOLATION
         </statusCode>
         <callState>
+          <id>
+            ID_CELL:Int
+          </id>
           <wordStack>
             ( W0:Int : ( W1:Int : WS:WordStack ) )
           </wordStack>
@@ -348,24 +239,34 @@ Node 6:
         </callState>
         ...
       </evm>
-      ...
+      <network>
+        <accounts>
+          ( <account>
+            <acctID>
+              ID_CELL:Int
+            </acctID>
+            ...
+          </account>
+          DotAccountVar:AccountCellMap )
+        </accounts>
+        ...
+      </network>
     </ethereum>
     ...
   </kevm>
   ...
 </generatedTop>
-#And { true #Equals STATIC_CELL:Bool } )
+#And ( { true #Equals STATIC_CELL:Bool }
+#And { true #Equals ( notBool <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) ) } ) )
 
 
 
-Node 7:
+Node 6:
 
 ( <generatedTop>
   <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
     <useGas>
       false
     </useGas>
@@ -373,8 +274,11 @@ Node 7:
       <evm>
         <callState>
           <id>
-            ACCT:Int
+            ID_CELL:Int
           </id>
+          <pc>
+            ( PC_CELL:Int +Int 1 )
+          </pc>
           <static>
             false
           </static>
@@ -386,76 +290,14 @@ Node 7:
         <accounts>
           ( <account>
             <acctID>
-              ACCT:Int
+              ID_CELL:Int
             </acctID>
-            _Gen23:BalanceCell
-            _Gen24:CodeCell
             <storage>
-              STORAGE:Map [ W0:Int <- W1:Int ]
+              STORAGE_CELL:Map [ W0:Int <- W1:Int ]
             </storage>
-            _Gen25:OrigStorageCell
-            _Gen26:TransientStorageCell
-            _Gen27:NonceCell
+            ...
           </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  _Gen23:BalanceCell
-  _Gen24:CodeCell
-  <storage>
-    STORAGE:Map
-  </storage>
-  _Gen25:OrigStorageCell
-  _Gen26:TransientStorageCell
-  _Gen27:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) )
-
-
-
-Node 8:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
+          DotAccountVar:AccountCellMap )
         </accounts>
         ...
       </network>
@@ -465,1900 +307,9 @@ Node 8:
   ...
 </generatedTop>
 #And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen23:BalanceCell . #Exists _Gen24:CodeCell . #Exists _Gen25:OrigStorageCell . #Exists _Gen26:TransientStorageCell . #Exists _Gen27:NonceCell . #Exists ACCT:Int . #Exists STORAGE:Map . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  _Gen23:BalanceCell
-  _Gen24:CodeCell
-  <storage>
-    STORAGE:Map
-  </storage>
-  _Gen25:OrigStorageCell
-  _Gen26:TransientStorageCell
-  _Gen27:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT:Int } ) ) ) ) )
-
-
-
-Node 9:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT0:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT0:Int
-            </acctID>
-            _Gen28:BalanceCell
-            _Gen29:CodeCell
-            <storage>
-              STORAGE0:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen30:OrigStorageCell
-            _Gen31:TransientStorageCell
-            _Gen32:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT0:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  _Gen28:BalanceCell
-  _Gen29:CodeCell
-  <storage>
-    STORAGE0:Map
-  </storage>
-  _Gen30:OrigStorageCell
-  _Gen31:TransientStorageCell
-  _Gen32:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And #Not ( ( { ACCT:Int #Equals ACCT0:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  _Gen28:BalanceCell
-  _Gen29:CodeCell
-  <storage>
-    STORAGE0:Map
-  </storage>
-  _Gen30:OrigStorageCell
-  _Gen31:TransientStorageCell
-  _Gen32:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) )
-
-
-
-Node 10:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen28:BalanceCell . #Exists _Gen29:CodeCell . #Exists _Gen30:OrigStorageCell . #Exists _Gen31:TransientStorageCell . #Exists _Gen32:NonceCell . #Exists ACCT0:Int . #Exists STORAGE0:Map . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  _Gen28:BalanceCell
-  _Gen29:CodeCell
-  <storage>
-    STORAGE0:Map
-  </storage>
-  _Gen30:OrigStorageCell
-  _Gen31:TransientStorageCell
-  _Gen32:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT0:Int } ) ) ) ) ) )
-
-
-
-Node 11:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT1:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT1:Int
-            </acctID>
-            _Gen33:BalanceCell
-            _Gen34:CodeCell
-            <storage>
-              STORAGE1:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen35:OrigStorageCell
-            _Gen36:TransientStorageCell
-            _Gen37:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT1:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  _Gen33:BalanceCell
-  _Gen34:CodeCell
-  <storage>
-    STORAGE1:Map
-  </storage>
-  _Gen35:OrigStorageCell
-  _Gen36:TransientStorageCell
-  _Gen37:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And ( #Not ( ( { ACCT:Int #Equals ACCT1:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  _Gen33:BalanceCell
-  _Gen34:CodeCell
-  <storage>
-    STORAGE1:Map
-  </storage>
-  _Gen35:OrigStorageCell
-  _Gen36:TransientStorageCell
-  _Gen37:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( ( { ACCT0:Int #Equals ACCT1:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  _Gen33:BalanceCell
-  _Gen34:CodeCell
-  <storage>
-    STORAGE1:Map
-  </storage>
-  _Gen35:OrigStorageCell
-  _Gen36:TransientStorageCell
-  _Gen37:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) )
-
-
-
-Node 12:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT0:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen33:BalanceCell . #Exists _Gen34:CodeCell . #Exists _Gen35:OrigStorageCell . #Exists _Gen36:TransientStorageCell . #Exists _Gen37:NonceCell . #Exists ACCT1:Int . #Exists STORAGE1:Map . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  _Gen33:BalanceCell
-  _Gen34:CodeCell
-  <storage>
-    STORAGE1:Map
-  </storage>
-  _Gen35:OrigStorageCell
-  _Gen36:TransientStorageCell
-  _Gen37:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT1:Int } ) ) ) ) ) ) )
-
-
-
-Node 13:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT2:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT2:Int
-            </acctID>
-            _Gen38:BalanceCell
-            _Gen39:CodeCell
-            <storage>
-              STORAGE2:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen40:OrigStorageCell
-            _Gen41:TransientStorageCell
-            _Gen42:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT2:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  _Gen38:BalanceCell
-  _Gen39:CodeCell
-  <storage>
-    STORAGE2:Map
-  </storage>
-  _Gen40:OrigStorageCell
-  _Gen41:TransientStorageCell
-  _Gen42:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And ( #Not ( ( { ACCT:Int #Equals ACCT2:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  _Gen38:BalanceCell
-  _Gen39:CodeCell
-  <storage>
-    STORAGE2:Map
-  </storage>
-  _Gen40:OrigStorageCell
-  _Gen41:TransientStorageCell
-  _Gen42:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT0:Int #Equals ACCT2:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  _Gen38:BalanceCell
-  _Gen39:CodeCell
-  <storage>
-    STORAGE2:Map
-  </storage>
-  _Gen40:OrigStorageCell
-  _Gen41:TransientStorageCell
-  _Gen42:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( ( { ACCT1:Int #Equals ACCT2:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  _Gen38:BalanceCell
-  _Gen39:CodeCell
-  <storage>
-    STORAGE2:Map
-  </storage>
-  _Gen40:OrigStorageCell
-  _Gen41:TransientStorageCell
-  _Gen42:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 14:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT0:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT1:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen38:BalanceCell . #Exists _Gen39:CodeCell . #Exists _Gen40:OrigStorageCell . #Exists _Gen41:TransientStorageCell . #Exists _Gen42:NonceCell . #Exists ACCT2:Int . #Exists STORAGE2:Map . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  _Gen38:BalanceCell
-  _Gen39:CodeCell
-  <storage>
-    STORAGE2:Map
-  </storage>
-  _Gen40:OrigStorageCell
-  _Gen41:TransientStorageCell
-  _Gen42:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT2:Int } ) ) ) ) ) ) ) )
-
-
-
-Node 15:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT3:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT3:Int
-            </acctID>
-            _Gen43:BalanceCell
-            _Gen44:CodeCell
-            <storage>
-              STORAGE3:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen45:OrigStorageCell
-            _Gen46:TransientStorageCell
-            _Gen47:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT3:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  _Gen43:BalanceCell
-  _Gen44:CodeCell
-  <storage>
-    STORAGE3:Map
-  </storage>
-  _Gen45:OrigStorageCell
-  _Gen46:TransientStorageCell
-  _Gen47:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And ( #Not ( ( { ACCT:Int #Equals ACCT3:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  _Gen43:BalanceCell
-  _Gen44:CodeCell
-  <storage>
-    STORAGE3:Map
-  </storage>
-  _Gen45:OrigStorageCell
-  _Gen46:TransientStorageCell
-  _Gen47:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT0:Int #Equals ACCT3:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  _Gen43:BalanceCell
-  _Gen44:CodeCell
-  <storage>
-    STORAGE3:Map
-  </storage>
-  _Gen45:OrigStorageCell
-  _Gen46:TransientStorageCell
-  _Gen47:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT1:Int #Equals ACCT3:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  _Gen43:BalanceCell
-  _Gen44:CodeCell
-  <storage>
-    STORAGE3:Map
-  </storage>
-  _Gen45:OrigStorageCell
-  _Gen46:TransientStorageCell
-  _Gen47:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( ( { ACCT2:Int #Equals ACCT3:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  _Gen43:BalanceCell
-  _Gen44:CodeCell
-  <storage>
-    STORAGE3:Map
-  </storage>
-  _Gen45:OrigStorageCell
-  _Gen46:TransientStorageCell
-  _Gen47:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 16:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT0:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT1:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT2:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen43:BalanceCell . #Exists _Gen44:CodeCell . #Exists _Gen45:OrigStorageCell . #Exists _Gen46:TransientStorageCell . #Exists _Gen47:NonceCell . #Exists ACCT3:Int . #Exists STORAGE3:Map . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  _Gen43:BalanceCell
-  _Gen44:CodeCell
-  <storage>
-    STORAGE3:Map
-  </storage>
-  _Gen45:OrigStorageCell
-  _Gen46:TransientStorageCell
-  _Gen47:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT3:Int } ) ) ) ) ) ) ) ) )
-
-
-
-Node 17:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT4:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT4:Int
-            </acctID>
-            _Gen48:BalanceCell
-            _Gen49:CodeCell
-            <storage>
-              STORAGE4:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen50:OrigStorageCell
-            _Gen51:TransientStorageCell
-            _Gen52:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT4:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT4:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And ( #Not ( ( { ACCT:Int #Equals ACCT4:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT0:Int #Equals ACCT4:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT1:Int #Equals ACCT4:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT2:Int #Equals ACCT4:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( ( { ACCT3:Int #Equals ACCT4:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 18:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT0:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT1:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT2:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT3:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen48:BalanceCell . #Exists _Gen49:CodeCell . #Exists _Gen50:OrigStorageCell . #Exists _Gen51:TransientStorageCell . #Exists _Gen52:NonceCell . #Exists ACCT4:Int . #Exists STORAGE4:Map . ( { false #Equals <acctID>
-  ACCT4:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  _Gen48:BalanceCell
-  _Gen49:CodeCell
-  <storage>
-    STORAGE4:Map
-  </storage>
-  _Gen50:OrigStorageCell
-  _Gen51:TransientStorageCell
-  _Gen52:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT4:Int } ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 19:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT5:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT5:Int
-            </acctID>
-            _Gen53:BalanceCell
-            _Gen54:CodeCell
-            <storage>
-              STORAGE5:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen55:OrigStorageCell
-            _Gen56:TransientStorageCell
-            _Gen57:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT5:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT5:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And ( #Not ( ( { ACCT:Int #Equals ACCT5:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT0:Int #Equals ACCT5:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT1:Int #Equals ACCT5:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT2:Int #Equals ACCT5:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT3:Int #Equals ACCT5:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( ( { ACCT4:Int #Equals ACCT5:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT4:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 20:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT0:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT1:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT2:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT3:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT4:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT4:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen53:BalanceCell . #Exists _Gen54:CodeCell . #Exists _Gen55:OrigStorageCell . #Exists _Gen56:TransientStorageCell . #Exists _Gen57:NonceCell . #Exists ACCT5:Int . #Exists STORAGE5:Map . ( { false #Equals <acctID>
-  ACCT5:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  _Gen53:BalanceCell
-  _Gen54:CodeCell
-  <storage>
-    STORAGE5:Map
-  </storage>
-  _Gen55:OrigStorageCell
-  _Gen56:TransientStorageCell
-  _Gen57:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT5:Int } ) ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 21:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ACCT6:Int
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ( <account>
-            <acctID>
-              ACCT6:Int
-            </acctID>
-            _Gen58:BalanceCell
-            _Gen59:CodeCell
-            <storage>
-              STORAGE6:Map [ W0:Int <- W1:Int ]
-            </storage>
-            _Gen60:OrigStorageCell
-            _Gen61:TransientStorageCell
-            _Gen62:NonceCell
-          </account>
-          _DotVar7:AccountCellMap )
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { ID_CELL:Account #Equals ACCT6:Int }
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( { true #Equals ( notBool <acctID>
-  ACCT6:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And ( #Not ( ( { ACCT:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT0:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT1:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT2:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT3:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ACCT4:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT4:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( ( { ACCT5:Int #Equals ACCT6:Int }
-#And #Exists _DotVar8:AccountCellMap . ( { false #Equals <acctID>
-  ACCT5:Int
-</acctID> in_keys ( _DotVar8:AccountCellMap ) }
-#And { ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  ...
-</account>
-_DotVar8:AccountCellMap ) #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) } ) ) ) ) ) ) ) ) ) ) ) ) ) )
-
-
-
-Node 22:
-
-( <generatedTop>
-  <kevm>
-    <k>
-      SSTORE W0:Int W1:Int
-      ~> #pc [ SSTORE ]
-      ~> K_CELL:K
-    </k>
-    <useGas>
-      false
-    </useGas>
-    <ethereum>
-      <evm>
-        <callState>
-          <id>
-            ID_CELL:Account
-          </id>
-          <static>
-            false
-          </static>
-          ...
-        </callState>
-        ...
-      </evm>
-      <network>
-        <accounts>
-          ACCOUNTS_CELL:AccountCellMap
-        </accounts>
-        ...
-      </network>
-    </ethereum>
-    ...
-  </kevm>
-  ...
-</generatedTop>
-#And ( { true #Equals ( notBool STATIC_CELL:Bool ) }
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT0:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT0:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT0:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT1:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT1:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT1:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT2:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT2:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT2:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT3:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT3:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT3:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT4:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT4:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT4:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And ( #Not ( ( { ID_CELL:Account #Equals ACCT5:Int }
-#And #Exists _DotVar7:AccountCellMap . ( { false #Equals <acctID>
-  ACCT5:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT5:Int
-  </acctID>
-  ...
-</account>
-_DotVar7:AccountCellMap ) } ) ) )
-#And #Not ( #Exists _DotVar7:AccountCellMap . #Exists _Gen58:BalanceCell . #Exists _Gen59:CodeCell . #Exists _Gen60:OrigStorageCell . #Exists _Gen61:TransientStorageCell . #Exists _Gen62:NonceCell . #Exists ACCT6:Int . #Exists STORAGE6:Map . ( { false #Equals <acctID>
-  ACCT6:Int
-</acctID> in_keys ( _DotVar7:AccountCellMap ) }
-#And ( { ACCOUNTS_CELL:AccountCellMap #Equals ( <account>
-  <acctID>
-    ACCT6:Int
-  </acctID>
-  _Gen58:BalanceCell
-  _Gen59:CodeCell
-  <storage>
-    STORAGE6:Map
-  </storage>
-  _Gen60:OrigStorageCell
-  _Gen61:TransientStorageCell
-  _Gen62:NonceCell
-</account>
-_DotVar7:AccountCellMap ) }
-#And { ID_CELL:Account #Equals ACCT6:Int } ) ) ) ) ) ) ) ) ) ) ) )
+#And { true #Equals ( notBool <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) ) } ) )
 
 
 

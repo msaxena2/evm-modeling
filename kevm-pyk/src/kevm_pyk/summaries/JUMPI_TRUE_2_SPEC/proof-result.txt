@@ -1,14 +1,14 @@
-Proof JUMP_1_SPEC Failed
+Proof JUMPI_TRUE_2_SPEC Failed
 
 ┌─ 1 (root, init)
-│   k: #next [ JUMP ] ~> K_CELL:K
+│   k: #next [ JUMPI ] ~> K_CELL:K
 │   pc: PC_CELL:Int
 │   callDepth: CALLDEPTH_CELL:Int
 │   statusCode: STATUSCODE_CELL:StatusCode
 │
-│  (4 steps)
+│  (5 steps)
 ├─ 3
-│   k: JUMP W0:Int ~> #pc [ JUMP ] ~> K_CELL:K
+│   k: JUMP W0:Int ~> #pc [ JUMPI ] ~> K_CELL:K
 │   pc: PC_CELL:Int
 │   callDepth: CALLDEPTH_CELL:Int
 │   statusCode: STATUSCODE_CELL:StatusCode
@@ -17,7 +17,7 @@ Proof JUMP_1_SPEC Failed
 ┣━━┓
 ┃  │
 ┃  ├─ 4
-┃  │   k: #endBasicBlock ~> #pc [ JUMP ] ~> K_CELL:K
+┃  │   k: #endBasicBlock ~> #pc [ JUMPI ] ~> K_CELL:K
 ┃  │   pc: W0:Int
 ┃  │   callDepth: CALLDEPTH_CELL:Int
 ┃  │   statusCode: STATUSCODE_CELL:StatusCode
@@ -40,7 +40,7 @@ Proof JUMP_1_SPEC Failed
 ┗━━┓
    │
    ├─ 5
-   │   k: #end EVMC_BAD_JUMP_DESTINATION ~> #pc [ JUMP ] ~> K_CELL:K
+   │   k: #end EVMC_BAD_JUMP_DESTINATION ~> #pc [ JUMPI ] ~> K_CELL:K
    │   pc: PC_CELL:Int
    │   callDepth: CALLDEPTH_CELL:Int
    │   statusCode: STATUSCODE_CELL:StatusCode
@@ -56,10 +56,10 @@ Proof JUMP_1_SPEC Failed
 
 Node 1:
 
-<generatedTop>
+( <generatedTop>
   <kevm>
     <k>
-      #next [ JUMP ]
+      #next [ JUMPI ]
       ~> K_CELL:K
     </k>
     <useGas>
@@ -69,7 +69,7 @@ Node 1:
       <evm>
         <callState>
           <wordStack>
-            ( W0:Int : WS:WordStack )
+            ( W0:Int : ( W1:Int : WS:WordStack ) )
           </wordStack>
           ...
         </callState>
@@ -81,6 +81,7 @@ Node 1:
   </kevm>
   ...
 </generatedTop>
+#And #Not ( { W1:Int #Equals 0 } ) )
 
 
 
@@ -101,11 +102,11 @@ Node 2:
 
 Node 3:
 
-<generatedTop>
+( <generatedTop>
   <kevm>
     <k>
       JUMP W0:Int
-      ~> #pc [ JUMP ]
+      ~> #pc [ JUMPI ]
       ~> K_CELL:K
     </k>
     <useGas>
@@ -115,6 +116,7 @@ Node 3:
   </kevm>
   ...
 </generatedTop>
+#And { true #Equals ( notBool W1:Int ==Int 0 ) } )
 
 
 
@@ -124,7 +126,7 @@ Node 4:
   <kevm>
     <k>
       #endBasicBlock
-      ~> #pc [ JUMP ]
+      ~> #pc [ JUMPI ]
       ~> K_CELL:K
     </k>
     <useGas>
@@ -149,8 +151,9 @@ Node 4:
   </kevm>
   ...
 </generatedTop>
+#And ( { true #Equals ( notBool W1:Int ==Int 0 ) }
 #And ( { true #Equals W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes ) }
-#And { true #Equals 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ] } ) )
+#And { true #Equals 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ] } ) ) )
 
 
 
@@ -160,7 +163,7 @@ Node 5:
   <kevm>
     <k>
       #end EVMC_BAD_JUMP_DESTINATION
-      ~> #pc [ JUMP ]
+      ~> #pc [ JUMPI ]
       ~> K_CELL:K
     </k>
     <useGas>
@@ -182,8 +185,9 @@ Node 5:
   </kevm>
   ...
 </generatedTop>
+#And ( { true #Equals ( notBool W1:Int ==Int 0 ) }
 #And #Not ( ( { true #Equals W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes ) }
-#And { 1 #Equals JUMPDESTS_CELL:Bytes [ W0:Int ] } ) ) )
+#And { 1 #Equals JUMPDESTS_CELL:Bytes [ W0:Int ] } ) ) ) )
 
 
 
@@ -217,8 +221,9 @@ Node 6:
   </kevm>
   ...
 </generatedTop>
+#And ( { true #Equals ( notBool W1:Int ==Int 0 ) }
 #And ( { true #Equals W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes ) }
-#And { true #Equals 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ] } ) )
+#And { true #Equals 1 ==Int JUMPDESTS_CELL:Bytes [ W0:Int ] } ) ) )
 
 
 
@@ -252,8 +257,9 @@ Node 7:
   </kevm>
   ...
 </generatedTop>
+#And ( { true #Equals ( notBool W1:Int ==Int 0 ) }
 #And #Not ( ( { true #Equals W0:Int <Int lengthBytes ( JUMPDESTS_CELL:Bytes ) }
-#And { 1 #Equals JUMPDESTS_CELL:Bytes [ W0:Int ] } ) ) )
+#And { 1 #Equals JUMPDESTS_CELL:Bytes [ W0:Int ] } ) ) ) )
 
 
 

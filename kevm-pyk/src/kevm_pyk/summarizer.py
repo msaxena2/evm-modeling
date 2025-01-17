@@ -18,7 +18,7 @@ from pyk.kore.rpc import KoreClient
 from pyk.proof import APRProof
 from pyk.proof.show import APRProofShow
 from pyk.utils import ensure_dir_path
-from pyk.prelude.ml import mlEqualsFalse
+from pyk.prelude.ml import mlEqualsFalse, mlEqualsTrue, mlEquals, mlOr, mlNot
 
 from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
 from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
@@ -174,22 +174,22 @@ OPCODES_SUMMARY_STATUS = {
     'DIFFICULTY': 'PASSED, No underflow check in KCFG',
     'GASLIMIT': 'PASSED, No underflow check in KCFG',
     'CHAINID': 'PASSED, No underflow check in KCFG',
-    'SELFBALANCE': 'TODO, Proof crashed',
+    'SELFBALANCE': 'PASSED, No underflow check in KCFG',
     'BASEFEE': 'PASSED, No underflow check in KCFG',
     'POP': 'PASSED, No underflow check, no gas usage',
     'MLOAD': 'PASSED, No underflow check, no gas usage',
     'MSTORE': 'PASSED, No underflow check in KCFG',
     'MSTORE8': 'PASSED, No underflow check, no gas usage',
-    'SLOAD': 'TODO, Proof crashed',
-    'SSTORE': 'TODO, Proof crashed',
-    'JUMP': 'TODO, Proof crashed',
-    'JUMPI': 'TODO, Proof crashed',
+    'SLOAD': 'PASSED, No underflow check in KCFG',
+    'SSTORE': 'PASSED, No underflow check in KCFG',
+    'JUMP': 'PASSED, No underflow check, wierd ndbranch that looks like a split',
+    'JUMPI': 'PASSED, no underflow check, no gas usage, weird ndbranch that looks like a split',
     'PC': 'PASSED, No underflow check in KCFG',
-    'MSIZE': 'TODO, Proof crashed',
+    'MSIZE': 'PASSED, No underflow check in KCFG, no gas usage',
     'GAS': 'PASSED, No underflow check in KCFG',
     'JUMPDEST': 'PASSED, No underflow check in KCFG',
-    'TLOAD': 'TODO, Proof crashed',
-    'TSTORE': 'TODO, Proof crashed',
+    'TLOAD': 'PASSED, No underflow check, no gas usage',
+    'TSTORE': 'PASSED, No underflow check, no gas usage, strange info about smt reason timeout',
     'MCOPY': 'PASSED, No underflow check in KCFG',
     'PUSHZERO': 'PASSED, No underflow check in KCFG',
     'PUSH': 'TODO, Proof crashed',
@@ -296,6 +296,7 @@ class KEVMSummarizer:
         self,
         opcode: KApply,
         stack_needed: int,
+        id_str: str = ''
     ) -> APRProof:
         """
         Build the specification to symbolically execute one abitrary instruction.
@@ -315,7 +316,8 @@ class KEVMSummarizer:
         final_subst = CSubst(Subst(_final_subst), ())
 
         opcode_symbol = opcode.label.name.split('_')[0]
-        kclaim, subst = cterm_build_claim(f'{opcode_symbol}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm))
+    
+        kclaim, subst = cterm_build_claim(f'{opcode_symbol}{id_str}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm))
         # >> TODO: The cterm_build_claim will remove all the type I've set.
         kclaim = KClaim(subst(kclaim.body), subst(kclaim.requires), subst(kclaim.ensures), kclaim.att)
         proof = APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
@@ -338,14 +340,14 @@ class KEVMSummarizer:
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI']:
+        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE']:
             # >> CHECK THIS: don't calculate Gas
             _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
             gas_subst = CSubst(Subst(_gas_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=gas_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['SELFBALANCE']:
+        if opcode_symbol in ['SELFBALANCE', 'SLOAD', 'SSTORE', 'TLOAD', 'TSTORE']:
             _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
             _subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
             
@@ -369,6 +371,23 @@ class KEVMSummarizer:
             new_cterm = subst(node.cterm)
             new_cterm = new_cterm.add_constraint(constraint)
             proof.kcfg.let_node(1, cterm=new_cterm, attrs=node.attrs)
+        
+        if opcode_symbol in ['JUMP']:
+            _LOGGER.info(f'Setting the final state of `K_CELL` to `#endBasicBlock ~> K_CELL` for {opcode_symbol}')
+            _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
+            subst = CSubst(Subst(_subst), ())
+            node = proof.kcfg.get_node(2)
+            proof.kcfg.let_node(2, cterm=subst(node.cterm), attrs=node.attrs)
+            
+        # if opcode_symbol in ['JUMPI']:
+        #     _LOGGER.info(f'Setting the final state of `K_CELL` to `#endBasicBlock ~> K_CELL` for {opcode_symbol}')
+        #     _subst = {'K_CELL': KVariable('FINAL_K_CELL')}
+        #     subst = CSubst(Subst(_subst), ())
+        #     node = proof.kcfg.get_node(2)
+        #     constraint0 = mlEquals(KVariable('FINAL_K_CELL'), KVariable('K_CELL'))
+        #     constraint1 = mlEquals(KVariable('FINAL_K_CELL'), KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')]))
+        #     constraint = mlOr([constraint0, constraint1])
+        #     proof.kcfg.let_node(2, cterm=subst(node.cterm).add_constraint(constraint), attrs=node.attrs)
             
         _LOGGER.debug(proof.kcfg.nodes[0].cterm.to_dict())
         return proof
@@ -536,9 +555,25 @@ def summarize(opcode_symbol: str) -> None:
     for need in needs:
         if len(needs) > 1:
             opcode = KApply(opcode.label.name, KToken(str(need), KSort('Int')))
-        proof = summarizer.build_spec(opcode, need)
-        summarizer.explore(proof)
-        summarizer.summarize(proof)
+        if opcode_symbol == 'JUMPI':
+            proof = summarizer.build_spec(opcode, need, id_str='_FALSE')
+            constraint = mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int')
+            proof.kcfg.let_node(1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs)
+            summarizer.explore(proof)
+            summarizer.summarize(proof)
+            
+            proof = summarizer.build_spec(opcode, need, id_str='_TRUE')
+            _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
+            subst = CSubst(Subst(_subst), ())
+            constraint = mlNot(mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int'))
+            proof.kcfg.let_node(1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs)
+            proof.kcfg.let_node(2, cterm=subst(proof.kcfg.get_node(2).cterm), attrs=proof.kcfg.get_node(2).attrs)
+            summarizer.explore(proof)
+            summarizer.summarize(proof)
+        else:
+            proof = summarizer.build_spec(opcode, need)
+            summarizer.explore(proof)
+            summarizer.summarize(proof)
     # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')
     
 

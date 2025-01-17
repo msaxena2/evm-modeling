@@ -16,148 +16,23 @@
 ┃  │   callDepth: CALLDEPTH_CELL:Int
 ┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (4 steps)
-┃  ├─ 5
-┃  │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃  │   pc: PC_CELL:Int
+┃  │  (6 steps)
+┃  ├─ 6
+┃  │   k: K_CELL:K
+┃  │   pc: ( PC_CELL:Int +Int 1 )
 ┃  │   callDepth: CALLDEPTH_CELL:Int
 ┃  │   statusCode: STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┃ (1 step)
-┃  ┣━━┓
-┃  ┃  │
-┃  ┃  └─ 7 (leaf, pending)
-┃  ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃  ┃      pc: PC_CELL:Int
-┃  ┃      callDepth: CALLDEPTH_CELL:Int
-┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃  ┃
-┃  ┗━━┓
-┃     │
-┃     ├─ 8
-┃     │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃     │   pc: PC_CELL:Int
-┃     │   callDepth: CALLDEPTH_CELL:Int
-┃     │   statusCode: STATUSCODE_CELL:StatusCode
-┃     ┃
-┃     ┃ (1 step)
-┃     ┣━━┓
-┃     ┃  │
-┃     ┃  └─ 9 (leaf, pending)
-┃     ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃     ┃      pc: PC_CELL:Int
-┃     ┃      callDepth: CALLDEPTH_CELL:Int
-┃     ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃     ┃
-┃     ┗━━┓
-┃        │
-┃        ├─ 10
-┃        │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃        │   pc: PC_CELL:Int
-┃        │   callDepth: CALLDEPTH_CELL:Int
-┃        │   statusCode: STATUSCODE_CELL:StatusCode
-┃        ┃
-┃        ┃ (1 step)
-┃        ┣━━┓
-┃        ┃  │
-┃        ┃  └─ 11 (leaf, pending)
-┃        ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃        ┃      pc: PC_CELL:Int
-┃        ┃      callDepth: CALLDEPTH_CELL:Int
-┃        ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃        ┃
-┃        ┗━━┓
-┃           │
-┃           ├─ 12
-┃           │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃           │   pc: PC_CELL:Int
-┃           │   callDepth: CALLDEPTH_CELL:Int
-┃           │   statusCode: STATUSCODE_CELL:StatusCode
-┃           ┃
-┃           ┃ (1 step)
-┃           ┣━━┓
-┃           ┃  │
-┃           ┃  └─ 13 (leaf, pending)
-┃           ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃           ┃      pc: PC_CELL:Int
-┃           ┃      callDepth: CALLDEPTH_CELL:Int
-┃           ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃           ┃
-┃           ┗━━┓
-┃              │
-┃              ├─ 14
-┃              │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃              │   pc: PC_CELL:Int
-┃              │   callDepth: CALLDEPTH_CELL:Int
-┃              │   statusCode: STATUSCODE_CELL:StatusCode
-┃              ┃
-┃              ┃ (1 step)
-┃              ┣━━┓
-┃              ┃  │
-┃              ┃  └─ 15 (leaf, pending)
-┃              ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃              ┃      pc: PC_CELL:Int
-┃              ┃      callDepth: CALLDEPTH_CELL:Int
-┃              ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃              ┃
-┃              ┗━━┓
-┃                 │
-┃                 ├─ 16
-┃                 │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                 │   pc: PC_CELL:Int
-┃                 │   callDepth: CALLDEPTH_CELL:Int
-┃                 │   statusCode: STATUSCODE_CELL:StatusCode
-┃                 ┃
-┃                 ┃ (1 step)
-┃                 ┣━━┓
-┃                 ┃  │
-┃                 ┃  └─ 17 (leaf, pending)
-┃                 ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃                 ┃      pc: PC_CELL:Int
-┃                 ┃      callDepth: CALLDEPTH_CELL:Int
-┃                 ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃                 ┃
-┃                 ┗━━┓
-┃                    │
-┃                    ├─ 18
-┃                    │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                    │   pc: PC_CELL:Int
-┃                    │   callDepth: CALLDEPTH_CELL:Int
-┃                    │   statusCode: STATUSCODE_CELL:StatusCode
-┃                    ┃
-┃                    ┃ (1 step)
-┃                    ┣━━┓
-┃                    ┃  │
-┃                    ┃  └─ 19 (leaf, pending)
-┃                    ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃                    ┃      pc: PC_CELL:Int
-┃                    ┃      callDepth: CALLDEPTH_CELL:Int
-┃                    ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃                    ┃
-┃                    ┗━━┓
-┃                       │
-┃                       ├─ 20
-┃                       │   k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                       │   pc: PC_CELL:Int
-┃                       │   callDepth: CALLDEPTH_CELL:Int
-┃                       │   statusCode: STATUSCODE_CELL:StatusCode
-┃                       ┃
-┃                       ┃ (1 step)
-┃                       ┣━━┓
-┃                       ┃  │
-┃                       ┃  └─ 21 (leaf, pending)
-┃                       ┃      k: #pc [ SSTORE ] ~> K_CELL:K
-┃                       ┃      pc: PC_CELL:Int
-┃                       ┃      callDepth: CALLDEPTH_CELL:Int
-┃                       ┃      statusCode: STATUSCODE_CELL:StatusCode
-┃                       ┃
-┃                       ┗━━┓
-┃                          │
-┃                          └─ 22 (leaf, pending)
-┃                              k: SSTORE W0:Int W1:Int ~> #pc [ SSTORE ] ~> K_CELL:K
-┃                              pc: PC_CELL:Int
-┃                              callDepth: CALLDEPTH_CELL:Int
-┃                              statusCode: STATUSCODE_CELL:StatusCode
+┃  │
+┃  ┊  constraint:
+┃  ┊      ( notBool <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+┃  ┊  subst: ...
+┃  └─ 2 (leaf, target)
+┃      k: K_CELL:K
+┃      pc: FINAL_PC_CELL:Int
+┃      callDepth: FINAL_CALLDEPTH_CELL:Int
+┃      statusCode: FINAL_STATUSCODE_CELL:StatusCode
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
@@ -170,54 +45,19 @@
    │   statusCode: STATUSCODE_CELL:StatusCode
    │
    │  (2 steps)
-   └─ 6 (leaf, terminal)
+   └─ 5 (leaf, terminal)
        k: #halt ~> K_CELL:K
        pc: PC_CELL:Int
        callDepth: CALLDEPTH_CELL:Int
        statusCode: EVMC_STATIC_MODE_VIOLATION
 
 
-┌─ 2 (root, leaf, target)
-│   k: K_CELL:K
-│   pc: FINAL_PC_CELL:Int
-│   callDepth: FINAL_CALLDEPTH_CELL:Int
-│   statusCode: FINAL_STATUSCODE_CELL:StatusCode
-
 
 
 module SUMMARY-SSTORE-2-SPEC
     
     
-    rule [BASIC-BLOCK-3-TO-5]: <kevm>
-           <k>
-             ( #next [ SSTORE ] ~> .K => SSTORE W0:Int W1:Int
-             ~> #pc [ SSTORE ] )
-             ~> _K_CELL
-           </k>
-           <useGas>
-             false
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <wordStack>
-                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
-                 </wordStack>
-                 <static>
-                   ( STATIC_CELL:Bool => false )
-                 </static>
-                 ...
-               </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( notBool STATIC_CELL:Bool )
-      [priority(20), label(BASIC-BLOCK-3-TO-5)]
-    
-    rule [BASIC-BLOCK-4-TO-6]: <kevm>
+    rule [BASIC-BLOCK-4-TO-5]: <kevm>
            <k>
              ( #next [ SSTORE ] => #halt )
              ~> _K_CELL
@@ -231,6 +71,9 @@ module SUMMARY-SSTORE-2-SPEC
                  ( _STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
                </statusCode>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
                    ( _W0 : ( _W1 : _WS ) )
                  </wordStack>
@@ -241,11 +84,78 @@ module SUMMARY-SSTORE-2-SPEC
                </callState>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires STATIC_CELL:Bool
-      [priority(20), label(BASIC-BLOCK-4-TO-6)]
+      requires ( STATIC_CELL:Bool
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+               ))
+      [priority(20), label(BASIC-BLOCK-4-TO-5)]
+    
+    rule [BASIC-BLOCK-3-TO-6]: <kevm>
+           <k>
+             ( #next [ SSTORE ] ~> .K => .K )
+             ~> _K_CELL
+           </k>
+           <useGas>
+             false
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : WS:WordStack ) ) => WS:WordStack )
+                 </wordStack>
+                 <pc>
+                   ( PC_CELL:Int => ( PC_CELL:Int +Int 1 ) )
+                 </pc>
+                 <static>
+                   ( STATIC_CELL:Bool => false )
+                 </static>
+                 ...
+               </callState>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <storage>
+                     ( STORAGE_CELL:Map => STORAGE_CELL:Map [ W0:Int <- W1:Int ] )
+                   </storage>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( ( notBool STATIC_CELL:Bool )
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+               ))
+      [priority(20), label(BASIC-BLOCK-3-TO-6)]
 
 endmodule
