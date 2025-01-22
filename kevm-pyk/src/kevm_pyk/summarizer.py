@@ -471,7 +471,7 @@ class KEVMSummarizer:
         _LOGGER.debug(proof.kcfg.nodes[0].cterm.to_dict())
         return proof
 
-    def explore(self, proof: APRProof) -> None:
+    def explore(self, proof: APRProof) -> bool:
         """
         Execute the specification to explore the KCFG for all possible instructions.
         """
@@ -568,6 +568,7 @@ class KEVMSummarizer:
             for line in res_lines:
                 f.write(line)
                 f.write('\n')
+        return passed
 
     def summarize(self, proof: APRProof, merge: bool = False) -> None:
         # TODO: need customized minimization rules, maybe
@@ -625,12 +626,13 @@ def batch_summarize(num_processes: int = 4) -> None:
     _LOGGER.info('Batch summarization completed')
 
 
-def summarize(opcode_symbol: str) -> None:
+def summarize(opcode_symbol: str) -> tuple[KEVMSummarizer, list[APRProof]]:
     proof_dir = Path(__file__).parent / 'proofs'
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)
     needs = stack_needed(opcode_symbol)
     opcode = OPCODES[opcode_symbol]
+    proofs = []
     for need in needs:
         if len(needs) > 1:
             opcode = KApply(opcode.label.name, KToken(str(need), KSort('Int')))
@@ -642,6 +644,8 @@ def summarize(opcode_symbol: str) -> None:
             )
             summarizer.explore(proof)
             summarizer.summarize(proof)
+            proof.write_proof_data()
+            proofs.append(proof)
 
             proof = summarizer.build_spec(opcode, need, id_str='_TRUE')
             _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
@@ -653,15 +657,22 @@ def summarize(opcode_symbol: str) -> None:
             proof.kcfg.let_node(2, cterm=subst(proof.kcfg.get_node(2).cterm), attrs=proof.kcfg.get_node(2).attrs)
             summarizer.explore(proof)
             summarizer.summarize(proof)
+            proof.write_proof_data()
+            proofs.append(proof)
         elif opcode_symbol == 'LOG':
             need += 2
             proof = summarizer.build_spec(opcode, need)
             summarizer.explore(proof)
             summarizer.summarize(proof)
+            proof.write_proof_data()
+            proofs.append(proof)
         else:
             proof = summarizer.build_spec(opcode, need)
             summarizer.explore(proof)
             summarizer.summarize(proof)
+            proof.write_proof_data()
+            proofs.append(proof)
+    return summarizer, proofs
     # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')
     # validation: generate them as claims and call kevm prove.
 
@@ -671,3 +682,10 @@ def analyze_proof(opcode: str, node_id: int) -> None:
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)
     summarizer.analyze_proof(proof_dir / f'{opcode}_SPEC', node_id)
+
+def debug_proof(proof_id: str) -> None:
+    proof_dir = Path(__file__).parent / 'proofs'
+    save_directory = Path(__file__).parent / 'summaries'
+    summarizer = KEVMSummarizer(proof_dir, save_directory)
+    proof = APRProof.read_proof_data(proof_dir, proof_id)
+    
