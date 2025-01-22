@@ -1,541 +1,243 @@
 
 ┌─ 1 (root, split, init)
-│   k: #next [ CALL ] ~> _K_CELL:K
-│   pc: _PC_CELL:Int
-│   callDepth: _CALLDEPTH_CELL:Int
-│   statusCode: _STATUSCODE_CELL:StatusCode
+│   k: #next [ CALL ] ~> K_CELL:K
+│   pc: PC_CELL:Int
+│   callDepth: CALLDEPTH_CELL:Int
+│   statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┃ (branch)
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _STATIC_CELL:Bool
-┃  ┃     #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) )
+┃  ┃     STATIC_CELL:Bool
+┃  ┃     #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) )
 ┃  │
 ┃  ├─ 4
-┃  │   k: #next [ CALL ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │   k: #next [ CALL ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
 ┃  │  (2 steps)
 ┃  └─ 6 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
+┃      k: #halt ~> K_CELL:K
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
 ┃      statusCode: EVMC_STATIC_MODE_VIOLATION
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     ( notBool _USEGAS_CELL:Bool )
-┃  ┃     ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
+┃  ┃     USEGAS_CELL:Bool
+┃  ┃     ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <=Gas GAS_CELL:Gas
+┃  ┃     ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
 ┃  │
-┃  ├─ 51
-┃  │   k: #next [ CALL ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 34
+┃  │   k: #next [ CALL ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (4 steps)
-┃  ├─ 9
-┃  │   k: CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int ~ ...
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  │  (11 steps)
+┃  ├─ 19 (split)
+┃  │   k: #accountNonexistent ( ( W1:Int modInt pow160 ) ) ~> #freezerCcallgas1_ ( SCHEDUL ...
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  ┃
-┃  ┃ (1 step)
-┃  ┣━━┓
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     ID_CELL:Int ==Int ( W1:Int modInt pow160 )
+┃  ┃  ┃     ( notBool <acctID>
+  ( W1:Int modInt pow160 )
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) )
 ┃  ┃  │
-┃  ┃  ├─ 10
-┃  ┃  │   k: #accessAccounts ( _W1:Int modInt pow160 ) ~> #checkCall ACCTFROM:Int _W2:Int ~>  ...
-┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  │
-┃  ┃  │  (2 steps)
-┃  ┃  ├─ 15
-┃  ┃  │   k: #checkBalanceUnderflow ACCTFROM:Int _W2:Int ~> #checkDepthExceeded ~> #call ACCT ...
-┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃
-┃  ┃  ┃ (1 step)
-┃  ┃  ┣━━┓
-┃  ┃  ┃  │
-┃  ┃  ┃  └─ 16 (leaf, pending)
-┃  ┃  ┃      k: #refund _CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALA ...
-┃  ┃  ┃      pc: _PC_CELL:Int
-┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃
-┃  ┃  ┣━━┓
-┃  ┃  ┃  │
-┃  ┃  ┃  ├─ 17 (split)
-┃  ┃  ┃  │   k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃  ┃
-┃  ┃  ┃  ┃ (branch)
-┃  ┃  ┃  ┣━━┓ subst: .Subst
-┃  ┃  ┃  ┃  ┃ constraint:
-┃  ┃  ┃  ┃  ┃     _CALLDEPTH_CELL:Int <Int 1024
-┃  ┃  ┃  ┃  │
-┃  ┃  ┃  ┃  ├─ 19
-┃  ┃  ┃  ┃  │   k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃  ┃  │
-┃  ┃  ┃  ┃  │  (1 step)
-┃  ┃  ┃  ┃  ├─ 32 (split)
-┃  ┃  ┃  ┃  │   k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃  ┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃  ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃  ┃  ┃
-┃  ┃  ┃  ┃  ┃ (branch)
-┃  ┃  ┃  ┃  ┣━━┓ subst: .Subst
-┃  ┃  ┃  ┃  ┃  ┃ constraint:
-┃  ┃  ┃  ┃  ┃  ┃     _Gen0:CodeCell ==K <code>
-  CODE:Bytes
-</code>
-┃  ┃  ┃  ┃  ┃  ┃     ACCTFROM:Int ==Int ( _W1:Int modInt pow160 )
-┃  ┃  ┃  ┃  ┃  ┃     _ID_CELL:Account ==K ( _W1:Int modInt pow160 )
-┃  ┃  ┃  ┃  ┃  ┃     ( notBool <acctID>
-  ( _W1:Int modInt pow160 )
-</acctID> in_keys ( _DotVar5:AccountCellMap ) )
-┃  ┃  ┃  ┃  ┃  ┃     _ACCOUNTS_CELL:AccountCellMap ==K ( <account>
+┃  ┃  └─ 23 (leaf, pending)
+┃  ┃      k: #accountNonexistent ( ( W1:Int modInt pow160 ) ) ~> #freezerCcallgas1_ ( SCHEDUL ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     ( notBool <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( AC1_1:AccountCellMap ) )
+┃  ┃  ┃     ( notBool ID_CELL:Int ==Int ( W1:Int modInt pow160 ) )
+┃  ┃  ┃     ( notBool <acctID>
+  ( W1:Int modInt pow160 )
+</acctID> in_keys ( AC1_1:AccountCellMap ) )
+┃  ┃  ┃     DotAccountVar:AccountCellMap ==K ( <account>
   <acctID>
-    ( _W1:Int modInt pow160 )
+    ( W1:Int modInt pow160 )
   </acctID>
   <balance>
     BAL:Int
   </balance>
   <code>
-    CODE:Bytes
+    CODE:AccountCode
   </code>
-  _Gen1:StorageCell
-  _Gen2:OrigStorageCell
-  _Gen3:TransientStorageCell
-  _Gen4:NonceCell
+  _Gen0:StorageCell
+  _Gen1:OrigStorageCell
+  _Gen2:TransientStorageCell
+  <nonce>
+    NONCE:Int
+  </nonce>
 </account>
-_DotVar5:AccountCellMap )
-┃  ┃  ┃  ┃  ┃  │
-┃  ┃  ┃  ┃  ┃  └─ 38 (leaf, pending)
-┃  ┃  ┃  ┃  ┃      k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
-┃  ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃  ┃  ┃
-┃  ┃  ┃  ┃  ┣━━┓ subst: .Subst
-┃  ┃  ┃  ┃  ┃  ┃ constraint:
-┃  ┃  ┃  ┃  ┃  ┃     ( notBool <acctID>
-  ACCTFROM:Int
-</acctID> in_keys ( AC3_:AccountCellMap ) )
-┃  ┃  ┃  ┃  ┃  ┃     ( notBool ACCTFROM:Int ==Int ( _W1:Int modInt pow160 ) )
-┃  ┃  ┃  ┃  ┃  ┃     ( notBool <acctID>
-  ( _W1:Int modInt pow160 )
-</acctID> in_keys ( AC3_:AccountCellMap ) )
-┃  ┃  ┃  ┃  ┃  ┃     _DotVar5:AccountCellMap ==K ( <account>
-  <acctID>
-    ( _W1:Int modInt pow160 )
-  </acctID>
-  _Gen0:BalanceCell
-  <code>
-    CODE:Bytes
-  </code>
-  _Gen1:StorageCell
-  _Gen2:OrigStorageCell
-  _Gen3:TransientStorageCell
-  _Gen4:NonceCell
-</account>
-AC3_:AccountCellMap )
-┃  ┃  ┃  ┃  ┃  ┃     _ACCOUNTS_CELL:AccountCellMap ==K ( <account>
-  <acctID>
-    ( _W1:Int modInt pow160 )
-  </acctID>
-  _Gen0:BalanceCell
-  <code>
-    CODE:Bytes
-  </code>
-  _Gen1:StorageCell
-  _Gen2:OrigStorageCell
-  _Gen3:TransientStorageCell
-  _Gen4:NonceCell
-</account>
-( <account>
-  <acctID>
-    ACCTFROM:Int
-  </acctID>
-  <balance>
-    BAL:Int
-  </balance>
-  _Gen0:CodeCell
-  _Gen1:StorageCell
-  _Gen2:OrigStorageCell
-  _Gen3:TransientStorageCell
-  _Gen4:NonceCell
-</account>
-AC3_:AccountCellMap ) )
-┃  ┃  ┃  ┃  ┃  │
-┃  ┃  ┃  ┃  ┃  └─ 39 (leaf, pending)
-┃  ┃  ┃  ┃  ┃      k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃  ┃  ┃  ┃      pc: _PC_CELL:Int
-┃  ┃  ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃  ┃  ┃
-┃  ┃  ┃  ┃  ┗━━┓ subst: .Subst
-┃  ┃  ┃  ┃     ┃ constraint: true
-┃  ┃  ┃  ┃     │
-┃  ┃  ┃  ┃     └─ 40 (leaf, pending)
-┃  ┃  ┃  ┃         k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃  ┃  ┃         pc: _PC_CELL:Int
-┃  ┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃  ┃
-┃  ┃  ┃  ┗━━┓ subst: .Subst
-┃  ┃  ┃     ┃ constraint:
-┃  ┃  ┃     ┃     1024 <=Int _CALLDEPTH_CELL:Int
-┃  ┃  ┃     │
-┃  ┃  ┃     └─ 20 (leaf, pending)
-┃  ┃  ┃         k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃  ┃         pc: _PC_CELL:Int
-┃  ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
-┃  ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃  ┃
-┃  ┃  ┗━━┓
-┃  ┃     │
-┃  ┃     ├─ 18
-┃  ┃     │   k: #checkBalanceUnderflow ACCTFROM:Int _W2:Int ~> #checkDepthExceeded ~> #call ACCT ...
-┃  ┃     │   pc: _PC_CELL:Int
-┃  ┃     │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃
-┃  ┃     ┃ (1 step)
-┃  ┃     ┣━━┓
-┃  ┃     ┃  │
-┃  ┃     ┃  └─ 21 (leaf, pending)
-┃  ┃     ┃      k: #refund _CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALA ...
-┃  ┃     ┃      pc: _PC_CELL:Int
-┃  ┃     ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃
-┃  ┃     ┣━━┓
-┃  ┃     ┃  │
-┃  ┃     ┃  ├─ 22 (split)
-┃  ┃     ┃  │   k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃     ┃  │   pc: _PC_CELL:Int
-┃  ┃     ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃  ┃
-┃  ┃     ┃  ┃ (branch)
-┃  ┃     ┃  ┣━━┓ subst: .Subst
-┃  ┃     ┃  ┃  ┃ constraint:
-┃  ┃     ┃  ┃  ┃     _CALLDEPTH_CELL:Int <Int 1024
-┃  ┃     ┃  ┃  │
-┃  ┃     ┃  ┃  ├─ 27
-┃  ┃     ┃  ┃  │   k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃     ┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃     ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃  ┃  │
-┃  ┃     ┃  ┃  │  (1 step)
-┃  ┃     ┃  ┃  ├─ 35 (split)
-┃  ┃     ┃  ┃  │   k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃     ┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃     ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃  ┃  ┃
-┃  ┃     ┃  ┃  ┃ (branch)
-┃  ┃     ┃  ┃  ┣━━┓ subst: .Subst
-┃  ┃     ┃  ┃  ┃  ┃ constraint:
-┃  ┃     ┃  ┃  ┃  ┃     _Gen28:CodeCell ==K <code>
-  CODE:Bytes
-</code>
-┃  ┃     ┃  ┃  ┃  ┃     ACCTFROM:Int ==Int ( _W1:Int modInt pow160 )
-┃  ┃     ┃  ┃  ┃  ┃     _ID_CELL:Account ==K ( _W1:Int modInt pow160 )
-┃  ┃     ┃  ┃  ┃  ┃     ( notBool <acctID>
-  ( _W1:Int modInt pow160 )
-</acctID> in_keys ( _DotVar5:AccountCellMap ) )
-┃  ┃     ┃  ┃  ┃  ┃     _ACCOUNTS_CELL:AccountCellMap ==K ( <account>
-  <acctID>
-    ( _W1:Int modInt pow160 )
-  </acctID>
-  <balance>
-    BAL0:Int
-  </balance>
-  <code>
-    CODE:Bytes
-  </code>
-  _Gen29:StorageCell
-  _Gen30:OrigStorageCell
-  _Gen31:TransientStorageCell
-  _Gen32:NonceCell
-</account>
-_DotVar5:AccountCellMap )
-┃  ┃     ┃  ┃  ┃  │
-┃  ┃     ┃  ┃  ┃  └─ 46 (leaf, pending)
-┃  ┃     ┃  ┃  ┃      k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃     ┃  ┃  ┃      pc: _PC_CELL:Int
-┃  ┃     ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃  ┃  ┃
-┃  ┃     ┃  ┃  ┣━━┓ subst: .Subst
-┃  ┃     ┃  ┃  ┃  ┃ constraint:
-┃  ┃     ┃  ┃  ┃  ┃     ( notBool <acctID>
-  ACCTFROM:Int
-</acctID> in_keys ( AC3_:AccountCellMap ) )
-┃  ┃     ┃  ┃  ┃  ┃     ( notBool ACCTFROM:Int ==Int ( _W1:Int modInt pow160 ) )
-┃  ┃     ┃  ┃  ┃  ┃     ( notBool <acctID>
-  ( _W1:Int modInt pow160 )
-</acctID> in_keys ( AC3_:AccountCellMap ) )
-┃  ┃     ┃  ┃  ┃  ┃     _DotVar5:AccountCellMap ==K ( <account>
-  <acctID>
-    ( _W1:Int modInt pow160 )
-  </acctID>
-  _Gen0:BalanceCell
-  <code>
-    CODE:Bytes
-  </code>
-  _Gen1:StorageCell
-  _Gen2:OrigStorageCell
-  _Gen3:TransientStorageCell
-  _Gen4:NonceCell
-</account>
-AC3_:AccountCellMap )
-┃  ┃     ┃  ┃  ┃  ┃     _ACCOUNTS_CELL:AccountCellMap ==K ( <account>
-  <acctID>
-    ( _W1:Int modInt pow160 )
-  </acctID>
-  _Gen0:BalanceCell
-  <code>
-    CODE:Bytes
-  </code>
-  _Gen1:StorageCell
-  _Gen2:OrigStorageCell
-  _Gen3:TransientStorageCell
-  _Gen4:NonceCell
-</account>
-( <account>
-  <acctID>
-    ACCTFROM:Int
-  </acctID>
-  <balance>
-    BAL0:Int
-  </balance>
-  _Gen28:CodeCell
-  _Gen29:StorageCell
-  _Gen30:OrigStorageCell
-  _Gen31:TransientStorageCell
-  _Gen32:NonceCell
-</account>
-AC3_:AccountCellMap ) )
-┃  ┃     ┃  ┃  ┃  │
-┃  ┃     ┃  ┃  ┃  └─ 47 (leaf, pending)
-┃  ┃     ┃  ┃  ┃      k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃     ┃  ┃  ┃      pc: _PC_CELL:Int
-┃  ┃     ┃  ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃  ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃  ┃  ┃
-┃  ┃     ┃  ┃  ┗━━┓ subst: .Subst
-┃  ┃     ┃  ┃     ┃ constraint: true
-┃  ┃     ┃  ┃     │
-┃  ┃     ┃  ┃     └─ 48 (leaf, pending)
-┃  ┃     ┃  ┃         k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃     ┃  ┃         pc: _PC_CELL:Int
-┃  ┃     ┃  ┃         callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃  ┃         statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃  ┃
-┃  ┃     ┃  ┗━━┓ subst: .Subst
-┃  ┃     ┃     ┃ constraint:
-┃  ┃     ┃     ┃     1024 <=Int _CALLDEPTH_CELL:Int
-┃  ┃     ┃     │
-┃  ┃     ┃     └─ 28 (leaf, pending)
-┃  ┃     ┃         k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃     ┃         pc: _PC_CELL:Int
-┃  ┃     ┃         callDepth: _CALLDEPTH_CELL:Int
-┃  ┃     ┃         statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃     ┃
-┃  ┃     ┗━━┓
-┃  ┃        │
-┃  ┃        ├─ 23
-┃  ┃        │   k: #checkBalanceUnderflow ACCTFROM:Int _W2:Int ~> #checkDepthExceeded ~> #call ACCT ...
-┃  ┃        │   pc: _PC_CELL:Int
-┃  ┃        │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃        │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃        ┃
-┃  ┃        ┃ (1 step)
-┃  ┃        ┣━━┓
-┃  ┃        ┃  │
-┃  ┃        ┃  └─ 29 (leaf, pending)
-┃  ┃        ┃      k: #refund _CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALA ...
-┃  ┃        ┃      pc: _PC_CELL:Int
-┃  ┃        ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃        ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃        ┃
-┃  ┃        ┣━━┓
-┃  ┃        ┃  │
-┃  ┃        ┃  ├─ 30 (split)
-┃  ┃        ┃  │   k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃        ┃  │   pc: _PC_CELL:Int
-┃  ┃        ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃        ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃        ┃  ┃
-┃  ┃        ┃  ┃ (branch)
-┃  ┃        ┃  ┣━━┓ subst: .Subst
-┃  ┃        ┃  ┃  ┃ constraint:
-┃  ┃        ┃  ┃  ┃     _CALLDEPTH_CELL:Int <Int 1024
-┃  ┃        ┃  ┃  │
-┃  ┃        ┃  ┃  ├─ 36
-┃  ┃        ┃  ┃  │   k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃        ┃  ┃  │   pc: _PC_CELL:Int
-┃  ┃        ┃  ┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃        ┃  ┃  │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃        ┃  ┃  │
-┃  ┃        ┃  ┃  │  (1 step)
-┃  ┃        ┃  ┃  └─ 49 (leaf, pending)
-┃  ┃        ┃  ┃      k: #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _ ...
-┃  ┃        ┃  ┃      pc: _PC_CELL:Int
-┃  ┃        ┃  ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃        ┃  ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃        ┃  ┃
-┃  ┃        ┃  ┗━━┓ subst: .Subst
-┃  ┃        ┃     ┃ constraint:
-┃  ┃        ┃     ┃     1024 <=Int _CALLDEPTH_CELL:Int
-┃  ┃        ┃     │
-┃  ┃        ┃     └─ 37 (leaf, pending)
-┃  ┃        ┃         k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃        ┃         pc: _PC_CELL:Int
-┃  ┃        ┃         callDepth: _CALLDEPTH_CELL:Int
-┃  ┃        ┃         statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃        ┃
-┃  ┃        ┗━━┓
-┃  ┃           │
-┃  ┃           ├─ 31
-┃  ┃           │   k: #checkBalanceUnderflow ACCTFROM:Int _W2:Int ~> #checkDepthExceeded ~> #call ACCT ...
-┃  ┃           │   pc: _PC_CELL:Int
-┃  ┃           │   callDepth: _CALLDEPTH_CELL:Int
-┃  ┃           │   statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃           ┃
-┃  ┃           ┃ (1 step)
-┃  ┃           ┣━━┓
-┃  ┃           ┃  │
-┃  ┃           ┃  └─ 43 (leaf, pending)
-┃  ┃           ┃      k: #refund _CALLGAS_CELL:Gas ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALA ...
-┃  ┃           ┃      pc: _PC_CELL:Int
-┃  ┃           ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃           ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃           ┃
-┃  ┃           ┣━━┓
-┃  ┃           ┃  │
-┃  ┃           ┃  └─ 44 (leaf, pending)
-┃  ┃           ┃      k: #checkDepthExceeded ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int mo ...
-┃  ┃           ┃      pc: _PC_CELL:Int
-┃  ┃           ┃      callDepth: _CALLDEPTH_CELL:Int
-┃  ┃           ┃      statusCode: _STATUSCODE_CELL:StatusCode
-┃  ┃           ┃
-┃  ┃           ┗━━┓
-┃  ┃              │
-┃  ┃              └─ 45 (leaf, pending)
-┃  ┃                  k: #checkBalanceUnderflow ACCTFROM:Int _W2:Int ~> #checkDepthExceeded ~> #call ACCT ...
-┃  ┃                  pc: _PC_CELL:Int
-┃  ┃                  callDepth: _CALLDEPTH_CELL:Int
-┃  ┃                  statusCode: _STATUSCODE_CELL:StatusCode
+AC1_1:AccountCellMap )
+┃  ┃  │
+┃  ┃  └─ 24 (leaf, pending)
+┃  ┃      k: #accountNonexistent ( ( W1:Int modInt pow160 ) ) ~> #freezerCcallgas1_ ( SCHEDUL ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
 ┃  ┃
-┃  ┗━━┓
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint: true
 ┃     │
-┃     └─ 11 (stuck, leaf)
-┃         k: CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int ~ ...
-┃         pc: _PC_CELL:Int
-┃         callDepth: _CALLDEPTH_CELL:Int
-┃         statusCode: _STATUSCODE_CELL:StatusCode
+┃     └─ 25 (leaf, pending)
+┃         k: #accountNonexistent ( ( W1:Int modInt pow160 ) ) ~> #freezerCcallgas1_ ( SCHEDUL ...
+┃         pc: PC_CELL:Int
+┃         callDepth: CALLDEPTH_CELL:Int
+┃         statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-┃  ┃     ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
+┃  ┃     USEGAS_CELL:Bool
+┃  ┃     GAS_CELL:Gas <Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
+┃  ┃     ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
 ┃  │
-┃  ├─ 59
-┃  │   k: #next [ CALL ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 35
+┃  │   k: #next [ CALL ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (13 steps)
-┃  └─ 33 (leaf, terminal)
-┃      k: #halt ~> _K_CELL:K
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: EVMC_OUT_OF_GAS
+┃  │  (7 steps)
+┃  └─ 14 (leaf, pending)
+┃      k: ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMO ...
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
+┃      statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-┃  ┃     ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-┃  ┃     _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) )
+┃  ┃     ( notBool USEGAS_CELL:Bool )
+┃  ┃     BALANCE_CELL:Int <Int W2:Int
+┃  ┃     ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
 ┃  │
-┃  ├─ 65
-┃  │   k: #next [ CALL ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 36
+┃  │   k: #next [ CALL ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (19 steps)
-┃  └─ 26 (leaf, pending)
-┃      k: Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in ...
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  │  (7 steps)
+┃  └─ 10 (leaf, pending)
+┃      k: #checkBalanceUnderflow ID_CELL:Int W2:Int ~> #checkDepthExceeded ~> #call ID_CEL ...
+┃      pc: PC_CELL:Int
+┃      callDepth: CALLDEPTH_CELL:Int
+┃      statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┣━━┓ subst: .Subst
 ┃  ┃ constraint:
-┃  ┃     _USEGAS_CELL:Bool
-┃  ┃     Ghasaccesslist << _SCHEDULE_CELL:Schedule >>
-┃  ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-┃  ┃     ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-┃  ┃     Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+┃  ┃     ( notBool USEGAS_CELL:Bool )
+┃  ┃     W2:Int <=Int BALANCE_CELL:Int
+┃  ┃     CALLDEPTH_CELL:Int <Int 1024
+┃  ┃     ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
 ┃  │
-┃  ├─ 68
-┃  │   k: #next [ CALL ] ~> _K_CELL:K
-┃  │   pc: _PC_CELL:Int
-┃  │   callDepth: _CALLDEPTH_CELL:Int
-┃  │   statusCode: _STATUSCODE_CELL:StatusCode
+┃  ├─ 40
+┃  │   k: #next [ CALL ] ~> K_CELL:K
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
 ┃  │
-┃  │  (20 steps)
-┃  └─ 41 (leaf, pending)
-┃      k: #access [ CALL , CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int  ...
-┃      pc: _PC_CELL:Int
-┃      callDepth: _CALLDEPTH_CELL:Int
-┃      statusCode: _STATUSCODE_CELL:StatusCode
+┃  │  (9 steps)
+┃  ├─ 18 (split)
+┃  │   k: #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:In ...
+┃  │   pc: PC_CELL:Int
+┃  │   callDepth: CALLDEPTH_CELL:Int
+┃  │   statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┃ (branch)
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     CODE_CELL:AccountCode ==K CODE:Bytes
+┃  ┃  ┃     ID_CELL:Int ==Int ( W1:Int modInt pow160 )
+┃  ┃  ┃     ( notBool <acctID>
+  ( W1:Int modInt pow160 )
+</acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+┃  ┃  │
+┃  ┃  └─ 20 (leaf, pending)
+┃  ┃      k: #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:In ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┣━━┓ subst: .Subst
+┃  ┃  ┃ constraint:
+┃  ┃  ┃     ( notBool <acctID>
+  ID_CELL:Int
+</acctID> in_keys ( AC1_1:AccountCellMap ) )
+┃  ┃  ┃     ( notBool ID_CELL:Int ==Int ( W1:Int modInt pow160 ) )
+┃  ┃  ┃     ( notBool <acctID>
+  ( W1:Int modInt pow160 )
+</acctID> in_keys ( AC1_1:AccountCellMap ) )
+┃  ┃  ┃     DotAccountVar:AccountCellMap ==K ( <account>
+  <acctID>
+    ( W1:Int modInt pow160 )
+  </acctID>
+  _Gen0:BalanceCell
+  <code>
+    CODE:Bytes
+  </code>
+  _Gen1:StorageCell
+  _Gen2:OrigStorageCell
+  _Gen3:TransientStorageCell
+  _Gen4:NonceCell
+</account>
+AC1_1:AccountCellMap )
+┃  ┃  │
+┃  ┃  └─ 21 (leaf, pending)
+┃  ┃      k: #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:In ...
+┃  ┃      pc: PC_CELL:Int
+┃  ┃      callDepth: CALLDEPTH_CELL:Int
+┃  ┃      statusCode: STATUSCODE_CELL:StatusCode
+┃  ┃
+┃  ┗━━┓ subst: .Subst
+┃     ┃ constraint: true
+┃     │
+┃     └─ 22 (leaf, pending)
+┃         k: #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:In ...
+┃         pc: PC_CELL:Int
+┃         callDepth: CALLDEPTH_CELL:Int
+┃         statusCode: STATUSCODE_CELL:StatusCode
 ┃
 ┗━━┓ subst: .Subst
    ┃ constraint:
-   ┃     _USEGAS_CELL:Bool
-   ┃     ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-   ┃     ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-   ┃     Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+   ┃     ( notBool USEGAS_CELL:Bool )
+   ┃     W2:Int <=Int BALANCE_CELL:Int
+   ┃     1024 <=Int CALLDEPTH_CELL:Int
+   ┃     ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
    │
-   ├─ 69
-   │   k: #next [ CALL ] ~> _K_CELL:K
-   │   pc: _PC_CELL:Int
-   │   callDepth: _CALLDEPTH_CELL:Int
-   │   statusCode: _STATUSCODE_CELL:StatusCode
+   ├─ 41
+   │   k: #next [ CALL ] ~> K_CELL:K
+   │   pc: PC_CELL:Int
+   │   callDepth: CALLDEPTH_CELL:Int
+   │   statusCode: STATUSCODE_CELL:StatusCode
    │
-   │  (20 steps)
-   └─ 42 (leaf, pending)
-       k: #access [ CALL , CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int  ...
-       pc: _PC_CELL:Int
-       callDepth: _CALLDEPTH_CELL:Int
-       statusCode: _STATUSCODE_CELL:StatusCode
+   │  (8 steps)
+   └─ 17 (leaf, pending)
+       k: #checkDepthExceeded ~> #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modIn ...
+       pc: PC_CELL:Int
+       callDepth: CALLDEPTH_CELL:Int
+       statusCode: STATUSCODE_CELL:StatusCode
 
 
 ┌─ 2 (root, leaf, target)
-│   k: _K_CELL:K
-│   pc: ?_FINAL_PC_CELL:Int
-│   callDepth: ?_FINAL_CALLDEPTH_CELL:Int
-│   statusCode: ?_FINAL_STATUSCODE_CELL:StatusCode
+│   k: K_CELL:K
+│   pc: FINAL_PC_CELL:Int
+│   callDepth: FINAL_CALLDEPTH_CELL:Int
+│   statusCode: FINAL_STATUSCODE_CELL:StatusCode
 
 
 
@@ -545,576 +247,377 @@ module SUMMARY-CALL-7-SPEC
     rule [BASIC-BLOCK-4-TO-6]: <kevm>
            <k>
              ( #next [ CALL ] => #halt )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
            <ethereum>
              <evm>
                <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
+                 ( _STATUSCODE_CELL => EVMC_STATIC_MODE_VIOLATION )
                </statusCode>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) )
+                   ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) )
                  </wordStack>
                  <static>
-                   ( _STATIC_CELL:Bool => true )
+                   ( STATIC_CELL:Bool => true )
                  </static>
                  ...
                </callState>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _STATIC_CELL:Bool
-       andBool ( #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) )
-               ))
+      requires ( STATIC_CELL:Bool
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) )
+               )))
       [priority(20), label(BASIC-BLOCK-4-TO-6)]
     
-    rule [BASIC-BLOCK-10-TO-15]: <kevm>
+    rule [BASIC-BLOCK-36-TO-10]: <kevm>
            <k>
-             ( #accessAccounts ( _W1:Int modInt pow160 )
-             ~> #checkCall ACCTFROM:Int _W2:Int => #checkBalanceUnderflow ACCTFROM:Int _W2:Int
-             ~> #checkDepthExceeded )
-             ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _W2:Int #range ( _LOCALMEM_CELL:Bytes , _W3:Int , _W4:Int ) false
-             ~> #return _W5:Int _W6:Int
-             ~> #pc [ CALL ]
-             ~> __K_CELL
-           </k>
-           <useGas>
-             false
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <id>
-                   ACCTFROM:Int
-                 </id>
-                 <wordStack>
-                   _WS:WordStack
-                 </wordStack>
-                 <localMem>
-                   _LOCALMEM_CELL:Bytes
-                 </localMem>
-                 <static>
-                   _STATIC_CELL:Bool
-                 </static>
-                 ...
-               </callState>
-               <substate>
-                 <accessedAccounts>
-                   ( _ACCESSEDACCOUNTS_CELL:Set => _ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( ( _W1:Int modInt pow160 ) ) )
-                 </accessedAccounts>
-                 ...
-               </substate>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __ID_CELL ==K ACCTFROM:Int
-       andBool ( ( notBool __USEGAS_CELL )
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( __W0 : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-               )))
-      [priority(20), label(BASIC-BLOCK-10-TO-15)]
-    
-    rule [BASIC-BLOCK-19-TO-32]: <kevm>
-           <k>
-             ( #checkDepthExceeded ~> .K => .K )
-             ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _W2:Int #range ( _LOCALMEM_CELL:Bytes , _W3:Int , _W4:Int ) false
-             ~> #return _W5:Int _W6:Int
-             ~> #pc [ CALL ]
-             ~> __K_CELL
-           </k>
-           <useGas>
-             false
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <id>
-                   ACCTFROM:Int
-                 </id>
-                 <wordStack>
-                   _WS:WordStack
-                 </wordStack>
-                 <localMem>
-                   _LOCALMEM_CELL:Bytes
-                 </localMem>
-                 <static>
-                   _STATIC_CELL:Bool
-                 </static>
-                 <callDepth>
-                   _CALLDEPTH_CELL:Int
-                 </callDepth>
-                 ...
-               </callState>
-               <substate>
-                 <accessedAccounts>
-                   __ACCESSEDACCOUNTS_CELL |Set SetItem ( ( _W1:Int modInt pow160 ) )
-                 </accessedAccounts>
-                 ...
-               </substate>
-               ...
-             </evm>
-             <network>
-               <accounts>
-                 ( <account>
-                   <acctID>
-                     ACCTFROM:Int
-                   </acctID>
-                   <balance>
-                     BAL:Int
-                   </balance>
-                   _Gen0:CodeCell
-                   _Gen1:StorageCell
-                   _Gen2:OrigStorageCell
-                   _Gen3:TransientStorageCell
-                   _Gen4:NonceCell
-                 </account>
-                 _DotVar5:AccountCellMap )
-               </accounts>
-               ...
-             </network>
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __ID_CELL ==K ACCTFROM:Int
-       andBool ( ( notBool __USEGAS_CELL )
-       andBool ( _W2:Int <=Int BAL:Int
-       andBool ( _CALLDEPTH_CELL:Int <Int 1024
-       andBool ( ( notBool <acctID>
-          ACCTFROM:Int
-        </acctID> in_keys ( _DotVar5:AccountCellMap ) )
-       andBool ( __ACCOUNTS_CELL ==K ( <account>
-          <acctID>
-            ACCTFROM:Int
-          </acctID>
-          <balance>
-            BAL:Int
-          </balance>
-          _Gen0:CodeCell
-          _Gen1:StorageCell
-          _Gen2:OrigStorageCell
-          _Gen3:TransientStorageCell
-          _Gen4:NonceCell
-        </account>
-        _DotVar5:AccountCellMap )
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( __W0 : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-               )))))))
-      [priority(20), label(BASIC-BLOCK-19-TO-32)]
-    
-    rule [BASIC-BLOCK-27-TO-35]: <kevm>
-           <k>
-             ( #checkDepthExceeded ~> .K => .K )
-             ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _W2:Int #range ( _LOCALMEM_CELL:Bytes , _W3:Int , _W4:Int ) false
-             ~> #return _W5:Int _W6:Int
-             ~> #pc [ CALL ]
-             ~> __K_CELL
-           </k>
-           <useGas>
-             false
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <id>
-                   ACCTFROM:Int
-                 </id>
-                 <wordStack>
-                   _WS:WordStack
-                 </wordStack>
-                 <localMem>
-                   _LOCALMEM_CELL:Bytes
-                 </localMem>
-                 <static>
-                   _STATIC_CELL:Bool
-                 </static>
-                 <callDepth>
-                   _CALLDEPTH_CELL:Int
-                 </callDepth>
-                 ...
-               </callState>
-               <substate>
-                 <accessedAccounts>
-                   __ACCESSEDACCOUNTS_CELL |Set SetItem ( ( _W1:Int modInt pow160 ) )
-                 </accessedAccounts>
-                 ...
-               </substate>
-               ...
-             </evm>
-             <network>
-               <accounts>
-                 ( <account>
-                   <acctID>
-                     ACCTFROM:Int
-                   </acctID>
-                   <balance>
-                     BAL0:Int
-                   </balance>
-                   _Gen28:CodeCell
-                   _Gen29:StorageCell
-                   _Gen30:OrigStorageCell
-                   _Gen31:TransientStorageCell
-                   _Gen32:NonceCell
-                 </account>
-                 _DotVar5:AccountCellMap )
-               </accounts>
-               ...
-             </network>
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __ID_CELL ==K ACCTFROM:Int
-       andBool ( ( notBool __USEGAS_CELL )
-       andBool ( _W2:Int <=Int BAL0:Int
-       andBool ( _CALLDEPTH_CELL:Int <Int 1024
-       andBool ( ( notBool <acctID>
-          ACCTFROM:Int
-        </acctID> in_keys ( _DotVar5:AccountCellMap ) )
-       andBool ( __ACCOUNTS_CELL ==K ( <account>
-          <acctID>
-            ACCTFROM:Int
-          </acctID>
-          <balance>
-            BAL0:Int
-          </balance>
-          _Gen28:CodeCell
-          _Gen29:StorageCell
-          _Gen30:OrigStorageCell
-          _Gen31:TransientStorageCell
-          _Gen32:NonceCell
-        </account>
-        _DotVar5:AccountCellMap )
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( __W0 : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-       andBool ( ( notBool ( _W2:Int <=Int BAL:Int andBool ( __Gen0 ==K _Gen28:CodeCell andBool ( __Gen1 ==K _Gen29:StorageCell andBool ( __Gen2 ==K _Gen30:OrigStorageCell andBool ( __Gen3 ==K _Gen31:TransientStorageCell andBool ( __Gen4 ==K _Gen32:NonceCell andBool BAL:Int ==Int BAL0:Int ) ) ) ) ) ) )
-       andBool ( ( notBool ( BAL:Int <Int _W2:Int andBool ( __Gen23 ==K _Gen28:CodeCell andBool ( __Gen24 ==K _Gen29:StorageCell andBool ( __Gen25 ==K _Gen30:OrigStorageCell andBool ( __Gen26 ==K _Gen31:TransientStorageCell andBool ( __Gen27 ==K _Gen32:NonceCell andBool BAL:Int ==Int BAL0:Int ) ) ) ) ) ) )
-               )))))))))
-      [priority(20), label(BASIC-BLOCK-27-TO-35)]
-    
-    rule [BASIC-BLOCK-36-TO-49]: <kevm>
-           <k>
-             ( #checkDepthExceeded ~> .K => .K )
-             ~> #call ACCTFROM:Int ( _W1:Int modInt pow160 ) ( _W1:Int modInt pow160 ) _W2:Int _W2:Int #range ( _LOCALMEM_CELL:Bytes , _W3:Int , _W4:Int ) false
-             ~> #return _W5:Int _W6:Int
-             ~> #pc [ CALL ]
-             ~> __K_CELL
-           </k>
-           <useGas>
-             false
-           </useGas>
-           <ethereum>
-             <evm>
-               <callState>
-                 <id>
-                   ACCTFROM:Int
-                 </id>
-                 <wordStack>
-                   _WS:WordStack
-                 </wordStack>
-                 <localMem>
-                   _LOCALMEM_CELL:Bytes
-                 </localMem>
-                 <static>
-                   _STATIC_CELL:Bool
-                 </static>
-                 <callDepth>
-                   _CALLDEPTH_CELL:Int
-                 </callDepth>
-                 ...
-               </callState>
-               <substate>
-                 <accessedAccounts>
-                   __ACCESSEDACCOUNTS_CELL |Set SetItem ( ( _W1:Int modInt pow160 ) )
-                 </accessedAccounts>
-                 ...
-               </substate>
-               ...
-             </evm>
-             <network>
-               <accounts>
-                 ( <account>
-                   <acctID>
-                     ACCTFROM:Int
-                   </acctID>
-                   <balance>
-                     BAL1:Int
-                   </balance>
-                   _Gen33:CodeCell
-                   _Gen34:StorageCell
-                   _Gen35:OrigStorageCell
-                   _Gen36:TransientStorageCell
-                   _Gen37:NonceCell
-                 </account>
-                 _DotVar5:AccountCellMap )
-               </accounts>
-               ...
-             </network>
-           </ethereum>
-           ...
-         </kevm>
-      requires ( __ID_CELL ==K ACCTFROM:Int
-       andBool ( ( notBool __USEGAS_CELL )
-       andBool ( _W2:Int <=Int BAL1:Int
-       andBool ( _CALLDEPTH_CELL:Int <Int 1024
-       andBool ( ( notBool <acctID>
-          ACCTFROM:Int
-        </acctID> in_keys ( _DotVar5:AccountCellMap ) )
-       andBool ( __ACCOUNTS_CELL ==K ( <account>
-          <acctID>
-            ACCTFROM:Int
-          </acctID>
-          <balance>
-            BAL1:Int
-          </balance>
-          _Gen33:CodeCell
-          _Gen34:StorageCell
-          _Gen35:OrigStorageCell
-          _Gen36:TransientStorageCell
-          _Gen37:NonceCell
-        </account>
-        _DotVar5:AccountCellMap )
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( __W0 : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-       andBool ( ( notBool ( _W2:Int <=Int BAL:Int andBool ( __Gen0 ==K _Gen33:CodeCell andBool ( __Gen1 ==K _Gen34:StorageCell andBool ( __Gen2 ==K _Gen35:OrigStorageCell andBool ( __Gen3 ==K _Gen36:TransientStorageCell andBool ( __Gen4 ==K _Gen37:NonceCell andBool BAL:Int ==Int BAL1:Int ) ) ) ) ) ) )
-       andBool ( ( notBool ( BAL:Int <Int _W2:Int andBool ( __Gen23 ==K _Gen33:CodeCell andBool ( __Gen24 ==K _Gen34:StorageCell andBool ( __Gen25 ==K _Gen35:OrigStorageCell andBool ( __Gen26 ==K _Gen36:TransientStorageCell andBool ( __Gen27 ==K _Gen37:NonceCell andBool BAL:Int ==Int BAL1:Int ) ) ) ) ) ) )
-       andBool ( ( notBool ( BAL0:Int <Int _W2:Int andBool ( _Gen28:CodeCell ==K _Gen33:CodeCell andBool ( _Gen29:StorageCell ==K _Gen34:StorageCell andBool ( _Gen30:OrigStorageCell ==K _Gen35:OrigStorageCell andBool ( _Gen31:TransientStorageCell ==K _Gen36:TransientStorageCell andBool ( _Gen32:NonceCell ==K _Gen37:NonceCell andBool BAL0:Int ==Int BAL1:Int ) ) ) ) ) ) )
-       andBool ( ( notBool ( _W2:Int <=Int BAL0:Int andBool ( _Gen28:CodeCell ==K _Gen33:CodeCell andBool ( _Gen29:StorageCell ==K _Gen34:StorageCell andBool ( _Gen30:OrigStorageCell ==K _Gen35:OrigStorageCell andBool ( _Gen31:TransientStorageCell ==K _Gen36:TransientStorageCell andBool ( _Gen32:NonceCell ==K _Gen37:NonceCell andBool BAL0:Int ==Int BAL1:Int ) ) ) ) ) ) )
-               )))))))))))
-      [priority(20), label(BASIC-BLOCK-36-TO-49)]
-    
-    rule [BASIC-BLOCK-51-TO-9]: <kevm>
-           <k>
-             ( #next [ CALL ] ~> .K => CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int
+             ( #next [ CALL ] ~> .K => #checkBalanceUnderflow ID_CELL:Int W2:Int
+             ~> #checkDepthExceeded
+             ~> #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:Int #range ( LOCALMEM_CELL:Bytes , W3:Int , W4:Int ) false
+             ~> #return W5:Int W6:Int
              ~> #pc [ CALL ] )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
            <useGas>
-             ( _USEGAS_CELL:Bool => false )
+             ( USEGAS_CELL:Bool => false )
            </useGas>
            <ethereum>
              <evm>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) => WS:WordStack )
                  </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
                  <static>
-                   _STATIC_CELL:Bool
+                   STATIC_CELL:Bool
                  </static>
                  ...
                </callState>
-               ...
-             </evm>
-             ...
-           </ethereum>
-           ...
-         </kevm>
-      requires ( ( notBool _USEGAS_CELL:Bool )
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-               ))
-      [priority(20), label(BASIC-BLOCK-51-TO-9)]
-    
-    rule [BASIC-BLOCK-59-TO-33]: <kevm>
-           <k>
-             ( #next [ CALL ] => #halt )
-             ~> __K_CELL
-           </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
-           <useGas>
-             ( _USEGAS_CELL:Bool => true )
-           </useGas>
-           <ethereum>
-             <evm>
-               <statusCode>
-                 ( __STATUSCODE_CELL => EVMC_OUT_OF_GAS )
-               </statusCode>
-               <callState>
-                 <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) => _WS:WordStack )
-                 </wordStack>
-                 <gas>
-                   _GAS_CELL:Gas
-                 </gas>
-                 <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) )
-                 </memoryUsed>
-                 <static>
-                   _STATIC_CELL:Bool
-                 </static>
+               <substate>
+                 <accessedAccounts>
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( ( W1:Int modInt pow160 ) ) )
+                 </accessedAccounts>
                  ...
-               </callState>
+               </substate>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( _GAS_CELL:Gas <Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-               )))
-      [priority(20), label(BASIC-BLOCK-59-TO-33)]
+      requires ( ( notBool USEGAS_CELL:Bool )
+       andBool ( BALANCE_CELL:Int <Int W2:Int
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
+               ))))
+      [priority(20), label(BASIC-BLOCK-36-TO-10)]
     
-    rule [BASIC-BLOCK-65-TO-26]: <kevm>
+    rule [BASIC-BLOCK-34-TO-19]: <kevm>
            <k>
-             ( #next [ CALL ] ~> .K => Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) )
+             ( #next [ CALL ] ~> .K => #accountNonexistent ( ( W1:Int modInt pow160 ) )
+             ~> #freezerCcallgas1_ ( SCHEDULE_CELL:Schedule ~> .K , W0:Int ~> .K , GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) ~> .K , W2:Int ~> .K , ( W1:Int modInt pow160 ) in ACCESSEDACCOUNTS_CELL:Set ~> .K )
+             ~> #allocateCallGas
+             ~> Ccall ( SCHEDULE_CELL:Schedule , #accountNonexistent ( ( W1:Int modInt pow160 ) ) , W0:Int , GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) , W2:Int , ( W1:Int modInt pow160 ) in ACCESSEDACCOUNTS_CELL:Set )
              ~> #deductGas
-             ~> #access [ CALL , CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int ]
-             ~> CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int
+             ~> #access [ CALL , CALL W0:Int ( W1:Int modInt pow160 ) W2:Int W3:Int W4:Int W5:Int W6:Int ]
+             ~> CALL W0:Int ( W1:Int modInt pow160 ) W2:Int W3:Int W4:Int W5:Int W6:Int
              ~> #pc [ CALL ] )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
            <schedule>
-             _SCHEDULE_CELL:Schedule
+             SCHEDULE_CELL:Schedule
            </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             ( USEGAS_CELL:Bool => true )
            </useGas>
            <ethereum>
              <evm>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) => WS:WordStack )
                  </wordStack>
                  <gas>
-                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) )
+                   ( GAS_CELL:Gas => GAS_CELL:Gas -Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) )
                  </gas>
                  <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) )
+                   ( MEMORYUSED_CELL:Int => #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) )
                  </memoryUsed>
-                 <callGas>
-                   ( __CALLGAS_CELL => Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) +Gas #if _W2:Int ==Int 0 #then 0 #else Gcallstipend < _SCHEDULE_CELL:Schedule > #fi )
-                 </callGas>
                  <static>
-                   _STATIC_CELL:Bool
+                   STATIC_CELL:Bool
                  </static>
                  ...
                </callState>
                <substate>
                  <accessedAccounts>
-                   _ACCESSEDACCOUNTS_CELL:Set
+                   ACCESSEDACCOUNTS_CELL:Set
                  </accessedAccounts>
                  ...
                </substate>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-       andBool ( _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <Gas Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) )
+      requires ( USEGAS_CELL:Bool
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) ) <=Gas GAS_CELL:Gas
+       andBool ( ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
                ))))
-      [priority(20), label(BASIC-BLOCK-65-TO-26)]
+      [priority(20), label(BASIC-BLOCK-34-TO-19)]
     
-    rule [BASIC-BLOCK-68-TO-41]: <kevm>
+    rule [BASIC-BLOCK-35-TO-14]: <kevm>
            <k>
-             ( #next [ CALL ] ~> .K => #access [ CALL , CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int ]
-             ~> CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int
+             ( #next [ CALL ] ~> .K => ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
+             ~> #deductGas
+             ~> #gas [ CALL W0:Int ( W1:Int modInt pow160 ) W2:Int W3:Int W4:Int W5:Int W6:Int ]
+             ~> #access [ CALL , CALL W0:Int ( W1:Int modInt pow160 ) W2:Int W3:Int W4:Int W5:Int W6:Int ]
+             ~> CALL W0:Int ( W1:Int modInt pow160 ) W2:Int W3:Int W4:Int W5:Int W6:Int
              ~> #pc [ CALL ] )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
            <schedule>
-             _SCHEDULE_CELL:Schedule
+             SCHEDULE_CELL:Schedule
            </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             ( USEGAS_CELL:Bool => true )
            </useGas>
            <ethereum>
              <evm>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) => WS:WordStack )
                  </wordStack>
                  <gas>
-                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) )
+                   GAS_CELL:Gas
                  </gas>
                  <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) )
+                   ( MEMORYUSED_CELL:Int => #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) )
                  </memoryUsed>
-                 <callGas>
-                   ( __CALLGAS_CELL => Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) +Gas #if _W2:Int ==Int 0 #then 0 #else Gcallstipend < _SCHEDULE_CELL:Schedule > #fi )
-                 </callGas>
                  <static>
-                   _STATIC_CELL:Bool
+                   STATIC_CELL:Bool
                  </static>
+                 ...
+               </callState>
+               ...
+             </evm>
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
+           </ethereum>
+           ...
+         </kevm>
+      requires ( USEGAS_CELL:Bool
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( GAS_CELL:Gas <Gas ( Cmem ( SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( MEMORYUSED_CELL:Int , W3:Int , W4:Int ) , W5:Int , W6:Int ) ) -Int Cmem ( SCHEDULE_CELL:Schedule , MEMORYUSED_CELL:Int ) )
+       andBool ( ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
+               ))))
+      [priority(20), label(BASIC-BLOCK-35-TO-14)]
+    
+    rule [BASIC-BLOCK-40-TO-18]: <kevm>
+           <k>
+             ( #next [ CALL ] ~> .K => #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:Int #range ( LOCALMEM_CELL:Bytes , W3:Int , W4:Int ) false
+             ~> #return W5:Int W6:Int
+             ~> #pc [ CALL ] )
+             ~> _K_CELL
+           </k>
+           <useGas>
+             ( USEGAS_CELL:Bool => false )
+           </useGas>
+           <ethereum>
+             <evm>
+               <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
+                 <wordStack>
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) => WS:WordStack )
+                 </wordStack>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
+                 <static>
+                   STATIC_CELL:Bool
+                 </static>
+                 <callDepth>
+                   CALLDEPTH_CELL:Int
+                 </callDepth>
                  ...
                </callState>
                <substate>
                  <accessedAccounts>
-                   _ACCESSEDACCOUNTS_CELL:Set
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( ( W1:Int modInt pow160 ) ) )
                  </accessedAccounts>
                  ...
                </substate>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( Ghasaccesslist << _SCHEDULE_CELL:Schedule >>
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-       andBool ( Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
+      requires ( ( notBool USEGAS_CELL:Bool )
+       andBool ( W2:Int <=Int BALANCE_CELL:Int
+       andBool ( CALLDEPTH_CELL:Int <Int 1024
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
                )))))
-      [priority(20), label(BASIC-BLOCK-68-TO-41)]
+      [priority(20), label(BASIC-BLOCK-40-TO-18)]
     
-    rule [BASIC-BLOCK-69-TO-42]: <kevm>
+    rule [BASIC-BLOCK-41-TO-17]: <kevm>
            <k>
-             ( #next [ CALL ] ~> .K => #access [ CALL , CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int ]
-             ~> CALL _W0:Int ( _W1:Int modInt pow160 ) _W2:Int _W3:Int _W4:Int _W5:Int _W6:Int
+             ( #next [ CALL ] ~> .K => #checkDepthExceeded
+             ~> #call ID_CELL:Int ( W1:Int modInt pow160 ) ( W1:Int modInt pow160 ) W2:Int W2:Int #range ( LOCALMEM_CELL:Bytes , W3:Int , W4:Int ) false
+             ~> #return W5:Int W6:Int
              ~> #pc [ CALL ] )
-             ~> __K_CELL
+             ~> _K_CELL
            </k>
-           <schedule>
-             _SCHEDULE_CELL:Schedule
-           </schedule>
            <useGas>
-             ( _USEGAS_CELL:Bool => true )
+             ( USEGAS_CELL:Bool => false )
            </useGas>
            <ethereum>
              <evm>
                <callState>
+                 <id>
+                   ID_CELL:Int
+                 </id>
                  <wordStack>
-                   ( ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) => _WS:WordStack )
+                   ( ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) => WS:WordStack )
                  </wordStack>
-                 <gas>
-                   ( _GAS_CELL:Gas => _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) -Gas Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) )
-                 </gas>
-                 <memoryUsed>
-                   ( _MEMORYUSED_CELL:Int => #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) )
-                 </memoryUsed>
-                 <callGas>
-                   ( __CALLGAS_CELL => Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) +Gas #if _W2:Int ==Int 0 #then 0 #else Gcallstipend < _SCHEDULE_CELL:Schedule > #fi )
-                 </callGas>
+                 <localMem>
+                   LOCALMEM_CELL:Bytes
+                 </localMem>
                  <static>
-                   _STATIC_CELL:Bool
+                   STATIC_CELL:Bool
                  </static>
+                 <callDepth>
+                   CALLDEPTH_CELL:Int
+                 </callDepth>
                  ...
                </callState>
                <substate>
                  <accessedAccounts>
-                   _ACCESSEDACCOUNTS_CELL:Set
+                   ( ACCESSEDACCOUNTS_CELL:Set => ACCESSEDACCOUNTS_CELL:Set |Set SetItem ( ( W1:Int modInt pow160 ) ) )
                  </accessedAccounts>
                  ...
                </substate>
                ...
              </evm>
-             ...
+             <network>
+               <accounts>
+                 ( <account>
+                   <acctID>
+                     ID_CELL:Int
+                   </acctID>
+                   <balance>
+                     BALANCE_CELL:Int
+                   </balance>
+                   ...
+                 </account>
+                 DotAccountVar:AccountCellMap )
+               </accounts>
+               ...
+             </network>
            </ethereum>
            ...
          </kevm>
-      requires ( _USEGAS_CELL:Bool
-       andBool ( ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) <=Gas _GAS_CELL:Gas
-       andBool ( ( notBool ( _STATIC_CELL:Bool andBool #changesState ( CALL , ( _W0:Int : ( _W1:Int : ( _W2:Int : ( _W3:Int : ( _W4:Int : ( _W5:Int : ( _W6:Int : _WS:WordStack ) ) ) ) ) ) ) ) ) )
-       andBool ( Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) +Gas Cgascap ( _SCHEDULE_CELL:Schedule , _W0:Int , _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) ) , Cextra ( _SCHEDULE_CELL:Schedule , true , _W2:Int , ( _W1:Int modInt pow160 ) in _ACCESSEDACCOUNTS_CELL:Set ) ) <=Gas _GAS_CELL:Gas -Gas ( Cmem ( _SCHEDULE_CELL:Schedule , #memoryUsageUpdate ( #memoryUsageUpdate ( _MEMORYUSED_CELL:Int , _W3:Int , _W4:Int ) , _W5:Int , _W6:Int ) ) -Int Cmem ( _SCHEDULE_CELL:Schedule , _MEMORYUSED_CELL:Int ) )
-               ))))
-      [priority(20), label(BASIC-BLOCK-69-TO-42)]
+      requires ( ( notBool USEGAS_CELL:Bool )
+       andBool ( W2:Int <=Int BALANCE_CELL:Int
+       andBool ( 1024 <=Int CALLDEPTH_CELL:Int
+       andBool ( ( notBool <acctID>
+          ID_CELL:Int
+        </acctID> in_keys ( DotAccountVar:AccountCellMap ) )
+       andBool ( ( notBool ( STATIC_CELL:Bool andBool #changesState ( CALL , ( W0:Int : ( W1:Int : ( W2:Int : ( W3:Int : ( W4:Int : ( W5:Int : ( W6:Int : WS:WordStack ) ) ) ) ) ) ) ) ) )
+               )))))
+      [priority(20), label(BASIC-BLOCK-41-TO-17)]
 
 endmodule

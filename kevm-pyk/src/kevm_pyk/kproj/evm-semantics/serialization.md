@@ -69,6 +69,7 @@ Address/Hash Helpers
                  | #newAddr ( Int , Int , Bytes ) [symbol(newAddrCreate2), function]
  // --------------------------------------------------------------------------------
     rule [#newAddr]:        #newAddr(ACCT, NONCE) => #addr(#parseHexWord(Keccak256(#rlpEncode([#addrBytes(ACCT), NONCE]))))                                                                        [concrete]
+    rule [#newAddr-definedness]: #Ceil(#newAddr(@ACCT, @NONCE)) => #Ceil(@ACCT) #And #Ceil(@NONCE) [simplification]
     rule [#newAddrCreate2]: #newAddr(ACCT, SALT, INITCODE) => #addr(#parseHexWord(Keccak256(b"\xff" +Bytes #addrBytes(ACCT) +Bytes #wordBytes(SALT) +Bytes #parseByteStack(Keccak256(INITCODE))))) [concrete]
 ```
 
