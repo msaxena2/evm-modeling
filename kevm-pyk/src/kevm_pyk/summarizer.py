@@ -299,7 +299,7 @@ class KEVMSummarizer:
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
         _init_subst['WORDSTACK_CELL'] = word_stack(stack_needed)
         init_subst = CSubst(Subst(_init_subst), ())
-        # use inf_gas for gas cell.
+        # TODO use inf_gas for gas cell.
 
         # construct the final substitution
         _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
