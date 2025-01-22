@@ -47,30 +47,7 @@ def test_summarize(opcode: str) -> None:
                 claims.append(successor.to_rule(f'{opcode}-SUMMARY', claim = True))
                 
             # prove the correctness of the summary
-            # KRequire('edsl.md'),
-            # module = KFlatModule(f'{opcode}-SUMMARY', claims)
-            # with open(summarizer.save_directory / proof.id / f'{opcode.lower()}-summary.k', 'w') as f:
-            #     res_lines = 'requires "edsl.md"\n'
-            #     res_lines += summarizer.kevm.pretty_print(module)
-            #     splited_lines = res_lines.split('\n')
-            #     splited_lines.insert(2, '    imports public EDSL')
-            #     res_lines = '\n'.join(splited_lines)
-            #     f.write(res_lines)
-                
-            # int = 0
-            # print(len(claims))
-            # proof_result = summarizer.explore(APRProof.from_claim(summarizer.kevm.definition, claims[2], {}, summarizer.proof_dir))
-            # print(proof_result)
             for claim in claims:
                 assert summarizer.explore(APRProof.from_claim(summarizer.kevm.definition, claim, {}, summarizer.proof_dir))
-            #     # TODO: fix the sort issue caused by `APRProof.from_claim`
-            #     # print(f'validating {claim.att[Atts.LABEL]}')
-            #     # _subst = {'_USEGAS_CELL': KVariable('_USEGAS_CELL', sort = 'Bool')}
-            #     # subst = CSubst(Subst(_subst), ())
-            #     summary_proof = APRProof.from_claim(summarizer.kevm.definition, claim, {}, summarizer.proof_dir)
-            #     # summary_proof.kcfg.let_node(1, cterm = subst(summary_proof.kcfg.get_node(1).cterm), attrs = summary_proof.kcfg.get_node(1).attrs)
-            #     proof_result = summarizer.explore(summary_proof)
-            #     # print(f'{claim.att[Atts.LABEL]} proof result: {proof_result}')
-            #     assert proof_result
     else:
         pytest.skip(f'{opcode} ignored')
