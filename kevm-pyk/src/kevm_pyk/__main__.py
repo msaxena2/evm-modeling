@@ -32,7 +32,7 @@ from pyk.proof.show import APRProofShow
 from pyk.proof.tui import APRProofViewer
 from pyk.utils import FrozenDict, hash_str, single
 
-from kevm_pyk.summarizer import OPCODES, OPCODES_SUMMARY_STATUS, analyze_proof, batch_summarize, get_passed_opcodes, get_todo_list, stack_needed, summarize
+from kevm_pyk.summarizer import get_todo_list, summarize
 
 from . import VERSION, config
 from .cli import _create_argument_parser, generate_options, get_argument_type_setter, get_option_string_destination
@@ -640,8 +640,9 @@ def exec_summarize(options: ProveOptions) -> None:
     # batch_summarize()
     next_opcode = get_todo_list()
     _LOGGER.info(f'summarizing {next_opcode}')
-    summarize(next_opcode[1])
+    summarize(next_opcode[0])
     # analyze_proof('CREATE_3', 3)
+
 
 # Helpers
 

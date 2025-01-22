@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from itertools import count
 import logging
-from platform import node
 import time
 import traceback
 from multiprocessing import Pool
@@ -11,14 +9,14 @@ from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
 from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
-from pyk.kast.outer import KSort, KClaim
-from pyk.kcfg import KCFGExplore, KCFG
+from pyk.kast.outer import KClaim, KSort
+from pyk.kcfg import KCFG, KCFGExplore
 from pyk.kdist import kdist
 from pyk.kore.rpc import KoreClient
+from pyk.prelude.ml import mlEquals, mlEqualsFalse, mlNot
 from pyk.proof import APRProof
 from pyk.proof.show import APRProofShow
 from pyk.utils import ensure_dir_path
-from pyk.prelude.ml import mlEqualsFalse, mlEqualsTrue, mlEquals, mlOr, mlNot
 
 from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
 from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
@@ -117,10 +115,6 @@ OPCODES: dict[str, KApply] = {
     # 'ALL': KVariable('OP_CODE', KSort('OpCode'))
 }
 
-OPCODES_PRECONDITIONS = {
-    # 'STOP': 'TODICUSS, all the leaves are terminal or stuck, find NDBranch',
-    'STACK_UNDERFLOW': ''
-}
 
 OPCODES_SUMMARY_STATUS = {
     'STOP': 'PASSED, One rule? Several rules?',
@@ -139,7 +133,7 @@ OPCODES_SUMMARY_STATUS = {
     'GT': 'PASSED, No underflow check in KCFG',
     'SLT': 'PASSED, No underflow check in KCFG',
     'SGT': 'PASSED, No underflow check in KCFG',
-    'EQ' : 'PASSED, No underflow check in KCFG',
+    'EQ': 'PASSED, No underflow check in KCFG',
     'ISZERO': 'PASSED, No underflow check in KCFG',
     'AND': 'PASSED, No underflow check in KCFG',
     'EVMOR': 'PASSED, No underflow check in KCFG',
@@ -199,16 +193,17 @@ OPCODES_SUMMARY_STATUS = {
     'CREATE': 'TODO, Proof crashed',
     'CALL': 'UNCHECKED',
     'CALLCODE': 'UNCHECKED',
-    'RETURN': 'UNCHECKED',
+    'RETURN': 'PASSED, no underflow check, no gas usage',
     'DELEGATECALL': 'UNCHECKED',
     'CREATE2': 'UNCHECKED',
     'STATICCALL': 'UNCHECKED',
-    'REVERT': 'UNCHECKED',
-    'INVALID': 'UNCHECKED',
+    'REVERT': 'PASSED',
+    'INVALID': 'PASSED',
     'SELFDESTRUCT': 'UNCHECKED',
     'UNDEFINED': 'PASSED',
     'ALL': 'TODICUSS, failed to summarize, the optimized rule applies one step to obtain the target, the failure process rules are applied to obtain the failure, we need to summarize these ndbranches and exclude these conditions from individual opcode spec',
 }
+
 
 def get_passed_opcodes() -> list[str]:
     passed_opcodes = []
@@ -222,17 +217,19 @@ def get_summary_status(opcode: str) -> str:
     assert opcode in OPCODES_SUMMARY_STATUS
     return OPCODES_SUMMARY_STATUS[opcode].split(',')[0]
 
+
 def word_stack(size_over: int) -> KInner:
     def _word_stack_var(n: int) -> KInner:
         return KVariable(f'W{n}', KSort('Int'))
-    
+
     def _word_stack(w0: KInner, w1: KInner) -> KInner:
         return KApply('_:__EVM-TYPES_WordStack_Int_WordStack', [w0, w1])
-    
+
     ws = KVariable('WS', KSort('WordStack'))
     for i in reversed(range(size_over)):
         ws = _word_stack(_word_stack_var(i), ws)
     return ws
+
 
 def get_todo_list() -> list[str]:
     todo_list = []
@@ -244,6 +241,7 @@ def get_todo_list() -> list[str]:
     _LOGGER.info(f'Number of todo opcodes: {len(todo_list)}')
     _LOGGER.info(f'Todo opcodes: {todo_list}')
     return todo_list
+
 
 def stack_needed(opcode_id: str) -> list[int]:
     """
@@ -269,17 +267,15 @@ def stack_needed(opcode_id: str) -> list[int]:
     elif 'UnStackOp' in opcode:
         return [1]
     return [0]
-    
-    
-    
+
+
 class KEVMSummarizer:
     """
     A class for summarizing the instructions of the KEVM.
 
-    TODO:
-    1. Build the proof to symbolically execute one abitrary instruction.
-    2. Run the proof to get the KCFG.
-    3. Summarize the KCFG to get the summarized rules for the instructions.
+    1. `build_spec` Build the proof to symbolically execute one abitrary opcode.
+    2. `explore` Run the proof to get the KCFG.
+    3. `summarize` Minimize the KCFG to get the summarized rules for opcodes.
     """
 
     _cterm_symbolic: CTermSymbolic
@@ -292,23 +288,18 @@ class KEVMSummarizer:
         self.proof_dir = proof_dir
         self.save_directory = save_directory
 
-    def build_spec(
-        self,
-        opcode: KApply,
-        stack_needed: int,
-        id_str: str = ''
-    ) -> APRProof:
+    def build_spec(self, opcode: KApply, stack_needed: int, id_str: str = '') -> APRProof:
         """
         Build the specification to symbolically execute one abitrary instruction.
         """
         cterm = CTerm(self.kevm.definition.empty_config(KSort('GeneratedTopCell')))
 
         # construct the initial substitution
-        # opcode = OPCODES[opcode_symbol]
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst: dict[str, KInner] = {'K_CELL': KSequence([next_opcode, KVariable('K_CELL')])}
         _init_subst['WORDSTACK_CELL'] = word_stack(stack_needed)
         init_subst = CSubst(Subst(_init_subst), ())
+        # use inf_gas for gas cell.
 
         # construct the final substitution
         _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
@@ -316,15 +307,18 @@ class KEVMSummarizer:
         final_subst = CSubst(Subst(_final_subst), ())
 
         opcode_symbol = opcode.label.name.split('_')[0]
-    
-        kclaim, subst = cterm_build_claim(f'{opcode_symbol}{id_str}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm))
+
+        kclaim, subst = cterm_build_claim(
+            f'{opcode_symbol}{id_str}_{stack_needed}_SPEC', init_subst(cterm), final_subst(cterm)
+        )
         # >> TODO: The cterm_build_claim will remove all the type I've set.
         kclaim = KClaim(subst(kclaim.body), subst(kclaim.requires), subst(kclaim.ensures), kclaim.att)
         proof = APRProof.from_claim(self.kevm.definition, kclaim, {}, self.proof_dir)
+        # SummarizeConfig class;
         if opcode_symbol in ['ADDRESS', 'LOG']:
             # >> CHECK THIS: Because #push doesn't handle `.Account`, we need to set the type of `ID_CELL` to `Int`
             _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
-            _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
+            _type_subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}  # for every opcode.
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
@@ -340,7 +334,29 @@ class KEVMSummarizer:
             type_subst = CSubst(Subst(_type_subst), ())
             node = proof.kcfg.get_node(1)
             proof.kcfg.let_node(1, cterm=type_subst(node.cterm), attrs=node.attrs)
-        if opcode_symbol in ['BALANCE', 'EXTCODESIZE', 'EXTCODECOPY', 'CALLER', 'RETURNDATASIZE', 'EXTCODEHASH', 'COINBASE', 'SELFBALANCE', 'POP', 'MLOAD', 'MSTORE8', 'SLOAD', 'SSTORE', 'JUMP', 'JUMPI', 'MSIZE', 'TLOAD', 'TSTORE', 'PUSH', 'CREATE']:
+        if opcode_symbol in [
+            'BALANCE',
+            'EXTCODESIZE',
+            'EXTCODECOPY',
+            'CALLER',
+            'RETURNDATASIZE',
+            'EXTCODEHASH',
+            'COINBASE',
+            'SELFBALANCE',
+            'POP',
+            'MLOAD',
+            'MSTORE8',
+            'SLOAD',
+            'SSTORE',
+            'JUMP',
+            'JUMPI',
+            'MSIZE',
+            'TLOAD',
+            'TSTORE',
+            'PUSH',
+            'CREATE',
+            'CALL',
+        ]:
             # >> CHECK THIS: don't calculate Gas
             _LOGGER.info(f'Setting the type of `USEGAS_CELL` to `false` for {opcode_symbol}')
             _gas_subst: dict[str, KInner] = {'USEGAS_CELL': KToken('false', KSort('Bool'))}
@@ -350,7 +366,51 @@ class KEVMSummarizer:
         if opcode_symbol in ['SELFBALANCE', 'SLOAD', 'SSTORE', 'TLOAD', 'TSTORE', 'CREATE']:
             _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
             _subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
-            
+
+            _LOGGER.info(f'Setting more concrete `ACCOUNTS_CELL` for {opcode_symbol}')
+            acct_id_cell = KApply('<acctID>', KVariable('WO', KSort('Int')))  # --> ID_CELL for every opcode.
+            balance_cell = KApply('<balance>', KVariable('BALANCE_CELL', KSort('Int')))
+            code_cell = KApply('<code>', KVariable('CODE_CELL', KSort('AccountCode')))
+            storage_cell = KApply('<storage>', KVariable('STORAGE_CELL', KSort('Map')))
+            orig_storage_cell = KApply('<origStorage>', KVariable('ORIG_STORAGE_CELL', KSort('Map')))
+            transient_storage_cell = KApply('<transientStorage>', KVariable('TRANSIENT_STORAGE_CELL', KSort('Map')))
+            nonce_cell = KApply('<nonce>', KVariable('NONCE_CELL', KSort('Int')))
+            account_cell = KApply(
+                '<account>',
+                [
+                    acct_id_cell,
+                    balance_cell,
+                    code_cell,
+                    storage_cell,
+                    orig_storage_cell,
+                    transient_storage_cell,
+                    nonce_cell,
+                ],
+            )
+            dot_account_var = KVariable('DotAccountVar', KSort('AccountCellMap'))
+            _subst['ACCOUNTS_CELL'] = KApply('_AccountCellMap_', [account_cell, dot_account_var])
+
+            _LOGGER.info(f'Setting constraints on `ACCOUNTS_CELL` for {opcode_symbol}')
+            constraint = mlEqualsFalse(
+                KApply(
+                    'AccountCellMap:in_keys',
+                    [
+                        KApply('<acctID>', KVariable('W0', KSort('Int'))),
+                        KVariable('DotAccountVar', KSort('AccountCellMap')),
+                    ],
+                )
+            )
+
+            subst = CSubst(Subst(_subst), ())
+            node = proof.kcfg.get_node(1)
+            new_cterm = subst(node.cterm)
+            new_cterm = new_cterm.add_constraint(constraint)
+            proof.kcfg.let_node(1, cterm=new_cterm, attrs=node.attrs)
+
+        if opcode_symbol in ['CALL']:
+            _LOGGER.info(f'Setting the type of `ID_CELL` to `Int` for {opcode_symbol}')
+            _subst: dict[str, KInner] = {'ID_CELL': KVariable('ID_CELL', KSort('Int'))}
+
             _LOGGER.info(f'Setting more concrete `ACCOUNTS_CELL` for {opcode_symbol}')
             acct_id_cell = KApply('<acctID>', KVariable('ID_CELL', KSort('Int')))
             balance_cell = KApply('<balance>', KVariable('BALANCE_CELL', KSort('Int')))
@@ -359,26 +419,45 @@ class KEVMSummarizer:
             orig_storage_cell = KApply('<origStorage>', KVariable('ORIG_STORAGE_CELL', KSort('Map')))
             transient_storage_cell = KApply('<transientStorage>', KVariable('TRANSIENT_STORAGE_CELL', KSort('Map')))
             nonce_cell = KApply('<nonce>', KVariable('NONCE_CELL', KSort('Int')))
-            account_cell = KApply('<account>', [acct_id_cell, balance_cell, code_cell, storage_cell, orig_storage_cell, transient_storage_cell, nonce_cell])
+            account_cell = KApply(
+                '<account>',
+                [
+                    acct_id_cell,
+                    balance_cell,
+                    code_cell,
+                    storage_cell,
+                    orig_storage_cell,
+                    transient_storage_cell,
+                    nonce_cell,
+                ],
+            )
             dot_account_var = KVariable('DotAccountVar', KSort('AccountCellMap'))
             _subst['ACCOUNTS_CELL'] = KApply('_AccountCellMap_', [account_cell, dot_account_var])
-            
+
             _LOGGER.info(f'Setting constraints on `ACCOUNTS_CELL` for {opcode_symbol}')
-            constraint = mlEqualsFalse(KApply('AccountCellMap:in_keys', [KApply('<acctID>', KVariable('ID_CELL', KSort('Int'))), KVariable('DotAccountVar', KSort('AccountCellMap'))]))
-            
+            constraint = mlEqualsFalse(
+                KApply(
+                    'AccountCellMap:in_keys',
+                    [
+                        KApply('<acctID>', KVariable('ID_CELL', KSort('Int'))),
+                        KVariable('DotAccountVar', KSort('AccountCellMap')),
+                    ],
+                )
+            )
+
             subst = CSubst(Subst(_subst), ())
             node = proof.kcfg.get_node(1)
             new_cterm = subst(node.cterm)
             new_cterm = new_cterm.add_constraint(constraint)
             proof.kcfg.let_node(1, cterm=new_cterm, attrs=node.attrs)
-        
+
         if opcode_symbol in ['JUMP']:
             _LOGGER.info(f'Setting the final state of `K_CELL` to `#endBasicBlock ~> K_CELL` for {opcode_symbol}')
             _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
             subst = CSubst(Subst(_subst), ())
             node = proof.kcfg.get_node(2)
             proof.kcfg.let_node(2, cterm=subst(node.cterm), attrs=node.attrs)
-            
+
         # if opcode_symbol in ['JUMPI']:
         #     _LOGGER.info(f'Setting the final state of `K_CELL` to `#endBasicBlock ~> K_CELL` for {opcode_symbol}')
         #     _subst = {'K_CELL': KVariable('FINAL_K_CELL')}
@@ -388,7 +467,7 @@ class KEVMSummarizer:
         #     constraint1 = mlEquals(KVariable('FINAL_K_CELL'), KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')]))
         #     constraint = mlOr([constraint0, constraint1])
         #     proof.kcfg.let_node(2, cterm=subst(node.cterm).add_constraint(constraint), attrs=node.attrs)
-            
+
         _LOGGER.debug(proof.kcfg.nodes[0].cterm.to_dict())
         return proof
 
@@ -534,7 +613,7 @@ def batch_summarize(num_processes: int = 4) -> None:
     # 分成两组，一组是有CALL的，一组是没有的
     has_call_opcodes = [opcode for opcode in unpassed_opcodes if 'Call' in OPCODES[opcode].label.name]
     no_call_opcodes = [opcode for opcode in unpassed_opcodes if 'Call' not in OPCODES[opcode].label.name]
-    
+
     _LOGGER.info(f'Starting batch summarization of {len(unpassed_opcodes)} opcodes with {num_processes} processes')
 
     with Pool(processes=num_processes) as pool:
@@ -558,15 +637,19 @@ def summarize(opcode_symbol: str) -> None:
         if opcode_symbol == 'JUMPI':
             proof = summarizer.build_spec(opcode, need, id_str='_FALSE')
             constraint = mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int')
-            proof.kcfg.let_node(1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs)
+            proof.kcfg.let_node(
+                1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs
+            )
             summarizer.explore(proof)
             summarizer.summarize(proof)
-            
+
             proof = summarizer.build_spec(opcode, need, id_str='_TRUE')
             _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
             subst = CSubst(Subst(_subst), ())
             constraint = mlNot(mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int'))
-            proof.kcfg.let_node(1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs)
+            proof.kcfg.let_node(
+                1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs
+            )
             proof.kcfg.let_node(2, cterm=subst(proof.kcfg.get_node(2).cterm), attrs=proof.kcfg.get_node(2).attrs)
             summarizer.explore(proof)
             summarizer.summarize(proof)
@@ -580,7 +663,8 @@ def summarize(opcode_symbol: str) -> None:
             summarizer.explore(proof)
             summarizer.summarize(proof)
     # summarizer.analyze_proof(proof_dir / 'STOP_SPEC')
-    
+    # validation: generate them as claims and call kevm prove.
+
 
 def analyze_proof(opcode: str, node_id: int) -> None:
     proof_dir = Path(__file__).parent / 'proofs'
