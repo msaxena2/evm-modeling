@@ -32,7 +32,7 @@ from pyk.proof.show import APRProofShow
 from pyk.proof.tui import APRProofViewer
 from pyk.utils import FrozenDict, hash_str, single
 
-from kevm_pyk.summarizer import KEVMSummarizer, get_todo_list, summarize
+from kevm_pyk.summarizer import summarize
 
 from . import VERSION, config
 from .cli import _create_argument_parser, generate_options, get_argument_type_setter, get_option_string_destination
@@ -637,18 +637,28 @@ def exec_kast(options: KastOptions) -> None:
 
 
 def exec_summarize(options: ProveOptions) -> None:
-    proof_dir = Path(__file__).parent / 'proofs'
-    save_directory = Path(__file__).parent / 'summaries'
-    p = APRProof.read_proof_data(Path(__file__).parent / 'proofs', 'STOP-SUMMARY-16-TO-10')
-    # print('proof initial state -------------------------------')
-    # print(p.kcfg.node(p.init).cterm)
-    summarizer = KEVMSummarizer(proof_dir, save_directory)
-    summarizer.explore(p)
-    
+    # Path(__file__).parent / 'proofs'
+    # Path(__file__).parent / 'summaries'
+    # kevm = KEVM(kdist.get('evm-semantics.haskell'))
+    # p = APRProof.read_proof_data(Path(__file__).parent / 'proofs', 'BALANCE_1_SPEC')
+    # node_printer = kevm_node_printer(kevm, p)
+    # proof_show = APRProofShow(kevm, node_printer=node_printer)
+
+    # res_lines = proof_show.show(
+    #     p,
+    #     nodes=[node.id for node in p.kcfg.nodes],
+    # )
+    # for res_line in res_lines:
+    #     print(res_line)
+    # # print('proof initial state -------------------------------')
+    # # print(p.kcfg.node(p.init).cterm)
+    # summarizer = KEVMSummarizer(proof_dir, save_directory)
+    # summarizer.explore(p)
+
     # batch_summarize()
     # next_opcode = get_todo_list()
     # _LOGGER.info(f'summarizing {next_opcode}')
-    # summarize(next_opcode[0])
+    summarize('BALANCE')
     # analyze_proof('CREATE_3', 3)
 
 
