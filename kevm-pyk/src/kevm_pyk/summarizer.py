@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from pyk.cterm import CSubst, CTerm, CTermSymbolic, cterm_build_claim
-from pyk.kast.inner import KApply, KInner, KSequence, KToken, KVariable, Subst
+from pyk.kast.inner import KApply, KSequence, KToken, KVariable, Subst
 from pyk.kast.outer import KSort
 from pyk.kcfg import KCFG, KCFGExplore
 from pyk.kdist import kdist
@@ -22,7 +22,7 @@ from kevm_pyk.kevm import KEVM, KEVMSemantics, kevm_node_printer
 from kevm_pyk.utils import initialize_apr_proof, legacy_explore, run_prover
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from pyk.kast.inner import KInner
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -258,7 +258,7 @@ def word_stack(size_over: int) -> KInner:
     def _word_stack(w0: KInner, w1: KInner) -> KInner:
         return KApply('_:__EVM-TYPES_WordStack_Int_WordStack', [w0, w1])
 
-    ws = KVariable('WS', KSort('WordStack'))
+    ws: KInner = KVariable('WS', KSort('WordStack'))
     for i in reversed(range(size_over)):
         ws = _word_stack(_word_stack_var(i), ws)
     return ws
@@ -286,11 +286,11 @@ def stack_needed(opcode_id: str) -> list[int]:
     elif 'CallSixOp' in opcode:
         return [6]
     elif 'LOG' in opcode:
-        return range(5)
+        return list(range(5))
     elif 'SWAP' in opcode:
-        return range(1, 17)
+        return list(range(1, 17))
     elif 'DUP' in opcode:
-        return range(1, 17)
+        return list(range(1, 17))
     elif 'QuadStackOp' in opcode:
         return [4]
     elif 'TernStackOp' in opcode:
@@ -356,10 +356,10 @@ class KEVMSummarizer:
         self.proof_dir = proof_dir
         self.save_directory = save_directory
 
-    def build_stack_underflow_spec(self) -> APRProof:
+    def build_stack_underflow_spec(self) -> APRProof | None:
         """Build the specification to symbolically execute abitrary instruction with stack underflow."""
         # TODO:
-        ...
+        return None
 
     def build_spec(self, opcode: KApply, stack_needed: int, id_str: str = '') -> APRProof:
         """Build the specification to symbolically execute one abitrary instruction."""
@@ -415,19 +415,21 @@ class KEVMSummarizer:
             if opcode_symbol == 'JUMPI':
                 proof = self.build_spec(opcode, need, id_str='_FALSE')
                 constraint = mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int')
-                proof.kcfg.let_node(
-                    1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs
-                )
+                node1 = proof.kcfg.get_node(1)
+                assert isinstance(node1, KCFG.Node)
+                proof.kcfg.let_node(1, cterm=node1.cterm.add_constraint(constraint))
                 proofs.append(proof)
 
                 proof = self.build_spec(opcode, need, id_str='_TRUE')
                 _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
                 subst = CSubst(Subst(_subst), ())
                 constraint = mlNot(mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int'))
-                proof.kcfg.let_node(
-                    1, cterm=proof.kcfg.get_node(1).cterm.add_constraint(constraint), attrs=proof.kcfg.get_node(1).attrs
-                )
-                proof.kcfg.let_node(2, cterm=subst(proof.kcfg.get_node(2).cterm), attrs=proof.kcfg.get_node(2).attrs)
+                node1 = proof.kcfg.get_node(1)
+                assert isinstance(node1, KCFG.Node)
+                proof.kcfg.let_node(1, cterm=node1.cterm.add_constraint(constraint))
+                node2 = proof.kcfg.get_node(2)
+                assert isinstance(node2, KCFG.Node)
+                proof.kcfg.let_node(2, cterm=subst(node2.cterm))
                 proofs.append(proof)
             elif opcode_symbol == 'LOG':
                 need += 2
@@ -575,7 +577,7 @@ def batch_summarize(num_processes: int = 4) -> None:
         num_processes: Number of parallel processes to use. Defaults to 4.
     """
 
-    opcodes_to_process = [op for op in OPCODES.keys()]
+    opcodes_to_process = OPCODES.keys()
     passed_opcodes = get_passed_opcodes()
     unpassed_opcodes = [opcode for opcode in opcodes_to_process if opcode not in passed_opcodes]
     has_call_opcodes = [opcode for opcode in unpassed_opcodes if 'Call' in OPCODES[opcode].label.name]
@@ -608,4 +610,4 @@ def analyze_proof(opcode: str, node_id: int) -> None:
     proof_dir = Path(__file__).parent / 'proofs'
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)
-    summarizer.analyze_proof(proof_dir / f'{opcode}_SPEC', node_id)
+    summarizer.analyze_proof(str(proof_dir / f'{opcode}_SPEC'), node_id)

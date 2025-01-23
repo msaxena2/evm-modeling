@@ -1,8 +1,6 @@
 import pytest
-from pyk.kast.att import Atts
-from pyk.kast.outer import KClaim
+from pyk.kast.outer import KRuleLike
 from pyk.kcfg import KCFG
-from pyk.proof.reachability import APRProof
 
 from kevm_pyk.summarizer import OPCODES, OPCODES_SUMMARY_STATUS, get_summary_status, summarize
 
@@ -24,7 +22,7 @@ def test_summarize(opcode: str) -> None:
         # print(f'{len(proofs)} proofs')
 
         for proof in proofs:
-            claims: list[KClaim] = []
+            claims: list[KRuleLike] = []
 
             # no pending, failing, bounded nodes in the proof
             for leaf in proof.kcfg.leaves:
