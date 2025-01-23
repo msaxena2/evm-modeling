@@ -352,7 +352,7 @@ class KEVMSummarizer:
     save_directory: Path
 
     def __init__(self, proof_dir: Path, save_directory: Path) -> None:
-        self.kevm = KEVM(kdist.get('evm-semantics.haskell'))
+        self.kevm = KEVM(kdist.get('evm-semantics.summary'))
         self.proof_dir = proof_dir
         self.save_directory = save_directory
 
