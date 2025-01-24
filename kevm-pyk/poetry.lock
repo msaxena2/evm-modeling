@@ -273,28 +273,21 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "cmd2"
-version = "2.5.8"
+version = "2.5.9"
 description = "cmd2 - quickly build feature-rich and user-friendly interactive command line applications in Python"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "cmd2-2.5.8-py3-none-any.whl", hash = "sha256:aeb6eb6cd6d783bb7d92d37aa920bcfa7379690ba9ab1188576562f73a13471c"},
-    {file = "cmd2-2.5.8.tar.gz", hash = "sha256:ddf29beaa7c9d4e9806eefad528a59c372ca97b4c0d83e019fef0e37c44f4497"},
+    {file = "cmd2-2.5.9-py3-none-any.whl", hash = "sha256:b2621661fe48a5a94343bd0f3285c18ca51ed9edda61406b6898895be0eb99ad"},
+    {file = "cmd2-2.5.9.tar.gz", hash = "sha256:09bb13637832bc818aad5577ccdf5dbeb0c9fbe5b9412ff78d5084f7846f83ab"},
 ]
 
 [package.dependencies]
-gnureadline = {version = "*", markers = "platform_system == \"Darwin\""}
-pyperclip = "*"
-pyreadline3 = {version = "*", markers = "platform_system == \"Windows\""}
-wcwidth = "*"
-
-[package.extras]
-build = ["build", "setuptools", "setuptools-scm"]
-dev = ["codecov", "doc8", "invoke", "mypy", "pytest", "pytest-cov", "pytest-mock", "ruff", "sphinx", "sphinx-autobuild", "sphinx-rtd-theme", "twine"]
-docs = ["setuptools", "setuptools_scm", "sphinx", "sphinx-autobuild", "sphinx-rtd-theme"]
-test = ["codecov", "coverage", "pytest", "pytest-cov", "pytest-mock"]
-validate = ["mypy", "ruff", "types-setuptools"]
+gnureadline = {version = ">=8", markers = "platform_system == \"Darwin\""}
+pyperclip = ">=1.8"
+pyreadline3 = {version = ">=3.4", markers = "platform_system == \"Windows\""}
+wcwidth = ">=0.2.10"
 
 [[package]]
 name = "colorama"
@@ -479,16 +472,8 @@ name = "filelock"
 version = "3.17.0"
 description = "A platform independent file lock."
 optional = false
-<<<<<<< HEAD
 python-versions = ">=3.9"
 groups = ["main"]
-=======
-python-versions = ">=3.8"
-<<<<<<< HEAD
->>>>>>> acabd5b0 (check all the finished summarization.)
-=======
-groups = ["main"]
->>>>>>> bb2e17b6 (poetry lock 2.0.1)
 files = [
     {file = "filelock-3.17.0-py3-none-any.whl", hash = "sha256:533dc2f7ba78dc2f0f531fc6c4940addf7b70a481e269a5a3b93be94ffbe8338"},
     {file = "filelock-3.17.0.tar.gz", hash = "sha256:ee4e77401ef576ebb38cd7f13b9b28893194acc20a8e68e18730ba9c0e54660e"},
@@ -656,14 +641,14 @@ pyreadline3 = {version = "*", markers = "sys_platform == \"win32\" and python_ve
 
 [[package]]
 name = "hypothesis"
-version = "6.123.17"
+version = "6.124.2"
 description = "A library for property-based testing"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "hypothesis-6.123.17-py3-none-any.whl", hash = "sha256:5c949fb44935e32c61c64abfcc3975eec41f8205ade2223073ba074c1e078ead"},
-    {file = "hypothesis-6.123.17.tar.gz", hash = "sha256:5850893975b4f08e893ddc10f1d468bc7e011d59703f70fe06a10161e426e602"},
+    {file = "hypothesis-6.124.2-py3-none-any.whl", hash = "sha256:fef7709a404929a9cd3e785f60a6e026089aab986e288b1fdced13091574d474"},
+    {file = "hypothesis-6.124.2.tar.gz", hash = "sha256:c98823fc1323f23399e5f2251982fd1f38259f84cf627aaaea1b3f0a0d4d2b03"},
 ]
 
 [package.dependencies]
@@ -708,16 +693,8 @@ name = "importlib-metadata"
 version = "8.6.1"
 description = "Read metadata from Python packages"
 optional = false
-<<<<<<< HEAD
 python-versions = ">=3.9"
 groups = ["main"]
-=======
-python-versions = ">=3.8"
-<<<<<<< HEAD
->>>>>>> acabd5b0 (check all the finished summarization.)
-=======
-groups = ["main"]
->>>>>>> bb2e17b6 (poetry lock 2.0.1)
 files = [
     {file = "importlib_metadata-8.6.1-py3-none-any.whl", hash = "sha256:02a89390c1e15fdfdc0d7c6b25cb3e62650d0494005c97d6f148bf5b9787525e"},
     {file = "importlib_metadata-8.6.1.tar.gz", hash = "sha256:310b41d755445d74569f993ccfc22838295d9fe005425094fad953d7f15c8580"},
