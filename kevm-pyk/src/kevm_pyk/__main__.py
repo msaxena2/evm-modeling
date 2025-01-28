@@ -22,7 +22,7 @@ from pyk.kast.outer import KApply, KRewrite, KSort, KToken
 from pyk.kcfg import KCFG
 from pyk.kcfg.explore import KCFGExplore
 from pyk.kdist import kdist
-from pyk.kore.rpc import KoreClient
+from pyk.kore.rpc import FallbackReason, KoreClient
 from pyk.kore.tools import kore_print
 from pyk.ktool.claim_loader import ClaimLoader
 from pyk.ktool.kompile import LLVMKompileType
@@ -235,10 +235,14 @@ def exec_prove(options: ProveOptions) -> None:
     if options.kore_rpc_command is None:
         if options.use_booster_dev:
             kore_rpc_command = ('booster-dev',)
+            options.post_exec_simplify = True
         elif not options.use_booster:
             kore_rpc_command = ('kore-rpc',)
+            options.post_exec_simplify = True
         else:
             kore_rpc_command = ('kore-rpc-booster',)
+            if options.fallback_on is None:
+                options.fallback_on = [FallbackReason.ABORTED, FallbackReason.STUCK]
     elif isinstance(options.kore_rpc_command, str):
         kore_rpc_command = tuple(options.kore_rpc_command.split())
     else:
