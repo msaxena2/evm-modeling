@@ -159,7 +159,7 @@ def target_dir(kompiled_targets_dir: Path | None, tmp_path_factory: TempPathFact
 @pytest.fixture(scope='module')
 def kompiled_target_for(target_dir: Path) -> Callable[[Path], Path]:
     """
-    Generate a function that returns a path to the kompiled defintion for a given K spec. Invoke `kompile` only if no kompiled directory is cached for the spec.
+    Generate a function that returns a path to the kompiled definition for a given K spec. Invoke `kompile` only if no kompiled directory is cached for the spec.
     """
 
     def kompile(spec_file: Path) -> Path:
@@ -263,7 +263,7 @@ def test_kompile_targets(
     """
     This test function is intended to be used to pre-kompile all definitions,
     so that the actual proof tests do not need to do the actual compilation,
-    which is disturbing performance measurment.
+    which is disturbing performance measurement.
 
     To achieve the desired caching, this test should be run like this:
     pytest src/tests/integration/test_prove.py::test_kompile_targets --kompiled-targets-dir ./prekompiled

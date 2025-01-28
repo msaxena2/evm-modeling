@@ -45,8 +45,8 @@ For `kevm prove`, you can use `kevm show-kcfg ...` or `kevm view-kcfg ...` to ge
   This is the same file that is used for `kevm prove …`.
   - `--save-directory` must be passed as where the KCFGs have been saved (by a previous call to `kevm prove --save-directory save_directory ...`)
   - `--claim claim_label` lets you select an individual claim out of the `spec_file`.
-If the flag is ommited, it’s assumed that only one claim is present.
-If the flag is ommited and more than one claim is present in the `spec_file` then an error will be raised.
+If the flag is omitted, it’s assumed that only one claim is present.
+If the flag is omitted and more than one claim is present in the `spec_file` then an error will be raised.
   - `--spec-module spec_module` is also an inherited option.
 
 The interactive KCFG (`view-kcfg`) puts your terminal in *application mode*.
