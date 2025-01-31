@@ -76,6 +76,8 @@ def generate_options(args: dict[str, Any]) -> LoggingOptions:
             return KastOptions(args)
         case 'run':
             return RunOptions(args)
+        case 'summarize':
+            return ProveOptions(args)
         case _:
             raise ValueError(f'Unrecognized command: {command}')
 
@@ -101,6 +103,8 @@ def get_option_string_destination(command: str, option_string: str) -> str:
             option_string_destinations = KastOptions.from_option_string()
         case 'run':
             option_string_destinations = RunOptions.from_option_string()
+        case 'summarize':
+            option_string_destinations = ProveOptions.from_option_string()
 
     return option_string_destinations.get(option_string, option_string.replace('-', '_'))
 
@@ -129,6 +133,8 @@ def get_argument_type_setter(command: str, option_string: str) -> Callable[[str]
             option_types = KastOptions.get_argument_type()
         case 'run':
             option_types = RunOptions.get_argument_type()
+        case 'summarize':
+            option_types = ProveOptions.get_argument_type()
 
     return option_types.get(option_string, func)
 
@@ -183,6 +189,23 @@ def _create_argument_parser() -> ArgumentParser:
         '--max-frontier-parallel',
         type=int,
         help='Maximum worker threads to use on a single proof to explore separate branches in parallel.',
+    )
+
+    command_parser.add_parser(
+        'summarize',
+        help='Summarize an Opcode.',
+        parents=[
+            kevm_cli_args.logging_args,
+            kevm_cli_args.parallel_args,
+            kevm_cli_args.k_args,
+            kevm_cli_args.kprove_args,
+            kevm_cli_args.rpc_args,
+            kevm_cli_args.bug_report_args,
+            kevm_cli_args.smt_args,
+            kevm_cli_args.explore_args,
+            # kevm_cli_args.spec_args,
+            config_args.config_args,
+        ],
     )
 
     prune_args = command_parser.add_parser(

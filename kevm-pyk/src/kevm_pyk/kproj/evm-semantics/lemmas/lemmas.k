@@ -46,7 +46,7 @@ module LEMMAS-WITHOUT-SLOT-UPDATES [symbolic]
   // Word Reasoning
   // ########################
 
-    rule 0 <=Int #sizeWordStack ( _ , N ) => true requires 0 <=Int N [simplification, smt-lemma]
+    rule N <=Int #sizeWordStack ( _ , N ) => true requires 0 <=Int N [simplification, smt-lemma]
 
     // #newAddr range
     rule 0 <=Int #newAddr(_,_)             => true   [simplification]

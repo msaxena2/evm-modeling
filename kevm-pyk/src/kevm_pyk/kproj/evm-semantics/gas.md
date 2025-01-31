@@ -263,5 +263,8 @@ module GAS-SIMPLIFICATION [symbolic]
     imports BOOL
 
     rule A <Gas B => false requires B <=Gas A [simplification]
+    rule notBool (A <=Gas B) => B <Gas A [simplification]
+    rule notBool (A <Gas B) => B <=Gas A [simplification]
 endmodule
 ```
+
