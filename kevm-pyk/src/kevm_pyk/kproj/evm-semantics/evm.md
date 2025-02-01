@@ -1392,7 +1392,7 @@ The various `CALL*` (and other inter-contract control flow) operations will be d
                         | "#checkNonceExceeded"    Int
                         | "#checkDepthExceeded"
                         | "#call"                  Int Int Int Int Int Bytes Bool
-                        | "#callWithCode"          Int Int Int Bytes Int Int Bytes Bool
+                        | "#callWithCode"          Int Int Int Bytes Int Int Bytes Bool [symbol(callwithcode_check_fork)]
                         | "#mkCall"                Int Int Int Bytes     Int Bytes Bool
  // -----------------------------------------------------------------------------------
      rule <k> #checkBalanceUnderflow ACCT VALUE => #refund GCALL ~> #pushCallStack ~> #pushWorldState ~> #end EVMC_BALANCE_UNDERFLOW ... </k>
@@ -1453,7 +1453,8 @@ The various `CALL*` (and other inter-contract control flow) operations will be d
            ...
          </account>
 
-    rule <k> #call ACCTFROM ACCTTO ACCTCODE VALUE APPVALUE ARGS STATIC
+    rule [call.false]:
+         <k> #call ACCTFROM ACCTTO ACCTCODE VALUE APPVALUE ARGS STATIC
           => #callWithCode ACCTFROM ACCTTO ACCTCODE .Bytes VALUE APPVALUE ARGS STATIC
          ...
          </k> [owise]

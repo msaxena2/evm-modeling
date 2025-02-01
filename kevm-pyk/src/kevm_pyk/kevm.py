@@ -33,7 +33,7 @@ from pyk.proof.reachability import APRProof
 from pyk.proof.show import APRProofNodePrinter
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable
+    from collections.abc import Callable, Iterable
     from pathlib import Path
     from typing import Final
 
@@ -53,12 +53,14 @@ _LOGGER: Final = logging.getLogger(__name__)
 class KEVMSemantics(DefaultSemantics):
     auto_abstract_gas: bool
     allow_symbolic_program: bool
-    _cached_subst: Subst | None
+    _custom_step_definitions: tuple[
+        tuple[KSequence, Callable[[Subst, CTerm, CTermSymbolic], KCFGExtendResult | None]], ...
+    ]
 
     def __init__(self, auto_abstract_gas: bool = False, allow_symbolic_program: bool = False) -> None:
         self.auto_abstract_gas = auto_abstract_gas
         self.allow_symbolic_program = allow_symbolic_program
-        self._cached_subst = None
+        self._custom_step_definitions = ((self._load_pattern, self._exec_load_custom_step),)
 
     @staticmethod
     def is_functional(term: KInner) -> bool:
@@ -145,11 +147,12 @@ class KEVMSemantics(DefaultSemantics):
 
         return CTerm(config=bottom_up(_replace, cterm.config), constraints=cterm.constraints)
 
-    def custom_step(self, cterm: CTerm, _cterm_symbolic: CTermSymbolic) -> KCFGExtendResult | None:
-        if self._check_load_pattern(cterm):
-            return self._exec_load_custom_step(cterm)
-        else:
-            return None
+    def custom_step(self, cterm: CTerm, cterm_symbolic: CTermSymbolic) -> KCFGExtendResult | None:
+        for abstract_pattern, custom_step_fn in self._custom_step_definitions:
+            subst = abstract_pattern.match(cterm.cell('K_CELL'))
+            if subst is not None:
+                return custom_step_fn(subst, cterm, cterm_symbolic)
+        return None
 
     @staticmethod
     def cut_point_rules(
@@ -197,26 +200,16 @@ class KEVMSemantics(DefaultSemantics):
             terminal_rules.append('EVM.step')
         return terminal_rules
 
-    def _check_load_pattern(self, cterm: CTerm) -> bool:
-        """Given a CTerm, check if the rule 'EVM.program.load' is at the top of the K_CELL.
+    @property
+    def _load_pattern(self) -> KSequence:
+        return KSequence([KApply('loadProgram', KVariable('###BYTECODE')), KVariable('###CONTINUATION')])
 
-        This method checks if the `EVM.program.load` rule is at the top of the `K_CELL` in the given `cterm`.
-        If the rule matches, the resulting substitution is cached in `_cached_subst` for later use in `custom_step`
-        :param cterm: The CTerm representing the current state of the proof node.
-        :return: `True` if the pattern matches and a custom step can be made; `False` otherwise.
-        """
-        load_pattern = KSequence([KApply('loadProgram', KVariable('###BYTECODE')), KVariable('###CONTINUATION')])
-        self._cached_subst = load_pattern.match(cterm.cell('K_CELL'))
-        return self._cached_subst is not None
-
-    def _exec_load_custom_step(self, cterm: CTerm) -> KCFGExtendResult:
+    def _exec_load_custom_step(self, subst: Subst, cterm: CTerm, _c: CTermSymbolic) -> KCFGExtendResult:
         """Given a CTerm, update the JUMPDESTS_CELL and PROGRAM_CELL if the rule 'EVM.program.load' is at the top of the K_CELL.
 
         :param cterm: CTerm of a proof node.
         :return: If the K_CELL matches the load_pattern, a Step with depth 1 is returned together with the new configuration, also registering that the `EVM.program.load` rule has been applied.
         """
-        subst = self._cached_subst
-        assert subst is not None
         bytecode_sections = flatten_label('_+Bytes__BYTES-HOOKED_Bytes_Bytes_Bytes', subst['###BYTECODE'])
         jumpdests_set = compute_jumpdests(bytecode_sections)
         new_cterm = CTerm.from_kast(set_cell(cterm.kast, 'JUMPDESTS_CELL', jumpdests_set))
@@ -225,7 +218,10 @@ class KEVMSemantics(DefaultSemantics):
         return Step(new_cterm, 1, (), ['EVM.program.load'], cut=True)
 
     def can_make_custom_step(self, cterm: CTerm) -> bool:
-        return self._check_load_pattern(cterm)
+        return any(
+            abstract_pattern.match(cterm.cell('K_CELL')) is not None
+            for abstract_pattern, _ in self._custom_step_definitions
+        )
 
     def is_mergeable(self, ct1: CTerm, ct2: CTerm) -> bool:
         """Given two CTerms of Edges' targets, check if they are mergeable.
