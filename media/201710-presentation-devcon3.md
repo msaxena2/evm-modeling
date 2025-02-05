@@ -444,7 +444,7 @@ head:
    andBool G >=Int 52 *Int I +Int 21
 ```
 
-Verifing ABI compliant contracts
+Verifying ABI compliant contracts
 --------------------------------
 
 . . .
