@@ -321,7 +321,7 @@ class RPCOptions(Options):
             'kore_rpc_command': None,
             'use_booster': True,
             'fallback_on': [],
-            'post_exec_simplify': True,
+            'post_exec_simplify': False,
             'interim_simplification': None,
             'port': None,
             'maude_port': None,
