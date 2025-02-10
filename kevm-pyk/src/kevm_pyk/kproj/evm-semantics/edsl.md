@@ -12,6 +12,7 @@ requires "hashed-locations.md"
 requires "abi.md"
 requires "gas.md"
 requires "optimizations.md"
+requires "lemmas/lemmas.k"
 
 module EDSL
     imports BUF
@@ -21,6 +22,7 @@ module EDSL
     imports EVM-OPTIMIZATIONS
     imports INFINITE-GAS
     imports BIN-RUNTIME
+    imports LEMMAS
 endmodule
 
 module BIN-RUNTIME

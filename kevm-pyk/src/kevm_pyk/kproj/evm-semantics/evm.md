@@ -11,12 +11,14 @@ This file only defines the local execution operations, the file `driver.md` will
 requires "data.md"
 requires "network.md"
 requires "gas.md"
+requires "serialization.md"
 
 module EVM
     imports STRING
     imports EVM-DATA
     imports NETWORK
     imports GAS
+    imports SERIALIZATION
 ```
 
 Configuration
@@ -381,7 +383,7 @@ The `#next [_]` operator initiates execution by:
                   | #stackOverflow  ( WordStack , OpCode ) [symbol(#stackOverflow), macro]
  // --------------------------------------------------------------------------------------
     rule #stackUnderflow(WS, OP:OpCode) => #sizeWordStack(WS) <Int #stackNeeded(OP)
-    rule #stackOverflow (WS, OP) => #sizeWordStack(WS) +Int #stackDelta(OP) >Int 1024
+    rule #stackOverflow (WS, OP) => (#stackDelta(OP) >Int 0) andBool (#sizeWordStack(WS) +Int #stackDelta(OP) >Int 1024)
 
     syntax Int ::= #stackNeeded ( OpCode ) [symbol(#stackNeeded), function]
  // -----------------------------------------------------------------------
@@ -2010,9 +2012,9 @@ Precompiled Contracts
     syntax InternalOp ::= #ecadd(G1Point, G1Point) [symbol(#ecadd)]
  // ---------------------------------------------------------------
     rule <k> #ecadd(P1, P2) => #end EVMC_PRECOMPILE_FAILURE ... </k>
-      requires notBool isValidPoint(P1) orBool notBool isValidPoint(P2)
-    rule <k> #ecadd(P1, P2) => #end EVMC_SUCCESS ... </k> <output> _ => #point(BN128Add(P1, P2)) </output>
-      requires isValidPoint(P1) andBool isValidPoint(P2)
+      requires notBool isValidPointWrapper(P1) orBool notBool isValidPointWrapper(P2)
+    rule <k> #ecadd(P1, P2) => #end EVMC_SUCCESS ... </k> <output> _ => #point(BN128AddWrapper(P1, P2)) </output>
+      requires isValidPointWrapper(P1) andBool isValidPointWrapper(P2)
 
     syntax PrecompiledOp ::= "ECMUL"
  // --------------------------------
@@ -2022,9 +2024,9 @@ Precompiled Contracts
     syntax InternalOp ::= #ecmul(G1Point, Int) [symbol(#ecmul)]
  // -----------------------------------------------------------
     rule <k> #ecmul(P, _S) => #end EVMC_PRECOMPILE_FAILURE ... </k>
-      requires notBool isValidPoint(P)
-    rule <k> #ecmul(P,  S) => #end EVMC_SUCCESS ... </k> <output> _ => #point(BN128Mul(P, S)) </output>
-      requires isValidPoint(P)
+      requires notBool isValidPointWrapper(P)
+    rule <k> #ecmul(P,  S) => #end EVMC_SUCCESS ... </k> <output> _ => #point(BN128MulWrapper(P, S)) </output>
+      requires isValidPointWrapper(P)
 
     syntax Bytes ::= #point ( G1Point ) [symbol(#point), function]
  // --------------------------------------------------------------
@@ -2044,19 +2046,19 @@ Precompiled Contracts
     rule <k> (.K => #checkPoint) ~> #ecpairing((.List => ListItem((#asWord(#range(DATA, I, 32)), #asWord(#range(DATA, I +Int 32, 32))))) _, (.List => ListItem((#asWord(#range(DATA, I +Int 96, 32)) x #asWord(#range(DATA, I +Int 64, 32)) , #asWord(#range(DATA, I +Int 160, 32)) x #asWord(#range(DATA, I +Int 128, 32))))) _, I => I +Int 192, DATA, LEN) ... </k>
       requires I =/=Int LEN
     rule <k> #ecpairing(A, B, LEN, _, LEN) => #end EVMC_SUCCESS ... </k>
-         <output> _ => #padToWidth(32, #asByteStack(bool2Word(BN128AtePairing(A, B)))) </output>
+         <output> _ => #padToWidth(32, #asByteStack(bool2Word(BN128AtePairingWrapper(A, B)))) </output>
 
     syntax InternalOp ::= "#checkPoint"
  // -----------------------------------
     rule <k> (#checkPoint => .K) ~> #ecpairing(ListItem(AK::G1Point) _, ListItem(BK::G2Point) _, _, _, _) ... </k>
-      requires isValidPoint(AK) andBool isValidPoint(BK)
+      requires isValidPointWrapper(AK) andBool isValidPointWrapper(BK)
     rule <k> #checkPoint ~> #ecpairing(ListItem(AK::G1Point) _, ListItem(BK::G2Point) _, _, _, _) => #end EVMC_PRECOMPILE_FAILURE ... </k>
-      requires notBool isValidPoint(AK) orBool notBool isValidPoint(BK)
+      requires notBool isValidPointWrapper(AK) orBool notBool isValidPointWrapper(BK)
 
     syntax PrecompiledOp ::= "BLAKE2F"
  // ----------------------------------
     rule <k> BLAKE2F => #end EVMC_SUCCESS ... </k>
-         <output> _ => #parseByteStack( Blake2Compress( DATA ) ) </output>
+         <output> _ => #parseByteStack( Blake2CompressWrapper( DATA ) ) </output>
          <callData> DATA </callData>
       requires lengthBytes( DATA ) ==Int 213
        andBool DATA[212] <=Int 1
