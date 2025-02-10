@@ -13,6 +13,7 @@ from pyk.kast.outer import KSort
 from pyk.kcfg import KCFG, KCFGExplore
 from pyk.kdist import kdist
 from pyk.kore.rpc import KoreClient
+from pyk.prelude.kint import euclidModInt
 from pyk.prelude.ml import mlEquals, mlEqualsFalse, mlNot
 from pyk.proof import APRProof
 from pyk.proof.show import APRProofShow
@@ -232,7 +233,8 @@ NOT_USEGAS_OPCODES = [
 ACCOUNT_QUERIES_OPCODES = [
     'BALANCE',
     'EXTCODESIZE',
-    'EXTCODEHASH' 'EXTCODECOPY',
+    'EXTCODEHASH',
+    'EXTCODECOPY',
 ]
 
 ACCOUNT_STORAGE_OPCODES = ['SLOAD', 'SSTORE', 'TLOAD', 'TSTORE']
@@ -302,9 +304,11 @@ def stack_needed(opcode_id: str) -> list[int]:
     return [0]
 
 
-def accounts_cell(acct_id: str) -> tuple[KInner, KInner]:
+def accounts_cell(acct_id: str | KInner) -> tuple[KInner, KInner]:
     """Return the accounts cell with constraints on the accounts."""
-    acct_id_cell = KApply('<acctID>', KVariable(acct_id, KSort('Int')))
+    if isinstance(acct_id, str):
+        acct_id = KVariable(acct_id, KSort('Int'))
+    acct_id_cell = KApply('<acctID>', acct_id)
     balance_cell = KApply('<balance>', KVariable('BALANCE_CELL', KSort('Int')))
     code_cell = KApply('<code>', KVariable('CODE_CELL', KSort('AccountCode')))
     storage_cell = KApply('<storage>', KVariable('STORAGE_CELL', KSort('Map')))
@@ -324,15 +328,7 @@ def accounts_cell(acct_id: str) -> tuple[KInner, KInner]:
         ],
     )
     dot_account_var = KVariable('DotAccountVar', KSort('AccountCellMap'))
-    constraint = mlEqualsFalse(
-        KApply(
-            'AccountCellMap:in_keys',
-            [
-                KApply('<acctID>', KVariable(acct_id, KSort('Int'))),
-                KVariable('DotAccountVar', KSort('AccountCellMap')),
-            ],
-        )
-    )
+    constraint = mlEqualsFalse(KApply('AccountCellMap:in_keys', [acct_id_cell, dot_account_var]))
 
     return KApply('_AccountCellMap_', [account_cell, dot_account_var]), constraint
 
@@ -361,14 +357,22 @@ class KEVMSummarizer:
         # TODO:
         return None
 
-    def build_spec(self, opcode: KApply, stack_needed: int, id_str: str = '') -> APRProof:
+    def _build_spec(
+        self,
+        opcode: KApply,
+        stack_needed: int,
+        init_map: dict[str, KInner] = {},
+        init_constraints: list[KInner] = [],
+        final_map: dict[str, KInner] = {},
+        final_constraints: list[KInner] = [],
+        id_str: str = '',
+    ) -> APRProof:
         """Build the specification to symbolically execute one abitrary instruction."""
         cterm = CTerm(self.kevm.definition.empty_config(KSort('GeneratedTopCell')))
         opcode_symbol = opcode.label.name.split('_')[0]
 
         # construct the initial substitution
         _init_subst: dict[str, KInner] = {}
-        _init_constraints: list[KInner] = []
         next_opcode = KApply('#next[_]_EVM_InternalOp_MaybeOpCode', opcode)
         _init_subst['K_CELL'] = KSequence([next_opcode, KVariable('K_CELL')])  # #next [ OPCODE ] ~> K_CELL
         _init_subst['WORDSTACK_CELL'] = word_stack(stack_needed)  # W0 : W1 : ... : Wn for not underflow
@@ -376,35 +380,22 @@ class KEVMSummarizer:
         # This is because #push doesn't handle `.Account`. And it's okay to be Int for other opcodes.
         _init_subst['CALLER_CELL'] = KVariable('CALLER_CELL', KSort('Int'))  # CALLER_CELL should be Int for CALLER.
         _init_subst['ORIGIN_CELL'] = KVariable('ORIGIN_CELL', KSort('Int'))  # ORIGIN_CELL should be Int for ORIGIN.
-        _init_subst['GAS_CELL'] = KEVM.inf_gas(
-            KVariable('GAS_CELL', KSort('Gas'))
-        )  # inf_gas to reduce the computation cost.
-        if opcode_symbol in NOT_USEGAS_OPCODES:
-            _init_subst['USEGAS_CELL'] = KToken('false', KSort('Bool'))  # TODO: cannot usegas for these opcodes.
-        if opcode_symbol in ACCOUNT_QUERIES_OPCODES:
-            cell, constraint = accounts_cell('W0')
-            _init_subst['ACCOUNTS_CELL'] = cell
-            _init_constraints.append(constraint)
-        if opcode_symbol in ACCOUNT_STORAGE_OPCODES:
-            cell, constraint = accounts_cell('ID_CELL')
-            _init_subst['ACCOUNTS_CELL'] = cell
-            _init_constraints.append(constraint)
-        init_subst = CSubst(Subst(_init_subst), ())
+        inf_gas_cell = KEVM.inf_gas(KVariable('GAS_CELL', KSort('Gas')))
+        _init_subst['GAS_CELL'] = inf_gas_cell  # inf_gas to reduce the computation cost.
+        _init_subst.update(init_map)
+        init_subst = CSubst(Subst(_init_subst), init_constraints)
 
         # construct the final substitution
         _final_subst: dict[str, KInner] = {vname: KVariable('FINAL_' + vname) for vname in cterm.free_vars}
         _final_subst['K_CELL'] = KVariable('K_CELL')
-        if opcode_symbol == 'JUMP':
-            _final_subst['K_CELL'] = KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])
-        final_subst = CSubst(Subst(_final_subst), ())
+        _final_subst.update(final_map)
+        final_subst = CSubst(Subst(_final_subst), final_constraints)
 
-        init_cterm = init_subst(cterm)
-        init_cterm = CTerm(init_cterm.config, _init_constraints + list(init_cterm.constraints))
-        kclaim = cterm_build_claim(f'{opcode_symbol}{id_str}_{stack_needed}_SPEC', init_cterm, final_subst(cterm))
-        proof = APRProof.from_claim(self.kevm.definition, kclaim[0], {}, self.proof_dir)
-        return proof
+        spec_id = f'{opcode_symbol}{id_str}_{stack_needed}_SPEC'
+        kclaim = cterm_build_claim(spec_id, init_subst(cterm), final_subst(cterm))
+        return APRProof.from_claim(self.kevm.definition, kclaim[0], {}, self.proof_dir)
 
-    def build_specs(self, opcode_symbol: str) -> list[APRProof]:
+    def build_spec(self, opcode_symbol: str) -> list[APRProof]:
         needs = stack_needed(opcode_symbol)
         opcode = OPCODES[opcode_symbol]
         proofs = []
@@ -412,32 +403,47 @@ class KEVMSummarizer:
             if len(needs) > 1:
                 opcode = KApply(opcode.label.name, KToken(str(need), KSort('Int')))
 
-            if opcode_symbol == 'JUMPI':
-                proof = self.build_spec(opcode, need, id_str='_FALSE')
-                constraint = mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int')
-                node1 = proof.kcfg.get_node(1)
-                assert isinstance(node1, KCFG.Node)
-                proof.kcfg.let_node(1, cterm=node1.cterm.add_constraint(constraint))
-                proofs.append(proof)
+            # (opcode, init_subst, init_constraints, final_subst, final_constraints, id_str)
+            specs: list[tuple[KApply, dict[str, KInner], list[KInner], dict[str, KInner], list[KInner], str]] = []
+            init_subst = {}
+            final_subst = {}
 
-                proof = self.build_spec(opcode, need, id_str='_TRUE')
-                _subst = {'K_CELL': KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])}
-                subst = CSubst(Subst(_subst), ())
+            if opcode_symbol in NOT_USEGAS_OPCODES:
+                # TODO: Should allow infGas to calculate gas. Skip for now.
+                init_subst['USEGAS_CELL'] = KToken('false', KSort('Bool'))
+
+            if opcode_symbol in ACCOUNT_QUERIES_OPCODES:
+                specs.append((opcode, init_subst, [], {}, [], '_OWISE'))
+
+                w0 = KVariable('W0', KSort('Int'))
+                pow160 = KToken(str(pow(2, 160)), KSort('Int'))
+                cell, constraint = accounts_cell(euclidModInt(w0, pow160))
+                init_subst['ACCOUNTS_CELL'] = cell
+                specs.append((opcode, init_subst, [constraint], {}, [], '_NORMAL'))
+            elif opcode_symbol in ACCOUNT_STORAGE_OPCODES:
+                cell, constraint = accounts_cell('ID_CELL')
+                init_subst['ACCOUNTS_CELL'] = cell
+                specs.append((opcode, init_subst, [constraint], {}, [], '_NORMAL'))
+            elif opcode_symbol == 'JUMP':
+                final_subst['K_CELL'] = KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])
+                specs.append((opcode, init_subst, [], final_subst, [], ''))
+            elif opcode_symbol == 'JUMPI':
+                constraint = mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int')
+                specs.append((opcode, init_subst, [constraint], {}, [], '_FALSE'))
+
                 constraint = mlNot(mlEquals(KVariable('W1', KSort('Int')), KToken('0', KSort('Int')), 'Int'))
-                node1 = proof.kcfg.get_node(1)
-                assert isinstance(node1, KCFG.Node)
-                proof.kcfg.let_node(1, cterm=node1.cterm.add_constraint(constraint))
-                node2 = proof.kcfg.get_node(2)
-                assert isinstance(node2, KCFG.Node)
-                proof.kcfg.let_node(2, cterm=subst(node2.cterm))
-                proofs.append(proof)
+                final_subst['K_CELL'] = KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])
+                specs.append((opcode, init_subst, [], final_subst, [], '_TRUE'))
             elif opcode_symbol == 'LOG':
                 need += 2
-                proof = self.build_spec(opcode, need)
-                proofs.append(proof)
+                specs.append((opcode, init_subst, [], final_subst, [], '_NORMAL'))
             else:
-                proof = self.build_spec(opcode, need)
+                specs.append((opcode, init_subst, [], final_subst, [], '_NORMAL'))
+
+            for spec in specs:
+                proof = self._build_spec(spec[0], need, spec[1], spec[2], spec[3], spec[4], id_str=spec[5])
                 proofs.append(proof)
+
         return proofs
 
     def explore(self, proof: APRProof) -> bool:
@@ -546,12 +552,14 @@ class KEVMSummarizer:
         proof_show = APRProofShow(self.kevm, node_printer=node_printer)
         ensure_dir_path(self.save_directory / proof.id)
         with open(self.save_directory / proof.id / 'summary.md', 'w') as f:
+            _LOGGER.info(f'Writing summary to {self.save_directory / proof.id / "summary.md"}')
             for res_line in proof_show.show(proof, to_module=True):
                 f.write(res_line)
                 f.write('\n')
 
     def analyze_proof(self, proof_id: str, node_id: int) -> None:
         proof = APRProof.read_proof_data(self.proof_dir, proof_id)
+        self.summarize(proof)
         for successor in proof.kcfg.successors(node_id):
             print('Type: ', type(successor))
             print('Source: ', successor.source.id)
@@ -598,7 +606,7 @@ def summarize(opcode_symbol: str) -> tuple[KEVMSummarizer, list[APRProof]]:
     proof_dir = Path(__file__).parent / 'proofs'
     save_directory = Path(__file__).parent / 'summaries'
     summarizer = KEVMSummarizer(proof_dir, save_directory)
-    proofs = summarizer.build_specs(opcode_symbol)
+    proofs = summarizer.build_spec(opcode_symbol)
     for proof in proofs:
         summarizer.explore(proof)
         summarizer.summarize(proof)
