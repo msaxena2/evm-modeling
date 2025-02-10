@@ -256,6 +256,23 @@ module BYTES-SIMPLIFICATION [symbolic]
       requires 0 <=Int S andBool lengthBytes(B1) <=Int S +Int lengthBytes(B2)
       [simplification(60)]
 
+    // Memory lookup
+
+    rule [bytes-concat-lookup-left]:
+      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]
+      requires 0 <=Int I andBool I <Int lengthBytes(B1)
+      [simplification(40), preserves-definedness]
+
+    rule [bytes-concat-lookup-right]:
+      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B2 [ I -Int lengthBytes(B1) ]
+      requires lengthBytes(B1) <=Int I
+      [simplification(40), preserves-definedness]
+
+    rule [lookup-as-asWord]:
+      B:Bytes [ I:Int ] => #asWord ( #range ( B, I, 1 ) )
+      requires 0 <=Int I andBool I <=Int lengthBytes(B)
+      [simplification(60)]
+
     // lengthBytes
 
     rule [lengthBytes-geq-zero]:   0 <=Int lengthBytes ( _ )                     => true                                     [simplification, smt-lemma]
