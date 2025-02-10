@@ -505,7 +505,7 @@ class KEVMSummarizer:
                         break_on_basic_blocks=False,
                         break_on_load_program=False,
                     ),
-                    terminal_rules=KEVMSemantics.terminal_rules(False),
+                    terminal_rules=KEVMSemantics.terminal_rules(True),
                     fail_fast=False,
                     fast_check_subsumption=False,
                     direct_subproof_rules=False,
