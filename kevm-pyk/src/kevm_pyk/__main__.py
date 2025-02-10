@@ -637,8 +637,11 @@ def exec_kast(options: KastOptions) -> None:
 
 
 def exec_summarize(options: ProveOptions) -> None:
-    # analyze_proof('BALANCE_1', 3)
-    summarize('BALANCE')
+    # analyze_proof('EXTCODESIZE_OWISE_1', 3)
+    # summarize('EXTCODESIZE')
+    # summarize('EXTCODECOPY')
+    # summarize('EXTCODEHASH')
+    summarize('SELFBALANCE')
     # batch_summarize()
 
 

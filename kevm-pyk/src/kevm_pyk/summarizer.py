@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import logging
 import time
 import traceback
@@ -304,7 +305,7 @@ def stack_needed(opcode_id: str) -> list[int]:
     return [0]
 
 
-def accounts_cell(acct_id: str | KInner) -> tuple[KInner, KInner]:
+def accounts_cell(acct_id: str | KInner, exists: bool = True) -> tuple[KInner, KInner]:
     """Return the accounts cell with constraints on the accounts."""
     if isinstance(acct_id, str):
         acct_id = KVariable(acct_id, KSort('Int'))
@@ -329,8 +330,11 @@ def accounts_cell(acct_id: str | KInner) -> tuple[KInner, KInner]:
     )
     dot_account_var = KVariable('DotAccountVar', KSort('AccountCellMap'))
     constraint = mlEqualsFalse(KApply('AccountCellMap:in_keys', [acct_id_cell, dot_account_var]))
-
-    return KApply('_AccountCellMap_', [account_cell, dot_account_var]), constraint
+    
+    if exists:
+        return KApply('_AccountCellMap_', [account_cell, dot_account_var]), constraint
+    else:
+        return KApply('_AccountCellMap_', [dot_account_var]), constraint
 
 
 class KEVMSummarizer:
@@ -413,17 +417,21 @@ class KEVMSummarizer:
                 init_subst['USEGAS_CELL'] = KToken('false', KSort('Bool'))
 
             if opcode_symbol in ACCOUNT_QUERIES_OPCODES:
-                specs.append((opcode, init_subst, [], {}, [], '_OWISE'))
-
                 w0 = KVariable('W0', KSort('Int'))
                 pow160 = KToken(str(pow(2, 160)), KSort('Int'))
-                cell, constraint = accounts_cell(euclidModInt(w0, pow160))
+                
+                cell, constraint = accounts_cell(euclidModInt(w0, pow160), exists=False)
+                init_subst['ACCOUNTS_CELL'] = cell
+                # TODO: BALANCE doesn't need the above spec. Maybe a bug in the backend.
+                specs.append((opcode, init_subst, [constraint], {}, [], '_OWISE'))
+
+                cell, constraint = accounts_cell(euclidModInt(w0, pow160), exists=True)
                 init_subst['ACCOUNTS_CELL'] = cell
                 specs.append((opcode, init_subst, [constraint], {}, [], '_NORMAL'))
-            elif opcode_symbol in ACCOUNT_STORAGE_OPCODES:
+            elif opcode_symbol in ACCOUNT_STORAGE_OPCODES + ['SELFBALANCE']:
                 cell, constraint = accounts_cell('ID_CELL')
                 init_subst['ACCOUNTS_CELL'] = cell
-                specs.append((opcode, init_subst, [constraint], {}, [], '_NORMAL'))
+                specs.append((opcode, init_subst, [constraint], {}, [], ''))
             elif opcode_symbol == 'JUMP':
                 final_subst['K_CELL'] = KSequence([KApply('#endBasicBlock_EVM_InternalOp'), KVariable('K_CELL')])
                 specs.append((opcode, init_subst, [], final_subst, [], ''))
@@ -436,9 +444,9 @@ class KEVMSummarizer:
                 specs.append((opcode, init_subst, [], final_subst, [], '_TRUE'))
             elif opcode_symbol == 'LOG':
                 need += 2
-                specs.append((opcode, init_subst, [], final_subst, [], '_NORMAL'))
+                specs.append((opcode, init_subst, [], final_subst, [], ''))
             else:
-                specs.append((opcode, init_subst, [], final_subst, [], '_NORMAL'))
+                specs.append((opcode, init_subst, [], final_subst, [], ''))
 
             for spec in specs:
                 proof = self._build_spec(spec[0], need, spec[1], spec[2], spec[3], spec[4], id_str=spec[5])
@@ -553,7 +561,15 @@ class KEVMSummarizer:
         ensure_dir_path(self.save_directory / proof.id)
         with open(self.save_directory / proof.id / 'summary.md', 'w') as f:
             _LOGGER.info(f'Writing summary to {self.save_directory / proof.id / "summary.md"}')
-            for res_line in proof_show.show(proof, to_module=True):
+            for res_line in proof_show.show(proof, to_module=False):
+                f.write(res_line)
+                f.write('\n')
+    
+    def print_node(self, proof: APRProof, nodes: Iterable[int]) -> None:
+        node_printer = kevm_node_printer(self.kevm, proof)
+        proof_show = APRProofShow(self.kevm, node_printer=node_printer)
+        with open(self.proof_dir / proof.id / f'node-print.md', 'w') as f:
+            for res_line in proof_show.show(proof, nodes=nodes, to_module=False, minimize=False):
                 f.write(res_line)
                 f.write('\n')
 
@@ -608,6 +624,7 @@ def summarize(opcode_symbol: str) -> tuple[KEVMSummarizer, list[APRProof]]:
     summarizer = KEVMSummarizer(proof_dir, save_directory)
     proofs = summarizer.build_spec(opcode_symbol)
     for proof in proofs:
+        summarizer.print_node(proof, [1])
         summarizer.explore(proof)
         summarizer.summarize(proof)
         proof.write_proof_data()
